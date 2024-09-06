@@ -39,14 +39,13 @@ size_t	ft_strlen(char const *s)
 	return (i);
 }
 
-int main(void)
+int	main (void)
 {
-    char *line; 
-    
-    while(1)
-    {
-        line = readline("minishell > ");
-        if (ft_strncmp(line, "exit", 4) == 0 && ft_strlen(line) == 4)
-            exit(0);
-    }
+	char *line;
+	while (1)
+	{
+		line = readline ("minishell > ");
+		if (ft_strncmp (line, "exit", 5) == 0)
+		exit (0);
+	}
 }
