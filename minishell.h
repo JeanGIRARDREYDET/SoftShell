@@ -25,7 +25,6 @@
 # include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
-#include "/home/doferet/Documents/libft/libft.h"
+# include "libft/libft.h"
 
 #endif
