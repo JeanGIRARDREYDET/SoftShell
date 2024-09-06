@@ -3,7 +3,8 @@
 NAME = minishell
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -lreadline
+CFLAGS =  -Wall -Werror -Wextra 
+READLINE_LIB = -lreadline
 
 SRC = main.c
 
@@ -15,7 +16,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "Compilation..."
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(READLINE_LIB)
 	@echo "Minishell is ready !"
 
 clean:
