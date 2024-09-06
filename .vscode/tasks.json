@@ -1,28 +1,43 @@
 {
-    "tasks": [
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
         {
-            "type": "cppbuild",
-            "label": "C/C++: gcc générer le fichier actif",
-            "command": "/usr/bin/gcc",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+            "name": "Make and debug in plugin host",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}",
+            "args" :[ "Makefile", "tmp.sh" , "cat" ,"tmp.tmp"],
+//            "args" :[ "Makefile", "touch OUI" , " " ,"outf"],
+//            "args" :[ "Makefile", "touch OUI" , " " ,"outf"],
+//            "args" :[ "Makefile","./a.tmp","echo yo" ,"outf"],
+//            "args" :[ "Makefile","catiop", " " ,"outf"],
+//            "args" :[ "infile_no_r.tmp", "lsop", "echo yo", "t2_output"],
+//            "args" :[ "/dev/urandom", "cat", "head -1", "outs/test-xx.txt"],
+//            "args": ["Makefile","sleep 5","sleep 2","outfP"], 
+//            "args" :[ "pipex-tester/assets/deepthought.txt" ,"grep Now", "/usr/bin/cat" ,"test-56v.txt"],
+//            "args" :[ "pipex-tester/assets/deepthought.txt" ,"cat", "not-executable" ,"outs/test-$num.txt"],
+//            "args" : ["Makefile","/usr/bin/cati","touch OUI","outf"],
+//            "args": ["Makefile","cat","echo toto","outfP3"],
+//            "args": ["Makefile","cat","ls","outfP"],
+//            "args2": ["Makefile","ls","./a1.out","outfP"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/Pipex/bonus/",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": false
+                }
             ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "Tâche générée par le débogueur."
+            "preLaunchTask": "make",
+            "miDebuggerPath": "/usr/bin/gdb"
         }
-    ],
-    "version": "2.0.0"
+    ]
 }
