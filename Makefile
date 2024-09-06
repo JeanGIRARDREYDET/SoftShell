@@ -7,7 +7,7 @@ CFLAGS = -Wall -Werror -Wextra -lreadline
 
 SRC = main.c
 
-OBJ =
+OBJ = $(SRC:.c=.o)
 
 RM = rm -rf
 
