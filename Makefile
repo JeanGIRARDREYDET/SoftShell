@@ -1,0 +1,33 @@
+#------------MAKEFILE------------#
+
+NAME = minishell
+
+CC = cc
+CFLAGS = -Wall -Werror -Wextra -lreadline
+
+SRC = main.c
+
+OBJ =
+
+RM = rm -rf
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	@echo "Compilation..."
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@echo "Minishell is ready !"
+
+clean:
+	@echo "CLean..."
+	@$(RM) *.o
+	@echo "Done !"
+
+fclean: clean
+	@echo "Remove all..."
+	@$(RM) $(NAME)
+	@echo "Done !"
+
+re: fclean all
+
+.PHONY: all re clean fclean
