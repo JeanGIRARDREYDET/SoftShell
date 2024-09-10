@@ -6,11 +6,11 @@
 /*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:08:01 by doferet           #+#    #+#             */
-/*   Updated: 2024/09/06 12:34:19 by doferet          ###   ########.fr       */
+/*   Updated: 2024/09/10 14:56:19 by doferet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "/home/doferet/Documents/minishell/includes/minishell.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
