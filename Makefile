@@ -1,34 +1,52 @@
 #------------MAKEFILE------------#
+##	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(READLINE_LIB)
+
 
 NAME = minishell
 
 CC = cc
-CFLAGS =  -Wall -Werror -Wextra 
-READLINE_LIB = -lreadline
 
-SRC = main.c
+C_FLAGS 		= -g3 -Wall -Wextra -Werror
+READLINE_LIB	= -lreadline
 
-OBJ = $(SRC:.c=.o)
+SRCS = 			main.c \
+				builtins/env.c \
 
-RM = rm -rf
+SRC_PATH		=	
+BIN_PATH		=	
+SOURCES			=	$(addprefix $(SRC_PATH)/, $(SRCS))
+DESTS			= 	$(addprefix $(BIN_PATH)/, $(SRCS))
+EXEC = main
 
-all: $(NAME)
+OBJ = $(SRCS:%.c=%.o)
 
-$(NAME): $(OBJ)
-	@echo "Compilation..."
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(READLINE_LIB)
-	@echo "Minishell is ready !"
+CMD_RM = rm -f
 
-clean:
-	@echo "CLean..."
-	@$(RM) *.o
-	@echo "Done !"
+%.o: %.c
+	$(CC) $(C_FLAGS) -c $< -o $@
+	@echo  "$(GREEN) $@  created!$(DEFAULT)"
 
-fclean: clean
-	@echo "Remove all..."
-	@$(RM) $(NAME)
-	@echo "Done !"
+$(NAME): $(OBJ) 
+	$(CC) $(C_FLAGS) $(OBJ) -o  ${NAME} $(READLINE_LIB)
+	@echo -e "$(GREEN)$(NAME) created!$(DEFAULT)"
 
-re: fclean all
+all : $(NAME)
 
-.PHONY: all re clean fclean
+clean: 
+	$(CMD_RM) $(OBJ) 
+	@echo -e "$(YELLOW)object files deleted!$(DEFAULT)"
+
+fclean : clean
+	$(CMD_RM) $(NAME)
+	@echo -e "$(RED)all deleted!$(DEFAULT)"
+
+re : fclean all
+
+.PHONY : clean fcleam re
+
+
+#COLORS
+RED = \033[1;31m
+GREEN = \033[1;32m
+YELLOW = \033[1;33m
+DEFAULT = \033[0m

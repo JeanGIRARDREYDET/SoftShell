@@ -27,4 +27,6 @@
 # include <readline/history.h>
 # include "libft/libft.h"
 
+void	builtin_env(char **env);
+
 #endif

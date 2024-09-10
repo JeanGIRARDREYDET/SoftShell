@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/home/doferet/Documents/minishell/includes/minishell.h"
+#include "minishell.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -40,7 +40,7 @@ size_t	ft_strlen(char const *s)
 	return (i);
 }
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char **env)
 {
 	char	*line;
 
