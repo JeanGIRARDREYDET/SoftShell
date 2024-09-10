@@ -32,20 +32,35 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 size_t	ft_strlen(char const *s)
 {
 	size_t	i;
-
+	if (s == NULL)
+		return (0);
 	i = 0;
 	while (s[i])
 		i++;
 	return (i);
 }
 
-int	main (void)
+int	main(int ac, char **av, char **env)
 {
-	char *line;
+	char	*line;
+
+	if (ac > 1)
+	{
+		printf("Error: minishell does not take arguments. Try: ./minishell\n");
+		exit(0);
+	}
 	while (1)
 	{
-		line = readline ("minishell > ");
-		if (ft_strncmp (line, "exit", 5) == 0)
-		exit (0);
+		line = readline("minishell> ");
+		if (ft_strncmp(line, "exit", 4) == 0 && ft_strlen(line) == 4)
+		{
+			printf("exit\n");
+			exit(0);
+		}
+		else if (ft_strncmp(line, "env", 4) == 0)
+			builtin_env(env);
+		// else if (ft_strncmp(line, "echo", 5) == 0)
+		// 	builtin_echo();
+		add_history(line);
 	}
 }
