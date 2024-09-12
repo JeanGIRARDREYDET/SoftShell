@@ -16,11 +16,14 @@ SRCS = 			main.c \
 				builtins/export.c \
 				builtins/pwd.c \
 				builtins/unset.c \
+				libft/ft_atoi.c \
 				libft/ft_calloc.c \
+				libft/ft_itoa.c \
 				libft/ft_strdup.c \
 				libft/ft_strlen.c \
 				libft/ft_strnstr.c \
 				libft/ft_tablen.c \
+				libft/ft_strjoin.c \
 				common/initialization.c \
 
 SRC_PATH		=	

@@ -55,5 +55,4 @@ char	*ft_strdup(const char *s);
 char	*ft_strnstr(const char *source, const char *find, size_t len);
 size_t	ft_strlen(char const *s);
 
-
 #endif

@@ -16,6 +16,7 @@ void	common_initialization(char **env, t_sys *sys)
 {
 	int	i;
 
+	sys->SHLVL = "0";
 	i = 0;
 	while (env[i])
 	{
@@ -24,14 +25,16 @@ void	common_initialization(char **env, t_sys *sys)
 		if (ft_strnstr (env[i], "PWD=", 4) != 0)
 			sys->pwd = env[i] + 4;
 		if (ft_strnstr (env[i], "SHLVL=", 6) != 0)
-			sys->SHLVL = env[i] + 4;
+			sys->SHLVL = ft_itoa((1 + ft_atoi(env[i] + 6)));
 		i++;
 	}
 	sys->env = (char **)ft_calloc(i, sizeof(char *));
-		i = 0;
-	while (env[i])
+	i = -1;
+	while (env[++i])
 	{
-		sys->env[i] = ft_strdup(env[i]);
-		i++;
+		if (ft_strnstr (env[i], "SHLVL=", 6) != 0)
+			sys->env[i] = ft_strjoin("SHLVL=", sys->SHLVL);
+		else
+			sys->env[i] = ft_strdup(env[i]);
 	}
 }
