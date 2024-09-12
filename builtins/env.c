@@ -12,14 +12,14 @@
 
 #include "../minishell.h"
 
-void	builtin_env(char **env)
+void	builtin_env(t_sys *sys)
 {
 	int	i;
-
+	
 	i = 0;
-	while (env[i])
+	while (sys->env[i])
 	{
-		printf("%s\n", env[i]);
+		printf("%s\n", sys->env[i]);
 		i++;
 	}
 }

@@ -16,7 +16,7 @@ SRCS = 			main.c \
 				builtins/export.c \
 				builtins/pwd.c \
 				builtins/unset.c \
-				libfr/ft_calloc.c \
+				libft/ft_calloc.c \
 				libft/ft_strdup.c \
 				libft/ft_strlen.c \
 				libft/ft_strnstr.c \

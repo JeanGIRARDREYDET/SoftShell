@@ -23,9 +23,12 @@ void	common_initialization(char **env, t_sys *sys)
 			sys->path = env[i] + 5;
 		if (ft_strnstr (env[i], "PWD=", 4) != 0)
 			sys->pwd = env[i] + 4;
+		if (ft_strnstr (env[i], "SHLVL=", 6) != 0)
+			sys->SHLVL = env[i] + 4;
 		i++;
 	}
 	sys->env = (char **)ft_calloc(i, sizeof(char *));
+		i = 0;
 	while (env[i])
 	{
 		sys->env[i] = ft_strdup(env[i]);
