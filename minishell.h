@@ -47,10 +47,12 @@ typedef struct s_sys
 	int		error[2];
 }	t_sys;
 
-void	builtin_env(char **env);
+void	builtin_pwd(t_sys *sys);
+void	builtin_pwd(t_sys *sys);
 void	common_initialization(char **env, t_sys *sys);
 char	*ft_strdup(const char *s);
 char	*ft_strnstr(const char *source, const char *find, size_t len);
 size_t	ft_strlen(char const *s);
+
 
 #endif

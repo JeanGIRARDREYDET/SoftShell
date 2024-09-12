@@ -51,9 +51,9 @@ int	main(int ac, char **argv, char **env)
 			exit(0);
 		}
 		else if (ft_strncmp(line, "env", 4) == 0)
-			builtin_env(env);
+			builtin_env(&s_sys);
 		else if (ft_strncmp(line, "pwd", 4) == 0)
-			builtin_pwd(env);
+			builtin_pwd(&s_sys);
 		// else if (ft_strncmp(line, "echo", 5) == 0)
 		// 	builtin_echo();
 		add_history(line);
