@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 // unset values and attributes of variables and functions
 // unset peut supprimer une variable cree dans env

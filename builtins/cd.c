@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 //utiliser la fonction getcwd qui copie le chemin d'acces absolu du repertoire 
 //de travail courant dans la chaine pointee par buf qui est de longueur size

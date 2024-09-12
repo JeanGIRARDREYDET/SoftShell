@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 // export sans argument a un comportement indefini donc il faut le definir
 // export transfere une donnee entree dans le parent ex : $myname = "dollyne" si on fit un echo, le parent 

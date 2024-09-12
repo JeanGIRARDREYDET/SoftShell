@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 //dans bash echo -n ecrit ce qu'il y a apres n sans retour a la ligne
 

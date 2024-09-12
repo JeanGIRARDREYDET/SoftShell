@@ -10,7 +10,12 @@ C_FLAGS 		= -g3 -Wall -Wextra -Werror
 READLINE_LIB	= -lreadline
 
 SRCS = 			main.c \
+				builtins/cd.c \
+				builtins/echo.c \
 				builtins/env.c \
+				builtins/export.c \
+				builtins/pwd.c \
+				builtins/unset.c \
 				common/initialization.c \
 				libft/ft_strdup.c \
 				libft/ft_strlen.c \
