@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../minishell.h"
 
-//donne le chemin ou on est
-//utiliser getcwd
-
-//exemple de code
-
+void	builtin_pwd()
+{
+		printf("%s\n", getenv("pwd"));
+}
+}

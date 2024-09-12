@@ -12,14 +12,19 @@
 
 #include "../minishell.h"
 
-void	common_initialization(char **env)
+void	common_initialization(char **env, t_sys *sys)
 {
+//	sys->env = ft_strdup(env);
+	
 	int	i;
 
 	i = 0;
 	while (env[i])
 	{
-		printf("%s\n", env[i]);
+		if (ft_strnstr (env[i], "PATH=", 5) != 0)
+			sys->path = env[i] + 5;
+		if (ft_strnstr (env[i], "PWD=", 4) != 0)
+			sys->pwd = env[i] + 4;
 		i++;
 	}
 }

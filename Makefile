@@ -11,6 +11,11 @@ READLINE_LIB	= -lreadline
 
 SRCS = 			main.c \
 				builtins/env.c \
+				common/initialization.c \
+				libft/ft_strdup.c \
+				libft/ft_strlen.c \
+				libft/ft_strnstr.c \
+
 
 SRC_PATH		=	
 BIN_PATH		=	

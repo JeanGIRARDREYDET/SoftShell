@@ -25,8 +25,32 @@
 # include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft/libft.h"
+# include "./libft/libft.h"
+# include <limits.h>
+# include <stdarg.h>
+# include <string.h>
+# include <stddef.h>
+
+typedef struct s_sys
+{
+	int		duplexe_canal[2];
+	int		fdd[2][2];
+	int		pid;
+	int		status;
+	int		here_doc;
+	char	*pwd;
+	char	*path;
+	char	**cmd_args;
+	char	**env;
+	char	*exe[5];
+	char	*cmd;
+	int		error[2];
+}	t_sys;
 
 void	builtin_env(char **env);
+void	common_initialization(char **env, t_sys *sys);
+char	*ft_strdup(const char *s);
+char	*ft_strnstr(const char *source, const char *find, size_t len);
+size_t	ft_strlen(char const *s);
 
 #endif
