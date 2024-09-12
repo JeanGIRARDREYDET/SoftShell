@@ -20,6 +20,7 @@ SRCS = 			main.c \
 				libft/ft_strdup.c \
 				libft/ft_strlen.c \
 				libft/ft_strnstr.c \
+				libft/ft_tablen.c \
 
 
 SRC_PATH		=	

@@ -12,8 +12,7 @@
 
 #include "../minishell.h"
 
-void	builtin_pwd()
+void	builtin_pwd(env)
 {
 		printf("%s\n", getenv("pwd"));
-}
 }
