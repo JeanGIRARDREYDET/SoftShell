@@ -38,3 +38,5 @@ void	common_initialization(char **env, t_sys *sys)
 			sys->env[i] = ft_strdup(env[i]);
 	}
 }
+
+
