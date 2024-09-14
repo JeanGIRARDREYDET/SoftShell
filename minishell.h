@@ -33,7 +33,7 @@
 
 typedef struct s_sys
 {
-	int		duplexe_canal[2];
+		int		duplexe_canal[2];
 	int		fdd[2][2];
 	int		pid;
 	int		status;
@@ -50,9 +50,11 @@ typedef struct s_sys
 
 void	builtin_env(t_sys *sys);
 void	builtin_pwd(t_sys *sys);
+void	builtin_unset(char *line, t_sys *sys);
 void	common_initialization(char **env, t_sys *sys);
 char	*ft_strdup(const char *s);
 char	*ft_strnstr(const char *source, const char *find, size_t len);
 size_t	ft_strlen(char const *s);
+
 
 #endif

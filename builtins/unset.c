@@ -15,8 +15,7 @@
 // unset values and attributes of variables and functions
 // unset peut supprimer une variable cree dans env
 
-
-void	unset(char **key, t_sys *sys)
+void	builtin_unset(char *key, t_sys *sys)
 {
 	int	i;
 	int	pos;
@@ -29,11 +28,11 @@ void	unset(char **key, t_sys *sys)
 			pos = i;
 		i++;
 	}
-	if(pos = -1)
+	if (pos == -1)
 		return ;
-	while (env[pos+1])
+	while (sys->env[pos + 1])
 	{
-		env[pos] = env[pos + 1];
+		sys->env[pos] = sys->env[pos + 1];
 		pos++;
 	}
 }
