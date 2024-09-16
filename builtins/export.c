@@ -21,36 +21,36 @@ void	builtin_export(char *key, t_sys *s_sys)
 {
 	int	i;
 	int	pos;
+	char	**ienv;
 
 	i = 0;
 	pos = -1;
 	if (! key)
-	{
-		builtin_env(&s_sys);
-	}
+		builtin_env(s_sys);
 	while (s_sys->env[i])
 	{
-		if (ft_strnstr (s_sys->env[i], key, ft_strlen(s_sys)) != 0)
+		if (ft_strnstr (s_sys->env[i], key, ft_strlen(key)) != 0)
 			pos = i;
 		i++;
 	}
 	if (pos == -1)
 	{
-		s_sys->env = (char **)ft_calloc(i + 1, sizeof(char *));
-		i = -1;
-		while (env[++i])
+		ienv = (char **)ft_calloc(i + 1, sizeof(char *));
+		i=-1;
+		while (s_sys->env[++i])
 		{
-				if (ft_strnstr (env[i], "SHLVL=", 6) != 0)
-					sys->env[i] = ft_strjoin("SHLVL=", sys->SHLVL);
-				else
-					sys->env[i] = ft_strdup(env[i]);
+			ienv[i] = ft_strdup(s_sys->env[i]);
+			free(s_sys->env[i]);
 		}
+		free(s_sys->env);
+		ienv[i++] = ft_strdup(key);
+		ienv[i++] = NULL;
+		s_sys->env = ienv;
+
 	}
-	while (sys->env[pos + 1])
+	else
 	{
-		sys->env[pos] = sys->env[pos + 1];
-		pos++;
+		s_sys->env[i] = ft_strdup(key);
+		i++;
 	}
-	free(sys->env[pos+1]);
-	sys->env[pos] = NULL;
 }

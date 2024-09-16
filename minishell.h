@@ -48,9 +48,14 @@ typedef struct s_sys
 	int		error[2];
 }	t_sys;
 
+void	builtin_cd(char *key, t_sys *s_sys);
+void	builtin_echo(char *key, t_sys *s_sys);
 void	builtin_env(t_sys *sys);
+void	builtin_exit(t_sys *sys);
+void	builtin_export(char *key, t_sys *s_sys);
 void	builtin_pwd(t_sys *sys);
 void	builtin_unset(char *line, t_sys *sys);
+
 void	common_initialization(char **env, t_sys *sys);
 char	*ft_strdup(const char *s);
 char	*ft_strnstr(const char *source, const char *find, size_t len);

@@ -15,9 +15,9 @@
 void	builtin_env(t_sys *sys)
 {
 	int	i;
-	
+
 	i = 0;
-	while (sys->env[i])
+	while (sys->env[i] || sys->env[i] != 0)
 	{
 		printf("%s\n", sys->env[i]);
 		i++;
