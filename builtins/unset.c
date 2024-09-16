@@ -35,4 +35,6 @@ void	builtin_unset(char *key, t_sys *sys)
 		sys->env[pos] = sys->env[pos + 1];
 		pos++;
 	}
+	free(sys->env[pos+1]);
+	sys->env[pos] = NULL;
 }

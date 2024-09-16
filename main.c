@@ -29,7 +29,6 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
 }
 
-
 int	ft_strin(const char *s, const char c)
 {
 	size_t	i;
@@ -90,7 +89,6 @@ int	main(int ac, char **argv, char **env)
 		printf("%s \n", ft_left_sep(line, ' '));
 		printf("%s \n", ft_post_left_sep(line, ' '));
 		printf("%s \n", ft_left_sep(line, ' '));
-		
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)
 		{
 			printf("exit\n");
@@ -101,7 +99,9 @@ int	main(int ac, char **argv, char **env)
 		else if (ft_strncmp(line, "pwd", 4) == 0)
 			builtin_pwd(&s_sys);
 		else if (ft_strncmp(line, "unset", 5) == 0)
-			builtin_unset(line, &s_sys);
+			builtin_unset(ft_post_left_sep(line, ' '), &s_sys);
+		else if (ft_strncmp(line, "export", 6) == 0)
+			builtin_export(ft_post_left_sep(line, ' '), &s_sys);
 		// else if (ft_strncmp(line, "echo", 5) == 0)
 		// 	builtin_echo();
 		add_history(line);
