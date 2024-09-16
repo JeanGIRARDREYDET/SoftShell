@@ -31,6 +31,7 @@ Retour :
 			- otherwise a pointer to the first character of
 				the first occurrence of find is returned.
 */
+
 #include <stddef.h>
 
 char	*ft_strnstr(const char *source, const char *find, size_t len)

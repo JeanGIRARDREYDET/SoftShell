@@ -21,6 +21,7 @@ SRCS = 			main.c \
 				libft/ft_itoa.c \
 				libft/ft_strdup.c \
 				libft/ft_strlen.c \
+				libft/ft_strncmp.c \
 				libft/ft_strnstr.c \
 				libft/ft_tablen.c \
 				libft/ft_strjoin.c \
