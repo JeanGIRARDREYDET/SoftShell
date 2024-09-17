@@ -6,7 +6,8 @@ NAME = minishell
 
 CC = cc
 
-C_FLAGS 		= -g3 -Wall -Wextra -Werror
+C_FLAGS 		= -g3 -Wall -Wextra -Werror 
+#-Wundef
 READLINE_LIB	= -lreadline
 
 SRCS = 			main.c \
@@ -19,12 +20,15 @@ SRCS = 			main.c \
 				libft/ft_atoi.c \
 				libft/ft_calloc.c \
 				libft/ft_itoa.c \
+				libft/ft_left_sep.c \
+				libft/ft_strchr_pos.c \
+				libft/ft_strchr.c \
 				libft/ft_strdup.c \
+				libft/ft_strjoin.c \
 				libft/ft_strlen.c \
 				libft/ft_strncmp.c \
 				libft/ft_strnstr.c \
 				libft/ft_tablen.c \
-				libft/ft_strjoin.c \
 				common/initialization.c \
 
 SRC_PATH		=	

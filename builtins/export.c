@@ -22,43 +22,41 @@ void	builtin_export(char *key, t_sys *s_sys)
 	int		i;
 	int		pos;
 	char	**ienv;
-	int		e;
+	size_t	e;
 
-	e = 0;
-	while (key[e] != '\0' && key[e] != '=')
-		e++;
+	e = ft_strchr_pos(key, '=');
 	i = 0;
 	pos = -1;
 	if (! key)
 		builtin_env(s_sys);
-	if (key[e] != '=')
-		return;
-	key[e] = '\0';
+	if (key[e] == '=')
+		e++;
 	while (s_sys->env[i])
 	{
-		if (ft_strncmp (s_sys->env[i], key, e) != 0)
+		if (ft_strncmp (s_sys->env[i], key, e) == 0)
+		{
 			pos = i;
+			break;
+		}
 		i++;
 	}
-	key[e] = '=';
 	while (key[e] != '\0' && key[e] != ' ')
 		e++;
 	key[e] = '\0';
 	if (pos == -1)
 	{
-		ienv = (char **)ft_calloc(i + 1, sizeof(char *));
+		s_sys->env_len = s_sys->env_len + 1;
+		ienv = (char **)ft_calloc(s_sys->env_len, sizeof(char *));
 		i = -1;
 		while (s_sys->env[++i])
 			ienv[i] = ft_strdup(s_sys->env[i]);
+		ienv[i] = ft_strdup(key);
 		free(s_sys->env);
-		ienv[i++] = ft_strdup(key);
-		ienv[i++] = NULL;
 		s_sys->env = ienv;
 	}
 	else
 	{
-		free(s_sys->env[i]);
-		s_sys->env[i] = ft_strdup(key);
-		i++;
+		free(s_sys->env[pos]);
+		s_sys->env[pos] = ft_strdup(key);
 	}
 }

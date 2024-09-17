@@ -33,16 +33,17 @@
 
 typedef struct s_sys
 {
-		int		duplexe_canal[2];
+	int		duplexe_canal[2];
 	int		fdd[2][2];
 	int		pid;
 	int		status;
 	int		here_doc;
 	char	*pwd;
 	char	*path;
-	char	*SHLVL;
+	char	*shlvl;
 	char	**cmd_args;
 	char	**env;
+	int		env_len;
 	char	*exe[5];
 	char	*cmd;
 	int		error[2];
@@ -61,5 +62,6 @@ char	*ft_strdup(const char *s);
 char	*ft_strnstr(const char *source, const char *find, size_t len);
 size_t	ft_strlen(char const *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strchr_pos(const char *source, int find);
 
 #endif
