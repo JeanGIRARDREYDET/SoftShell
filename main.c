@@ -59,13 +59,11 @@ char	*ft_post_left_sep(char *src, const char c)
 int	main(int ac, char **argv, char **env)
 {
 	char	*line;
-	char	*ar;
 	t_sys	s_sys;
 
 	if (ac > 1)
 	{
-		printf("Error: minishell does not take arguments. Try: ./minishell\n");
-		ar = argv[0];
+		printf("Error: minishell does not take arguments. Try: ./%s\n", argv[0]);
 		exit(0);
 	}
 	common_initialization(env, &s_sys);
