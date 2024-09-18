@@ -59,6 +59,7 @@ void	builtin_unset(char *line, t_sys *sys);
 
 void	common_initialization(char **env, t_sys *sys);
 char	*ft_strdup(const char *s);
+int		ft_strin(const char *s, const char c);
 char	*ft_strnstr(const char *source, const char *find, size_t len);
 size_t	ft_strlen(char const *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

@@ -17,6 +17,18 @@
 // renvoie bien dollyne, si on ouvre un autre bash, il n'aura pas cette variable donc si on utilise exporte
 // l'enfant a bien la variable myname
 
+void	print_export(t_sys *sys)
+{
+	int	i;
+
+	i = 0;
+	while (sys->env[i] && sys->env[i] != 0 && sys->env[i] != NULL)
+	{
+			printf("%s\n", sys->env[i]);
+		i++;
+	}
+}
+
 void	builtin_export(char *key, t_sys *s_sys)
 {
 	int		i;
@@ -28,7 +40,7 @@ void	builtin_export(char *key, t_sys *s_sys)
 	i = 0;
 	pos = -1;
 	if (! key)
-		builtin_env(s_sys);
+		print_export(s_sys);
 	if (key[e] == '=')
 		e++;
 	while (s_sys->env[i])

@@ -24,6 +24,7 @@ SRCS = 			main.c \
 				libft/ft_strchr_pos.c \
 				libft/ft_strchr.c \
 				libft/ft_strdup.c \
+				libft/ft_strin.c \
 				libft/ft_strjoin.c \
 				libft/ft_strlen.c \
 				libft/ft_strncmp.c \
