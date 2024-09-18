@@ -40,12 +40,13 @@ void	builtin_export(char *key, t_sys *s_sys)
 	i = 0;
 	pos = -1;
 
-	if (!key=='\0')
+	if (key[0] == '\0')
 		print_export(s_sys);
 	if (key[e] == '=' || key[e] == '\0')
 		e++;
 	while (s_sys->env[i])
 	{
+
 		if (ft_strncmp (s_sys->env[i], key, e) == 0)
 		{
 			pos = i;

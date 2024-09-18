@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strin.c                                         :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:20:13 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/18 17:20:35 by jegirard         ###   ########.fr       */
+/*   Created: 2023/11/07 09:26:05 by jegirard          #+#    #+#             */
+/*   Updated: 2023/11/07 09:26:09 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include  <unistd.h>
 
-int	ft_strin(const char *s, const char c)
+/*
+Description :
+			La fonction bzero() met à 0 les n premiers octets du bloc pointé
+			par s (octets contenant « \0 »).	
+Prototype :
+			void	ft_bzero(void *source, size_t n)
+Paramètres :
+*/
+
+void	ft_bzero(void *source, size_t n)
 {
-	size_t	i;
+	char	*p;
 
-	i = 0;
-	while (s[i] != '\0' && s[i] != c)
-	{
-		i++;
-	}
-	if (s[i] == c)
-		return (1);
-	return (0);
+	p = (char *)source;
+	while (0 < n--)
+		p[n] = 0 ;
+	return ;
 }

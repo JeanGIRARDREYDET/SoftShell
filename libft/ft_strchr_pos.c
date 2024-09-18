@@ -41,4 +41,3 @@ size_t	ft_strchr_pos(const char *source, int find)
 		i++;
 	return (i);
 }
-

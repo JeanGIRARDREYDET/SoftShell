@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strin.c                                         :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:20:13 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/18 17:20:35 by jegirard         ###   ########.fr       */
+/*   Created: 2023/11/07 09:27:29 by jegirard          #+#    #+#             */
+/*   Updated: 2023/11/07 09:27:34 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "../minishell.h"
 
-int	ft_strin(const char *s, const char c)
+/*
+Description :	
+
+Name :			
+
+Prototype : 	
+
+Paramètres :
+
+Retour :		
+*/
+
+static int	ft_islower(int c)
 {
-	size_t	i;
+	return ('a' <= c && c <= 'z');
+}
 
-	i = 0;
-	while (s[i] != '\0' && s[i] != c)
-	{
-		i++;
-	}
-	if (s[i] == c)
-		return (1);
-	return (0);
+int	ft_toupper(int c)
+{
+	if (ft_islower(c))
+		return (c - 32);
+	else
+		return (c);
 }

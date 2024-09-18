@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strin.c                                         :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:20:13 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/18 17:20:35 by jegirard         ###   ########.fr       */
+/*   Created: 2023/11/07 09:27:46 by jegirard          #+#    #+#             */
+/*   Updated: 2023/11/07 09:27:49 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "../minishell.h"
 
-int	ft_strin(const char *s, const char c)
+/*
+Description :	
+
+Name :			
+
+Prototype : 	
+
+Paramètres :
+
+Retour :
+			A pointer to the last occurrence of the
+*/
+
+char	*ft_strrchr(const char *src, int find)
 {
-	size_t	i;
+	char	*p;
 
-	i = 0;
-	while (s[i] != '\0' && s[i] != c)
-	{
-		i++;
-	}
-	if (s[i] == c)
-		return (1);
-	return (0);
+	p = (char *)src;
+	while (*p != '\0')
+		p++;
+	while (p != src && *p != (char unsigned)find)
+		p--;
+	if (*p == (char unsigned)find)
+		return (p);
+	else
+		return (NULL);
 }

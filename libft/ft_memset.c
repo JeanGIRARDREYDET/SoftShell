@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strin.c                                         :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:20:13 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/18 17:20:35 by jegirard         ###   ########.fr       */
+/*   Created: 2023/11/07 09:25:56 by jegirard          #+#    #+#             */
+/*   Updated: 2023/11/07 09:26:03 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "../minishell.h"
 
-int	ft_strin(const char *s, const char c)
+/*
+Description :
+			The memset() function fills the first n bytes of the memory area
+			pointed to 
+
+Prototype :
+				void	*ft_memset(void *s, int c, size_t n)
+Paramètres :
+
+Retour :		 The memset() function returns a pointer to the memory area s
+*/
+
+void	*ft_memset(void *s, int c, size_t n)
 {
-	size_t	i;
+	char	*p;
 
-	i = 0;
-	while (s[i] != '\0' && s[i] != c)
-	{
-		i++;
-	}
-	if (s[i] == c)
-		return (1);
-	return (0);
+	p = (char *)s;
+	while (0 < n--)
+		p[n] = c ;
+	return (p);
 }

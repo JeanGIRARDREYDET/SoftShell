@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strin.c                                         :+:      :+:    :+:   */
+/*   ft_strcnt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:20:13 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/18 17:20:35 by jegirard         ###   ########.fr       */
+/*   Created: 2023/11/07 09:25:48 by jegirard          #+#    #+#             */
+/*   Updated: 2023/11/07 09:25:54 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "../minishell.h"
 
-int	ft_strin(const char *s, const char c)
+/*
+Description :	The strcnt() function count the number of the caracter is in
+				the stringstring.
+
+Prototype : 	
+
+Paramètres :
+
+Retour :		The strlen() function returns the number  ocurence in the string
+*/
+
+size_t	ft_strcnt(const char *s, const char c)
 {
 	size_t	i;
+	size_t	j;
 
 	i = 0;
-	while (s[i] != '\0' && s[i] != c)
+	j = 0;
+	while (s[i] != '\0')
 	{
 		i++;
+		if (s[i] == c)
+			j++;
 	}
-	if (s[i] == c)
-		return (1);
-	return (0);
+	return (j);
 }

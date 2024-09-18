@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_post_left_sep.c                                 :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:11:44 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/18 17:12:01 by jegirard         ###   ########.fr       */
+/*   Created: 2023/11/28 13:08:13 by jegirard          #+#    #+#             */
+/*   Updated: 2023/11/28 13:08:18 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_post_left_sep(char *src, const char c)
-{
-	char	*p;
+/*
+Function :
+				ft_lstlast
+Prototype :
+				t_list *ft_lstlast(t_list *lst);
+Paramètres :
+				lst: Le début de la liste.
+Retour :
+				Dernier élément de la liste
+Description :
+				Dernier élément de la liste
+ */
 
-	p = (char *)src;
-	while (*p != '\0' && *p != c)
-		p++;
-	if (*p == c)
-		p++;
-	return (p);
+t_list	*ft_lstlast(t_list *lst)
+{
+	t_list	*element;
+
+	if (lst == NULL)
+		return (NULL);
+	element = lst;
+	while (element->next != NULL)
+		element = element->next;
+	return (element);
 }

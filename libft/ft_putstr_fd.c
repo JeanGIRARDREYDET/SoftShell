@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strin.c                                         :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:20:13 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/18 17:20:35 by jegirard         ###   ########.fr       */
+/*   Created: 2023/11/15 09:49:48 by jegirard          #+#    #+#             */
+/*   Updated: 2023/11/15 09:49:51 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "../minishell.h"
 
-int	ft_strin(const char *s, const char c)
+/*
+Description : 
+			Écrit la chaîne de caractères ’s’ sur le descripteur de 
+			fichier donné.
+Prototype :
+			void ft_putstr_fd(char *s, int fd);
+Paramètres :
+			s: La chaîne de caractères à écrire.
+			d: Le descripteur de fichier sur lequel écrire.
+
+Autorisées : 
+			write
+*/
+
+void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0' && s[i] != c)
-	{
-		i++;
-	}
-	if (s[i] == c)
-		return (1);
-	return (0);
+	if (s)
+		write(fd, s, ft_strlen(s));
 }

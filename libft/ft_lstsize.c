@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_left_sep.c                                      :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:12:51 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/18 17:13:04 by jegirard         ###   ########.fr       */
+/*   Created: 2023/11/28 13:07:41 by jegirard          #+#    #+#             */
+/*   Updated: 2023/11/28 13:07:45 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../minishell.h"
 
-char	*ft_left_sep(char *src, const char c)
-{
-	size_t	i;
-	char	*p;
+/*
+Function :
+				ft_lstsize
+Prototype :
+				int ft_lstsize(t_list *lst);
+Paramètres :
+				lst: Le début de la liste.
+Retour :
+				Taille de la liste
+Description :
+				Compte le nombre d’éléments de la liste.
+ */
 
-	p = ft_strdup(src);
-	i = 0;
-	while (p[i] != '\0' && p[i] != c)
+int	ft_lstsize(t_list *lst)
+{
+	int		list_size;
+	t_list	*element;
+
+	list_size = 0;
+	if (lst == NULL)
+		return (0);
+	element = lst;
+	while (element != NULL)
 	{
-		i++;
+		element = element->next;
+		list_size++;
 	}
-	p[i] = '\0';
-	return (p);
+	return (list_size);
 }

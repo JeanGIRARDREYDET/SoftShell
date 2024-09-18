@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strin.c                                         :+:      :+:    :+:   */
+/*   ft_left_sub_char.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:20:13 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/18 17:20:35 by jegirard         ###   ########.fr       */
+/*   Created: 2024/04/05 16:11:11 by jegirard          #+#    #+#             */
+/*   Updated: 2024/04/05 16:11:24 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "../minishell.h"
 
-int	ft_strin(const char *s, const char c)
+int	ft_left_sub_char(char *s, char c)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
-	while (s[i] != '\0' && s[i] != c)
-	{
+	while (s[i] && s[i] == c)
 		i++;
-	}
-	if (s[i] == c)
-		return (1);
-	return (0);
+	return (i);
 }
