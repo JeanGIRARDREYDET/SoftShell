@@ -64,5 +64,9 @@ char	*ft_strnstr(const char *source, const char *find, size_t len);
 size_t	ft_strlen(char const *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strchr_pos(const char *source, int find);
+char	*ft_post_left_sep(char *src, const char c);
+size_t	ft_strchr_pos(const char *source, int find);
+char	*ft_left_sep(char *src, const char c);
+
 
 #endif

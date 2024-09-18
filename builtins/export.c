@@ -39,9 +39,10 @@ void	builtin_export(char *key, t_sys *s_sys)
 	e = ft_strchr_pos(key, '=');
 	i = 0;
 	pos = -1;
-	if (! key)
+
+	if (!key=='\0')
 		print_export(s_sys);
-	if (key[e] == '=')
+	if (key[e] == '=' || key[e] == '\0')
 		e++;
 	while (s_sys->env[i])
 	{

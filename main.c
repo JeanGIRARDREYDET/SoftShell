@@ -15,35 +15,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-
-
-char	*ft_left_sep(char *src, const char c)
-{
-	size_t	i;
-	char	*p;
-
-	p = ft_strdup(src);
-	i = 0;
-	while (p[i] != '\0' && p[i] != c)
-	{
-		i++;
-	}
-	p[i]='\0';
-	return (p);
-}
-
-char	*ft_post_left_sep(char *src, const char c)
-{
-	char	*p;
-
-	p = (char *)src;
-	while (*p != '\0' && *p != c)
-		p++;
-	if (*p == c)
-		p++;
-	return (p);
-}
-
 int	main(int ac, char **argv, char **env)
 {
 	char	*line;

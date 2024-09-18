@@ -21,6 +21,7 @@ SRCS = 			main.c \
 				libft/ft_calloc.c \
 				libft/ft_itoa.c \
 				libft/ft_left_sep.c \
+				libft/ft_post_left_sep.c \
 				libft/ft_strchr_pos.c \
 				libft/ft_strchr.c \
 				libft/ft_strdup.c \
