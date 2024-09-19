@@ -12,10 +12,10 @@
 
 #include "../minishell.h"
 
-char	*ft_sys_get_pwd()
-	{
-	char buffer[PATH_MAX];
-	if ( getcwd( buffer, PATH_MAX ) == NULL )
+void	ft_sys_get_pwd(char **buf)
+{
+	*buf = getcwd(NULL,0);
+	if (*buf == NULL)
 	{
 		fprintf( stderr, "Cannot get current working directory path\n" );
 		if ( errno == ERANGE ) {
@@ -23,7 +23,6 @@ char	*ft_sys_get_pwd()
 		}
 		exit( EXIT_FAILURE );
 	}
-	return (stderr);
 }
 
 void	common_initialization(char **env, t_sys *s_sys)
@@ -46,15 +45,11 @@ void	common_initialization(char **env, t_sys *s_sys)
 		s_sys->env_len++;
 	}
 	s_sys->env_len++;
-	if	(s_sys->pwd == 0)
-	{
-		s_sys->pwd;
+	if (s_sys->pwd == 0)
 		s_sys->env_len++;
-	}
-		
-	if(s_sys->shlvl == 0)
+	if (s_sys->shlvl == NULL)
 		s_sys->env_len++;
-	if(s_sys->_ == 0)
+	if (s_sys->_ == 0)
 		s_sys->env_len++;
 	ienv = (char **)ft_calloc(s_sys->env_len, sizeof(char *));
 	i = -1;
@@ -65,11 +60,15 @@ void	common_initialization(char **env, t_sys *s_sys)
 		else
 			ienv[i] = ft_strdup(env[i]);
 	}
-	if	(s_sys->pwd == 0)
-		ienv[i++] = ft_strjoin("PWD=",ft_sys_get_pwd());
-
-
-
-
+	if (s_sys->pwd== NULL)
+	{
+		ft_sys_get_pwd(&s_sys->pwd);
+		ienv[i++] = ft_strjoin("PWD=", s_sys->pwd);
+	}
+	if (s_sys->shlvl == 0)
+	{
+		s_sys->shlvl = "1";
+		ienv[i++] = ft_strjoin("SHLVL=", s_sys->shlvl);
+	}
 	s_sys->env = ienv;
 }
