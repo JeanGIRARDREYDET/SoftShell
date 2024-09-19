@@ -12,10 +12,12 @@
 
 #include "../minishell.h"
 
-// export sans argument a un comportement indefini donc il faut le definir
-// export transfere une donnee entree dans le parent ex : $myname = "dollyne" si on fit un echo, le parent 
-// renvoie bien dollyne, si on ouvre un autre bash, il n'aura pas cette variable donc si on utilise exporte
-// l'enfant a bien la variable myname
+/*
+export sans argument a un comportement indefini donc il faut le definir export
+transfere une donnee entree dans le parent ex : $myname = "dollyne" si on fit un
+echo, le parent renvoie bien dollyne, si on ouvre un autre bash, il n'aura pas
+cette variable donc si on utilise exporte l'enfant a bien la variable myname
+*/
 
 void	print_export(t_sys *sys)
 {
@@ -24,7 +26,7 @@ void	print_export(t_sys *sys)
 	i = 0;
 	while (sys->env[i] && sys->env[i] != 0 && sys->env[i] != NULL)
 	{
-			printf("%s\n", sys->env[i]);
+		printf("declare -x %s\n", sys->env[i]);
 		i++;
 	}
 }
@@ -37,16 +39,14 @@ void	builtin_export(char *key, t_sys *s_sys)
 	size_t	e;
 
 	e = ft_strchr_pos(key, '=');
-	i = 0;
 	pos = -1;
-
 	if (key[0] == '\0')
 		print_export(s_sys);
 	if (key[e] == '=' || key[e] == '\0')
 		e++;
+	i = 0;
 	while (s_sys->env[i])
 	{
-
 		if (ft_strncmp (s_sys->env[i], key, e) == 0)
 		{
 			pos = i;

@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+
 
 int	main(int ac, char **argv, char **env)
 {
@@ -32,6 +30,8 @@ int	main(int ac, char **argv, char **env)
 		printf("%s \n", ft_left_sep(line, ' '));
 		printf("%s \n", ft_post_left_sep(line, ' '));
 		printf("%s \n", ft_left_sep(line, ' '));
+
+
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)
 		{
 			printf("exit\n");

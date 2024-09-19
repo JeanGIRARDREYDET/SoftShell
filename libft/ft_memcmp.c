@@ -14,24 +14,29 @@
 
 /*
 Description :
-			The memcmp() function compares the first n bytes (each interpreted
-			as unsigned char) of the memory areas s1 and s2.
+			La fonction memcmp() compare les n premiers octets (chacun 
+			interprété comme un interprétés comme des caractères non signés) des
+			zones de mémoire s1 et s2.
 
 Prototype :
-			int	ft_memcmp(const void *s1, const void *s2, size_t n)
+			int ft_memcmp(const void *s1, const void *s2, size_t n)
 Paramètres :
 
 Retour :
-			The memcmp() function returns an integer less than, equal to, or
-			greater than zero 
-			if the first  n bytes of s1 is found, respectively, to be less than,
-			to match, or be greater than the first n bytes of s2.
+			La fonction memcmp() renvoie un entier inférieur, égal ou supérieur
+			à zéro.
+			supérieur à zéro 
+			si les n premiers octets de s1 sont respectivement inférieurs à,
+			égal ou supérieur aux n premiers octets de s2.
 
-			For a nonzero return value, the sign is determined by the sign of the 
-			difference between thef irst pair of bytes (interpreted as unsigned
-			char) that differ in s1 and s2.
+			Pour une valeur de retour non nulle, le signe est déterminé par le
+			signe de la différence entre la première paire d'octets de s1 et la
+			première paire d'octets de s2. 
+			différence entre la première paire d'octets (interprétés comme des
+			caractères non signés) qui diffèrent dans s1 et s2.
+			char non signés) qui diffèrent dans s1 et s2.
 
-			If n is zero, the return value is zero.
+			Si n est nul, la valeur de retour est nulle.
 */
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)

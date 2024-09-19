@@ -30,12 +30,9 @@
 # include <stdarg.h>
 # include <string.h>
 # include <stddef.h>
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <linux/limits.h>
 
 typedef struct s_sys
 {
@@ -47,6 +44,7 @@ typedef struct s_sys
 	char	*pwd;
 	char	*path;
 	char	*shlvl;
+	char	*_;
 	char	**cmd_args;
 	char	**env;
 	int		env_len;
