@@ -41,10 +41,7 @@ char	*s_getenv(char *key, t_sys *s_sys)
 	while (s_sys->env[i])
 	{
 		if (ft_strncmp (s_sys->env[i], key, len) == 0)
-		{
-			pos = i;
 			break;
-		}
 		i++;
 	}
 	return (s_sys->env[i]);

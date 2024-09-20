@@ -27,10 +27,6 @@ int	main(int ac, char **argv, char **env)
 	while (1)
 	{
 		line = readline("minishell> ");
-		printf("%s \n", ft_left_sep(line, ' '));
-		printf("%s \n", ft_post_left_sep(line, ' '));
-		printf("%s \n", ft_left_sep(line, ' '));
-		printf("getenv(\"PATH\") %s \n", getenv("PATH"));
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)
 		{
 			printf("exit\n");
@@ -40,6 +36,8 @@ int	main(int ac, char **argv, char **env)
 			builtin_env(&s_sys);
 		else if (ft_strncmp(line, "pwd", 4) == 0)
 			builtin_pwd(&s_sys);
+		else if (ft_strncmp(line, "cd ", 3) == 0)
+			builtin_cd(ft_post_left_sep(line, ' '), &s_sys);	
 		else if (ft_strncmp(line, "unset", 5) == 0)
 			builtin_unset(ft_post_left_sep(line, ' '), &s_sys);
 		else if (ft_strncmp(line, "export", 6) == 0)

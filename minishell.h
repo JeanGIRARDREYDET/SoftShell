@@ -61,6 +61,7 @@ void	builtin_exit(t_sys *sys);
 void	builtin_export(char *key, t_sys *s_sys);
 void	builtin_pwd(t_sys *sys);
 void	builtin_unset(char *line, t_sys *sys);
+char	*s_getenv(char *key, t_sys *s_sys);
 
 void	common_initialization(char **env, t_sys *sys);
 
