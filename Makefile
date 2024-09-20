@@ -56,6 +56,7 @@ SRCS = 			main.c \
 				libft/ft_itoa.c \
 				libft/ft_memcmp.c \
 				libft/ft_strdup.c \
+				libft/ft_sys_get_pwd.c \
 				libft/ft_tablen.c \
 				libft/ft_left_sep.c \
 				libft/ft_memcpy.c \

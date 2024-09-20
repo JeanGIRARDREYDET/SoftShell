@@ -11,25 +11,8 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	ft_sys_get_pwd(char **buf)
+int		read_env(char **env, t_sys *s_sys)
 {
-	*buf = getcwd(NULL,0);
-	if (*buf == NULL)
-	{
-		fprintf( stderr, "Cannot get current working directory path\n" );
-		if ( errno == ERANGE ) {
-			fprintf( stderr, "Buffer size is too small.\n" );
-		}
-		exit( EXIT_FAILURE );
-	}
-}
-
-void	common_initialization(char **env, t_sys *s_sys)
-{
-	int		i;
-	char	**ienv;
-
 	s_sys->shlvl = "0";
 	s_sys->env_len = 0;
 	while (env[s_sys->env_len])
@@ -40,6 +23,9 @@ void	common_initialization(char **env, t_sys *s_sys)
 			s_sys->pwd = env[s_sys->env_len] + 4;
 		if (ft_strnstr (env[s_sys->env_len], "SHLVL=", 6) != 0)
 			s_sys->shlvl = ft_itoa((1 + ft_atoi(env[s_sys->env_len] + 6)));
+		if (ft_strnstr (env[s_sys->env_len], "SHLVL=", 6) != 0)
+			s_sys->shlvl = ft_itoa((1 + ft_atoi(env[s_sys->env_len] + 6)));
+
 		if (ft_strnstr (env[s_sys->env_len], "_=", 2) != 0)
 			s_sys->_ = env[s_sys->env_len] + 2;
 		s_sys->env_len++;
@@ -51,6 +37,15 @@ void	common_initialization(char **env, t_sys *s_sys)
 		s_sys->env_len++;
 	if (s_sys->_ == 0)
 		s_sys->env_len++;
+	return (s_sys->env_len);	
+}
+
+void	common_initialization(char **env, t_sys *s_sys)
+{
+	int		i;
+	char	**ienv;
+
+	s_sys->env_len = read_env(env, s_sys);
 	ienv = (char **)ft_calloc(s_sys->env_len, sizeof(char *));
 	i = -1;
 	while (env[++i])
