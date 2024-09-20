@@ -65,7 +65,7 @@ void	common_initialization(char **env, t_sys *s_sys)
 		ft_sys_get_pwd(&s_sys->pwd);
 		ienv[i++] = ft_strjoin("PWD=", s_sys->pwd);
 	}
-	if (s_sys->shlvl == 0)
+	if (s_sys->shlvl[0] == '0')
 	{
 		s_sys->shlvl = "1";
 		ienv[i++] = ft_strjoin("SHLVL=", s_sys->shlvl);
