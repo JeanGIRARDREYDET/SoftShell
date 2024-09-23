@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   s_setenv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 17:12:48 by doferet           #+#    #+#             */
-/*   Updated: 2024/09/10 14:42:11 by doferet          ###   ########.fr       */
+/*   Created: 2024/09/23 14:45:32 by jegirard          #+#    #+#             */
+/*   Updated: 2024/09/23 14:45:37 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	builtin_env(t_sys *sys)
+int s_setenv(char *key, char *value, t_sys *s_sys)
 {
-	int	i;
+	int i;
+	int len;
 
 	i = 0;
-	//while (sys->env != NULL && sys->env[i] && sys->env[i] != NULL)
-	while (sys->env && sys->env[i] != 0 && sys->env[i] != NULL)
+	len = ft_strlen(key);
+	while (s_sys->env[i])
 	{
-		if (ft_strin(sys->env[i], '='))
-			printf("%s\n", sys->env[i]);
+		if (ft_strncmp (s_sys->env[i], key, len) == 0)
+		{
+			free(s_sys->env[i]);
+			s_sys->env[i] = join_3(key, "=",value);
+			return (i);
+			break;
+		}
 		i++;
 	}
+	return (-1);
 }

@@ -14,5 +14,5 @@
 
 void	builtin_pwd(t_sys *s_sys)
 {
-	printf("%s\n", s_sys->pwd);
+	printf("%s\n", s_sys->senv.pwd);
 }

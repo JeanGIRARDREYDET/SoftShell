@@ -31,22 +31,6 @@ void	print_export(t_sys *sys)
 	}
 }
 
-char	*s_getenv(char *key, t_sys *s_sys)
-{
-	int	i;
-	int len;
-
-	i = 0;
-	len = ft_strlen(key);
-	while (s_sys->env[i])
-	{
-		if (ft_strncmp (s_sys->env[i], key, len) == 0)
-			break;
-		i++;
-	}
-	return (s_sys->env[i]);
-}
-
 void	builtin_export(char *key, t_sys *s_sys)
 {
 	int		i;
@@ -75,8 +59,8 @@ void	builtin_export(char *key, t_sys *s_sys)
 	key[e] = '\0';
 	if (pos == -1)
 	{
-		s_sys->env_len = s_sys->env_len + 1;
-		ienv = (char **)ft_calloc(s_sys->env_len, sizeof(char *));
+		s_sys->senv.len = s_sys->senv.len + 1;
+		ienv = (char **)ft_calloc(s_sys->senv.len, sizeof(char *));
 		i = -1;
 		while (s_sys->env[++i])
 			ienv[i] = ft_strdup(s_sys->env[i]);

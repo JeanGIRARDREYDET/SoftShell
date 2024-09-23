@@ -16,6 +16,7 @@
 int	main(int ac, char **argv, char **env)
 {
 	char	*line;
+	int		l_len;
 	t_sys	s_sys;
 
 	if (ac > 1)
@@ -25,8 +26,11 @@ int	main(int ac, char **argv, char **env)
 	}
 	common_initialization(env, &s_sys);
 	while (1)
-	{
+	{	
+
+
 		line = readline("minishell> ");
+		l_len = ft_strlen(line);		
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)
 		{
 			printf("exit\n");
@@ -36,8 +40,8 @@ int	main(int ac, char **argv, char **env)
 			builtin_env(&s_sys);
 		else if (ft_strncmp(line, "pwd", 4) == 0)
 			builtin_pwd(&s_sys);
-		else if (ft_strncmp(line, "cd ", 3) == 0)
-			builtin_cd(ft_post_left_sep(line, ' '), &s_sys);	
+		else if (ft_strncmp(line, "cd", 2) == 0 && ( l_len==2 || (l_len >2  && (line[2]) < 33 ) ))
+			builtin_cd(ft_post_left_sep(line, ' '), &s_sys);
 		else if (ft_strncmp(line, "unset", 5) == 0)
 			builtin_unset(ft_post_left_sep(line, ' '), &s_sys);
 		else if (ft_strncmp(line, "export", 6) == 0)

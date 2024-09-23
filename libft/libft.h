@@ -71,6 +71,8 @@ char	*ft_strdup(const char *s1);
 int		ft_strin(const char *s, const char c);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*join_3(char *s1, char *s2, char *s3);
+char	*join_4(char *s1, char *s2, char *s3, char *s4);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);

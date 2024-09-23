@@ -34,6 +34,17 @@
 # include <readline/history.h>
 # include <linux/limits.h>
 
+typedef struct s_env
+{
+	int		len;
+	char	*oldpwd;
+	char	*pwd;
+	char	*path;
+	char	*shlvl;
+	char	*_;
+	char	*home;
+}	t_env;
+
 typedef struct s_sys
 {
 	int		duplexe_canal[2];
@@ -41,14 +52,9 @@ typedef struct s_sys
 	int		pid;
 	int		status;
 	int		here_doc;
-	char	*oldpwd;
-	char	*pwd;
-	char	*path;
-	char	*shlvl;
-	char	*_;
+	t_env	senv;
 	char	**cmd_args;
 	char	**env;
-	int		env_len;
 	char	*exe[5];
 	char	*cmd;
 	int		error[2];
@@ -64,7 +70,7 @@ void	builtin_unset(char *line, t_sys *sys);
 char	*s_getenv(char *key, t_sys *s_sys);
 
 void	common_initialization(char **env, t_sys *sys);
-
-
+char	*s_getenv(char *key, t_sys *s_sys);
+int		s_setenv(char *key, char *value, t_sys *s_sys);
 
 #endif

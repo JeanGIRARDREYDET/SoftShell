@@ -55,13 +55,10 @@ SRCS = 			main.c \
 				libft/ft_substr.c \
 				libft/ft_itoa.c \
 				libft/ft_memcmp.c \
-				libft/ft_strdup.c \
-				libft/ft_sys_get_pwd.c \
 				libft/ft_tablen.c \
 				libft/ft_left_sep.c \
 				libft/ft_memcpy.c \
 				libft/ft_strin.c \
-				libft/ft_tolower.c \
 				libft/ft_left_sub_char.c \
 				libft/ft_memmove.c \
 				libft/ft_striteri.c \
@@ -69,7 +66,13 @@ SRCS = 			main.c \
 				libft/ft_lstadd_back.c \
 				libft/ft_memset.c \
 				libft/ft_strjoin.c \
+				libft/ft_strjoin3.c \
+				libft/ft_strdup.c \
+				libft/ft_sys_get_pwd.c \
+				libft/ft_tolower.c \
 				common/initialization.c \
+				common/s_getenv.c \
+				common/s_setenv.c \
 
 SRC_PATH		=	
 BIN_PATH		=	
