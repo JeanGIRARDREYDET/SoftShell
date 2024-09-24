@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+extern int	g_status;
 
 int	main(int ac, char **argv, char **env)
 {
@@ -39,7 +40,7 @@ int	main(int ac, char **argv, char **env)
 		else if (ft_strncmp(line, "env", 4) == 0)
 			builtin_env(&s_sys);
 		else if (ft_strncmp(line, "pwd", 4) == 0)
-			builtin_pwd(&s_sys);
+			builtin_pwd();
 		else if (ft_strncmp(line, "cd", 2) == 0 && ( l_len==2 || (l_len >2  && (line[2]) < 33 ) ))
 			builtin_cd(ft_post_left_sep(line, ' '), &s_sys);
 		else if (ft_strncmp(line, "unset", 5) == 0)

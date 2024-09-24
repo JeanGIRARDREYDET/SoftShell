@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	builtin_pwd(t_sys *s_sys)
+void	builtin_pwd(void)
 {
-	printf("%s\n", s_sys->senv.pwd);
+	printf("%s\n", getcwd(NULL, 0));
 }

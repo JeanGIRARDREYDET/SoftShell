@@ -65,7 +65,7 @@ void	builtin_echo(char *key, t_sys *s_sys);
 void	builtin_env(t_sys *sys);
 void	builtin_exit(t_sys *sys);
 void	builtin_export(char *key, t_sys *s_sys);
-void	builtin_pwd(t_sys *sys);
+void	builtin_pwd(void);
 void	builtin_unset(char *line, t_sys *sys);
 char	*s_getenv(char *key, t_sys *s_sys);
 
