@@ -17,13 +17,22 @@
 //si "-n" est reconnu et qu'il y a une chaine de caractere alors il ne fait pas de retour a la ligne et la print
 //si "-n" est reconnu mais qu'il n'y a pas de parametre, rien ne se passe
 
-void	builtin_echo(char **key, t_sys *s_sys)
+void	builtin_echo(char *key)
 {
-	int i;
+	int	i;
+	int	n;
 
-	while (key)
+	i = 0;
+	n = 1;
+	if (key != NULL && key[0] == '-' && key[1] == 'n' && key[2] == '\0')
+	{
+		n = 0;
+		i++;
+	}
 
-
-
-
+		printf("%c\n", key);
+	if(n==1)
+	{
+		printf("\n");
+	}
 }

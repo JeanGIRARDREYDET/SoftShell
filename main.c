@@ -13,45 +13,48 @@
 #include "minishell.h"
 
 extern int	g_status;
-char find_command(char *line)
+char *find_command(char *line)
 {
 	int	i;
 	int	c1;
 	int	c2;
 
 	i = 0;
-	while(line[i] < 33)
+	while (line[i] < 33)
 		i++;
 	c1= i;	
-	while(line[i] > 32)
+	while (line[i] > 32)
 		i++;
 	c2 = i;
-	while(line[i] < 33)
+	while (line[i] < 33)
 		i++;
 	return (ft_substr(line,c1,(c2-c1)));
 }
 
-char find_expand(char *line)
+char *find_expand(char *line)
 {
 	int	i;
 	int	c1;
 	int	c2;
-// 34 39
+	// 34 39
 	i = 0;
-	while( line != "\0")
+	while (line[i] != '\0')
 	{
-		while(line[i] != '$')
+		while (line[i] != '$')
+		{
 			i++;
-		c1= i;	
-		while(line[i] > 32)
+			c1 = i;
+		}
+
+		while (line[i] > 32)
+		{
 			i++;
 			c2 = i;
-		while(line[i] < 33)
+		}
+
+		while (line[i] < 33)
 			i++;
-
 	}
-
-	
 	return (ft_substr(line,c1,(c2-c1)));
 } 
 
@@ -69,8 +72,6 @@ int	main(int ac, char **argv, char **env)
 	common_initialization(env, &s_sys);
 	while (1)
 	{	
-
-
 		line = readline("minishell> ");
 		l_len = ft_strlen(line);		
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)

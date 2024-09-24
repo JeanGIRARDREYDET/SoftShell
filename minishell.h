@@ -62,7 +62,7 @@ typedef struct s_sys
 }	t_sys;
 
 void	builtin_cd(char *key, t_sys *s_sys);
-void	builtin_echo(char *key, t_sys *s_sys);
+void	builtin_echo(char *key);
 void	builtin_env(t_sys *sys);
 void	builtin_exit(t_sys *sys);
 void	builtin_export(char *key, t_sys *s_sys);
