@@ -36,28 +36,28 @@
 
 typedef struct s_env
 {
-	int		len;
-	char	*oldpwd;
-	char	*pwd;
-	char	*path;
-	char	*shlvl;
-	char	*_;
-	char	*home;
+	int				len;
+	char			*oldpwd;
+	char			*pwd;
+	char			*path;
+	char			*shlvl;
+	char			*_;
+	char			*home;
 }	t_env;
 
 typedef struct s_sys
 {
-	int		duplexe_canal[2];
-	int		fdd[2][2];
-	int		pid;
-	int		status;
-	int		here_doc;
-	char	**cmd_args;
-	char	*exe;
-	char	*cmd;
-	int		error[2];
-	t_env	senv;
-	char	**env;
+	int				duplexe_canal[2];
+	int				fdd[2][2];
+	int				pid;
+	int				status;
+	int				here_doc;
+	char			**cmd_args;
+	char			*exe;
+	char			*cmd;
+	int				error[2];
+	t_env			senv;
+	char			**env;
 	struct s_sys	*next;
 }	t_sys;
 
