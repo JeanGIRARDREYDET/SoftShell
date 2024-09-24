@@ -52,12 +52,13 @@ typedef struct s_sys
 	int		pid;
 	int		status;
 	int		here_doc;
-	t_env	senv;
 	char	**cmd_args;
-	char	**env;
-	char	*exe[5];
+	char	*exe;
 	char	*cmd;
 	int		error[2];
+	t_env	senv;
+	char	**env;
+	struct s_sys	*next;
 }	t_sys;
 
 void	builtin_cd(char *key, t_sys *s_sys);

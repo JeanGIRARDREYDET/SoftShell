@@ -17,3 +17,13 @@
 //si "-n" est reconnu et qu'il y a une chaine de caractere alors il ne fait pas de retour a la ligne et la print
 //si "-n" est reconnu mais qu'il n'y a pas de parametre, rien ne se passe
 
+void	builtin_echo(char **key, t_sys *s_sys)
+{
+	int i;
+
+	while (key)
+
+
+
+
+}
