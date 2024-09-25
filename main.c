@@ -70,7 +70,6 @@ int	main(int ac, char **argv, char **env)
 		exit(0);
 	}
 	common_initialization(env, &s_sys);
-	dprintf(2,"debug\n");
 	while (1)
 	{	
 		line = readline("minishell> ");
