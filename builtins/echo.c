@@ -24,15 +24,12 @@ void	builtin_echo(char *key)
 
 	i = 0;
 	n = 1;
-	if (key != NULL && key[0] == '-' && key[1] == 'n' && key[2] == '\0')
+	if (key != NULL && key[0] == '-' && key[1] == 'n' && key[2] < 33)
 	{
 		n = 0;
-		i++;
+		key += 3;
 	}
-
-		printf("%c\n", key);
-	if(n==1)
-	{
-		printf("\n");
-	}
+	printf("%s", key);
+	if (n == 1)
+			printf("\n");
 }

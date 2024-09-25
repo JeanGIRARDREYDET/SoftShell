@@ -24,7 +24,7 @@ void	print_export(t_sys *sys)
 	int	i;
 
 	i = 0;
-	while (sys->env && sys->env[i] != 0 && sys->env[i] != NULL)
+	while (sys->env!=NULL && sys->env[i] != NULL)
 	{
 		printf("declare -x %s\n", sys->env[i]);
 		i++;
