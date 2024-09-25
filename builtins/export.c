@@ -24,7 +24,7 @@ void	print_export(t_sys *sys)
 	int	i;
 
 	i = 0;
-	while (sys->env != NULL && sys->env[i] != NULL)
+	while (sys->env != NULL && sys->env[i] != 0)
 	{
 		printf("declare -x %s\n", sys->env[i]);
 		i++;
@@ -78,6 +78,7 @@ int	export_values(char *key, t_sys *s_sys)
 	while (key[offset_sep] != '\0' && key[offset_sep] > 32)
 		offset_sep++;
 	if (key[offset_sep] != '\0')
+
 		export_values(key + offset_sep, s_sys);
 	if (key[0] == '=')
 		return (1);

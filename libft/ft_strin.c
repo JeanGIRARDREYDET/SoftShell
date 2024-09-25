@@ -17,7 +17,7 @@ int	ft_strin(const char *s, const char c)
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0' && s[i] != c)
+	while (s && s[i] != 0 && s[i] != c)
 	{
 		i++;
 	}
