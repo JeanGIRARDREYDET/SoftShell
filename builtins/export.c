@@ -30,54 +30,55 @@ void	print_export(t_sys *sys)
 		i++;
 	}
 }
-
-void	builtin_export(char *key, t_sys *s_sys)
+void	export_values(char *key, t_sys *s_sys)
 {
 	int		i;
 	int		pos;
 	char	**ienv;
 	size_t	e;
-
-	
+	while (key[0] != '\0' && key[0] < 33)
+		key++;
 	pos = -1;
-	if (key[0] == '\0')
+	e = ft_strchr_pos(key, '=');
+	if (key[e] == '=' || key[e] == '\0')
+		e++;
+	i = 0;
+	while (s_sys->env[i])
 	{
-		print_export(s_sys);
-		return ;
+		if (ft_strncmp (s_sys->env[i], key, e) == 0)
+		{
+			pos = i;
+			break ;
+		}
+		i++;
+	}
+	while (key[e] != '\0' && key[e] > 32)
+		e++;
+	if (key[e] != '\0')
+		export_values(key+e, s_sys);	
+	key[e] = '\0';
+	if (pos == -1)
+	{
+		s_sys->senv.len = s_sys->senv.len + 1;
+		ienv = (char **)ft_calloc(s_sys->senv.len, sizeof(char *));
+		i = -1;
+		while (s_sys->env[++i])
+			ienv[i] = ft_strdup(s_sys->env[i]);
+		ienv[i] = ft_strdup(key);
+		free(s_sys->env);
+		s_sys->env = ienv;
 	}
 	else
 	{
-		e = ft_strchr_pos(key, '=');
-		if (key[e] == '=' || key[e] == '\0')
-			e++;
-		i = 0;
-		while (s_sys->env[i])
-		{
-			if (ft_strncmp (s_sys->env[i], key, e) == 0)
-			{
-				pos = i;
-				break;
-			}
-			i++;
-		}
-		while (key[e] != '\0' && key[e] != ' ')
-			e++;
-		key[e] = '\0';
-		if (pos == -1)
-		{
-			s_sys->senv.len = s_sys->senv.len + 1;
-			ienv = (char **)ft_calloc(s_sys->senv.len, sizeof(char *));
-			i = -1;
-			while (s_sys->env[++i])
-				ienv[i] = ft_strdup(s_sys->env[i]);
-			ienv[i] = ft_strdup(key);
-			free(s_sys->env);
-			s_sys->env = ienv;
-		}
-		else
-		{
-			free(s_sys->env[pos]);
-			s_sys->env[pos] = ft_strdup(key);
-		}
-	}
+		free(s_sys->env[pos]);
+		s_sys->env[pos] = ft_strdup(key);
+	}	
+}
+
+void	builtin_export(char *key, t_sys *s_sys)
+{
+	if (key[0] == '\0')
+		print_export(s_sys);
+	else
+		export_values(key, s_sys);
 }
