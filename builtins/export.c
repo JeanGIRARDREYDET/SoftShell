@@ -78,7 +78,6 @@ int	export_values(char *key, t_sys *s_sys)
 	while (key[offset_sep] != '\0' && key[offset_sep] > 32)
 		offset_sep++;
 	if (key[offset_sep] != '\0')
-
 		export_values(key + offset_sep, s_sys);
 	if (key[0] == '=')
 		return (1);
