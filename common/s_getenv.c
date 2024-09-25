@@ -14,15 +14,17 @@
 
 char	*s_getenv(char *key, t_sys *s_sys)
 {
-	int i;
-	int len;
+	int			i;
+	int			len;
+	char		end;
 
 	i = 0;
 	len = ft_strlen(key);
 	while (s_sys->env[i])
 	{
-		if (ft_strncmp (s_sys->env[i], key, len) == 0 && s_sys->env[i][len] == '=')
-			break;
+		end = s_sys->env[i][len];
+		if (ft_strncmp (s_sys->env[i], key, len) == 0 && end == '=')
+			break ;
 		i++;
 	}
 	return (s_sys->env[i] + len + 1);

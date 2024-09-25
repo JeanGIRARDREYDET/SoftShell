@@ -24,28 +24,36 @@ void	print_export(t_sys *sys)
 	int	i;
 
 	i = 0;
-	while (sys->env!=NULL && sys->env[i] != NULL)
+	while (sys->env != NULL && sys->env[i] != NULL)
 	{
 		printf("declare -x %s\n", sys->env[i]);
 		i++;
 	}
 }
-void	export_values(char *key, t_sys *s_sys)
+
+int	export_values(char *key, t_sys *s_sys)
 {
 	int		i;
 	int		pos;
 	char	**ienv;
 	size_t	e;
+
 	while (key[0] != '\0' && key[0] < 33)
 		key++;
+
+		
 	pos = -1;
 	e = 0;
-	while (key[e] != '=' && key[e] != '\0' && key[e] >33)
+	while (key[e] != '=' && key[e] != '\0' && key[e] > 33)
 		e++;
 	i = 0;
-	while (s_sys->env[i])
+	if (key[0] == '=')
 	{
-		if (ft_strncmp (s_sys->env[i], key, e) == 0)
+		printf("export: `%s': not a valid identifier\n", key);
+	}
+	while (s_sys->env[i] && key[0] != '=')
+	{
+		if (ft_strncmp (s_sys->env[i], key, e) == 0 && ( s_sys->env[i][e] == '='|| s_sys->env[i][e] == 0 ))
 		{
 			pos = i;
 			break ;
@@ -55,7 +63,9 @@ void	export_values(char *key, t_sys *s_sys)
 	while (key[e] != '\0' && key[e] > 32)
 		e++;
 	if (key[e] != '\0')
-		export_values(key+e, s_sys);	
+		export_values(key + e, s_sys);
+	if (key[0] == '=')
+		return (1);
 	key[e] = '\0';
 	if (pos == -1)
 	{
@@ -72,7 +82,8 @@ void	export_values(char *key, t_sys *s_sys)
 	{
 		free(s_sys->env[pos]);
 		s_sys->env[pos] = ft_strdup(key);
-	}	
+	}
+	return(0);
 }
 
 void	builtin_export(char *key, t_sys *s_sys)
