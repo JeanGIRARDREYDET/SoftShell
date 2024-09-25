@@ -39,9 +39,8 @@ void	export_values(char *key, t_sys *s_sys)
 	while (key[0] != '\0' && key[0] < 33)
 		key++;
 	pos = -1;
-//	e = ft_strchr_pos(key, '=');
 	e = 0;
-	if (key[e] == '=' || key[e] == '\0' || key[e] < 32)
+	while (key[e] != '=' && key[e] != '\0' && key[e] >33)
 		e++;
 	i = 0;
 	while (s_sys->env[i])
