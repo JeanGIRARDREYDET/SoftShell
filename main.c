@@ -58,11 +58,56 @@ char *find_expand(char *line)
 	return (ft_substr(line,c1,(c2-c1)));
 } 
 
+void s_lexingline(char *ln, int i, t_pipe *cmd_pipe)
+{	
+	t_pipe		*new_pipe;
+	char		quoto;
+
+	quoto = '0';
+	
+	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != '\0' && ln[i] != '|')
+		i++;
+	if (ln[i] == '\'' || ln[i] == '\"')
+	{
+		quoto = ln[i];
+		i++;
+	}
+	while (ln[i] != quoto && ln[i] != '\0' && quoto != '0')
+		i++;
+	if (ln[i] != quoto && quoto != '0')
+	{
+		cmd_pipe->error = 130;
+		cmd_pipe->errormsg = ft_strdup("erreur de quot");
+	}		
+	else if (ln[i] == '\0')
+	{
+		cmd_pipe->full_cmd = ft_strdupleft(ln,i);
+		cmd_pipe->next = NULL;
+		return ;
+	}
+	else if (ln[i] == '|')
+	{
+		new_pipe = ft_calloc(1, sizeof (t_pipe));
+		if (!new_pipe)
+			return ;
+		cmd_pipe->full_cmd = ft_strdupleft(ln,i);
+		cmd_pipe->next = new_pipe;
+		i++;
+		s_lexingline (ln + i, 0, new_pipe);
+	}
+	else
+	{
+		i++;
+		s_lexingline (ln, i, cmd_pipe);		
+	}
+}
+
 int	main(int ac, char **argv, char **env)
 {
 	char	*line;
 	int		l_len;
 	t_sys	s_sys;
+	t_pipe	s_pipe;
 
 	if (ac > 1)
 	{
@@ -73,7 +118,8 @@ int	main(int ac, char **argv, char **env)
 	while (1)
 	{	
 		line = readline("minishell> ");
-		l_len = ft_strlen(line);		
+		l_len = ft_strlen(line);
+		s_lexingline (line, 0, &s_pipe);
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)
 		{
 			printf("exit\n");

@@ -35,6 +35,6 @@ void	s_unset(char *key, t_sys *s_sys)
 		s_sys->env[pos] = s_sys->env[pos + 1];
 		pos++;
 	}
-	free(s_sys->env[pos+1]);
+	free(s_sys->env[pos +1]);
 	s_sys->env[pos] = NULL;
 }

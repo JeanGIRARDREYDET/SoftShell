@@ -34,6 +34,13 @@
 # include <readline/history.h>
 # include <linux/limits.h>
 
+# define PIPE 1
+# define HEREDOC 2
+# define APPEND 3
+# define INPUT 4
+# define OUTPUT 5
+# define SPE 6
+
 typedef struct s_env
 {
 	int				len;
@@ -47,9 +54,6 @@ typedef struct s_env
 
 typedef struct s_sys
 {
-	int				duplexe_canal[2];
-	int				fdd[2][2];
-	int				pid;
 	int				status;
 	int				here_doc;
 	char			**cmd_args;
@@ -60,6 +64,22 @@ typedef struct s_sys
 	char			**env;
 	struct s_sys	*next;
 }	t_sys;
+
+typedef struct s_pipe
+{
+	int				pid;
+	char			*full_cmd;
+	char			*cmd;
+	char			*arg;
+	int				error;
+	int				tocken;
+	char			*errormsg;
+	int				duplexe_canal[2];
+	int				fdd[2][2];
+	char			*file;
+	struct s_pipe	*next;
+
+}	t_pipe;
 
 void	builtin_cd(char *key, t_sys *s_sys);
 void	builtin_echo(char *key);
