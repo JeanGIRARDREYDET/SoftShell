@@ -34,6 +34,8 @@ void	ft_bzero(void *s, size_t n);
 
 void	*ft_calloc(size_t count, size_t size);
 
+int		ft_get_confpos(char *key, char k_sep, char **conf);
+
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);

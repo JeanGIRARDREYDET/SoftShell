@@ -31,38 +31,6 @@ void	print_export(t_sys *sys)
 	}
 }
 
-int	get_sep_value_pos(char *key_value)
-{
-	int	e;
-
-	e = 0;
-	while (key_value[e] != '=' && key_value[e] != '\0' && key_value[e] > 33)
-		e++;
-	return (e);
-}
-
-int	get_confpos(char *key, char k_sep, char **conf)
-{
-	int			i;
-	int			offset;
-	char		*line;
-	char		end;
-
-	i = 0;
-	offset = 0;
-	while (key[offset] != k_sep && key[offset] != '\0' && key[offset] > 33)
-		offset++;
-	while (conf[i] && key[0] != k_sep)
-	{
-		line = conf[i];
-		end = line[offset];
-		if (ft_strncmp (line, key, offset) == 0 && (end == '=' || end == 0))
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
 void	s_env_create_value(char *line, t_sys *s_sys)
 {
 	char		**ienv;
@@ -82,7 +50,7 @@ void	s_env_create_update_value(char *line, t_sys *s_sys)
 {
 	int			pos;
 
-	pos = get_confpos(line, '=', s_sys->env);
+	pos = ft_get_confpos(line, '=', s_sys->env);
 	if (pos == -1)
 		s_env_create_value (line, s_sys);
 	else
