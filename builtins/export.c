@@ -41,14 +41,18 @@ int	get_sep_value_pos(char *key_value)
 	return (e);
 }
 
-int	get_confppos(char *key, int offset, char **conf)
+int	get_confpos(char *key, char k_sep, char **conf)
 {
 	int			i;
+	int			offset;
 	char		*line;
 	char		end;
 
 	i = 0;
-	while (conf[i] && key[0] != '=')
+	offset = 0;
+	while (key[offset] != k_sep && key[offset] != '\0' && key[offset] > 33)
+		offset++;
+	while (conf[i] && key[0] != k_sep)
 	{
 		line = conf[i];
 		end = line[offset];
@@ -59,40 +63,49 @@ int	get_confppos(char *key, int offset, char **conf)
 	return (-1);
 }
 
-int	export_values(char *key, t_sys *s_sys)
+void	s_env_create_value(char *line, t_sys *s_sys)
 {
-	int			i;
 	char		**ienv;
-	int			pos;
-	int			offset_sep;
+	int			i;
 
-	while (key[0] != '\0' && key[0] < 33)
-		key++;
-	offset_sep = get_sep_value_pos(key);	
-	i = 0;
-	if (key[0] == '=')
-		printf("export: `%s': not a valid identifier\n", key);
-	pos = get_confppos(key, offset_sep, s_sys->env);
-	while (key[offset_sep] != '\0' && key[offset_sep] > 32)
-		offset_sep++;
+	s_sys->senv.len = s_sys->senv.len + 1;
+	ienv = (char **)ft_calloc(s_sys->senv.len, sizeof(char *));
+	i = -1;
+	while (s_sys->env[++i])
+		ienv[i] = ft_strdup(s_sys->env[i]);
+	ienv[i] = line;
+	free(s_sys->env);
+	s_sys->env = ienv;
+}
+
+void	s_env_create_update_value(char *line, t_sys *s_sys)
+{
+	int			pos;
+
+	pos = get_confpos(line, '=', s_sys->env);
 	if (pos == -1)
-	{
-		s_sys->senv.len = s_sys->senv.len + 1;
-		ienv = (char **)ft_calloc(s_sys->senv.len, sizeof(char *));
-		i = -1;
-		while (s_sys->env[++i])
-			ienv[i] = ft_strdup(s_sys->env[i]);
-		ienv[i] = ft_strdupleft(key, offset_sep);
-		free(s_sys->env);
-		s_sys->env = ienv;
-	}
+		s_env_create_value (line, s_sys);
 	else
 	{
 		free(s_sys->env[pos]);
-		s_sys->env[pos] = ft_strdupleft(key, offset_sep);
+		s_sys->env[pos] = line;
 	}
-	if (key[offset_sep] != '\0')
-		export_values(key + offset_sep, s_sys);
+}
+
+int	export_values(char *key, t_sys *s_sys)
+{
+	int			next_value;
+
+	while (key[0] != '\0' && key[0] < 33)
+		key++;
+	if (key[0] == '=')
+		printf("export: `%s': not a valid identifier\n", key);
+	next_value = 0 ;
+	while (key[next_value] != '\0' && key[next_value] > 32)
+		next_value++;
+	s_env_create_update_value(ft_strdupleft (key, next_value), s_sys);
+	if (key[next_value] != '\0')
+		export_values(key + next_value, s_sys);
 	return (0);
 }
 
