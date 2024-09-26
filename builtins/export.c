@@ -41,22 +41,22 @@ int	get_sep_value_pos(char *key_value)
 	return (e);
 }
 
-int	get_env_pos(char *key, int offset, t_sys *s_sys)
+int	get_confppos(char *key, int offset, char **conf)
 {
 	int			i;
 	char		*line;
 	char		end;
 
 	i = 0;
-	while (s_sys->env[i] && key[0] != '=')
+	while (conf[i] && key[0] != '=')
 	{
-		line = s_sys->env[i];
+		line = conf[i];
 		end = line[offset];
 		if (ft_strncmp (line, key, offset) == 0 && (end == '=' || end == 0))
 			return (i);
 		i++;
 	}
-	return (i);
+	return (-1);
 }
 
 int	export_values(char *key, t_sys *s_sys)
@@ -66,22 +66,15 @@ int	export_values(char *key, t_sys *s_sys)
 	int			pos;
 	int			offset_sep;
 
-	offset_sep = get_sep_value_pos(key);
 	while (key[0] != '\0' && key[0] < 33)
 		key++;
+	offset_sep = get_sep_value_pos(key);	
 	i = 0;
 	if (key[0] == '=')
-	{
 		printf("export: `%s': not a valid identifier\n", key);
-	}
-	pos = get_env_pos(key, offset_sep, s_sys);
+	pos = get_confppos(key, offset_sep, s_sys->env);
 	while (key[offset_sep] != '\0' && key[offset_sep] > 32)
 		offset_sep++;
-	if (key[offset_sep] != '\0')
-		export_values(key + offset_sep, s_sys);
-	if (key[0] == '=')
-		return (1);
-	key[offset_sep] = '\0';
 	if (pos == -1)
 	{
 		s_sys->senv.len = s_sys->senv.len + 1;
@@ -89,16 +82,18 @@ int	export_values(char *key, t_sys *s_sys)
 		i = -1;
 		while (s_sys->env[++i])
 			ienv[i] = ft_strdup(s_sys->env[i]);
-		ienv[i] = ft_strdup(key);
+		ienv[i] = ft_strdupleft(key, offset_sep);
 		free(s_sys->env);
 		s_sys->env = ienv;
 	}
 	else
 	{
 		free(s_sys->env[pos]);
-		s_sys->env[pos] = ft_strdup(key);
+		s_sys->env[pos] = ft_strdupleft(key, offset_sep);
 	}
-	return(0);
+	if (key[offset_sep] != '\0')
+		export_values(key + offset_sep, s_sys);
+	return (0);
 }
 
 void	builtin_export(char *key, t_sys *s_sys)

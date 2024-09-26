@@ -68,6 +68,7 @@ char	**ft_split(char const *s, char c);
 size_t	ft_strchr_pos(const char *source, int find);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
+char	*ft_strdupleft(char const *s, size_t len);
 int		ft_strin(const char *s, const char c);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strjoin(char const *s1, char const *s2);

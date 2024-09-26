@@ -53,3 +53,8 @@ char	*ft_strdup(const char *s)
 		p[nmemb] = s[nmemb];
 	return (p);
 }
+
+
+
+
+
