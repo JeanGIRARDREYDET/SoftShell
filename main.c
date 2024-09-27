@@ -45,13 +45,11 @@ char *find_expand(char *line)
 			i++;
 			c1 = i;
 		}
-
 		while (line[i] > 32)
 		{
 			i++;
 			c2 = i;
 		}
-
 		while (line[i] < 33)
 			i++;
 	}
@@ -66,7 +64,6 @@ void	s_log_pipe_error(int id, char *msg, t_pipe *cmd_pipe)
 
 void	enleverspacedeavnt(char *ln)
 {
-	
 	while (ln[0] < 33 && ln[0] != '\0')
 	{
 		ln++;
@@ -113,6 +110,24 @@ void s_lexingline(char *ln, int i, t_pipe *cmd_pipe)
 	}
 }
 
+void	s_lspipetiter(t_pipe *lst, void (*f)(t_pipe *lst))
+{
+	t_pipe	*i_element;
+
+	i_element = lst;
+	while (i_element != NULL)
+	{
+		(*f)(i_element);
+		i_element = i_element->next;
+	}
+}
+
+static void s_pipe_parsse(t_pipe *lst)
+{
+	lst->arg = ft_post_left_sep(lst->full_cmd, ' ');
+	lst->cmd = ft_left_sep(lst->full_cmd, ' ');
+}
+
 int	main(int ac, char **argv, char **env)
 {
 	char	*line;
@@ -126,12 +141,12 @@ int	main(int ac, char **argv, char **env)
 		exit(0);
 	}
 	common_initialization(env, &s_sys);
-	
 	while (1)
 	{	
 		line = readline("minishell> ");
 		l_len = ft_strlen(line);
 		s_lexingline (line, 0, &s_pipe);
+		s_lspipetiter (&s_pipe, &s_pipe_parsse);
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)
 		{
 			printf("exit\n");
@@ -143,9 +158,9 @@ int	main(int ac, char **argv, char **env)
 			builtin_env(&s_sys);
 		else if (ft_strncmp(line, "pwd", 4) == 0)
 			builtin_pwd();
-		else if (ft_strncmp(line, "echo", 4) == 0 && ( l_len==4 || (l_len >4  && (line[4]) < 33 ) ))	
+		else if (ft_strncmp(line, "echo", 4) == 0 && (l_len==4 || (l_len >4  && (line[4]) < 33 ) ))	
 			builtin_echo(ft_post_left_sep(line, ' '));
-		else if (ft_strncmp(line, "cd", 2) == 0 && ( l_len==2 || (l_len >2  && (line[2]) < 33 ) ))
+		else if (ft_strncmp(line, "cd", 2) == 0 && (l_len==2 || (l_len >2  && (line[2]) < 33 ) ))
 			builtin_cd(ft_post_left_sep(line, ' '), &s_sys);
 		else if (ft_strncmp(line, "unset", 5) == 0)
 			s_unset(ft_post_left_sep(line, ' '), &s_sys);
