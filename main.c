@@ -75,7 +75,7 @@ int	s_pos_passcote( char *ln, int i, t_pipe *cmd_pipe)
 {
 	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != 0 && ln[i] != '|')
 		i++;
-	if (ln[i] == '\'' || ln[i] == '\"')
+	if (ft_strchr(TECHAP, ln[i])) //ft_strchr(c, p[i])
 	{
 		i = i+ 1 + ft_pos_left_char ((ln + i + 1), &ln[i]);
 		if (ln[i]== '\0')
