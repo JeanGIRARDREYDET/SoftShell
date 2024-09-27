@@ -42,6 +42,7 @@
 # define SPE 6
 
 # define WSPACE " \t"
+# define WSPACE " \t"
 
 typedef struct s_env
 {
@@ -73,6 +74,7 @@ typedef struct s_pipe
 	char			*full_cmd;
 	char			*cmd;
 	char			*arg;
+	char			**args;
 	int				error;
 	int				tocken;
 	char			*errormsg;

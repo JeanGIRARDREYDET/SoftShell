@@ -124,8 +124,8 @@ void	s_lspipetiter(t_pipe *lst, void (*f)(t_pipe *lst))
 
 static void s_pipe_parsse(t_pipe *lst)
 {
-	lst->arg = ft_post_left_sep(lst->full_cmd, ' ');
-	lst->cmd = ft_left_sep(lst->full_cmd, ' ');
+	lst->arg = ft_post_left_sep(lst->full_cmd, WSPACE);
+	lst->cmd = ft_left_sep(lst->full_cmd, WSPACE);
 }
 
 int	main(int ac, char **argv, char **env)
@@ -159,13 +159,13 @@ int	main(int ac, char **argv, char **env)
 		else if (ft_strncmp(line, "pwd", 4) == 0)
 			builtin_pwd();
 		else if (ft_strncmp(line, "echo", 4) == 0 && (l_len==4 || (l_len >4  && (line[4]) < 33 ) ))	
-			builtin_echo(ft_post_left_sep(line, ' '));
+			builtin_echo(ft_post_left_sep(line, WSPACE));
 		else if (ft_strncmp(line, "cd", 2) == 0 && (l_len==2 || (l_len >2  && (line[2]) < 33 ) ))
-			builtin_cd(ft_post_left_sep(line, ' '), &s_sys);
+			builtin_cd(ft_post_left_sep(line, WSPACE), &s_sys);
 		else if (ft_strncmp(line, "unset", 5) == 0)
-			s_unset(ft_post_left_sep(line, ' '), &s_sys);
+			s_unset(ft_post_left_sep(line, WSPACE), &s_sys);
 		else if (ft_strncmp(line, "export", 6) == 0)
-			builtin_export(ft_post_left_sep(line, ' '), &s_sys);
+			builtin_export(ft_post_left_sep(line, WSPACE), &s_sys);
 		// else if (ft_strncmp(line, "echo", 5) == 0)
 		// 	builtin_echo();
 		add_history(line);

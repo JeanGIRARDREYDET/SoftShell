@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 #include "../minishell.h"
 
-char	*ft_left_sep(char *src, const char c)
+char	*ft_left_sep(char *src, const char *c)
 {
 	size_t	i;
 	char	*p;
 
 	p = ft_strdup(src);
 	i = 0;
-	while (p[i] != '\0' && p[i] != c)
+	while (p[i] != '\0' && !ft_strchr(c, *p))
 	{
 		i++;
 	}

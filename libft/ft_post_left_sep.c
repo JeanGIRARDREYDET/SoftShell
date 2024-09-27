@@ -12,14 +12,14 @@
 
 #include "../minishell.h"
 
-char	*ft_post_left_sep(char *src, const char c)
+char	*ft_post_left_sep(char *src, const char *c)
 {
 	char	*p;
 
 	p = (char *)src;
-	while (*p != '\0' && *p != c)
+	while (*p != '\0' && !ft_strchr(c, *p))
 		p++;
-	if (*p == c)
+	if (ft_strchr(c, *p))
 		p++;
 	return (p);
 }

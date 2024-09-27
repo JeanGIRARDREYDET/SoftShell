@@ -43,7 +43,7 @@ int		ft_isdigit(int c);
 int		ft_isprint(int c);
 char	*ft_itoa(int n);
 
-char	*ft_left_sep(char *src, const char c);
+char	*ft_left_sep(char *src, const char *c);
 int		ft_left_sub_char(char *s, char c);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
@@ -62,7 +62,7 @@ void	*ft_memmove(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 
 int		ft_pos_left_char(char *s, char c);
-char	*ft_post_left_sep(char *s, const char c);
+char	*ft_post_left_sep(char *s, const char *c);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
