@@ -75,11 +75,13 @@ int	s_pos_passcote( char *ln, int i, t_pipe *cmd_pipe)
 {
 	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != 0 && ln[i] != '|')
 		i++;
-	if (ft_strchr(TECHAP, ln[i])) //ft_strchr(c, p[i])
+	if (ft_strchr (TECHAP, ln[i]))
 	{
-		i = i+ 1 + ft_pos_left_char ((ln + i + 1), &ln[i]);
-		if (ln[i]== '\0')
+		i = i + 2 + ft_pos_left_char ((ln + i + 1), &ln[i]);
+		if (ln[i] == '\0')
 			s_log_pipe_error(130, "erreur de quot", cmd_pipe);
+		else
+			i++;
 	}
 	return (i);
 }
