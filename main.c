@@ -58,30 +58,43 @@ char *find_expand(char *line)
 	return (ft_substr(line,c1,(c2-c1)));
 } 
 
-void s_lexingline(char *ln, int i, t_pipe *cmd_pipe)
-{	
-	t_pipe		*new_pipe;
-	char		quoto;
+void	s_log_pipe_error(int id, char *msg, t_pipe *cmd_pipe)
+{
+	cmd_pipe->error = id;
+	cmd_pipe->errormsg = msg;
+}
 
-	quoto = '0';
+void	enleverspacedeavnt(char *ln)
+{
 	
-	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != '\0' && ln[i] != '|')
+	while (ln[0] < 33 && ln[0] != '\0')
+	{
+		ln++;
+//		i = 0;
+	}
+}
+
+int	s_pos_passcote( char *ln, int i, t_pipe *cmd_pipe)
+{
+	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != 0 && ln[i] != '|')
 		i++;
 	if (ln[i] == '\'' || ln[i] == '\"')
 	{
-		quoto = ln[i];
-		i++;
+		i = i+ 1 + ft_pos_left_char ((ln + i + 1), ln[i]);
+		if (ln[i]== '\0')
+			s_log_pipe_error(130, "erreur de quot", cmd_pipe);
 	}
-	while (ln[i] != quoto && ln[i] != '\0' && quoto != '0')
-		i++;
-	if (ln[i] != quoto && quoto != '0')
+	return (i);
+}
+
+void s_lexingline(char *ln, int i, t_pipe *cmd_pipe)
+{	
+	t_pipe		*new_pipe;
+
+	i = s_pos_passcote(ln, i, cmd_pipe);
+	if (ln[i] == '\0')
 	{
-		cmd_pipe->error = 130;
-		cmd_pipe->errormsg = ft_strdup("erreur de quot");
-	}		
-	else if (ln[i] == '\0')
-	{
-		cmd_pipe->full_cmd = ft_strdupleft(ln,i);
+		cmd_pipe->full_cmd = ft_strtrim_param(ln, 0, i, WSPACE);
 		cmd_pipe->next = NULL;
 		return ;
 	}
@@ -90,15 +103,13 @@ void s_lexingline(char *ln, int i, t_pipe *cmd_pipe)
 		new_pipe = ft_calloc(1, sizeof (t_pipe));
 		if (!new_pipe)
 			return ;
-		cmd_pipe->full_cmd = ft_strdupleft(ln,i);
+		cmd_pipe->full_cmd = ft_strtrim_param(ln, 0, i -1, WSPACE);
 		cmd_pipe->next = new_pipe;
-		i++;
-		s_lexingline (ln + i, 0, new_pipe);
+		s_lexingline (ln + (++i), 0, new_pipe);
 	}
 	else
 	{
-		i++;
-		s_lexingline (ln, i, cmd_pipe);		
+		s_lexingline (ln, ++i, cmd_pipe);
 	}
 }
 
@@ -115,6 +126,7 @@ int	main(int ac, char **argv, char **env)
 		exit(0);
 	}
 	common_initialization(env, &s_sys);
+	
 	while (1)
 	{	
 		line = readline("minishell> ");
@@ -128,7 +140,7 @@ int	main(int ac, char **argv, char **env)
 		else if (ft_strncmp(line, "env", 4) == 0)
 			builtin_env(&s_sys);
 		else if (ft_strncmp(line, "env", 4) == 0)
-			builtin_env(&s_sys);	
+			builtin_env(&s_sys);
 		else if (ft_strncmp(line, "pwd", 4) == 0)
 			builtin_pwd();
 		else if (ft_strncmp(line, "echo", 4) == 0 && ( l_len==4 || (l_len >4  && (line[4]) < 33 ) ))	

@@ -41,6 +41,8 @@
 # define OUTPUT 5
 # define SPE 6
 
+# define WSPACE " \t"
+
 typedef struct s_env
 {
 	int				len;
