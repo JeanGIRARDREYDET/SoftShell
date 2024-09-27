@@ -18,7 +18,7 @@ char	*ft_left_sep(char *src, const char *c)
 
 	p = ft_strdup(src);
 	i = 0;
-	while (p[i] != '\0' && !ft_strchr(c, *p))
+	while (p[i] != '\0' && !ft_strchr(c, p[i]))
 	{
 		i++;
 	}

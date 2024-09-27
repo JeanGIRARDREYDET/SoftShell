@@ -12,12 +12,12 @@
 
 #include "../minishell.h"
 
-int	ft_pos_left_char(char *s, char c)
+int	ft_pos_left_char(char *s, char *c)
 {
 	int		i;
 
 	i = 0;
-	while (s[i] && s[i] != '\0' && s[i] != c)
+	while (s[i] && s[i] != '\0' && !ft_strchr(c, (int)(s[i])))
 		i++;
 	return (i);
 }

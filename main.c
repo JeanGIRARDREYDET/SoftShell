@@ -77,7 +77,7 @@ int	s_pos_passcote( char *ln, int i, t_pipe *cmd_pipe)
 		i++;
 	if (ln[i] == '\'' || ln[i] == '\"')
 	{
-		i = i+ 1 + ft_pos_left_char ((ln + i + 1), ln[i]);
+		i = i+ 1 + ft_pos_left_char ((ln + i + 1), &ln[i]);
 		if (ln[i]== '\0')
 			s_log_pipe_error(130, "erreur de quot", cmd_pipe);
 	}

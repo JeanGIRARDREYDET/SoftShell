@@ -42,7 +42,7 @@
 # define SPE 6
 
 # define WSPACE " \t"
-# define WSPACE " \t"
+# define TECHAP "\"'"
 
 typedef struct s_env
 {
