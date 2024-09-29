@@ -56,10 +56,10 @@ char *find_expand(char *line)
 	return (ft_substr(line,c1,(c2-c1)));
 } 
 
-void	s_log_pipe_error(int id, char *msg, t_pipe *cmd_pipe)
+void	s_log_pipe_error(int id, char *msg, t_error *s_error)
 {
-	cmd_pipe->error = id;
-	cmd_pipe->errormsg = msg;
+	s_error->num = id;
+	s_error->msg = msg;
 }
 
 void	enleverspacedeavnt(char *ln)
@@ -71,7 +71,7 @@ void	enleverspacedeavnt(char *ln)
 	}
 }
 
-int	s_pos_passcote( char *ln, int i, t_pipe *cmd_pipe)
+int	s_pos_passcote( char *ln, int i, t_error *s_error)
 {
 	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != 0 && ln[i] != '|')
 		i++;
@@ -79,18 +79,22 @@ int	s_pos_passcote( char *ln, int i, t_pipe *cmd_pipe)
 	{
 		i = i + 2 + ft_pos_left_char ((ln + i + 1), &ln[i]);
 		if (ln[i] == '\0')
-			s_log_pipe_error(130, "erreur de quot", cmd_pipe);
+			s_log_pipe_error(130, "erreur de quot", s_error);
 		else
 			i++;
 	}
 	return (i);
 }
 
+
+
 void s_lexingline(char *ln, int i, t_pipe *cmd_pipe)
 {	
 	t_pipe		*new_pipe;
 
-	i = s_pos_passcote(ln, i, cmd_pipe);
+	i = s_pos_passcote(ln, i, &cmd_pipe->error);
+	while (ln[i] && ft_strchr(WSPACE, ln[i]))
+		i++;
 	if (ln[i] == '\0')
 	{
 		cmd_pipe->full_cmd = ft_strtrim_param(ln, 0, i, WSPACE);
@@ -130,6 +134,23 @@ static void s_pipe_parsse(t_pipe *lst)
 	lst->cmd = ft_left_sep(lst->full_cmd, WSPACE);
 }
 
+
+void s_pos_passspace(char *ln, int *i)
+{
+	while (ln[*i] && ft_strchr(WSPACE, ln[*i]))
+		(*i)++;
+}
+
+static void s_pipe_arg_parsse(t_pipe *lst)
+{
+	int nombre;
+	
+	nombre = 0;
+	s_pos_passspace(lst->arg, &nombre);
+	printf("-%d-\n", nombre);
+}
+
+
 int	main(int ac, char **argv, char **env)
 {
 	char	*line;
@@ -149,6 +170,10 @@ int	main(int ac, char **argv, char **env)
 		l_len = ft_strlen(line);
 		s_lexingline (line, 0, &s_pipe);
 		s_lspipetiter (&s_pipe, &s_pipe_parsse);
+		s_lspipetiter (&s_pipe, &s_pipe_arg_parsse);
+		printf("-%s-\n", ft_strchr (TECHAP, '\0'));
+		if ( ft_strchr (TECHAP, '\0'))
+			printf("A\n");
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)
 		{
 			printf("exit\n");

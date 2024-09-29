@@ -55,6 +55,13 @@ typedef struct s_env
 	char			*home;
 }	t_env;
 
+typedef struct s_error
+{
+	int				num;
+	char			*msg;
+	struct s_error	*next;
+}	t_error;
+
 typedef struct s_sys
 {
 	int				status;
@@ -75,15 +82,14 @@ typedef struct s_pipe
 	char			*cmd;
 	char			*arg;
 	char			**args;
-	int				error;
-	int				tocken;
-	char			*errormsg;
+	t_error			error;
 	int				duplexe_canal[2];
 	int				fdd[2][2];
 	char			*file;
 	struct s_pipe	*next;
 
 }	t_pipe;
+
 
 void	builtin_cd(char *key, t_sys *s_sys);
 void	builtin_echo(char *key);

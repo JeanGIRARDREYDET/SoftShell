@@ -19,10 +19,9 @@
 
 void	builtin_echo(char *key)
 {
-	int	i;
+
 	int	n;
 
-	i = 0;
 	n = 1;
 	if (key != NULL && key[0] == '-' && key[1] == 'n' && key[2] < 33)
 	{
