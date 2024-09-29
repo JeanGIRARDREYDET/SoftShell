@@ -143,11 +143,35 @@ void s_pos_passspace(char *ln, int *i)
 
 static void s_pipe_arg_parsse(t_pipe *lst)
 {
-	int nombre;
+	int i;
+	int n;
+	char *tmp;
 	
-	nombre = 0;
-	s_pos_passspace(lst->arg, &nombre);
-	printf("-%d-\n", nombre);
+	i = 0;
+	n = 0;
+	s_pos_passspace(lst->arg, &i);
+
+	printf("-%d-\n", i);
+	if(lst->arg[i])
+	{
+		
+		while (lst->arg[i] && !ft_strchr(WSPACE, lst->arg[i]))
+		{
+			i++;
+		}
+		lst->args = ft_calloc(n + 1, sizeof (char *));
+		if (!lst->args)
+			return ;
+		i = 0;
+		n = 0;
+		while (lst->arg[i] && !ft_strchr(WSPACE, lst->arg[i]))
+		{
+			lst->args[n] = ft_post_left_sep(lst->arg + i, WSPACE);
+			i = i + ft_strlen(lst->args[n]);
+			n++;
+		}
+	}
+
 }
 
 
