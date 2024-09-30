@@ -134,46 +134,75 @@ static void s_pipe_parsse(t_pipe *lst)
 	lst->cmd = ft_left_sep(lst->full_cmd, WSPACE);
 }
 
-
 void s_pos_passspace(char *ln, int *i)
 {
 	while (ln[*i] && ft_strchr(WSPACE, ln[*i]))
 		(*i)++;
 }
 
+void s_pos_passstring(char *ln, int *i)
+{
+	char echap;
+
+	echap = '0';
+	while (ln[*i] && (!ft_strchr(WSPACE, ln[*i] ) || echap!= '0'))
+	{
+		if ((echap == '0') && ft_strchr(TECHAP, ln[*i]))
+			echap = ft_strchr(TECHAP, ln[*i])[0];
+		else if (ln[*i] == echap)
+			echap =  '0';
+		printf(" %d %c-%c-\n",*i,ln[*i], echap );			
+		(*i)++;
+	}
+	printf(" %d %c-%c-\n",*i,ln[*i], echap );
+printf(" - - - - - - -\n");
+
+}
+
 static void s_pipe_arg_parsse(t_pipe *lst)
 {
 	int i;
 	int n;
-	char *tmp;
+	//char *tmp;
 	
 	i = 0;
 	n = 0;
-	s_pos_passspace(lst->arg, &i);
-
-	printf("-%d-\n", i);
+	while( lst->arg[i])
+	{
+		s_pos_passspace(lst->arg, &i);
+		s_pos_passstring(lst->arg, &i);
+		printf("-----%c  %d-%d-\n",lst->arg[i],n, i);
+	}
+	
 	if(lst->arg[i])
 	{
 		
 		while (lst->arg[i] && !ft_strchr(WSPACE, lst->arg[i]))
 		{
 			i++;
+			n++;
 		}
 		//lst->args
-		tmp = ft_calloc(n + 1, sizeof (char *));
+	//	tmp = ft_calloc(n + 1, sizeof (char *));
 		if (!lst->args)
 			return ;
 		i = 0;
 		n = 0;
 		//while (lst->arg[i] && !ft_strchr(WSPACE, lst->arg[i]))
+/*
 		while (tmp[n]  && !ft_strchr(WSPACE, lst->arg[i]))
 		{
 			//lst->args
-			tmps[n] = ft_post_left_sep(lst->arg + i, WSPACE);
+			tmp[n] = ft_post_left_sep(lst->arg + i, WSPACE);
 			//i = i + ft_strlen(lst->args[n]);
 			tmp[n] = ft_strtrim_param(tmp[n], 0, ft_strlen(tmp[n]), WSPACE);
 			n++;
 		}
+
+
+*/
+
+
 	}
 
 }
