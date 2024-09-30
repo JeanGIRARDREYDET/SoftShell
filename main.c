@@ -159,15 +159,19 @@ static void s_pipe_arg_parsse(t_pipe *lst)
 		{
 			i++;
 		}
-		lst->args = ft_calloc(n + 1, sizeof (char *));
+		//lst->args
+		tmp = ft_calloc(n + 1, sizeof (char *));
 		if (!lst->args)
 			return ;
 		i = 0;
 		n = 0;
-		while (lst->arg[i] && !ft_strchr(WSPACE, lst->arg[i]))
+		//while (lst->arg[i] && !ft_strchr(WSPACE, lst->arg[i]))
+		while (tmp[n]  && !ft_strchr(WSPACE, lst->arg[i]))
 		{
-			lst->args[n] = ft_post_left_sep(lst->arg + i, WSPACE);
-			i = i + ft_strlen(lst->args[n]);
+			//lst->args
+			tmps[n] = ft_post_left_sep(lst->arg + i, WSPACE);
+			//i = i + ft_strlen(lst->args[n]);
+			tmp[n] = ft_strtrim_param(tmp[n], 0, ft_strlen(tmp[n]), WSPACE);
 			n++;
 		}
 	}
