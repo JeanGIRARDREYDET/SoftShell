@@ -86,8 +86,6 @@ int	s_pos_passcote( char *ln, int i, t_error *s_error)
 	return (i);
 }
 
-
-
 void s_lexingline(char *ln, int i, t_pipe *cmd_pipe)
 {	
 	t_pipe		*new_pipe;
@@ -140,73 +138,73 @@ void s_pos_passspace(char *ln, int *i)
 		(*i)++;
 }
 
+void s_expand(char *ln, int *i)
+{
+	char echap;
+
+	echap = '\0';
+	while (ln[*i] && echap!= '\0')
+	{
+		if ((echap == '\0') && ft_strchr(TECHAP, ln[*i]))
+			echap = ft_strchr(TECHAP, ln[*i])[0];
+		else if (ln[*i] == echap)
+			echap = '\0';
+		(*i)++;
+	}
+
+}
+
 void s_pos_passstring(char *ln, int *i)
 {
 	char echap;
 
-	echap = '0';
-	while (ln[*i] && (!ft_strchr(WSPACE, ln[*i] ) || echap!= '0'))
+	echap = '\0';
+	while (ln[*i] && (!ft_strchr(WSPACE, ln[*i] ) || echap!= '\0'))
 	{
-		if ((echap == '0') && ft_strchr(TECHAP, ln[*i]))
+		if ((echap == '\0') && ft_strchr(TECHAP, ln[*i]))
 			echap = ft_strchr(TECHAP, ln[*i])[0];
 		else if (ln[*i] == echap)
-			echap =  '0';
-		printf(" %d %c-%c-\n",*i,ln[*i], echap );			
+			echap = '\0';
 		(*i)++;
 	}
-	printf(" %d %c-%c-\n",*i,ln[*i], echap );
-printf(" - - - - - - -\n");
 
+}
+
+static void cnt_arg(char *ln, int *i, int *n)
+{
+	s_pos_passspace(ln, i);
+	s_pos_passstring(ln, i);
+	(*n)++;
+	if (ln[*i])
+		cnt_arg(ln,i,n);
 }
 
 static void s_pipe_arg_parsse(t_pipe *lst)
 {
 	int i;
+	int s;
 	int n;
-	//char *tmp;
-	
+
 	i = 0;
 	n = 0;
-	while( lst->arg[i])
+	cnt_arg(lst->full_cmd, &i, &n);
+	if (n > 0)
 	{
-		s_pos_passspace(lst->arg, &i);
-		s_pos_passstring(lst->arg, &i);
-		printf("-----%c  %d-%d-\n",lst->arg[i],n, i);
-	}
-	
-	if(lst->arg[i])
-	{
-		
-		while (lst->arg[i] && !ft_strchr(WSPACE, lst->arg[i]))
-		{
-			i++;
-			n++;
-		}
-		//lst->args
-	//	tmp = ft_calloc(n + 1, sizeof (char *));
-		if (!lst->args)
+		lst->args = ft_calloc(n + 1, sizeof (char *));
+		if (lst->args == NULL)
 			return ;
-		i = 0;
 		n = 0;
-		//while (lst->arg[i] && !ft_strchr(WSPACE, lst->arg[i]))
-/*
-		while (tmp[n]  && !ft_strchr(WSPACE, lst->arg[i]))
+		i = 0;
+		while (lst->full_cmd[i])
 		{
-			//lst->args
-			tmp[n] = ft_post_left_sep(lst->arg + i, WSPACE);
-			//i = i + ft_strlen(lst->args[n]);
-			tmp[n] = ft_strtrim_param(tmp[n], 0, ft_strlen(tmp[n]), WSPACE);
+			s_pos_passspace(lst->full_cmd, &i);
+			s = i;
+			s_pos_passstring(lst->full_cmd, &i);
+			lst->args[n] = ft_substr(lst->full_cmd, s, i -s);
 			n++;
 		}
-
-
-*/
-
-
 	}
-
 }
-
 
 int	main(int ac, char **argv, char **env)
 {
@@ -228,6 +226,7 @@ int	main(int ac, char **argv, char **env)
 		s_lexingline (line, 0, &s_pipe);
 		s_lspipetiter (&s_pipe, &s_pipe_parsse);
 		s_lspipetiter (&s_pipe, &s_pipe_arg_parsse);
+
 		printf("-%s-\n", ft_strchr (TECHAP, '\0'));
 		if ( ft_strchr (TECHAP, '\0'))
 			printf("A\n");
