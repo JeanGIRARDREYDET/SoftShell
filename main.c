@@ -138,20 +138,43 @@ void s_pos_passspace(char *ln, int *i)
 		(*i)++;
 }
 
-void s_expand(char *ln, int *i)
+void s_expand_find(char *ln, int *i)
 {
-	char echap;
+	char	*find;
+	int	l;
+	l = 0;
 
-	echap = '\0';
-	while (ln[*i] && echap!= '\0')
+	while (ln[l+*i] && t_isalnum(ln[l+*i]))
+		l++;
+	if (l > 0)
 	{
-		if ((echap == '\0') && ft_strchr(TECHAP, ln[*i]))
-			echap = ft_strchr(TECHAP, ln[*i])[0];
-		else if (ln[*i] == echap)
-			echap = '\0';
-		(*i)++;
+		find = ft_substr(ln, i, l);
+		s_getenv(find, t_sys *s_sys)
+		free(find);
 	}
 
+
+	}
+
+
+}
+void s_expand(char *ln, int *i)
+{
+	int echap;
+
+	echap = 0;
+	while (ln[*i])
+	{
+		if (echap)
+			if(ln[*i]=='\'')
+				echap = 0;
+		else 
+			if (ln[*i] == '\'')
+				echap = 1;
+			else if (ln[*i] == '$')
+				ls = s_expand_find(char *ln, int *i)
+		(*i)++;
+	}
 }
 
 void s_pos_passstring(char *ln, int *i)
@@ -224,6 +247,7 @@ int	main(int ac, char **argv, char **env)
 		line = readline("minishell> ");
 		l_len = ft_strlen(line);
 		s_lexingline (line, 0, &s_pipe);
+		s_lspipetiter (&s_pipe, &s_expand);
 		s_lspipetiter (&s_pipe, &s_pipe_parsse);
 		s_lspipetiter (&s_pipe, &s_pipe_arg_parsse);
 
