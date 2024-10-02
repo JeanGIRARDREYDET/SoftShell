@@ -140,10 +140,10 @@ void	s_lssyspipetiter(t_sys *sys, void (*f)(t_pipe *lst, t_sys *sys))
 	}
 }
 
-static void s_pipe_parsse(t_pipe *lst)
+static void s_pipe_parsse(t_pipe *pipe)
 {
-	lst->arg = ft_post_left_sep(lst->full_cmd, WSPACE);
-	lst->cmd = ft_left_sep(lst->full_cmd, WSPACE);
+	pipe->arg = ft_post_left_sep(pipe->full_cmd, WSPACE);
+	pipe->cmd = ft_left_sep(pipe->full_cmd, WSPACE);
 }
 
 void	s_pos_passspace(char *ln, int *i)
@@ -152,41 +152,50 @@ void	s_pos_passspace(char *ln, int *i)
 		(*i)++;
 }
 
-void	s_expand_find(char *ln, int *i)
+void	s_expand_find(char *ln, int i, t_sys *s_sys)
 {
 	char	*find;
+	char	*Retur;
 	int		l;
 
 	l = 0;
-	while (ln[l +(*i)] && ft_isalnum(ln[l +(*i)]))
+	while (ln[l +(i)] && ft_isalnum(ln[l +(i)]))
 		l++;
 	if (l > 0)
 	{
-		find = ft_substr(ln, *i, l);
-	//	s_getenv(find, *s_sys)
+		find = ft_substr(ln, i, l);
+		Retur = s_getenv(find, s_sys);
 		free(find);
 	}
 
 }
-void s_expand(char *ln, int *i, t_sys *sys)
+
+
+
+void s_expand(char *ln, int i, t_sys *sys)
 {
 	int echap;
 
 	echap = 0;
-	while (ln[*i])
+	while (ln[i])
 	{
 		if (echap)
 		{
-			if(ln[*i] == '\'')
+			if(ln[i] == '\'')
 				echap = 0;
 		}
 		else
-			if (ln[*i] == '\'')
+			if (ln[i] == '\'')
 				echap = 1;
-			else if (ln[*i] == '$')
-				s_expand_find(ln, i);
-		(*i)++;
+			else if (ln[i] == '$')
+				s_expand_find(ln, i, sys);
+		i++;
 	}
+}
+void expand_interface (t_pipe *pipe, t_sys *sys) 
+{
+	printf("expand_interface\n");
+	s_expand(pipe->full_cmd, 0,sys);
 }
 
 void s_pos_passstring(char *ln, int *i)
@@ -241,6 +250,7 @@ static void s_pipe_arg_parsse(t_pipe *lst)
 	}
 }
 
+
 int	main(int ac, char **argv, char **env)
 {
 	char	*line;
@@ -261,7 +271,7 @@ int	main(int ac, char **argv, char **env)
 		
 		s_lexingline (line, 0, &pipe);
 		s_sys.pipe = &pipe;
-		s_lssyspipetiter (&s_sys, &s_expand);
+		s_lssyspipetiter (&s_sys, &expand_interface);
 		s_lspipetiter (&pipe, &s_pipe_parsse);
 		s_lspipetiter (&pipe, &s_pipe_arg_parsse);
 		printf("-%s-\n", ft_strchr (TECHAP, '\0'));
