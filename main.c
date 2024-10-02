@@ -144,12 +144,12 @@ void s_expand_find(char *ln, int *i)
 	int	l;
 	l = 0;
 
-	while (ln[l+*i] && t_isalnum(ln[l+*i]))
+	while (ln[l +(*i)] && t_isalnum(ln[l +(*i)]))
 		l++;
 	if (l > 0)
 	{
 		find = ft_substr(ln, i, l);
-		s_getenv(find, t_sys *s_sys)
+		s_getenv(find, *s_sys)
 		free(find);
 	}
 
@@ -250,7 +250,6 @@ int	main(int ac, char **argv, char **env)
 		s_lspipetiter (&s_pipe, &s_expand);
 		s_lspipetiter (&s_pipe, &s_pipe_parsse);
 		s_lspipetiter (&s_pipe, &s_pipe_arg_parsse);
-
 		printf("-%s-\n", ft_strchr (TECHAP, '\0'));
 		if ( ft_strchr (TECHAP, '\0'))
 			printf("A\n");
