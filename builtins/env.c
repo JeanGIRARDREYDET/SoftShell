@@ -17,11 +17,10 @@ void	builtin_env(t_sys *sys)
 	int	i;
 
 	i = 0;
-	//while (sys->env != NULL && sys->env[i] && sys->env[i] != NULL)
-	while (sys->env && sys->env[i] != NULL && sys->env[i] != 0)
+	while (sys->env != NULL && sys->env[i] != 0)
 	{
-	//	if (ft_strin(sys->env[i], '='))
-			printf("%s\n", sys->env[i]);
+		if (ft_strin(sys->env[i], '='))
+			printf(" %s\n", sys->env[i]);
 		i++;
 	}
 }

@@ -75,7 +75,9 @@ int	s_pos_passcote( char *ln, int i, t_error *s_error)
 {
 	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != 0 && ln[i] != '|')
 		i++;
-	if (ft_strchr (TECHAP, ln[i]))
+	printf("-%c-%d\n", ln[i], ft_strin (TECHAP, ln[i]));
+	printf("-%c-%d\n", ln[i], ft_strin (TECHAP, ln[i]));
+	if (ft_strin(TECHAP, ln[i]))
 	{
 		i = i + 2 + ft_pos_left_char ((ln + i + 1), &ln[i]);
 		if (ln[i] == '\0')
@@ -126,39 +128,47 @@ void	s_lspipetiter(t_pipe *lst, void (*f)(t_pipe *lst))
 	}
 }
 
+void	s_lssyspipetiter(t_sys *sys, void (*f)(t_pipe *lst, t_sys *sys))
+{
+	t_pipe	*i_element;
+
+	i_element = sys->pipe;
+	while (i_element != NULL)
+	{
+		(*f)(i_element, sys);
+		i_element = i_element->next;
+	}
+}
+
 static void s_pipe_parsse(t_pipe *lst)
 {
 	lst->arg = ft_post_left_sep(lst->full_cmd, WSPACE);
 	lst->cmd = ft_left_sep(lst->full_cmd, WSPACE);
 }
 
-void s_pos_passspace(char *ln, int *i)
+void	s_pos_passspace(char *ln, int *i)
 {
 	while (ln[*i] && ft_strchr(WSPACE, ln[*i]))
 		(*i)++;
 }
 
-void s_expand_find(char *ln, int *i)
+void	s_expand_find(char *ln, int *i)
 {
 	char	*find;
-	int	l;
-	l = 0;
+	int		l;
 
-	while (ln[l +(*i)] && t_isalnum(ln[l +(*i)]))
+	l = 0;
+	while (ln[l +(*i)] && ft_isalnum(ln[l +(*i)]))
 		l++;
 	if (l > 0)
 	{
-		find = ft_substr(ln, i, l);
-		s_getenv(find, *s_sys)
+		find = ft_substr(ln, *i, l);
+	//	s_getenv(find, *s_sys)
 		free(find);
 	}
 
-
-	}
-
-
 }
-void s_expand(char *ln, int *i)
+void s_expand(char *ln, int *i, t_sys *sys)
 {
 	int echap;
 
@@ -166,13 +176,15 @@ void s_expand(char *ln, int *i)
 	while (ln[*i])
 	{
 		if (echap)
-			if(ln[*i]=='\'')
+		{
+			if(ln[*i] == '\'')
 				echap = 0;
-		else 
+		}
+		else
 			if (ln[*i] == '\'')
 				echap = 1;
 			else if (ln[*i] == '$')
-				ls = s_expand_find(char *ln, int *i)
+				s_expand_find(ln, i);
 		(*i)++;
 	}
 }
@@ -234,7 +246,7 @@ int	main(int ac, char **argv, char **env)
 	char	*line;
 	int		l_len;
 	t_sys	s_sys;
-	t_pipe	s_pipe;
+	t_pipe	pipe;
 
 	if (ac > 1)
 	{
@@ -246,13 +258,13 @@ int	main(int ac, char **argv, char **env)
 	{	
 		line = readline("minishell> ");
 		l_len = ft_strlen(line);
-		s_lexingline (line, 0, &s_pipe);
-		s_lspipetiter (&s_pipe, &s_expand);
-		s_lspipetiter (&s_pipe, &s_pipe_parsse);
-		s_lspipetiter (&s_pipe, &s_pipe_arg_parsse);
+		
+		s_lexingline (line, 0, &pipe);
+		s_sys.pipe = &pipe;
+		s_lssyspipetiter (&s_sys, &s_expand);
+		s_lspipetiter (&pipe, &s_pipe_parsse);
+		s_lspipetiter (&pipe, &s_pipe_arg_parsse);
 		printf("-%s-\n", ft_strchr (TECHAP, '\0'));
-		if ( ft_strchr (TECHAP, '\0'))
-			printf("A\n");
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)
 		{
 			printf("exit\n");

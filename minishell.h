@@ -33,6 +33,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <linux/limits.h>
+# include <stdbool.h>
 
 # define PIPE 1
 # define HEREDOC 2
@@ -43,6 +44,7 @@
 
 # define WSPACE " \t"
 # define TECHAP "\"'"
+
 
 typedef struct s_env
 {
@@ -62,19 +64,6 @@ typedef struct s_error
 	struct s_error	*next;
 }	t_error;
 
-typedef struct s_sys
-{
-	int				status;
-	int				here_doc;
-	char			**cmd_args;
-	char			*exe;
-	char			*cmd;
-	int				error[2];
-	t_env			senv;
-	char			**env;
-	struct s_sys	*next;
-}	t_sys;
-
 typedef struct s_pipe
 {
 	int				pid;
@@ -89,6 +78,22 @@ typedef struct s_pipe
 	struct s_pipe	*next;
 
 }	t_pipe;
+
+typedef struct s_sys
+{
+	int				status;
+	int				here_doc;
+	char			**cmd_args;
+	char			*exe;
+	char			*cmd;
+	int				error[2];
+	t_env			senv;
+	char			**env;
+	t_pipe			*pipe;
+	struct s_sys	*next;
+}	t_sys;
+
+
 
 
 void	builtin_cd(char *key, t_sys *s_sys);

@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-int	ft_strin(const char *s, const char c)
+
+bool	ft_strin(const char *s, const char c)
 {
 	size_t	i;
 
@@ -21,7 +22,7 @@ int	ft_strin(const char *s, const char c)
 	{
 		i++;
 	}
-	if (s[i] == c)
-		return (1);
-	return (0);
+	if (s[i] == c && s[i] != 0)
+		return (true);
+	return (false);
 }
