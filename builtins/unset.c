@@ -21,20 +21,7 @@ void	s_unset(char *key, t_sys *s_sys)
 	int	pos;
 
 	i = 0;
-	pos = -1;
-	while (s_sys->env[i])
-	{
-		if (ft_strnstr (s_sys->env[i], key, ft_strlen(key)) != 0)
-			pos = i;
-		i++;
-	}
-	if (pos == -1)
-		return ;
-	while (s_sys->env[pos + 1])
-	{
-		s_sys->env[pos] = s_sys->env[pos + 1];
-		pos++;
-	}
-	free(s_sys->env[pos +1]);
-	s_sys->env[pos] = NULL;
+	pos = ft_get_confpos(key, '=', s_sys->env);
+	if (pos != -1)
+		free(s_sys->env[pos]);
 }
