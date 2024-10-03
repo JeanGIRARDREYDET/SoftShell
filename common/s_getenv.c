@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_getenv.c                                         :+:      :+:    :+:   */
+/*   s_mgetenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-char	*s_getenv(char *key, t_sys *s_sys)
+char	*s_getenv(char *key, t_sys *sys)
 {
 	int			i;
 	int			len;
@@ -20,12 +20,12 @@ char	*s_getenv(char *key, t_sys *s_sys)
 
 	i = 0;
 	len = ft_strlen(key);
-	while (s_sys->env[i])
+	while (sys->env[i])
 	{
-		end = s_sys->env[i][len];
-		if (ft_strncmp (s_sys->env[i], key, len) == 0 && end == '=')
+		end = sys->env[i][len];
+		if (ft_strncmp (sys->env[i], key, len) == 0 && end == '=')
 			break ;
 		i++;
 	}
-	return (s_sys->env[i] + len + 1);
+	return (sys->env[i] + len + 1);
 }

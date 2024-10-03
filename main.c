@@ -151,43 +151,86 @@ void	s_pos_passspace(char *ln, int *i)
 	while (ln[*i] && ft_strchr(WSPACE, ln[*i]))
 		(*i)++;
 }
+void	ft_strrollleft(char *str)
+{
+	int			i;
+	char		c;
 
-void	s_expand_find(char *ln, int i, t_sys *s_sys)
+	i = 0;
+	c = str[0];
+	if (!str[0] || !str[1])
+		return ;
+	while (str[i +1])
+	{
+		str[i] = str[i + 1];
+		i++;
+	}
+	str[i] = c;
+}
+
+char	*ft_strsubreplace(char *str, int start, int len, char *replace)
+{
+	char	*new;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	new = ft_calloc(ft_strlen(str) + ft_strlen(replace) - len + 1, sizeof(char));
+	while (i < start)
+	{
+		new[i] = str[i];
+		i++;
+	}
+	while (replace[j])
+	{
+		new[i] = replace[j];
+		i++;
+		j++;
+	}
+	j = start + len;
+	while (str[j])
+	{
+		new[i] = str[j];
+		i++;
+		j++;
+	}
+	return (new);
+}
+
+void	s_expand_find(char **ln, int i, t_sys *sys)
 {
 	char	*find;
 	char	*Retur;
+	char	*Retur2;
 	int		l;
 
-	l = 0;
-	while (ln[l +(i)] && ft_isalnum(ln[l +(i)]))
+	l = 1;
+	while (ln[0][l +i] && ft_isalnum(ln[0][l +i]))
 		l++;
 	if (l > 0)
 	{
-		find = ft_substr(ln, i, l);
-		Retur = s_getenv(find, s_sys);
+		find = ft_substr(ln[0], i, l);
+		Retur = s_getenv(find + 1, sys);
 		free(find);
+		Retur2 = ft_strsubreplace(ln[0] ,i, l, Retur);
+		free(*ln);
+		*ln = Retur2;
 	}
-
 }
 
-
-
-void s_expand(char *ln, int i, t_sys *sys)
+void s_expand(char **ln, int i, t_sys *sys)
 {
-	int echap;
+	bool echap;
 
-	echap = 0;
-	while (ln[i])
+	echap = false;
+	while (ln[0][i])
 	{
-		if (echap)
-		{
-			if(ln[i] == '\'')
-				echap = 0;
-		}
-		else
-			if (ln[i] == '\'')
-				echap = 1;
-			else if (ln[i] == '$')
+		if (echap && ln[0][i] == '\'')
+				echap = false;
+		else if (ln[0][i] == '\'')
+				echap = true;
+		else if (!echap && ln[0][i] == '$')
 				s_expand_find(ln, i, sys);
 		i++;
 	}
@@ -195,7 +238,8 @@ void s_expand(char *ln, int i, t_sys *sys)
 void expand_interface (t_pipe *pipe, t_sys *sys) 
 {
 	printf("expand_interface\n");
-	s_expand(pipe->full_cmd, 0,sys);
+	s_expand(&pipe->full_cmd, 0,sys);
+	printf("expand_interface\n");
 }
 
 void s_pos_passstring(char *ln, int *i)
@@ -255,7 +299,7 @@ int	main(int ac, char **argv, char **env)
 {
 	char	*line;
 	int		l_len;
-	t_sys	s_sys;
+	t_sys	sys;
 	t_pipe	pipe;
 
 	if (ac > 1)
@@ -263,15 +307,15 @@ int	main(int ac, char **argv, char **env)
 		printf("Error: minishell does not take arguments. Try: ./%s\n", argv[0]);
 		exit(0);
 	}
-	common_initialization(env, &s_sys);
+	common_initialization(env, &sys);
 	while (1)
 	{	
 		line = readline("minishell> ");
 		l_len = ft_strlen(line);
 		
 		s_lexingline (line, 0, &pipe);
-		s_sys.pipe = &pipe;
-		s_lssyspipetiter (&s_sys, &expand_interface);
+		sys.pipe = &pipe;
+		s_lssyspipetiter (&sys, &expand_interface);
 		s_lspipetiter (&pipe, &s_pipe_parsse);
 		s_lspipetiter (&pipe, &s_pipe_arg_parsse);
 		printf("-%s-\n", ft_strchr (TECHAP, '\0'));
@@ -281,19 +325,19 @@ int	main(int ac, char **argv, char **env)
 			exit(0);
 		}
 		else if (ft_strncmp(line, "env", 4) == 0)
-			builtin_env(&s_sys);
+			builtin_env(&sys);
 		else if (ft_strncmp(line, "env", 4) == 0)
-			builtin_env(&s_sys);
+			builtin_env(&sys);
 		else if (ft_strncmp(line, "pwd", 4) == 0)
 			builtin_pwd();
 		else if (ft_strncmp(line, "echo", 4) == 0 && (l_len==4 || (l_len >4  && (line[4]) < 33 ) ))	
 			builtin_echo(ft_post_left_sep(line, WSPACE));
 		else if (ft_strncmp(line, "cd", 2) == 0 && (l_len==2 || (l_len >2  && (line[2]) < 33 ) ))
-			builtin_cd(ft_post_left_sep(line, WSPACE), &s_sys);
+			builtin_cd(ft_post_left_sep(line, WSPACE), &sys);
 		else if (ft_strncmp(line, "unset", 5) == 0)
-			s_unset(ft_post_left_sep(line, WSPACE), &s_sys);
+			s_unset(ft_post_left_sep(line, WSPACE), &sys);
 		else if (ft_strncmp(line, "export", 6) == 0)
-			builtin_export(ft_post_left_sep(line, WSPACE), &s_sys);
+			builtin_export(ft_post_left_sep(line, WSPACE), &sys);
 		// else if (ft_strncmp(line, "echo", 5) == 0)
 		// 	builtin_echo();
 		add_history(line);

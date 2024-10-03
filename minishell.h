@@ -90,7 +90,7 @@ typedef struct s_sys
 	t_env			senv;
 	char			**env;
 	t_pipe			*pipe;
-	struct s_sys	*next;
+//	struct s_sys	*next;
 }	t_sys;
 
 

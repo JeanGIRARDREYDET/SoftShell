@@ -12,19 +12,19 @@
 
 #include "../minishell.h"
 
-int s_setenv(char *key, char *value, t_sys *s_sys)
+int s_setenv(char *key, char *value, t_sys *sys)
 {
 	int i;
 	int len;
 
 	i = 0;
 	len = ft_strlen(key);
-	while (s_sys->env[i])
+	while (sys->env[i])
 	{
-		if (ft_strncmp (s_sys->env[i], key, len) == 0)
+		if (ft_strncmp (sys->env[i], key, len) == 0)
 		{
-			free(s_sys->env[i]);
-			s_sys->env[i] = join_3(key, "=",value);
+			free(sys->env[i]);
+			sys->env[i] = join_3(key, "=",value);
 			return (i);
 			break;
 		}
