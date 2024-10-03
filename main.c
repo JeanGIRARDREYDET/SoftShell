@@ -17,7 +17,6 @@ extern int	g_status;
 int	main(int ac, char **argv, char **env)
 {
 	char	*line;
-	int		l_len;
 	t_sys	mi_sys;
 	t_pipe	mi_pipe;
 
@@ -30,7 +29,6 @@ int	main(int ac, char **argv, char **env)
 	while (1)
 	{	
 		line = readline("minishell> ");
-		l_len = ft_strlen(line);
 		mi_sys.nb_pipe = 0;
 		mi_pipe = *mi_createpipe();
 		mi_lexingline (line, 0, &mi_pipe, &mi_sys);
