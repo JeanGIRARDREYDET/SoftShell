@@ -256,7 +256,7 @@ void mi_expand(char **ln, int i, t_sys *sys)
 	echap = '\0';
 	while (ln[0][i])
 	{
-		if (echap && ln[0][i] == '\'' && ft_strin(TECHAP, ln[0][i]))
+		if (echap == '\0' && ft_strin(TECHAP, ln[0][i]))
 				echap = ln[0][i];
 		else if (ln[0][i] == echap)
 				echap = '\0';
