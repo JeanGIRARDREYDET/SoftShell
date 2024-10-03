@@ -208,7 +208,7 @@ void	s_expand_find(char **ln, int i, t_sys *sys)
 	l = 1;
 	while (ln[0][l +i] && ft_isalnum(ln[0][l +i]))
 		l++;
-	if (l > 0)
+	if (l > 1)
 	{
 		find = ft_substr(ln[0], i, l);
 		Retur = s_getenv(find + 1, sys);
@@ -221,15 +221,15 @@ void	s_expand_find(char **ln, int i, t_sys *sys)
 
 void s_expand(char **ln, int i, t_sys *sys)
 {
-	bool echap;
+	char echap;
 
-	echap = false;
+	echap = '\0';
 	while (ln[0][i])
 	{
-		if (echap && ln[0][i] == '\'')
-				echap = false;
-		else if (ln[0][i] == '\'')
-				echap = true;
+		if (echap && ln[0][i] == '\'' && ft_strin(TECHAP, ln[0][i]))
+				echap = ln[0][i];
+		else if (ln[0][i] == echap)
+				echap = '\0';
 		else if (!echap && ln[0][i] == '$')
 				s_expand_find(ln, i, sys);
 		i++;
@@ -295,6 +295,7 @@ static void s_pipe_arg_parsse(t_pipe *lst)
 }
 
 
+
 int	main(int ac, char **argv, char **env)
 {
 	char	*line;
@@ -318,7 +319,8 @@ int	main(int ac, char **argv, char **env)
 		s_lssyspipetiter (&sys, &expand_interface);
 		s_lspipetiter (&pipe, &s_pipe_parsse);
 		s_lspipetiter (&pipe, &s_pipe_arg_parsse);
-		printf("-%s-\n", ft_strchr (TECHAP, '\0'));
+
+
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)
 		{
 			printf("exit\n");
