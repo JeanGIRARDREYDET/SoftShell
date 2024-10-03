@@ -42,7 +42,7 @@
 # define OUTPUT 5
 # define SPE 6
 
-# define WSPACE " \t"
+# define WSPACE " \a\b\t\n\v\f\r"
 # define TECHAP "\"'"
 
 
@@ -70,6 +70,7 @@ typedef struct s_pipe
 	char			*full_cmd;
 	char			*cmd;
 	char			*arg;
+	char			*type;
 	char			**args;
 	t_error			error;
 	int				duplexe_canal[2];

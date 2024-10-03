@@ -73,19 +73,47 @@ void	enleverspacedeavnt(char *ln)
 
 int	s_pos_passcote( char *ln, int i, t_error *s_error)
 {
+	char	echap;
+
 	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != 0 && ln[i] != '|')
 		i++;
 	printf("-%c-%d\n", ln[i], ft_strin (TECHAP, ln[i]));
 	printf("-%c-%d\n", ln[i], ft_strin (TECHAP, ln[i]));
 	if (ft_strin(TECHAP, ln[i]))
 	{
-		i = i + 2 + ft_pos_left_char ((ln + i + 1), &ln[i]);
-		if (ln[i] == '\0')
-			s_log_pipe_error(130, "erreur de quot", s_error);
-		else
+		echap = ln[i];
+		i++;
+		i += ft_pos_left_char ((ln + i), echap);
+		if (ln[i] == echap)
 			i++;
+		else
+			s_log_pipe_error(130, "erreur de quot", s_error);
 	}
 	return (i);
+}
+t_pipe *mi_create_pipe(void)
+{
+	t_pipe	*pipe;
+
+	pipe = ft_calloc(1, sizeof (t_pipe));
+	if (!pipe)
+		return (NULL);
+	pipe->pid = 0;
+	pipe->full_cmd = NULL;
+	pipe->cmd = NULL;
+	pipe->arg = NULL;
+	pipe->args = NULL;
+	pipe->error.num = 0;
+	pipe->error.msg = NULL;
+	pipe->duplexe_canal[0] = 0;
+	pipe->duplexe_canal[1] = 0;
+	pipe->fdd[0][0] = 0;
+	pipe->fdd[0][1] = 0;
+	pipe->fdd[1][0] = 0;
+	pipe->fdd[1][1] = 0;
+	pipe->file = NULL;
+	pipe->next = NULL;
+	return (pipe);
 }
 
 void s_lexingline(char *ln, int i, t_pipe *cmd_pipe)
@@ -230,7 +258,7 @@ void s_expand(char **ln, int i, t_sys *sys)
 				echap = ln[0][i];
 		else if (ln[0][i] == echap)
 				echap = '\0';
-		else if (!echap && ln[0][i] == '$')
+		if (echap!='\'' && ln[0][i] == '$')
 				s_expand_find(ln, i, sys);
 		i++;
 	}
@@ -314,13 +342,12 @@ int	main(int ac, char **argv, char **env)
 		line = readline("minishell> ");
 		l_len = ft_strlen(line);
 		
+		pipe = *mi_create_pipe();
 		s_lexingline (line, 0, &pipe);
 		sys.pipe = &pipe;
 		s_lssyspipetiter (&sys, &expand_interface);
 		s_lspipetiter (&pipe, &s_pipe_parsse);
 		s_lspipetiter (&pipe, &s_pipe_arg_parsse);
-
-
 		if (ft_strncmp(line, "exit", 5) == 0 && ft_strlen(line) == 4)
 		{
 			printf("exit\n");
