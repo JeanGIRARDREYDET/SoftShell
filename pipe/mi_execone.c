@@ -26,4 +26,3 @@ void mi_execone (t_pipe *pipe, t_sys *mi_sys)
 	else if (ft_strncmp(pipe->cmd, "export", 6) == 0)
 		builtin_export(ft_post_left_sep(pipe->cmd, WSPACE), mi_sys);
 }
-
