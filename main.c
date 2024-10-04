@@ -27,7 +27,7 @@ int	main(int ac, char **argv, char **env)
 	}
 	mi_sysinitialization(env, &mi_sys);
 	while (1)
-	{	
+	{
 		line = readline("minishell> ");
 		mi_sys.nb_pipe = 0;
 		mi_pipe = *mi_createpipe();
