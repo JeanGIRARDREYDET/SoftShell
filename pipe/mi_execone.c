@@ -1,12 +1,20 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mi_execone.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/04 19:50:42 by jegirard          #+#    #+#             */
+/*   Updated: 2024/10/04 19:50:46 by jegirard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
-void mi_execone (t_pipe *pipe, t_sys *mi_sys)
+void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
 {
-
-
-	if (ft_strncmp(pipe->cmd, "exit", 5)==0)
+	if (ft_strncmp(pipe->cmd, "exit", 5) == 0)
 	{
 		printf("exit\n");
 		exit(0);
