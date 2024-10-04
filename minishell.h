@@ -44,6 +44,7 @@
 
 # define WSPACE " \a\b\t\n\v\f\r"
 # define TECHAP "\"'"
+# define BUILTINS " echo cd pwd export unset env exit "
 
 
 typedef struct s_env

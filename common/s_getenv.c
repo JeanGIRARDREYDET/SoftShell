@@ -27,5 +27,7 @@ char	*s_getenv(char *key, t_sys *sys)
 			break ;
 		i++;
 	}
-	return (sys->env[i] + len + 1);
+	if(sys->env[i])
+		return (sys->env[i] + len + 1);
+	return (NULL);
 }
