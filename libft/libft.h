@@ -34,6 +34,8 @@ int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 
 void	*ft_calloc(size_t count, size_t size);
+void	ft_cnt_arg(char *ln, int *i, int *n);
+
 
 int		ft_get_confpos(char *key, char k_sep, char **conf);
 
@@ -65,6 +67,8 @@ char	*ft_strsubreplace(char *str, int start, int len, char *replace);
 int		ft_pos_left_char(char *s, char c);
 int		ft_pos_left_chars(char *s, char *c);
 char	*ft_post_left_sep(char *s, const char *c);
+void	ft_pos_passspace(char *ln, int *i);
+void	ft_pos_passstring(char *ln, int *i);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);

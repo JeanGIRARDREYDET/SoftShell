@@ -1,0 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mi_pipe_parsse.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/04 18:39:21 by jegirard          #+#    #+#             */
+/*   Updated: 2024/10/04 18:39:25 by jegirard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+
+void	mi_pipeparsse(t_pipe *pipe)
+{
+	pipe->arg = ft_post_left_sep(pipe->full_cmd, WSPACE);
+	pipe->cmd = ft_left_sep(pipe->full_cmd, WSPACE);
+}
+
+void	mi_pipeargparsse(t_pipe *lst)
+{
+	int i;
+	int s;
+	int n;
+
+	i = 0;
+	n = 0;
+	ft_cnt_arg(lst->full_cmd, &i, &n);
+	if (n > 0)
+	{
+		lst->args = ft_calloc(n + 1, sizeof (char *));
+		if (lst->args == NULL)
+			return ;
+		n = 0;
+		i = 0;
+		while (lst->full_cmd[i])
+		{
+			ft_pos_passspace(lst->full_cmd, &i);
+			s = i;
+			ft_pos_passstring(lst->full_cmd, &i);
+			lst->args[n] = ft_substr(lst->full_cmd, s, i -s);
+			n++;
+		}
+	}
+}

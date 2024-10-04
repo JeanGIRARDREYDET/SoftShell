@@ -34,7 +34,7 @@ char	*find_expand(char *line)
 		while (line[i] < 33)
 			i++;
 	}
-	return (ft_substr(line,c1,(c2-c1)));
+	return (ft_substr(line, c1, c2 -c1) );
 }
 
 void	mi_expand_find(char **ln, int i, t_sys *sys)
@@ -45,7 +45,7 @@ void	mi_expand_find(char **ln, int i, t_sys *sys)
 	int		len;
 
 	len = 1;
-	while (ln[0][len +i] && ft_isalnum(ln[0][len +i]))
+	while (ln[0][len +i] && ft_isalnum(ln[0][len +i]) )
 		len++;
 	if (len > 1)
 	{
@@ -54,7 +54,7 @@ void	mi_expand_find(char **ln, int i, t_sys *sys)
 		free(search);
 		if (find)
 		{
-			replace = ft_strsubreplace(ln[0] ,i, len, find);
+			replace = ft_strsubreplace(ln[0], i, len, find);
 			free(*ln);
 			*ln = replace;
 		}
@@ -63,7 +63,7 @@ void	mi_expand_find(char **ln, int i, t_sys *sys)
 
 void	mi_expand(char **ln, int i, t_sys *sys)
 {
-	char echap;
+	char	echap;
 
 	echap = '\0';
 	while (ln[0][i])
@@ -78,7 +78,7 @@ void	mi_expand(char **ln, int i, t_sys *sys)
 	}
 }
 
-void mi_expand_interface (t_pipe *pipe, t_sys *mi_sys)
+void	mi_expand_interface (t_pipe *pipe, t_sys *mi_sys)
 {
 	mi_expand(&pipe->full_cmd, 0,mi_sys);
 }

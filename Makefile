@@ -21,6 +21,7 @@ SRCS = 			main.c \
 				libft/ft_atoi.c \
 				libft/ft_bzero.c \
 				libft/ft_calloc.c \
+				libft/ft_cnt_arg.c \
 				libft/ft_get_confpos.c \
 				libft/ft_isalnum.c \
 				libft/ft_isascii.c \
@@ -30,6 +31,8 @@ SRCS = 			main.c \
 				libft/ft_itoa.c \
 				libft/ft_lstadd_front.c \
 				libft/ft_post_left_sep.c \
+				libft/ft_pos_passspace.c \
+				libft/ft_pos_passstring.c \
 				libft/ft_strlcat.c \
 				libft/ft_lstclear.c \
 				libft/ft_putchar_fd.c \
@@ -75,11 +78,16 @@ SRCS = 			main.c \
 				libft/ft_tolower.c \
 				libft/ft_strtrim_param.c \
 				common/mi_getenv.c \
+				common/mi_logpipeerror.c \
 				common/mi_setenv.c \
 				common/mi_sysinitialization.c \
 				common/mi_unsetenv.c \
 				common/mi_utils.c \
 				parsing/mi_expand.c \
+				parsing/mi_lexing.c \
+				parsing/mi_pipe_parsse.c \
+				parsing/mi_pospasscote.c \
+				parsing/mi_pipeiter.c \
 
 
 

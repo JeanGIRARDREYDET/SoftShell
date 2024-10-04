@@ -93,7 +93,6 @@ typedef struct s_sys
 	t_env			senv;
 	char			**env;
 	t_pipe			*pipe;
-//	struct s_sys	*next;
 }	t_sys;
 
 void	builtin_cd(char *key, t_sys *s_sys);
@@ -108,6 +107,17 @@ char	*mi_getenv(char *key, t_sys *s_sys);
 void	mi_unset(char *key, t_sys *s_sys);
 void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
-void	mi_expand_interface (t_pipe *pipe, t_sys *mi_sys);
+void	mi_expand_interface(t_pipe *pipe, t_sys *mi_sys);
+void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
+void	mi_oneexec(t_pipe *pipe, t_sys *mi_sys);
+void	mi_pipeparsse(t_pipe *pipe);
+void	mi_pipeargparsse(t_pipe *lst);
+void	mi_pipeiter(t_pipe *lst, void (*f)(t_pipe *lst));
+void	mi_syspipeiter(t_sys *sys, void (*f)(t_pipe *lst, t_sys *sys));
+void	mi_lexingline(char *ln, int i, t_pipe *cmd_pipe, t_sys *mi_sys);
+int		mi_pospasscote(char *ln, int i, t_error *mi_error);
+void	mi_logpipeerror(int id, char *msg, t_error *mi_error);
+t_pipe	*mi_create_pipe(void);
+char	*ft_findcommand(char *line);
 
 #endif
