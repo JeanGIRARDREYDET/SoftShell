@@ -69,6 +69,7 @@ typedef struct s_pipe
 {
 	int				pid;
 	char			*full_cmd;
+	bool			here_doc;
 	char			*cmd;
 	char			*arg;
 	char			*type;
@@ -85,6 +86,7 @@ typedef struct s_sys
 {
 	int				status;
 	int				here_doc;
+	int				nb_pipe;
 	char			**cmd_args;
 	char			*exe;
 	char			*cmd;
@@ -106,10 +108,9 @@ void	builtin_export(char *key, t_sys *s_sys);
 void	print_export(t_sys *s_sys);
 void	builtin_pwd(void);
 void	builtin_unset(char *key, t_sys *s_sys);
-char	*s_getenv(char *key, t_sys *s_sys);
-void	s_unset(char *key, t_sys *s_sys);
-void	common_initialization(char **env, t_sys *s_sys);
-char	*s_getenv(char *key, t_sys *s_sys);
-int		s_setenv(char *key, char *value, t_sys *s_sys);
+char	*mi_getenv(char *key, t_sys *s_sys);
+void	mi_unset(char *key, t_sys *s_sys);
+void	mi_sysinitialization(char **env, t_sys *s_sys)
+int		mi_setenv(char *key, char *value, t_sys *s_sys);
 
 #endif

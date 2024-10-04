@@ -31,30 +31,6 @@ char *find_command(char *line)
 	return (ft_substr(line, c1, (c2- c1)));
 }
 
-char *find_expand(char *line)
-{
-	int	i;
-	int	c1;
-	int	c2;
-	// 34 39
-	i = 0;
-	while (line[i] != '\0')
-	{
-		while (line[i] != '$')
-		{
-			i++;
-			c1 = i;
-		}
-		while (line[i] > 32)
-		{
-			i++;
-			c2 = i;
-		}
-		while (line[i] < 33)
-			i++;
-	}
-	return (ft_substr(line,c1,(c2-c1)));
-} 
 
 void	mi_log_pipe_error(int id, char *msg, t_error *mi_error)
 {
@@ -117,7 +93,7 @@ t_pipe *mi_create_pipe(void)
 	return (pipe);
 }
 
-void mi_lexingline(char *ln, int i, t_pipe *cmd_pipe)
+void mi_lexingline(char *ln, int i, t_pipe *cmd_pipe, t_sys *mi_sys)
 {	
 	t_pipe		*new_pipe;
 
@@ -137,12 +113,11 @@ void mi_lexingline(char *ln, int i, t_pipe *cmd_pipe)
 			return ;
 		cmd_pipe->full_cmd = ft_strtrim_param(ln, 0, i -1, WSPACE);
 		cmd_pipe->next = new_pipe;
-		mi_lexingline (ln + (++i), 0, new_pipe);
+		mi_sys->nb_pipe++;
+		mi_lexingline (ln + (++i), 0, new_pipe, mi_sys);
 	}
 	else
-	{
-		mi_lexingline (ln, ++i, cmd_pipe);
-	}
+		mi_lexingline (ln, ++i, cmd_pipe, mi_sys);
 }
 
 void	mi_lspipetiter(t_pipe *lst, void (*f)(t_pipe *lst))
@@ -228,51 +203,9 @@ char	*ft_strsubreplace(char *str, int start, int len, char *replace)
 	return (new);
 }
 
-void	mi_expand_find(char **ln, int i, t_sys *sys)
-{
-	char	*search;
-	char	*find;
-	char	*replace;
-	int		len;
 
-	len = 1;
-	while (ln[0][len +i] && ft_isalnum(ln[0][len +i]))
-		len++;
-	if (len > 1)
-	{
-		search = ft_substr(ln[0], i, len);
-		find = s_getenv(search + 1, sys);
-		free(search);
-		if (find)
-		{
-			replace = ft_strsubreplace(ln[0] ,i, len, find);
-			free(*ln);
-			*ln = replace;
-		}
-	}
-}
 
-void mi_expand(char **ln, int i, t_sys *sys)
-{
-	char echap;
 
-	echap = '\0';
-	while (ln[0][i])
-	{
-		if (echap == '\0' && ft_strin(TECHAP, ln[0][i]))
-				echap = ln[0][i];
-		else if (ln[0][i] == echap)
-				echap = '\0';
-		if (echap!='\'' && ln[0][i] == '$')
-				mi_expand_find(ln, i, sys);
-		i++;
-	}
-}
-
-void mi_expand_interface (t_pipe *pipe, t_sys *mi_sys)
-{
-	mi_expand(&pipe->full_cmd, 0,mi_sys);
-}
 
 void ft_pos_passstring(char *ln, int *i)
 {
@@ -327,7 +260,6 @@ static void mi_pipe_arg_parsse(t_pipe *lst)
 }
 void mi_oneexec (t_pipe *pipe, t_sys *mi_sys)
 {
-	
 	if (ft_strncmp(pipe->cmd, "exit", 5)==0)
 	{
 		printf("exit\n");
@@ -366,16 +298,14 @@ int	main(int ac, char **argv, char **env)
 	{	
 		line = readline("minishell> ");
 		l_len = ft_strlen(line);
-		
+		mi_sys.nb_pipe = 0;
 		mi_pipe = *mi_create_pipe();
-		mi_lexingline (line, 0, &mi_pipe);
+		mi_lexingline (line, 0, &mi_pipe, &mi_sys);
 		mi_sys.pipe = &mi_pipe;
 		mi_lssyspipetiter (&mi_sys, &mi_expand_interface);
 		mi_lspipetiter (&mi_pipe, &mi_pipe_parsse);
 		mi_lspipetiter (&mi_pipe, &mi_pipe_arg_parsse);
 		mi_oneexec(&mi_pipe, &mi_sys);
-		// else if (ft_strncmp(line, "echo", 5) == 0)
-		// 	builtin_echo();
 		add_history(line);
 	}
 }

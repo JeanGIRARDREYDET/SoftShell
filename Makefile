@@ -73,9 +73,9 @@ SRCS = 			main.c \
 				libft/ft_sys_get_pwd.c \
 				libft/ft_tolower.c \
 				libft/ft_strtrim_param.c \
-				common/initialization.c \
-				common/s_getenv.c \
-				common/s_setenv.c \
+				common/mi_sysinitialization.c \
+				common/mi_getenv.c \
+				common/mi_setenv.c \
 
 SRC_PATH		=	
 BIN_PATH		=	

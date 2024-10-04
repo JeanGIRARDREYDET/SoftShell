@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   mi_sysinitialization.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -46,11 +46,22 @@ int	read_env(char **env, t_sys *s_sys)
 	return (s_sys->senv.len);
 }
 
-void	common_initialization(char **env, t_sys *s_sys)
+void	me_setdefaul_initialization( t_sys *s_sys)
+{
+	s_sys->senv.path = "/usr/bin:/bin:/usr/sbin:/sbin";
+	s_sys->senv.pwd = NULL;
+	s_sys->senv.shlvl = "1";
+	s_sys->senv._ = NULL;
+	s_sys->senv.home = NULL;
+	s_sys->senv.len = 0;
+}
+
+void	mi_sysinitialization(char **env, t_sys *s_sys)
 {
 	int		i;
 	char	**ienv;
 
+	me_setdefaul_initialization(s_sys);
 	s_sys->senv.len = read_env(env, s_sys);
 	ienv = (char **)ft_calloc(s_sys->senv.len, sizeof(char *));
 	i = -1;
@@ -66,10 +77,6 @@ void	common_initialization(char **env, t_sys *s_sys)
 		ft_sys_get_pwd(&s_sys->senv.pwd);
 		ienv[i++] = ft_strjoin("PWD=", s_sys->senv.pwd);
 	}
-	if (s_sys->senv.shlvl[0] == '0')
-	{
-		s_sys->senv.shlvl = "1";
-		ienv[i++] = ft_strjoin("SHLVL=", s_sys->senv.shlvl);
-	}
+	ienv[i++] = ft_strjoin("SHLVL=", s_sys->senv.shlvl);
 	s_sys->env = ienv;
 }

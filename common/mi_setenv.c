@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_setenv.c                                         :+:      :+:    :+:   */
+/*   mi_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int s_setenv(char *key, char *value, t_sys *sys)
+int mi_setenv(char *key, char *value, t_sys *sys)
 {
 	int i;
 	int len;
