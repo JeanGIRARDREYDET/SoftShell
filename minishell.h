@@ -25,7 +25,6 @@
 # include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "./libft/libft.h"
 # include <limits.h>
 # include <stdarg.h>
 # include <string.h>
@@ -34,6 +33,7 @@
 # include <readline/history.h>
 # include <linux/limits.h>
 # include <stdbool.h>
+# include "./libft/libft.h"
 
 # define PIPE 1
 # define HEREDOC 2
@@ -45,7 +45,6 @@
 # define WSPACE " \a\b\t\n\v\f\r"
 # define TECHAP "\"'"
 # define BUILTINS " echo cd pwd export unset env exit "
-
 
 typedef struct s_env
 {
@@ -97,9 +96,6 @@ typedef struct s_sys
 //	struct s_sys	*next;
 }	t_sys;
 
-
-
-
 void	builtin_cd(char *key, t_sys *s_sys);
 void	builtin_echo(char *key);
 void	builtin_env(t_sys *s_sys);
@@ -110,7 +106,8 @@ void	builtin_pwd(void);
 void	builtin_unset(char *key, t_sys *s_sys);
 char	*mi_getenv(char *key, t_sys *s_sys);
 void	mi_unset(char *key, t_sys *s_sys);
-void	mi_sysinitialization(char **env, t_sys *s_sys)
+void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
+void	mi_expand_interface (t_pipe *pipe, t_sys *mi_sys);
 
 #endif

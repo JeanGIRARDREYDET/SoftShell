@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-char    *find_expand(char *line)
+char	*find_expand(char *line)
 {
 	int	i;
 	int	c1;
@@ -50,7 +50,7 @@ void	mi_expand_find(char **ln, int i, t_sys *sys)
 	if (len > 1)
 	{
 		search = ft_substr(ln[0], i, len);
-		find = s_getenv(search + 1, sys);
+		find = mi_getenv(search + 1, sys);
 		free(search);
 		if (find)
 		{
@@ -61,7 +61,7 @@ void	mi_expand_find(char **ln, int i, t_sys *sys)
 	}
 }
 
-void mi_expand(char **ln, int i, t_sys *sys)
+void	mi_expand(char **ln, int i, t_sys *sys)
 {
 	char echap;
 

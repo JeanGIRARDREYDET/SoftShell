@@ -53,8 +53,6 @@ int	mi_pos_passcote( char *ln, int i, t_error *mi_error)
 
 	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != 0 && ln[i] != '|')
 		i++;
-	printf("-%c-%d\n", ln[i], ft_strin (TECHAP, ln[i]));
-	printf("-%c-%d\n", ln[i], ft_strin (TECHAP, ln[i]));
 	if (ft_strin(TECHAP, ln[i]))
 	{
 		echap = ln[i];
@@ -173,35 +171,7 @@ void	ft_strrollleft(char *str)
 	str[i] = c;
 }
 
-char	*ft_strsubreplace(char *str, int start, int len, char *replace)
-{
-	char	*new;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
-	new = ft_calloc(ft_strlen(str) + ft_strlen(replace) - len + 1, sizeof(char));
-	while (i < start)
-	{
-		new[i] = str[i];
-		i++;
-	}
-	while (replace[j])
-	{
-		new[i] = replace[j];
-		i++;
-		j++;
-	}
-	j = start + len;
-	while (str[j])
-	{
-		new[i] = str[j];
-		i++;
-		j++;
-	}
-	return (new);
-}
 
 
 
@@ -276,7 +246,7 @@ void mi_oneexec (t_pipe *pipe, t_sys *mi_sys)
 	else if (ft_strncmp(pipe->cmd, "cd", 2) == 0)
 		builtin_cd(ft_post_left_sep(pipe->cmd, WSPACE), mi_sys);
 	else if (ft_strncmp(pipe->cmd, "unset", 5) == 0)
-		s_unset(pipe->args[0], mi_sys);
+		builtin_unset(pipe->args[0], mi_sys);
 	else if (ft_strncmp(pipe->cmd, "export", 6) == 0)
 		builtin_export(ft_post_left_sep(pipe->cmd, WSPACE), mi_sys);
 }
@@ -293,7 +263,7 @@ int	main(int ac, char **argv, char **env)
 		printf("Error: minishell does not take arguments. Try: ./%s\n", argv[0]);
 		exit(0);
 	}
-	common_initialization(env, &mi_sys);
+	mi_sysinitialization(env, &mi_sys);
 	while (1)
 	{	
 		line = readline("minishell> ");

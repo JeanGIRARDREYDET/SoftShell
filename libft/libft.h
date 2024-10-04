@@ -61,7 +61,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
-
+char	*ft_strsubreplace(char *str, int start, int len, char *replace);
 int		ft_pos_left_char(char *s, char c);
 int		ft_pos_left_chars(char *s, char *c);
 char	*ft_post_left_sep(char *s, const char *c);
@@ -75,7 +75,7 @@ size_t	ft_strchr_pos(const char *source, int find);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
 char	*ft_strdupleft(char const *s, size_t len);
-bool		ft_strin(const char *s, const char c);
+bool	ft_strin(const char *s, const char c);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*join_3(char *s1, char *s2, char *s3);
@@ -95,7 +95,5 @@ void	ft_sys_get_pwd(char **buf);
 size_t	ft_tablen(char const **str);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-
-
 
 #endif

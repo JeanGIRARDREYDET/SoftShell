@@ -48,6 +48,7 @@ SRCS = 			main.c \
 				libft/ft_strnstr.c \
 				libft/ft_lstnew.c \
 				libft/ft_strchr.c \
+				libft/ft_strsubreplace.c \
 				libft/ft_strrchr.c \
 				libft/ft_lstsize.c \
 				libft/ft_strchr_pos.c \
@@ -73,9 +74,14 @@ SRCS = 			main.c \
 				libft/ft_sys_get_pwd.c \
 				libft/ft_tolower.c \
 				libft/ft_strtrim_param.c \
-				common/mi_sysinitialization.c \
 				common/mi_getenv.c \
 				common/mi_setenv.c \
+				common/mi_sysinitialization.c \
+				common/mi_unsetenv.c \
+				common/mi_utils.c \
+				parsing/mi_expand.c \
+
+
 
 SRC_PATH		=	
 BIN_PATH		=	
