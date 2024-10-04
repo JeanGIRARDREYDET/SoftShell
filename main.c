@@ -13,40 +13,6 @@
 #include "minishell.h"
 
 extern int	g_status;
-char *ft_findcommand(char *line)
-{
-	int	i;
-	int	c1;
-	int	c2;
-
-	i = 0;
-	while (line[i] < 33)
-		i++;
-	c1= i;	
-	while (line[i] > 32)
-		i++;
-	c2 = i;
-	while (line[i] < 33)
-		i++;
-	return (ft_substr(line, c1, (c2- c1)));
-}
-
-
-
-
-void	ft_enleverspacedeavnt(char *ln)
-{
-	while (ln[0] < 33 && ln[0] != '\0')
-	{
-		ln++;
-//		i = 0;
-	}
-}
-
-
-
-
-
 
 int	main(int ac, char **argv, char **env)
 {
