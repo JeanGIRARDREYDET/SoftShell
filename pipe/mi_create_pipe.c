@@ -24,8 +24,7 @@ t_pipe	*mi_createpipe(void)
 	pipe->cmd = NULL;
 	pipe->arg = NULL;
 	pipe->args = NULL;
-	pipe->bultin = true;
-	pipe->error.num = 0;
+	pipe->builtin = true;
 	pipe->error.msg = NULL;
 	pipe->duplexe_canal[0] = 0;
 	pipe->duplexe_canal[1] = 0;

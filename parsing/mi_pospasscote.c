@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int		mi_pospasscote( char *ln, int i, t_error *mi_error)
+int	mi_pospasscote(char *ln, int i, t_error *mi_error)
 {
 	char	echap;
 
@@ -26,7 +26,7 @@ int		mi_pospasscote( char *ln, int i, t_error *mi_error)
 		if (ln[i] == echap)
 			i++;
 		else
-			mi_logpipeerror(130, "erreur de quot", mi_error);
+			mi_logerror(130, "erreur de quot", mi_error);
 	}
 	return (i);
 }

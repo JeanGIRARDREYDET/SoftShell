@@ -12,16 +12,18 @@
 
 #include "../minishell.h"
 
-void	mi_exec(t_pipe *pipe, t_sys *mi_sys)
+void	mi_exec(t_pipe *mi_pipe, t_sys *mi_sys)
 {
 	if (mi_sys->nb_pipe == 0)
-		mi_execone(pipe, mi_sys);
+		mi_execone(mi_pipe, mi_sys);
 	else
 	{
-		while(pipe)
+		while (mi_pipe)
 		{
-			mi_execone(pipe, mi_sys);
-			pipe = pipe->next;
+			if (pipe(mi_pipe->fdd[1]) == -1)
+				mi_logerror(126, "pipe", &mi_pipe->error);
+			mi_execone(mi_pipe, mi_sys);
+			mi_pipe = mi_pipe->next;
 		}
 	}
 }

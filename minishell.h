@@ -59,7 +59,7 @@ typedef struct s_env
 
 typedef struct s_error
 {
-	int				num;
+	int				code_error;
 	char			*msg;
 	struct s_error	*next;
 }	t_error;
@@ -87,7 +87,7 @@ typedef struct s_sys
 	int				status;
 	int				here_doc;
 	int				nb_pipe;
-	int 			nb_error;
+	int				nb_error;
 	char			**cmd_args;
 	char			*exe;
 	char			*cmd;
@@ -118,10 +118,10 @@ void	mi_pipeiter(t_pipe *lst, void (*f)(t_pipe *lst));
 void	mi_syspipeiter(t_sys *sys, void (*f)(t_pipe *lst, t_sys *sys));
 void	mi_lexingline(char *ln, int i, t_pipe *cmd_pipe, t_sys *mi_sys);
 int		mi_pospasscote(char *ln, int i, t_error *mi_error);
-void	mi_logpipeerror(int id, char *msg, t_error *mi_error);
+void	mi_logerror(int id, char *msg, t_error *mi_error);
 t_pipe	*mi_createpipe(void);
 char	*ft_findcommand(char *line);
-void	mi_exec (t_pipe *pipe, t_sys *mi_sys);
-void 	mi_execone (t_pipe *pipe, t_sys *mi_sys);
+void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
+void	mi_execone(t_pipe *pipe, t_sys *mi_sys);
 
 #endif
