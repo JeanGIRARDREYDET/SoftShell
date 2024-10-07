@@ -57,6 +57,29 @@ void	mi_exepermis(t_pipe *pipe, t_sys *mi_sys)
 	mi_sys->nb_error++;
 }
 
+int	mi_exec_child_in(t_pipe *pipe, char **argv, int ind, char **env)
+{
+	if (pipe->pid == 0)
+		return (0);
+	pipe->pid = fork();
+	if (pipe->pid == -1)
+		return (ft_perror(pipe, "fork failed in :", 3, 0));
+	if (pipe->pid != 0)
+		return (0);
+	if (dup2(pipe->fdd[1][1], STDOUT_FILENO) == -1)
+		return (1);
+	close (pipe->fdd[1][0]);
+	if (dup2(pipe->fdd[0][0], STDIN_FILENO) == -1)
+		return (1);
+	close_pipe (pipe, 1);
+	if (pipe->exe[ind] != NULL)
+		ft_exec_cmd(pipe, argv, ind, env);
+	free_pipe (pipe);
+	exit (EXIT_FAILURE);
+	return (errno);
+}
+
+
 void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
 {
 	if (ft_strncmp(pipe->cmd, "exit", 5) == 0)
