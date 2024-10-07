@@ -72,13 +72,12 @@ int	mi_exec_child_in(t_pipe *pipe, char **argv, int ind, char **env)
 	if (dup2(pipe->fdd[0][0], STDIN_FILENO) == -1)
 		return (1);
 	close_pipe (pipe, 1);
-	if (pipe->exe[ind] != NULL)
+	if (pipe->cmd != NULL)
 		ft_exec_cmd(pipe, argv, ind, env);
 	free_pipe (pipe);
 	exit (EXIT_FAILURE);
 	return (errno);
 }
-
 
 void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
 {
