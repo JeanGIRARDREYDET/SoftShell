@@ -15,7 +15,7 @@
 
 #include "../minishell.h"
 
-void cd_home( t_sys *mi_sys)
+void cd_home(t_sys *mi_sys)
 {
 	if(!mi_sys->senv.home)
 	{
@@ -26,7 +26,7 @@ void cd_home( t_sys *mi_sys)
 	mi_setenv("PWD", mi_sys->senv.home, mi_sys);
 }
 
-void cd_back( t_sys *mi_sys)
+void cd_back(t_sys *mi_sys)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ void cd_back( t_sys *mi_sys)
 	}
 	while (mi_sys->senv.pwd[i])
 			i++;
-	while (mi_sys->senv.pwd[i] != '/' && i >1)
+	while (mi_sys->senv.pwd[i] != '/' && i > 1)
 		i--;
 	mi_setenv("PWD", ft_substr(mi_sys->senv.pwd, 0, i), mi_sys);
 	mi_sys->senv.pwd = mi_getenv("PWD", mi_sys);

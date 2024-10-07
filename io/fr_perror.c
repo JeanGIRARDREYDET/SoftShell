@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_exec.c                                          :+:      :+:    :+:   */
+/*   perror.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 19:48:48 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/04 19:48:51 by jegirard         ###   ########.fr       */
+/*   Created: 2024/07/24 08:18:24 by jegirard          #+#    #+#             */
+/*   Updated: 2024/07/24 08:18:29 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../struct.h"
 
-void	mi_exec(t_pipe *pipe, t_sys *mi_sys)
+int	ft_perror_m(t_app *app, char *s, int code_error, int ind)
 {
-	if (mi_sys->nb_pipe == 0)
-		mi_execone(pipe, mi_sys);
-	else
-	{
-		while(pipe)
-		{
-			mi_execone(pipe, mi_sys);
-			pipe = pipe->next;
-		}
-	}
+	perror(s);
+	free(s);
+	if (app->error[ind] == 0)
+		app->error[ind] = code_error;
+	return (code_error);
+}
+
+int	ft_perror(t_app *app, char *s, int code_error, int ind)
+{
+	perror(s);
+	if (app->error[ind] == 0)
+		app->error[ind] = code_error;
+	return (code_error);
 }

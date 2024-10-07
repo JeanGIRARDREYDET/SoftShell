@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-t_pipe *mi_createpipe(void)
+t_pipe	*mi_createpipe(void)
 {
 	t_pipe	*pipe;
 
@@ -24,6 +24,7 @@ t_pipe *mi_createpipe(void)
 	pipe->cmd = NULL;
 	pipe->arg = NULL;
 	pipe->args = NULL;
+	pipe->bultin = true;
 	pipe->error.num = 0;
 	pipe->error.msg = NULL;
 	pipe->duplexe_canal[0] = 0;

@@ -73,6 +73,7 @@ typedef struct s_pipe
 	char			*arg;
 	char			*type;
 	char			**args;
+	bool			builtin;
 	t_error			error;
 	int				duplexe_canal[2];
 	int				fdd[2][2];
@@ -86,6 +87,7 @@ typedef struct s_sys
 	int				status;
 	int				here_doc;
 	int				nb_pipe;
+	int 			nb_error;
 	char			**cmd_args;
 	char			*exe;
 	char			*cmd;

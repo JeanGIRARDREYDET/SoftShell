@@ -12,6 +12,52 @@
 
 #include "../minishell.h"
 
+void	mi_exefind(t_pipe *pipe, t_sys *mi_sys)
+{
+	char		*cmd;
+	char		**paths;
+	int			i;
+	char		*error_msg;
+
+	i = 0;
+
+	if (access(pipe->cmd, F_OK) == 0)
+		return ;
+	cmd = join_3(mi_getenv("PWD", mi_sys) , "/", pipe->cmd);
+	if (access(pipe->cmd, F_OK) == 0)
+		return ;
+	paths = ft_split (mi_getenv("PATH", mi_sys), ':');
+	while (paths && paths[++i])
+	{
+		cmd = join_3(paths[i], "/", pipe->cmd);
+		if (access(cmd, F_OK) == 0)
+		{
+			pipe->cmd = cmd;
+			free(paths);
+			return ;
+		}
+		free(cmd);
+	}
+	error_msg = join_3 ("minishell: ", pipe->cmd, ": command not found\n");
+	mi_logpipeerror(126, error_msg, &pipe->error);
+	free(cmd);
+	free(paths);
+	free(pipe->cmd);
+	return ;
+}
+
+void	mi_exepermis(t_pipe *pipe, t_sys *mi_sys)
+{
+	char		*error_msg;
+
+	if (access(pipe->cmd, X_OK) == 0)
+		return ;
+	error_msg = join_3 ("minishell: ", pipe->cmd, ": Permission denied\n");
+	mi_logpipeerror(126, error_msg, &pipe->error);
+	free(error_msg);
+	mi_sys->nb_error++;
+}
+
 void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
 {
 	if (ft_strncmp(pipe->cmd, "exit", 5) == 0)
@@ -33,4 +79,12 @@ void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
 		builtin_unset(pipe->args[0], mi_sys);
 	else if (ft_strncmp(pipe->cmd, "export", 6) == 0)
 		builtin_export(ft_post_left_sep(pipe->cmd, WSPACE), mi_sys);
+	else
+		pipe->builtin = false;
+	if (pipe->builtin == false)
+	{
+		mi_exefind(pipe, mi_sys);
+		if (pipe->cmd)
+			mi_exepermis(pipe, mi_sys);
+	}
 }

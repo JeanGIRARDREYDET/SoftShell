@@ -34,7 +34,7 @@ char	*find_expand(char *line)
 		while (line[i] < 33)
 			i++;
 	}
-	return (ft_substr(line, c1, c2 -c1));
+	return (ft_substr(line, c1, c2 - c1));
 }
 
 void	mi_expand_find(char **ln, int i, t_sys *sys)
