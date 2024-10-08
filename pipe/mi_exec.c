@@ -12,8 +12,6 @@
 
 #include "../minishell.h"
 
-
-
 void	mi_exec(t_pipe *mi_pipe, t_sys *mi_sys)
 {
 	if (mi_sys->nb_pipe == 0)
@@ -22,11 +20,12 @@ void	mi_exec(t_pipe *mi_pipe, t_sys *mi_sys)
 	{
 		while (mi_pipe)
 		{
-			if (pipe(mi_pipe->fdd[1]) == -1)
+			if(!mi_pipe->next && pipe(mi_pipe->fdd) == -1)
 				mi_logerror(126, "pipe", &mi_pipe->error);
 			mi_execone(mi_pipe, mi_sys);
 			mi_pipe = mi_pipe->next;
 		}
+		
 		mi_waitingpipe (mi_sys);
 	}
 }

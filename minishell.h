@@ -76,8 +76,7 @@ typedef struct s_pipe
 	char			**args;
 	bool			builtin;
 	t_error			error;
-	int				duplexe_canal[2];
-	int				fdd[2][2];
+	int				fdd[2];
 	char			*file;
 	struct s_pipe	*next;
 

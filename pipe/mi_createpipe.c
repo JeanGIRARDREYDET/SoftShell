@@ -27,12 +27,8 @@ t_pipe	*mi_createpipe(void)
 	pipe->args = NULL;
 	pipe->builtin = true;
 	pipe->error.msg = NULL;
-	pipe->duplexe_canal[0] = 0;
-	pipe->duplexe_canal[1] = 0;
-	pipe->fdd[0][0] = 0;
-	pipe->fdd[0][1] = 0;
-	pipe->fdd[1][0] = 0;
-	pipe->fdd[1][1] = 0;
+	pipe->fdd[0] = 0;
+	pipe->fdd[1] = 0;
 	pipe->file = NULL;
 	pipe->next = NULL;
 	return (pipe);

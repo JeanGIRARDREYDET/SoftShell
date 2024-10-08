@@ -62,13 +62,18 @@ int	mi_execchildout(t_pipe *mi_pipe, char **argv, int ind, char **env)
 		return (mi_intlogerror (mi_pipe, "fork out failed", 1));
 	if (mi_pipe->id != 0)
 		return (0);
-	
-	if (dup2(mi_pipe->fdd[1][0], STDIN_FILENO) == -1)
-		return (1);
-	close (mi_pipe->fdd[1][1]);
-	if (dup2(mi_pipe->fdd[0][1], STDOUT_FILENO) == -1)
-		return (1);
-	mi_closepipe (mi_pipe, 1);
+	if (mi_pipe->no != 0)
+	{
+		if (dup2(mi_pipe->fdd[0], STDIN_FILENO) == -1)
+			return (1);
+		close (mi_pipe->fdd[0]);
+	}
+	if (mi_pipe->next)
+	{
+		if (dup2(mi_pipe->fdd[1], STDOUT_FILENO) == -1)
+			return (1);
+		close (mi_pipe->fdd[1]);
+	}
 	if (mi_pipe->cmd != NULL)
 		mi_execcmd(mi_pipe, argv, ind, env);
 	mi_freepipe (mi_pipe);
