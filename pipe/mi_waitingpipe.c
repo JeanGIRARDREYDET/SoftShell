@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_free_pipe.c                                     :+:      :+:    :+:   */
+/*   mi_waitingpipe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 11:40:01 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/08 11:40:05 by jegirard         ###   ########.fr       */
+/*   Created: 2024/10/08 11:37:40 by jegirard          #+#    #+#             */
+/*   Updated: 2024/10/08 11:37:42 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-void	mi_free_pipe(t_pipe *mi_pipe)
+void	mi_waitingpipe(t_sys *mi_sys)
 {
-//	ft_arrfree(mi_pipe->paths);
-	if (mi_pipe->cmd != NULL)
-		free(mi_pipe->cmd);
-	if (mi_pipe->cmd != NULL)
-		free(mi_pipe->cmd);
+	if (wait (&mi_sys->status) != 32512)
+		wait (&mi_sys->status);
 }

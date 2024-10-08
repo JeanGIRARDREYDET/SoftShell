@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec_cmd.c                                      :+:      :+:    :+:   */
+/*   mi_execcmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../struct.h"
+#include "../minishell.h"
 
-int	ft_exec_cmd(t_app *app, char **argv, int ind, char **env)
+int	mi_execcmd(t_pipe *app, char **argv, int ind, char **env)
 {
 	char	**arg;
 
-	if (app->exe[ind] == NULL)
+	if (app->cmd == NULL)
 		return (1);
 	arg = ft_split(argv[ind + 2], '\x20');
 	if (arg == NULL)
@@ -25,10 +25,11 @@ int	ft_exec_cmd(t_app *app, char **argv, int ind, char **env)
 		perror(argv[ind + 2]);
 		return (1);
 	}
-	if (execve(app->exe[ind], arg, env) == -1)
+	if (execve(app->cmd, arg, env) == -1)
 	{
-		perror(ft_strjoin("Command :", app->exe[ind]));
-		ft_perror(app, "Command found but in error ", 126, ind);
+		perror(ft_strjoin("Command :", app->cmd));
+		mi_logerror(126, "Command found but in error ", &app->error);
+		free(arg);
 		return (errno);
 	}
 	return (1);

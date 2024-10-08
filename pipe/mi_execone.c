@@ -53,7 +53,7 @@ void	mi_exepermis(t_pipe *pi, t_sys *mi_sys)
 	mi_sys->nb_error++;
 }
 
-int	ft_exec_child_out(t_pipe *app, char **argv, int ind, char **env)
+int	mi_execchildout(t_pipe *app, char **argv, int ind, char **env)
 {
 	if (app->pid == 0)
 		return (0);
@@ -67,10 +67,10 @@ int	ft_exec_child_out(t_pipe *app, char **argv, int ind, char **env)
 	close (app->fdd[1][1]);
 	if (dup2(app->fdd[0][1], STDOUT_FILENO) == -1)
 		return (1);
-	mi_close_pipe (app, 1);
+	mi_closepipe (app, 1);
 	if (app->cmd != NULL)
-		ft_exec_cmd(app, argv, ind, env);
-	free_pipe (app);
+		mi_execcmd(app, argv, ind, env);
+	mi_freepipe (app);
 	exit (EXIT_FAILURE);
 	return (1);
 }
@@ -104,5 +104,7 @@ void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
 		mi_exefind(pipe, mi_sys);
 		if (pipe->cmd)
 			mi_exepermis(pipe, mi_sys);
+			mi_execchildout(pipe, pipe->args, 0, mi_sys->env);
+
 	}
 }

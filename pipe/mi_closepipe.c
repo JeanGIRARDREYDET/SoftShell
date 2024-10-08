@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_waiting_pipe.c                                  :+:      :+:    :+:   */
+/*   mi_closepipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 11:37:40 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/08 11:37:42 by jegirard         ###   ########.fr       */
+/*   Created: 2024/10/08 11:37:18 by jegirard          #+#    #+#             */
+/*   Updated: 2024/10/08 11:37:20 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	mi_waiting_pipe(t_pipe *mi_pipe)
+void	mi_closepipe(t_pipe *mi_pipe, int nb)
 {
-	if (wait (&mi_pipe->status) != 32512)
-		wait (&mi_pipe->status);
+	nb++;
+	while (nb--)
+	{
+		if (mi_pipe->fdd[nb][0] != -1)
+			close(mi_pipe->fdd[nb][0]);
+		if (mi_pipe->fdd[nb][1] != -1)
+			close(mi_pipe->fdd[nb][1]);
+	}
 }

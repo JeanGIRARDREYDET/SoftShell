@@ -122,16 +122,14 @@ int		mi_pospasscote(char *ln, int i, t_error *mi_error);
 void	mi_logerror(int id, char *msg, t_error *mi_error);
 void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_error *mi_err);
 int		mi_intlogerror(t_pipe *app, char *s, int code);
-
-void	mi_close_pipe(t_pipe *mi_pipe, int nb);
-t_pipe	*mi_createpipe(void);
-void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
-void	mi_execone(t_pipe *pipe, t_sys *mi_sys);
-void	mi_free_pipe(t_pipe *mi_pipe)
-
-
 char	*ft_findcommand(char *line);
 
+void	mi_closepipe(t_pipe *mi_pipe, int nb);
+t_pipe	*mi_createpipe(void);
+int		mi_execcmd(t_pipe *app, char **argv, int ind, char **env);
+void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
 void	mi_execone(t_pipe *pipe, t_sys *mi_sys);
+void	mi_freepipe(t_pipe *mi_pipe);
+void	mi_waitingpipe(t_sys *mi_sys);
 
 #endif
