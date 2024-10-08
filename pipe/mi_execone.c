@@ -53,24 +53,25 @@ void	mi_exepermis(t_pipe *pi, t_sys *mi_sys)
 	mi_sys->nb_error++;
 }
 
-int	mi_execchildout(t_pipe *app, char **argv, int ind, char **env)
+int	mi_execchildout(t_pipe *mi_pipe, char **argv, int ind, char **env)
 {
-	if (app->pid == 0)
+	if (mi_pipe->id == 0)
 		return (0);
-	app->pid = fork();
-	if (app->pid == -1)
-		return (mi_intlogerror (app, "fork out failed", 1));
-	if (app->pid != 0)
+	mi_pipe->id = fork();
+	if (mi_pipe->id == -1)
+		return (mi_intlogerror (mi_pipe, "fork out failed", 1));
+	if (mi_pipe->id != 0)
 		return (0);
-	if (dup2(app->fdd[1][0], STDIN_FILENO) == -1)
+	
+	if (dup2(mi_pipe->fdd[1][0], STDIN_FILENO) == -1)
 		return (1);
-	close (app->fdd[1][1]);
-	if (dup2(app->fdd[0][1], STDOUT_FILENO) == -1)
+	close (mi_pipe->fdd[1][1]);
+	if (dup2(mi_pipe->fdd[0][1], STDOUT_FILENO) == -1)
 		return (1);
-	mi_closepipe (app, 1);
-	if (app->cmd != NULL)
-		mi_execcmd(app, argv, ind, env);
-	mi_freepipe (app);
+	mi_closepipe (mi_pipe, 1);
+	if (mi_pipe->cmd != NULL)
+		mi_execcmd(mi_pipe, argv, ind, env);
+	mi_freepipe (mi_pipe);
 	exit (EXIT_FAILURE);
 	return (1);
 }
@@ -104,6 +105,7 @@ void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
 		mi_exefind(pipe, mi_sys);
 		if (pipe->cmd)
 			mi_exepermis(pipe, mi_sys);
+		if (pipe->cmd)
 			mi_execchildout(pipe, pipe->args, 0, mi_sys->env);
 
 	}

@@ -19,7 +19,8 @@ t_pipe	*mi_createpipe(void)
 	pipe = ft_calloc(1, sizeof (t_pipe));
 	if (!pipe)
 		return (NULL);
-	pipe->pid = 0;
+	pipe->id = 0;
+	pipe->no = 0;
 	pipe->full_cmd = NULL;
 	pipe->cmd = NULL;
 	pipe->arg = NULL;

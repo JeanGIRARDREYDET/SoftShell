@@ -18,28 +18,28 @@ void	mi_pipeparsse(t_pipe *pipe)
 	pipe->cmd = ft_left_sep(pipe->full_cmd, WSPACE);
 }
 
-void	mi_pipeargparsse(t_pipe *lst)
+void	mi_pipeargparsse(t_pipe *mi_pipe)
 {
-	int i;
-	int s;
-	int n;
+	int	i;
+	int	s;
+	int	n;
 
 	i = 0;
 	n = 0;
-	ft_cnt_arg(lst->full_cmd, &i, &n);
+	ft_cnt_arg(mi_pipe->full_cmd, &i, &n);
 	if (n > 0)
 	{
-		lst->args = ft_calloc(n + 1, sizeof (char *));
-		if (lst->args == NULL)
+		mi_pipe->args = ft_calloc(n + 1, sizeof (char *));
+		if (mi_pipe->args == NULL)
 			return ;
 		n = 0;
 		i = 0;
-		while (lst->full_cmd[i])
+		while (mi_pipe->full_cmd[i])
 		{
-			ft_pos_passspace(lst->full_cmd, &i);
+			ft_pos_passspace(mi_pipe->full_cmd, &i);
 			s = i;
-			ft_pos_passstring(lst->full_cmd, &i);
-			lst->args[n] = ft_substr(lst->full_cmd, s, i -s);
+			ft_pos_passstring(mi_pipe->full_cmd, &i);
+			mi_pipe->args[n] = ft_substr(mi_pipe->full_cmd, s, i -s);
 			n++;
 		}
 	}

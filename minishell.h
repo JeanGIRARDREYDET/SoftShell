@@ -66,7 +66,8 @@ typedef struct s_error
 
 typedef struct s_pipe
 {
-	int				pid;
+	int				id;
+	int				no;
 	char			*full_cmd;
 	bool			here_doc;
 	char			*cmd;

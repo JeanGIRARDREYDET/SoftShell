@@ -36,7 +36,6 @@ int	main(int ac, char **argv, char **env)
 		mi_syspipeiter (&mi_sys, &mi_expand_interface);
 		mi_pipeiter (&mi_pipe, &mi_pipeparsse);
 		mi_pipeiter (&mi_pipe, &mi_pipeargparsse);
-
 		mi_exec(&mi_pipe, &mi_sys);
 		add_history(line);
 	}
