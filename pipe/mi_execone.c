@@ -59,7 +59,7 @@ int	ft_exec_child_out(t_pipe *app, char **argv, int ind, char **env)
 		return (0);
 	app->pid = fork();
 	if (app->pid == -1)
-		return (mi_perror (app, "fork out failed", 1));
+		return (mi_intlogerror (app, "fork out failed", 1));
 	if (app->pid != 0)
 		return (0);
 	if (dup2(app->fdd[1][0], STDIN_FILENO) == -1)
@@ -67,7 +67,7 @@ int	ft_exec_child_out(t_pipe *app, char **argv, int ind, char **env)
 	close (app->fdd[1][1]);
 	if (dup2(app->fdd[0][1], STDOUT_FILENO) == -1)
 		return (1);
-	close_pipe (app, 1);
+	mi_close_pipe (app, 1);
 	if (app->cmd != NULL)
 		ft_exec_cmd(app, argv, ind, env);
 	free_pipe (app);

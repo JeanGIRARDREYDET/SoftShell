@@ -11,3 +11,9 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	mi_waiting_pipe(t_pipe *mi_pipe)
+{
+	if (wait (&mi_pipe->status) != 32512)
+		wait (&mi_pipe->status);
+}

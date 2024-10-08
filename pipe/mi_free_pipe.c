@@ -10,4 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../minishell.h"
 
+
+void	mi_free_pipe(t_pipe *mi_pipe)
+{
+//	ft_arrfree(mi_pipe->paths);
+	if (mi_pipe->cmd != NULL)
+		free(mi_pipe->cmd);
+	if (mi_pipe->cmd != NULL)
+		free(mi_pipe->cmd);
+}

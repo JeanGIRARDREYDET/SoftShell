@@ -109,6 +109,7 @@ char	*mi_getenv(char *key, t_sys *s_sys);
 void	mi_unset(char *key, t_sys *s_sys);
 void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
+
 void	mi_expand_interface(t_pipe *pipe, t_sys *mi_sys);
 void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
 void	mi_oneexec(t_pipe *pipe, t_sys *mi_sys);
@@ -120,11 +121,17 @@ void	mi_lexingline(char *ln, int i, t_pipe *cmd_pipe, t_sys *mi_sys);
 int		mi_pospasscote(char *ln, int i, t_error *mi_error);
 void	mi_logerror(int id, char *msg, t_error *mi_error);
 void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_error *mi_err);
-int		mi_perror_m(t_pipe *app, char *s, int code);
-int		mi_perror_m(t_pipe *app, char *s, int code);
+int		mi_intlogerror(t_pipe *app, char *s, int code);
+
+void	mi_close_pipe(t_pipe *mi_pipe, int nb);
 t_pipe	*mi_createpipe(void);
-char	*ft_findcommand(char *line);
 void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
+void	mi_execone(t_pipe *pipe, t_sys *mi_sys);
+void	mi_free_pipe(t_pipe *mi_pipe)
+
+
+char	*ft_findcommand(char *line);
+
 void	mi_execone(t_pipe *pipe, t_sys *mi_sys);
 
 #endif

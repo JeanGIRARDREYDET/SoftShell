@@ -12,14 +12,14 @@
 
 #include "../minishell.h"
 
-void	mi_close_pipe(t_app *app, int nb)
+void	mi_close_pipe(t_pipe *mi_pipe, int nb)
 {
 	nb++;
 	while (nb--)
 	{
-		if (app->fdd[nb][0] != -1)
-			close(app->fdd[nb][0]);
-		if (app->fdd[nb][1] != -1)
-			close(app->fdd[nb][1]);
+		if (mi_pipe->fdd[nb][0] != -1)
+			close(mi_pipe->fdd[nb][0]);
+		if (mi_pipe->fdd[nb][1] != -1)
+			close(mi_pipe->fdd[nb][1]);
 	}
 }
