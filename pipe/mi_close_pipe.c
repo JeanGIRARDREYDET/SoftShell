@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   perror.c                                           :+:      :+:    :+:   */
+/*   mi_close_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 08:18:24 by jegirard          #+#    #+#             */
-/*   Updated: 2024/07/24 08:18:29 by jegirard         ###   ########.fr       */
+/*   Created: 2024/10/08 11:37:18 by jegirard          #+#    #+#             */
+/*   Updated: 2024/10/08 11:37:20 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../struct.h"
+#include "../minishell.h"
 
-int	ft_perror_m(t_app *app, char *s, int code_error, int ind)
+void	mi_close_pipe(t_app *app, int nb)
 {
-	perror(s);
-	free(s);
-	if (app->error[ind] == 0)
-		app->error[ind] = code_error;
-	return (code_error);
-}
-
-int	ft_perror(t_app *app, char *s, int code_error, int ind)
-{
-	perror(s);
-	if (app->error[ind] == 0)
-		app->error[ind] = code_error;
-	return (code_error);
+	nb++;
+	while (nb--)
+	{
+		if (app->fdd[nb][0] != -1)
+			close(app->fdd[nb][0]);
+		if (app->fdd[nb][1] != -1)
+			close(app->fdd[nb][1]);
+	}
 }

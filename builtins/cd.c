@@ -63,6 +63,7 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 	if (access(mi_sys->senv.pwd, F_OK) == 0)
 	{
 		printf("%s is existing\n", key);
+		mi_setenv("PWD", mi_sys->senv.pwd, mi_sys);
 	}
 	else
 	{

@@ -45,39 +45,36 @@ void	mi_exefind(t_pipe *pipe, t_sys *mi_sys)
 	return ;
 }
 
-void	mi_exepermis(t_pipe *pipe, t_sys *mi_sys)
+void	mi_exepermis(t_pipe *pi, t_sys *mi_sys)
 {
-	char		*error_msg;
-
-	if (access(pipe->cmd, X_OK) == 0)
+	if (access(pi->cmd, X_OK) == 0)
 		return ;
-	error_msg = join_3 ("minishell: ", pipe->cmd, ": Permission denied\n");
-	mi_logerror(126, error_msg, &pipe->error);
-	free(error_msg);
+	mi_logerrorlong(126, "mi: ", pi->cmd, ": Permission denied", &pi->error);
 	mi_sys->nb_error++;
 }
 
-int	mi_exec_child_in(t_pipe *pipe, char **argv, int ind, char **env)
+int	ft_exec_child_out(t_pipe *app, char **argv, int ind, char **env)
 {
-	if (pipe->pid == 0)
+	if (app->pid == 0)
 		return (0);
-	pipe->pid = fork();
-	if (pipe->pid == -1)
-		return (ft_perror(pipe, "fork failed in :", 3, 0));
-	if (pipe->pid != 0)
+	app->pid = fork();
+	if (app->pid == -1)
+		return (mi_perror (app, "fork out failed", 1));
+	if (app->pid != 0)
 		return (0);
-	if (dup2(pipe->fdd[1][1], STDOUT_FILENO) == -1)
+	if (dup2(app->fdd[1][0], STDIN_FILENO) == -1)
 		return (1);
-	close (pipe->fdd[1][0]);
-	if (dup2(pipe->fdd[0][0], STDIN_FILENO) == -1)
+	close (app->fdd[1][1]);
+	if (dup2(app->fdd[0][1], STDOUT_FILENO) == -1)
 		return (1);
-	close_pipe (pipe, 1);
-	if (pipe->cmd != NULL)
-		ft_exec_cmd(pipe, argv, ind, env);
-	free_pipe (pipe);
+	close_pipe (app, 1);
+	if (app->cmd != NULL)
+		ft_exec_cmd(app, argv, ind, env);
+	free_pipe (app);
 	exit (EXIT_FAILURE);
-	return (errno);
+	return (1);
 }
+
 
 void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
 {
