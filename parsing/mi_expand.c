@@ -45,7 +45,7 @@ void	mi_expand_find(char **ln, int i, t_sys *sys)
 	int		len;
 
 	len = 1;
-	while (ln[0][len +i] && ft_isalnum(ln[0][len +i]) )
+	while (ln[0][len +i] && ft_isalnum(ln[0][len +i]))
 		len++;
 	if (len > 1)
 	{
@@ -66,7 +66,7 @@ void	mi_expand(char **ln, int i, t_sys *sys)
 	char	echap;
 
 	echap = '\0';
-	while (ln[0][i])
+	while (ln && ln[0][i])
 	{
 		if (echap == '\0' && ft_strin(TECHAP, ln[0][i]))
 				echap = ln[0][i];
@@ -80,5 +80,6 @@ void	mi_expand(char **ln, int i, t_sys *sys)
 
 void	mi_expand_interface (t_pipe *pipe, t_sys *mi_sys)
 {
-	mi_expand(&pipe->full_cmd, 0,mi_sys);
++
+	mi_expand(&pipe->full_cmd, 0, mi_sys);
 }

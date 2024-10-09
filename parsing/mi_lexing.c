@@ -15,11 +15,12 @@
 void	mi_lexingline(char *ln, int i, t_pipe *cmd_pipe, t_sys *mi_sys)
 {	
 	t_pipe		*new_pipe;
-
-	i = mi_pospasscote(ln, i, &cmd_pipe->error);
-	while (ln[i] && ft_strchr(WSPACE, ln[i]))
-		i++;
-	if (ln[i] == '\0')
+	if (ft_strin(TECHAP, ln[i]))
+	{
+		i = mi_pospasscote(ln, i, &cmd_pipe->error);	
+		mi_lexingline (ln, ++i, cmd_pipe, mi_sys);
+	}	
+	else if (ln[i] == '\0')
 	{
 		cmd_pipe->full_cmd = ft_strtrim_param(ln, 0, i, WSPACE);
 		cmd_pipe->next = NULL;

@@ -53,8 +53,9 @@ void	mi_exepermis(t_pipe *pi, t_sys *mi_sys)
 	mi_sys->nb_error++;
 }
 
-int	mi_execchildout(t_pipe *mi_pipe, char **argv, int ind, char **env)
+int	mi_execchild(t_pipe *mi_pipe, char **argv, int ind, char **env)
 {
+	printf("10");
 	if (mi_pipe->id == 0)
 		return (0);
 	mi_pipe->id = fork();
@@ -80,7 +81,6 @@ int	mi_execchildout(t_pipe *mi_pipe, char **argv, int ind, char **env)
 	exit (EXIT_FAILURE);
 	return (1);
 }
-
 
 void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
 {
@@ -111,7 +111,6 @@ void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
 		if (pipe->cmd)
 			mi_exepermis(pipe, mi_sys);
 		if (pipe->cmd)
-			mi_execchildout(pipe, pipe->args, 0, mi_sys->env);
-
+			mi_execchild(pipe, pipe->args, 0, mi_sys->env);
 	}
 }
