@@ -70,6 +70,7 @@ typedef struct s_pipe
 	int				no;
 	char			*full_cmd;
 	bool			here_doc;
+	char 			*heredoc;
 	char			*cmd;
 	char			*arg;
 	char			*type;
@@ -131,5 +132,7 @@ void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
 void	mi_execone(t_pipe *pipe, t_sys *mi_sys);
 void	mi_freepipe(t_pipe *mi_pipe);
 void	mi_waitingpipe(t_sys *mi_sys);
+
+void	mi_pipeherdoc(t_pipe *pipe);
 
 #endif

@@ -25,6 +25,8 @@
 //            "args": ["Makefile","cat","echo toto","outfP3"],
 //            "args": ["Makefile","cat","ls","outfP"],
 //            "args2": ["Makefile","ls","./a1.out","outfP"],
+            "console": "internalConsole", 
+            "outputCapture": "std",
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/",
             "environment": [],

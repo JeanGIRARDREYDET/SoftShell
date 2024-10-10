@@ -12,6 +12,21 @@
 
 #include "../minishell.h"
 
+void	mi_pipeherdoc(t_pipe *pipe)
+{
+	while (pipe->args)
+	{
+		if (pipe->args[0][0] == '<' && pipe->args[0][1] == '<')
+		{
+			pipe->here_doc = true;
+			pipe->heredoc = ft_strdup(pipe->args[1]);
+			pipe->args[0] = NULL;
+			pipe->args[1] = NULL;
+		}
+		pipe->args++;
+	}
+}
+
 void	mi_pipeparsse(t_pipe *pipe)
 {
 	pipe->arg = ft_post_left_sep(pipe->full_cmd, WSPACE);
