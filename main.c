@@ -29,17 +29,17 @@ int	main(int ac, char **argv, char **env)
 	while (1)
 	{
 		line = readline("minishell> ");
+		if (*line =='\0')
+			continue;
 		mi_sys.nb_pipe = 0;
-		mi_pipe = *mi_createpipe();
+		mi_pipe = *mi_createpipe(&mi_sys);
 		mi_lexingline (line, 0, &mi_pipe, &mi_sys);
 		mi_sys.pipe = &mi_pipe;
-
 		mi_syspipeiter (&mi_sys, &mi_expand_interface);
 		mi_pipeiter (&mi_pipe, &mi_pipeparsse);
-
 		mi_pipeiter (&mi_pipe, &mi_pipeargparsse);
-
-		mi_pipeiter (&mi_pipe, &mi_pipeherdoc);		mi_exec(&mi_pipe, &mi_sys);
+		mi_pipeiter (&mi_pipe, &mi_pipeherdoc);
+		mi_exec(&mi_pipe, &mi_sys);
 		add_history(line);
 	}
 }

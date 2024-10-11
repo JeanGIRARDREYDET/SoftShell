@@ -69,11 +69,11 @@ void	mi_expand(char **ln, int i, t_sys *sys)
 	while (ln && ln[0][i])
 	{
 		if (echap == '\0' && ft_strin(TECHAP, ln[0][i]))
-				echap = ln[0][i];
+			echap = ln[0][i];
 		else if (ln[0][i] == echap)
-				echap = '\0';
+			echap = '\0';
 		if (echap!='\'' && ln[0][i] == '$')
-				mi_expand_find(ln, i, sys);
+			mi_expand_find(ln, i, sys);
 		i++;
 	}
 }

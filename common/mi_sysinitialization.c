@@ -50,6 +50,7 @@ void	me_setdefaul_initialization( t_sys *s_sys)
 {
 	s_sys->senv.path = "/usr/bin:/bin:/usr/sbin:/sbin";
 	s_sys->senv.pwd = NULL;
+	s_sys->nb_pipe = 0;
 	s_sys->senv.shlvl = "1";
 	s_sys->senv._ = NULL;
 	s_sys->senv.home = NULL;

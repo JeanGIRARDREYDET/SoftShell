@@ -12,18 +12,18 @@
 
 #include "../minishell.h"
 
-void	mi_pipeherdoc(t_pipe *pipe)
+void	mi_pipeherdoc(t_pipe *mp)
 {
-	while (pipe->args)
+	while (*mp->args)
 	{
-		if (pipe->args[0][0] == '<' && pipe->args[0][1] == '<')
+		if (*mp->args && *mp->args[0] == '<' && *mp->args[1] == '<')
 		{
-			pipe->here_doc = true;
-			pipe->heredoc = ft_strdup(pipe->args[1]);
-			pipe->args[0] = NULL;
-			pipe->args[1] = NULL;
+			mp->here_doc = true;	
+			mp->heredoc = ft_strdup(mp->args[1]);
+			mp->args[0] = NULL;
+			mp->args[1] = NULL;
 		}
-		pipe->args++;
+ 		mp->args++;
 	}
 }
 

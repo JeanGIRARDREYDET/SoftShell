@@ -25,6 +25,8 @@ int	mi_execcmd(t_pipe *app, char **argv, int ind, char **env)
 		perror(argv[ind + 2]);
 		return (1);
 	}
+	FILE *fptr = fopen("sample.txt", "w");
+	fprintf(fptr, "Error: (%s)\n", app->cmd);
 	if (execve(app->cmd, arg, env) == -1)
 	{
 		perror(ft_strjoin("Command :", app->cmd));

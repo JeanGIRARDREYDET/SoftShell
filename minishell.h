@@ -88,6 +88,8 @@ typedef struct s_sys
 	int				status;
 	int				here_doc;
 	int				nb_pipe;
+	int				nb_herdoc;
+	int 			**end_herdoc;
 	int				nb_error;
 	char			**cmd_args;
 	char			*exe;
@@ -126,7 +128,7 @@ int		mi_intlogerror(t_pipe *app, char *s, int code);
 char	*ft_findcommand(char *line);
 
 void	mi_closepipe(t_pipe *mi_pipe, int nb);
-t_pipe	*mi_createpipe(void);
+t_pipe	*mi_createpipe(t_sys *mi_sys);
 int		mi_execcmd(t_pipe *app, char **argv, int ind, char **env);
 void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
 void	mi_execone(t_pipe *pipe, t_sys *mi_sys);

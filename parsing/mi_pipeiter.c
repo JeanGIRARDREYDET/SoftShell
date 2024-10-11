@@ -14,24 +14,21 @@
 
 void	mi_pipeiter(t_pipe *lst, void (*f)(t_pipe *lst))
 {
-	t_pipe	*i_element;
-
-	i_element = lst;
-	while (i_element != NULL)
+	while (lst != NULL)
 	{
-		(*f)(i_element);
-		i_element = i_element->next;
+		(*f)(lst);
+		lst = lst->next;
 	}
 }
 
-void	mi_syspipeiter(t_sys *sys, void (*f)(t_pipe *lst, t_sys *sys))
+void	mi_syspipeiter(t_sys *me_sys, void (*f)(t_pipe *lst, t_sys *me_sys))
 {
 	t_pipe	*mi_pipe;
 
-	mi_pipe = sys->pipe;
-	while (mi_pipe)
+	mi_pipe = me_sys->pipe;
+	while (mi_pipe != NULL)
 	{
-		(*f)(mi_pipe, sys);
+		(*f)(mi_pipe, me_sys);
 		mi_pipe = mi_pipe->next;
 	}
 }

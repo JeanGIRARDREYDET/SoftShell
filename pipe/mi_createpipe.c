@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-t_pipe	*mi_createpipe(void)
+t_pipe	*mi_createpipe(t_sys *mi_sys)
 {
 	t_pipe	*pipe;
 
@@ -20,7 +20,7 @@ t_pipe	*mi_createpipe(void)
 	if (!pipe)
 		return (NULL);
 	pipe->id = 0;
-	pipe->no = 0;
+	pipe->no = ++mi_sys->nb_pipe;
 	pipe->full_cmd = NULL;
 	pipe->cmd = NULL;
 	pipe->arg = NULL;

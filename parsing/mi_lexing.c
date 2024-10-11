@@ -14,7 +14,7 @@
 
 void	mi_lexingline(char *ln, int i, t_pipe *cmd_pipe, t_sys *mi_sys)
 {	
-	t_pipe		*new_pipe;
+	t_pipe		new_pipe;
 	if (ft_strin(TECHAP, ln[i]))
 	{
 		i = mi_pospasscote(ln, i, &cmd_pipe->error);
@@ -28,13 +28,13 @@ void	mi_lexingline(char *ln, int i, t_pipe *cmd_pipe, t_sys *mi_sys)
 	}
 	else if (ln[i] == '|')
 	{
-		new_pipe = ft_calloc(1, sizeof (t_pipe));
-		if (!new_pipe)
-			return ;
+		// new_pipe = ft_calloc(1, sizeof (t_pipe));
+		// if (!new_pipe)
+		// 	return ;
+		new_pipe = *mi_createpipe(mi_sys);
 		cmd_pipe->full_cmd = ft_strtrim_param(ln, 0, i -1, WSPACE);
-		cmd_pipe->next = new_pipe;
-		new_pipe->no = ++mi_sys->nb_pipe;
-		mi_lexingline (ln + (++i), 0, new_pipe, mi_sys);
+		cmd_pipe->next = &new_pipe;
+		mi_lexingline (ln + (++i), 0, &new_pipe, mi_sys);
 	}
 	else
 		mi_lexingline (ln, ++i, cmd_pipe, mi_sys);
