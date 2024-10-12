@@ -26,7 +26,7 @@ void	mi_syspipeiter(t_sys *me_sys, void (*f)(t_pipe *mi_pipe, t_sys *me_sys))
 	t_pipe	*mi_pipe;
 
 	mi_pipe = me_sys->pipe;
-	while (mi_pipe != NULL)
+	while (mi_pipe!= NULL)
 	{
 		(*f)(mi_pipe, me_sys);
 		mi_pipe = mi_pipe->next;

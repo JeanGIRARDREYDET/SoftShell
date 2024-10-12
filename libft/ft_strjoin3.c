@@ -34,7 +34,7 @@ char	*join_3(char *s1, char *s2, char *s3)
 	if (s1 == NULL || s2 == NULL || s3 == NULL)
 		return (NULL);
 	i = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3);
-	p = (char *) ft_calloc (i + 1, sizeof(char));
+	p = (char *) ft_calloc (i + 4, sizeof(char));
 	if (!p)
 		return (NULL);
 	j = 0;
@@ -47,7 +47,7 @@ char	*join_3(char *s1, char *s2, char *s3)
 	j = 0;
 	while (s3[j] != 0)
 		p[i++] = s3[j++];
-	p[i] = 0;
+	p[i] = '\0';
 	return (p);
 }
 
@@ -76,6 +76,6 @@ char	*join_4(char *s1, char *s2, char *s3, char *s4)
 	j = 0;
 	while (s4[j] != 0)
 		p[i++] = s4[j++];
-	p[i] = 0;
+	p[i] = '\0';
 	return (p);
 }
