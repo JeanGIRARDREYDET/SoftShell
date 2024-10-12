@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	mi_exefind(t_pipe *pipe, t_sys *mi_sys)
+void	mi_exefind(t_pipe *mi_pipe, t_sys *mi_sys)
 {
 	char		*cmd;
 	char		**paths;
@@ -20,28 +20,29 @@ void	mi_exefind(t_pipe *pipe, t_sys *mi_sys)
 	char		*error_msg;
 
 	i = 0;
-	if (access(pipe->cmd, F_OK) == 0)
+	if (access(mi_pipe->cmd, F_OK) == 0)
 		return ;
-	cmd = join_3(mi_getenv("PWD", mi_sys), "/", pipe->cmd);
-	if (access(pipe->cmd, F_OK) == 0)
+	i = 0;
+	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_pipe->cmd);
+	if (access(mi_pipe->cmd, F_OK) == 0)
 		return ;
 	paths = ft_split (mi_getenv("PATH", mi_sys), ':');
 	while (paths && paths[++i])
 	{
-		cmd = join_3(paths[i], "/", pipe->cmd);
+		cmd = join_3(paths[i], "/", mi_pipe->cmd);
 		if (access(cmd, F_OK) == 0)
 		{
-			pipe->cmd = cmd;
+			mi_pipe->cmd = cmd;
 			free(paths);
 			return ;
 		}
 		free(cmd);
 	}
-	error_msg = join_3 ("minishell: ", pipe->cmd, ": command not found\n");
-	mi_logerror(126, error_msg, &pipe->error);
+	error_msg = join_3 ("minishell: ", mi_pipe->cmd, ": command not found\n");
+	mi_logerror(126, error_msg, &mi_pipe->error);
 	free(cmd);
 	free(paths);
-	free(pipe->cmd);
+	free(mi_pipe->cmd);
 	return ;
 }
 
@@ -57,6 +58,7 @@ int	mi_execchild(t_pipe *mi_pipe, char **argv, int ind, char **env)
 {
 	printf("10\n");
 	if (mi_pipe->id == 0)
+
 		return (0);
 	mi_pipe->id = fork();
 	if (mi_pipe->id == -1)

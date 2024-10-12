@@ -12,16 +12,16 @@
 
 #include "../minishell.h"
 
-void	mi_pipeiter(t_pipe *lst, void (*f)(t_pipe *lst))
+void	mi_pipeiter(t_pipe *mi_pipe, void (*f)(t_pipe *mi_pipe))
 {
-	while (lst != NULL)
+	while (mi_pipe != NULL)
 	{
-		(*f)(lst);
-		lst = lst->next;
+		(*f)(mi_pipe);
+		mi_pipe = mi_pipe->next;
 	}
 }
 
-void	mi_syspipeiter(t_sys *me_sys, void (*f)(t_pipe *lst, t_sys *me_sys))
+void	mi_syspipeiter(t_sys *me_sys, void (*f)(t_pipe *mi_pipe, t_sys *me_sys))
 {
 	t_pipe	*mi_pipe;
 

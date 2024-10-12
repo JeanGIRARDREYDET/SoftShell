@@ -27,10 +27,16 @@ void	mi_pipeherdoc(t_pipe *mp)
 	}
 }
 
-void	mi_pipeparsse(t_pipe *pipe)
-{
-	pipe->arg = ft_post_left_sep(pipe->full_cmd, WSPACE);
-	pipe->cmd = ft_left_sep(pipe->full_cmd, WSPACE);
+void	mi_pipeparsse(t_pipe *mi_pipe)
+{	int i;
+	if (mi_pipe->full_cmd == NULL)
+		return ;
+	i = ft_pos_left_chars(mi_pipe->full_cmd, WSPACE);
+	if (mi_pipe->full_cmd[i] =='\0')
+		mi_pipe->arg = NULL;
+	else
+		mi_pipe->arg = ft_post_left_sep(mi_pipe->full_cmd, WSPACE);
+	mi_pipe->cmd = ft_left_sep(mi_pipe->full_cmd, WSPACE);
 }
 
 void	mi_pipeargparsse(t_pipe *mi_pipe)

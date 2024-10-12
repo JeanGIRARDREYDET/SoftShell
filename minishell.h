@@ -79,8 +79,7 @@ typedef struct s_pipe
 	t_error			error;
 	int				fdd[2];
 	char			*file;
-	struct s_pipe	*next;
-
+	struct s_pipe	*next;	
 }	t_pipe;
 
 typedef struct s_sys
@@ -89,7 +88,7 @@ typedef struct s_sys
 	int				here_doc;
 	int				nb_pipe;
 	int				nb_herdoc;
-	int 			**end_herdoc;
+	char 			**end_herdoc;
 	int				nb_error;
 	char			**cmd_args;
 	char			*exe;

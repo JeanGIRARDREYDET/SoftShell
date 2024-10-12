@@ -23,10 +23,14 @@ t_pipe	*mi_createpipe(t_sys *mi_sys)
 	pipe->no = ++mi_sys->nb_pipe;
 	pipe->full_cmd = NULL;
 	pipe->cmd = NULL;
-	pipe->arg = NULL;
+	pipe->arg = "";
 	pipe->args = NULL;
 	pipe->builtin = true;
-	pipe->error.msg = NULL;
+	pipe->error.msg = "";
+	pipe->error.code_error = 0;
+	pipe->type = NULL;
+	pipe->here_doc = false;
+	pipe->heredoc = NULL;
 	pipe->fdd[0] = 0;
 	pipe->fdd[1] = 0;
 	pipe->file = NULL;

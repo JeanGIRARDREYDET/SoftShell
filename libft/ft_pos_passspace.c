@@ -14,6 +14,6 @@
 
 void	ft_pos_passspace(char *ln, int *i)
 {
-	while (ln[*i] && ft_strchr(WSPACE, ln[*i]))
+	while (ln && ln[*i] && ft_strchr(WSPACE, ln[*i]))
 		(*i)++;
 }
