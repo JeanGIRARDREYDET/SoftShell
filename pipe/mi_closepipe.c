@@ -17,9 +17,9 @@ void	mi_closepipe(t_pipe *mi_pipe, int nb)
 	nb++;
 	while (nb--)
 	{
-		if (mi_pipe->fdd[nb][0] != -1)
-			close(mi_pipe->fdd[nb][0]);
-		if (mi_pipe->fdd[nb][1] != -1)
-			close(mi_pipe->fdd[nb][1]);
+		if (mi_pipe->fdd[0] != -1)
+			close(mi_pipe->fdd[0]);
+		if (mi_pipe->fdd[1] != -1)
+			close(mi_pipe->fdd[1]);
 	}
 }

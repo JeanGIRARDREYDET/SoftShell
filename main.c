@@ -15,13 +15,13 @@
 extern int	g_status;
 void	mi_pipe_acc(t_pipe *mi_pipe, t_sys *mi_sys)
 {
-	char		*cmd;
+	char	*pathcmd;
 
 	if (access(mi_pipe->cmd, F_OK) == 0)
 		return;
-	cmd = join_3(mi_getenv("PWD", mi_sys), "/", "mi_pipe->cmd");
-//	if (access(mi_pipe->cmd, F_OK) == 0)
-//		return;
+	pathcmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_pipe->cmd);
+	if (access(pathcmd, F_OK) == 0)
+		return;
 	mi_sys->nb_error++;
 }
 
