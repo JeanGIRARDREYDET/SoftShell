@@ -14,6 +14,33 @@
 
 extern int	g_status;
 
+bool	ft_findword(const char *source, const char *find)
+{
+	char	*p;
+	size_t	i;
+	size_t	offset;
+	size_t lenfind;
+
+	lenfind = ft_strlen(find);
+	if (*find == '\0' || find == NULL)
+		return (false);
+	i = 0;
+	p = (char *)source;
+	while ((i < lenfind) && (*p != '\0'))
+	{
+		offset = 0;
+		while (find[offset] == p[offset] && offset < lenfind - i+1)
+		{
+			offset++;
+			if (p[offset] == ' ' && find[offset] == '\0')
+				return (true);
+		}
+		p++;
+		i++;
+	}
+	return (false);
+}
+
 void	mi_pipe_acc(t_pipe *mi_pipe, t_sys *mi_sys)
 {
 	char		*cmd;
@@ -78,7 +105,13 @@ void	mi_pipe_access (t_pipe *mi_pipe, t_sys *mi_sys)
 
 }
 
-
+void	mi_check_builtin(t_pipe *mi_pipe)
+{
+	if(ft_findword (BUILTINS, mi_pipe->cmd))
+		mi_pipe->builtin = true;
+	else
+		mi_pipe->builtin = false;
+}
 
 int	main(int ac, char **argv, char **env)
 {
@@ -104,6 +137,7 @@ int	main(int ac, char **argv, char **env)
 		mi_syspipeiter(&mi_sys, &mi_expand_interface);
 		mi_pipeiter (&mi_pipe, &mi_pipeparsse);
 		mi_pipeiter (&mi_pipe, &mi_pipeargparsse);
+		mi_pipeiter (&mi_pipe, &mi_check_builtin);
 		mi_syspipeiter(&mi_sys, &mi_expand_interface);
 		mi_syspipeiter (&mi_sys, &mi_pipe_access);
 //		mi_pipeiter (&mi_pipe, &mi_pipeherdoc);
