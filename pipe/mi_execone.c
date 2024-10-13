@@ -42,7 +42,6 @@ void	mi_exefind(t_pipe *mi_pipe, t_sys *mi_sys)
 	mi_logerror(126, error_msg, &mi_pipe->error);
 	free(cmd);
 	free(paths);
-	free(mi_pipe->cmd);
 	return ;
 }
 

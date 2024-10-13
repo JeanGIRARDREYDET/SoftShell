@@ -16,14 +16,15 @@ extern int	g_status;
 
 void	mi_pipe_acc(t_pipe *mi_pipe, t_sys *mi_sys)
 {
-	char		*paths;
 	char		*cmd;
+	char		**paths;
 	int			i;
+	char		*error_msg;
 
 	i = 0;
 	if (access(mi_pipe->cmd, F_OK) == 0)
-		return;
-	
+		return ;
+	i = 0;
 	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_pipe->cmd);
 	if (access(mi_pipe->cmd, F_OK) == 0)
 		return ;
@@ -39,23 +40,41 @@ void	mi_pipe_acc(t_pipe *mi_pipe, t_sys *mi_sys)
 		}
 		free(cmd);
 	}
+	error_msg = join_3 ("minishell: ", mi_pipe->cmd, ": command not found\n");
+	mi_logerror(126, error_msg, &mi_pipe->error);
+	free(cmd);
+	free(paths);
+	free(mi_pipe->cmd);
+	return ;
 }
 
-void	mi_pipe_exec (t_pipe *mi_pipe, t_sys *mi_sys)
+void	mi_pipe_access (t_pipe *mi_pipe, t_sys *mi_sys)
 {
 	int i;
 	char	*pathcmd;
+	char	**paths;
+	char	*pathstring;
 
-	mi_pipe->full_cmd[0]='A';
 	if (access(mi_pipe->cmd, F_OK) == 0)
 		return;
 	pathcmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_pipe->cmd);
 	if (access(pathcmd, F_OK) == 0)
-		return;
-	if (mi_pipe->full_cmd == NULL)
 		return ;
-	i = ft_pos_left_chars(mi_pipe->full_cmd, WSPACE);
-	i++;
+	pathstring = ft_strdup(mi_getenv("PATH", mi_sys));
+
+	paths = ft_split (pathstring, ':');
+	i = -1;
+	while (paths && paths[++i])
+	{
+		pathcmd = join_3(paths[i], "/", mi_pipe->cmd);
+		if (access(pathcmd, F_OK) == 0)
+		{
+			mi_pipe->cmd = pathcmd;
+			free(paths);
+			return ;
+		}
+		free(pathcmd);
+	}
 
 }
 
@@ -86,9 +105,9 @@ int	main(int ac, char **argv, char **env)
 		mi_pipeiter (&mi_pipe, &mi_pipeparsse);
 		mi_pipeiter (&mi_pipe, &mi_pipeargparsse);
 		mi_syspipeiter(&mi_sys, &mi_expand_interface);
-		mi_syspipeiter (&mi_sys, &mi_pipe_exec);
+		mi_syspipeiter (&mi_sys, &mi_pipe_access);
 //		mi_pipeiter (&mi_pipe, &mi_pipeherdoc);
-		mi_exec(&mi_pipe, &mi_sys);
+//		mi_exec(&mi_pipe, &mi_sys);
 		add_history(line);
 	}
 }
