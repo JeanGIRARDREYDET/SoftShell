@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 12:09:10 by doferet           #+#    #+#             */
-/*   Updated: 2024/09/06 10:18:30 by doferet          ###   ########.fr       */
+/*   Updated: 2024/10/14 00:57:48 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -99,6 +99,7 @@ typedef struct s_sys
 	t_pipe			*pipe;
 }	t_sys;
 
+bool	ft_findword(const char *source, const char *find);
 void	builtin_cd(char *key, t_sys *s_sys);
 void	builtin_echo(char *key);
 void	builtin_env(t_sys *s_sys);
@@ -107,6 +108,8 @@ void	builtin_export(char *key, t_sys *s_sys);
 void	print_export(t_sys *s_sys);
 void	builtin_pwd(void);
 void	builtin_unset(char *key, t_sys *s_sys);
+void	mi_checkbuiltin(t_pipe *mi_pipe);
+void	mi_checkpathaccess (t_pipe *mi_pipe, t_sys *mi_sys);
 char	*mi_getenv(char *key, t_sys *s_sys);
 void	mi_unset(char *key, t_sys *s_sys);
 void	mi_sysinitialization(char **env, t_sys *s_sys);
@@ -116,6 +119,7 @@ void	mi_expand_interface(t_pipe *pipe, t_sys *mi_sys);
 void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
 void	mi_exefind(t_pipe *mi_pipe, t_sys *mi_sys);
 void	mi_oneexec(t_pipe *pipe, t_sys *mi_sys);
+
 void	mi_pipeparsse(t_pipe *pipe);
 void	mi_pipeargparsse(t_pipe *lst);
 void	mi_pipeiter(t_pipe *lst, void (*f)(t_pipe *lst));

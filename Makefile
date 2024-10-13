@@ -17,11 +17,14 @@ SRCS = 			main.c \
 				builtins/export.c \
 				builtins/pwd.c \
 				builtins/unset.c \
+				check/mi_checkbuiltin.c \
+				check/mi_checkpathaccess.c \
 				libft/ft_arrclose.c \
 				libft/ft_atoi.c \
 				libft/ft_bzero.c \
 				libft/ft_calloc.c \
 				libft/ft_cnt_arg.c \
+				libft/ft_findword.c \
 				libft/ft_get_confpos.c \
 				libft/ft_isalnum.c \
 				libft/ft_isascii.c \
