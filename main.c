@@ -75,7 +75,38 @@ void	mi_pipe_acc(t_pipe *mi_pipe, t_sys *mi_sys)
 	return ;
 }
 
-void	mi_pipe_access (t_pipe *mi_pipe, t_sys *mi_sys)
+void mi_pipeexec(t_pipe *mi_pipe, t_sys *mi_sys)
+{
+	char	**argv;
+	char	**env;
+
+
+	if (mi_pipe->builtin == true)
+	{
+		if (ft_findword("cd", mi_pipe->cmd))
+			builtin_cd(mi_pipe->arg, mi_sys);
+		else if (ft_findword("echo", mi_pipe->cmd))
+			builtin_echo(mi_pipe->arg);
+		else if (ft_findword("env", mi_pipe->cmd))
+			builtin_env(mi_sys);
+	//	else if (ft_findword("exit", mi_pipe->cmd))
+	//		builtin_exit(mi_sys);
+		else if (ft_findword("export", mi_pipe->cmd))
+			builtin_export(mi_pipe->arg, mi_sys);
+		else if (ft_findword("pwd", mi_pipe->cmd))
+			builtin_pwd();
+		else if (ft_findword("unset", mi_pipe->cmd))
+			builtin_unset(mi_pipe->arg, mi_sys);
+	}
+	else
+	{
+		argv = ft_split(mi_pipe->full_cmd, ' ');
+		env = mi_sys->env;
+		mi_execchild(mi_pipe, argv, 0, env);
+	}
+}
+
+void	mi_pipeaccess (t_pipe *mi_pipe, t_sys *mi_sys)
 {
 	int i;
 	char	*pathcmd;
@@ -139,7 +170,8 @@ int	main(int ac, char **argv, char **env)
 		mi_pipeiter (&mi_pipe, &mi_pipeargparsse);
 		mi_pipeiter (&mi_pipe, &mi_check_builtin);
 		mi_syspipeiter(&mi_sys, &mi_expand_interface);
-		mi_syspipeiter (&mi_sys, &mi_pipe_access);
+		mi_syspipeiter (&mi_sys, &mi_pipeaccess);
+		mi_syspipeiter (&mi_sys, &mi_pipeexec);
 //		mi_pipeiter (&mi_pipe, &mi_pipeherdoc);
 //		mi_exec(&mi_pipe, &mi_sys);
 		add_history(line);

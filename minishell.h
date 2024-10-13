@@ -130,11 +130,11 @@ char	*ft_findcommand(char *line);
 void	mi_closepipe(t_pipe *mi_pipe, int nb);
 t_pipe	*mi_createpipe(t_sys *mi_sys);
 int		mi_execcmd(t_pipe *app, char **argv, int ind, char **env);
+int		mi_execchild(t_pipe *mi_pipe, char **argv, int ind, char **env);
 void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
 void	mi_execone(t_pipe *pipe, t_sys *mi_sys);
 void	mi_freepipe(t_pipe *mi_pipe);
 void	mi_waitingpipe(t_sys *mi_sys);
-
 void	mi_pipeherdoc(t_pipe *pipe);
 
 #endif
