@@ -37,7 +37,7 @@ char	*find_expand(char *line)
 	return (ft_substr(line, c1, c2 - c1));
 }
 
-void	mi_expand_find(char **ln, int i, t_sys *sys)
+void	mi_expand_find(char **full_cmd, int i, t_sys *sys)
 {
 	char	*search;
 	char	*find;
@@ -45,40 +45,40 @@ void	mi_expand_find(char **ln, int i, t_sys *sys)
 	int		len;
 
 	len = 1;
-	while (ln[0][len +i] && ft_isalnum(ln[0][len +i]))
+	while (full_cmd[0][len +i] && ft_isalnum(full_cmd[0][len +i]))
 		len++;
 	if (len > 1)
 	{
-		search = ft_substr(ln[0], i, len);
+		search = ft_substr(full_cmd[0], i, len);
 		find = mi_getenv(search + 1, sys);
 		free(search);
 		if (find)
 		{
-			replace = ft_strsubreplace(ln[0], i, len, find);
-			free(*ln);
-			*ln = replace;
+			replace = ft_strsubreplace(full_cmd[0], i, len, find);
+			free(*full_cmd);
+			*full_cmd = replace;
 		}
 	}
 }
 
-void	mi_expand(char **ln, int i, t_sys *sys)
+void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 {
 	char	echap;
 
 	echap = '\0';
-	while (ln && ln[0][i])
+	while (full_cmd && full_cmd[0][i])
 	{
-		if (echap == '\0' && ft_strin(TECHAP, ln[0][i]))
-			echap = ln[0][i];
-		else if (ln[0][i] == echap)
+		if (echap == '\0' && ft_strin(TECHAP, full_cmd[0][i]))
+			echap = full_cmd[0][i];
+		else if (full_cmd[0][i] == echap)
 			echap = '\0';
-		if (echap!='\'' && ln[0][i] == '$')
-			mi_expand_find(ln, i, sys);
+		if (echap!='\'' && full_cmd[0][i] == '$')
+			mi_expand_find(full_cmd, i, mi_sys);
 		i++;
 	}
 }
 
-void	mi_expand_interface (t_pipe *me_pipe, t_sys *mi_sys)
+void	mi_expand_interface (t_pipe *mi_pipe, t_sys *mi_sys)
 {
-	mi_expand(&me_pipe->full_cmd, 0, mi_sys);
+	mi_expand(&mi_pipe->full_cmd, 0, mi_sys);
 }

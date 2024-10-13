@@ -13,38 +13,50 @@
 #include "minishell.h"
 
 extern int	g_status;
+
 void	mi_pipe_acc(t_pipe *mi_pipe, t_sys *mi_sys)
 {
+	char		*paths;
+	char		*cmd;
+	int			i;
+
+	i = 0;
+	if (access(mi_pipe->cmd, F_OK) == 0)
+		return;
+	
+	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_pipe->cmd);
+	if (access(mi_pipe->cmd, F_OK) == 0)
+		return ;
+	paths = ft_split (mi_getenv("PATH", mi_sys), ':');
+	while (paths && paths[++i])
+	{
+		cmd = join_3(paths[i], "/", mi_pipe->cmd);
+		if (access(cmd, F_OK) == 0)
+		{
+			mi_pipe->cmd = cmd;
+			free(paths);
+			return ;
+		}
+		free(cmd);
+	}
+}
+
+void	mi_pipe_exec (t_pipe *mi_pipe, t_sys *mi_sys)
+{
+	int i;
 	char	*pathcmd;
 
+	mi_pipe->full_cmd[0]='A';
 	if (access(mi_pipe->cmd, F_OK) == 0)
 		return;
 	pathcmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_pipe->cmd);
 	if (access(pathcmd, F_OK) == 0)
 		return;
-	mi_sys->nb_error++;
-}
+	if (mi_pipe->full_cmd == NULL)
+		return ;
+	i = ft_pos_left_chars(mi_pipe->full_cmd, WSPACE);
+	i++;
 
-
-void	mi_pipe_exec(t_pipe *mi_pipe, t_sys *mi_sys)
-{
-
-
-	printf("debut mi_exec \n\t\t%s\t\t%s\n", mi_pipe->cmd, mi_pipe->cmd);
-
-
-
-		mi_pipe_acc(mi_pipe,mi_sys);
-		//mi_exefind(pipe, mi_sys);
-		printf("fin mi_exec\n");
-
-
-//			if (!mi_pipe->next && pipe(mi_pipe->fdd) == -1)
-//				mi_logerror(126, "pipe", &mi_pipe->error);
-//		mi_execone(mi_pipe, mi_sys);
-
-	
-	mi_sys->nb_error++;
 }
 
 
@@ -70,12 +82,13 @@ int	main(int ac, char **argv, char **env)
 		mi_pipe = *mi_createpipe(&mi_sys);
 		mi_lexingline (line, 0, &mi_pipe, &mi_sys);
 		mi_sys.pipe = &mi_pipe;
-		mi_syspipeiter (&mi_sys, &mi_expand_interface);
+		mi_syspipeiter(&mi_sys, &mi_expand_interface);
 		mi_pipeiter (&mi_pipe, &mi_pipeparsse);
 		mi_pipeiter (&mi_pipe, &mi_pipeargparsse);
-//		mi_pipeiter (&mi_pipe, &mi_pipeherdoc);
+		mi_syspipeiter(&mi_sys, &mi_expand_interface);
 		mi_syspipeiter (&mi_sys, &mi_pipe_exec);
-//		mi_exec(&mi_pipe, &mi_sys);
+//		mi_pipeiter (&mi_pipe, &mi_pipeherdoc);
+		mi_exec(&mi_pipe, &mi_sys);
 		add_history(line);
 	}
 }

@@ -46,7 +46,7 @@ int	read_env(char **env, t_sys *s_sys)
 	return (s_sys->senv.len);
 }
 
-void	me_setdefaul_initialization( t_sys *s_sys)
+void	mi_setdefaul_initialization( t_sys *s_sys)
 {
 	s_sys->senv.path = "/usr/bin:/bin:/usr/sbin:/sbin";
 	s_sys->senv.pwd = NULL;
@@ -62,7 +62,7 @@ void	mi_sysinitialization(char **env, t_sys *s_sys)
 	int		i;
 	char	**ienv;
 
-	me_setdefaul_initialization(s_sys);
+	mi_setdefaul_initialization(s_sys);
 	s_sys->senv.len = read_env(env, s_sys);
 	ienv = (char **)ft_calloc(s_sys->senv.len, sizeof(char *));
 	i = -1;

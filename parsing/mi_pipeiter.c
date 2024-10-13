@@ -21,14 +21,14 @@ void	mi_pipeiter(t_pipe *mi_pipe, void (*f)(t_pipe *mi_pipe))
 	}
 }
 
-void	mi_syspipeiter(t_sys *me_sys, void (*f)(t_pipe *mi_pipe, t_sys *me_sys))
+void	mi_syspipeiter(t_sys *mi_sys, void (*f)(t_pipe *mi_pipe, t_sys *mi_sys))
 {
 	t_pipe	*mi_pipe;
 
-	mi_pipe = me_sys->pipe;
+	mi_pipe = mi_sys->pipe;
 	while (mi_pipe!= NULL)
 	{
-		(*f)(mi_pipe, me_sys);
+		(*f)(mi_pipe, mi_sys);
 		mi_pipe = mi_pipe->next;
 	}
 }
