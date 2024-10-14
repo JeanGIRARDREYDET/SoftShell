@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
 int	ft_pos_left_char(char *s, char c)
 {
@@ -18,15 +18,6 @@ int	ft_pos_left_char(char *s, char c)
 
 	i = 0;
 	while (s[i] && s[i] != '\0' && s[i] != c)
-		i++;
-	return (i);
-}
-int	ft_pos_left_chars(char *s, char *c)
-{
-	int		i;
-
-	i = 0;
-	while (s[i] && s[i] != '\0' && !ft_strchr(c, (int)(s[i])))
 		i++;
 	return (i);
 }

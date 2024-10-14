@@ -53,5 +53,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 char	*ft_strdupleft(char const *s, size_t len)
 {
-	return ft_substr(s, 0, len);
+	return (ft_substr(s, 0, len));
 }

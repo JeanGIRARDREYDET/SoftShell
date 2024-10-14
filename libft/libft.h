@@ -36,7 +36,6 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_cnt_arg(char *ln, int *i, int *n);
 
-
 int		ft_get_confpos(char *key, char k_sep, char **conf);
 
 int		ft_isalnum(int c);

@@ -12,11 +12,11 @@
 
 #include "../minishell.h"
 
-void ft_cnt_arg(char *ln, int *i, int *n)
+void	ft_cnt_arg(char *ln, int *i, int *n)
 {
 	ft_pos_passspace(ln, i);
 	ft_pos_passstring(ln, i);
 	(*n)++;
 	if (ln[*i])
-		ft_cnt_arg(ln,i,n);
+		ft_cnt_arg(ln, i, n);
 }

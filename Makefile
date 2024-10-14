@@ -69,6 +69,7 @@ SRCS = 			main.c \
 				libft/ft_memcpy.c \
 				libft/ft_strin.c \
 				libft/ft_left_sub_char.c \
+				libft/ft_pos_left_chars.c \
 				libft/ft_pos_left_char.c \
 				libft/ft_memmove.c \
 				libft/ft_striteri.c \

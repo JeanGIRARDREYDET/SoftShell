@@ -12,7 +12,6 @@
 
 #include "libft.h"
 
-
 bool	ft_strin(const char *s, const char c)
 {
 	size_t	i;
