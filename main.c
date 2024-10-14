@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:08:01 by doferet           #+#    #+#             */
-/*   Updated: 2024/10/14 01:02:03 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/10/14 10:28:47 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -62,8 +62,8 @@ void mi_pipeexec(t_pipe *mi_pipe, t_sys *mi_sys)
 			builtin_echo(mi_pipe->arg);
 		else if (ft_findword("env", mi_pipe->cmd))
 			builtin_env(mi_sys);
-	//	else if (ft_findword("exit", mi_pipe->cmd))
-	//		builtin_exit(mi_sys);
+		else if (ft_findword("exit", mi_pipe->cmd))
+			builtin_exit();
 		else if (ft_findword("export", mi_pipe->cmd))
 			builtin_export(mi_pipe->arg, mi_sys);
 		else if (ft_findword("pwd", mi_pipe->cmd))

@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 12:09:10 by doferet           #+#    #+#             */
-/*   Updated: 2024/10/14 00:57:48 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/10/14 10:29:19 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -103,7 +103,7 @@ bool	ft_findword(const char *source, const char *find);
 void	builtin_cd(char *key, t_sys *s_sys);
 void	builtin_echo(char *key);
 void	builtin_env(t_sys *s_sys);
-void	builtin_exit(t_sys *s_sys);
+void	builtin_exit();
 void	builtin_export(char *key, t_sys *s_sys);
 void	print_export(t_sys *s_sys);
 void	builtin_pwd(void);
