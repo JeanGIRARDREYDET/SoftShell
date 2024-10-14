@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 12:09:10 by doferet           #+#    #+#             */
-/*   Updated: 2024/10/14 10:29:19 by jegirard         ###   ########.fr       */
+/*   Created: 2024/09/05 13:47:03 by doferet           #+#    #+#             */
+/*   Updated: 2024/10/14 10:54:37 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H

@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:08:01 by doferet           #+#    #+#             */
-/*   Updated: 2024/10/14 10:28:47 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/10/14 10:42:47 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -53,7 +53,6 @@ void mi_pipeexec(t_pipe *mi_pipe, t_sys *mi_sys)
 	char	**argv;
 	char	**env;
 
-
 	if (mi_pipe->builtin == true)
 	{
 		if (ft_findword("cd", mi_pipe->cmd))
@@ -78,7 +77,6 @@ void mi_pipeexec(t_pipe *mi_pipe, t_sys *mi_sys)
 		mi_execchild(mi_pipe, argv, 0, env);
 	}
 }
-
 
 int	main(int ac, char **argv, char **env)
 {

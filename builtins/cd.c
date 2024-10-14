@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 13:46:02 by doferet           #+#    #+#             */
-/*   Updated: 2024/09/10 14:42:49 by doferet          ###   ########.fr       */
+/*   Created: 2024/10/14 11:01:34 by jegirard          #+#    #+#             */
+/*   Updated: 2024/10/14 11:01:41 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../minishell.h"
 //utiliser la fonction getcwd qui copie le chemin d'acces absolu du repertoire 
 //de travail courant dans la chaine pointee par buf qui est de longueur size
 
 #include "../minishell.h"
 
-void cd_home(t_sys *mi_sys)
+void	cd_home(t_sys *mi_sys)
 {
-	if(!mi_sys->senv.home)
+	if (!mi_sys->senv.home)
 	{
 		printf("cd: HOME not set\n");
 		return ;
@@ -26,7 +27,7 @@ void cd_home(t_sys *mi_sys)
 	mi_setenv("PWD", mi_sys->senv.home, mi_sys);
 }
 
-void cd_back(t_sys *mi_sys)
+void	cd_back(t_sys *mi_sys)
 {
 	int	i;
 
