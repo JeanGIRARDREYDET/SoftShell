@@ -15,7 +15,7 @@
 void	mi_lexingline(char *ln, int i, t_pipe *cmd_pipe, t_sys *mi_sys)
 {	
 	t_pipe		*new_pipe;
-	const char *redir_token[] = {"<", ">", ">>", "<<", NULL};
+	// const char *redir_token[] = {"<", ">", ">>", "<<", NULL};
 
 	if (ft_strin(TECHAP, ln[i]))
 	{
