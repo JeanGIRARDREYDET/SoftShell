@@ -46,11 +46,13 @@ char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set)
 	while (ft_strchr(set, s1[fin]) && fin >= debut)
 		fin--;
 	p = (char *) ft_calloc ((fin - debut + 2), sizeof(char));
+	printf("size de p =  %d\n", fin - debut + 2);
 	if (!p)
 		return (NULL);
 	i = 0;
 	while (debut <= fin)
 		p[i++] = s1[debut++];
 	p[i] = 0;
+	printf("strtrim param = %p et %s\n", p, p);
 	return (p);
 }

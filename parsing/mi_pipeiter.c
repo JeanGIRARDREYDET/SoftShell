@@ -28,6 +28,10 @@ void	mi_syspipeiter(t_sys *mi_sys, void (*f)(t_pipe *mi_pipe, t_sys *mi_sys))
 	mi_pipe = mi_sys->pipe;
 	while (mi_pipe!= NULL)
 	{
+		printf("mi_syspipeiter, pipe = %p\n", mi_pipe);
+		printf("mi_pipe->full_cmd addr  = %p \n", mi_pipe->full_cmd);
+		printf("mi_pipe->full_cmd = %s\n", mi_pipe->full_cmd);
+
 		(*f)(mi_pipe, mi_sys);
 		mi_pipe = mi_pipe->next;
 	}

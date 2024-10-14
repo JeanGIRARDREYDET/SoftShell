@@ -82,7 +82,7 @@ int	main(int ac, char **argv, char **env)
 {
 	char	*line;
 	t_sys	mi_sys;
-	t_pipe	mi_pipe;
+	t_pipe	*mi_pipe;
 
 	if (ac > 1)
 	{
@@ -96,14 +96,13 @@ int	main(int ac, char **argv, char **env)
 		if (*line =='\0')
 			continue;
 		mi_sys.nb_pipe = 0;
-		mi_pipe = *mi_createpipe(&mi_sys);
-		mi_lexingline (line, 0, &mi_pipe, &mi_sys);
-		mi_sys.pipe = &mi_pipe;
+		mi_pipe = mi_createpipe(&mi_sys);
+		mi_lexingline (line, 0, mi_pipe, &mi_sys);
+		mi_sys.pipe = mi_pipe;
 		mi_syspipeiter(&mi_sys, &mi_expand_interface);
-		mi_pipeiter (&mi_pipe, &mi_pipeparsse);
-		mi_pipeiter (&mi_pipe, &mi_pipeargparsse);
-		mi_pipeiter (&mi_pipe, &mi_checkbuiltin);
-		mi_syspipeiter(&mi_sys, &mi_expand_interface);
+		mi_pipeiter (mi_pipe, &mi_pipeparsse);
+		mi_pipeiter (mi_pipe, &mi_pipeargparsse);
+		mi_pipeiter (mi_pipe, &mi_checkbuiltin);
 		mi_syspipeiter (&mi_sys, &mi_checkpathaccess);
 		mi_syspipeiter (&mi_sys, &mi_pipeexec);
 //		mi_pipeiter (&mi_pipe, &mi_pipeherdoc);

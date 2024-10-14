@@ -65,6 +65,14 @@ typedef struct s_error
 	struct s_error	*next;
 }	t_error;
 
+typedef struct s_redirection
+{
+	int			redir_type;
+	int			fd_here_doc;
+	char		*file_name;
+	struct		s_redirection *next;
+}t_redirection;
+
 typedef struct s_pipe
 {
 	int				id;

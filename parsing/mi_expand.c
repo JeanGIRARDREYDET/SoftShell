@@ -66,8 +66,12 @@ void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 	char	echap;
 
 	echap = '\0';
+	printf("i == %d\n", i);
+	printf("full_cmd addr  = %p et %p\n", full_cmd, *full_cmd);
+	printf("full_cmd = %s\n", *full_cmd);
 	while (full_cmd && full_cmd[0][i])
 	{
+		printf("full_cmd = %c\n", (*full_cmd)[i]);
 		if (echap == '\0' && ft_strin(TECHAP, full_cmd[0][i]))
 			echap = full_cmd[0][i];
 		else if (full_cmd[0][i] == echap)

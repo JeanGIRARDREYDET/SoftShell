@@ -68,7 +68,7 @@ static char	**str_add_malloc_clild_neq(char **my_split, char const *s, char c)
 	return (my_split);
 }
 
-char	**ft_split2(char const *s, char c)
+char	**ft_split1(char const *s, char c)
 {
 	char	**my_split;
 
@@ -118,7 +118,7 @@ static char	*word_dup(const char *str, int start, int finish)
 	return (word);
 }
 
-char		**ft_split(char const *s, char c)
+char		**ft_split2(char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
@@ -143,4 +143,66 @@ char		**ft_split(char const *s, char c)
 	}
 	split[j] = 0;
 	return (split);
+}
+
+
+char *ft_cut(char const *str,int start, int end, char c)
+{
+	char    *ret;
+	int i=0;
+	if ((ret = (char*)malloc(sizeof(char) * (end-start) )) == NULL)
+		return (NULL);
+	while(start<end)
+	{		
+		ret[i] = str[start];
+		if(str[start]!=c)
+			i++;
+		start++;
+		
+	}	
+	return (ret);
+}
+
+char	**ft_split(char const *str, char c)
+{
+	int			i;
+	int			n;
+	int			e;
+	int			k;
+	char		**ret;
+
+	k = 0;
+	i = 0;
+	n = 1;
+	while (str[i] != '\0')
+	{
+ 		if (str[i] == c)
+		{
+			n++;
+			while (str[i] == c)
+				i++;
+		}
+		i++;
+	}
+	i = 0;
+	if ((ret = (char**)malloc(sizeof(char*) * n +1) ) == NULL)
+		return (NULL);
+	i = 0;
+	e = 0;
+	while (str[e] != '\0')
+	{
+		while (str[i] == c)
+				i++;
+		if (i > e)
+			e = i;
+		if (str[e] == c)
+		{
+			ret[k] = ft_cut(str, i, e, c);
+			k++;
+			i = e;
+		}
+	e++;
+	}
+	ret[k] = ft_cut(str, i, e,c);
+	return (ret);
 }
