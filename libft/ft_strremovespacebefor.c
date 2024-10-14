@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_findcommand.c                                   :+:      :+:    :+:   */
+/*   ft_strremovespacebefor.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 11:38:49 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/14 11:38:52 by jegirard         ###   ########.fr       */
+/*   Created: 2024/10/14 11:41:33 by jegirard          #+#    #+#             */
+/*   Updated: 2024/10/14 11:41:48 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_findcommand(char *line)
+void	ft_strremovespacebefor(char *ln)
 {
-	int			i;
-	int			c1;
-	int			c2;
-
-	i = 0;
-	while (line[i] < 33)
-		i++;
-	c1 = i;
-	while (line[i] > 32)
-		i++;
-	c2 = i;
-	while (line[i] < 33)
-		i++;
-	return (ft_substr(line, c1, (c2 - c1)));
+	while (ln[0] < 33 && ln[0] != '\0')
+	{
+		ln++;
+	}
 }

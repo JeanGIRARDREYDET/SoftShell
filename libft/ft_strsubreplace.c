@@ -14,30 +14,30 @@
 
 char	*ft_strsubreplace(char *str, int start, int len, char *replace)
 {
-	char	*new;
+	char	*nw;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	new = ft_calloc(ft_strlen(str) + ft_strlen(replace) - len + 1, sizeof(char));
+	nw = ft_calloc(ft_strlen(str) + ft_strlen(replace) - len + 1, sizeof(char));
 	while (i < start)
 	{
-		new[i] = str[i];
+		nw[i] = str[i];
 		i++;
 	}
 	while (replace[j])
 	{
-		new[i] = replace[j];
+		nw[i] = replace[j];
 		i++;
 		j++;
 	}
 	j = start + len;
 	while (str[j])
 	{
-		new[i] = str[j];
+		nw[i] = str[j];
 		i++;
 		j++;
 	}
-	return (new);
+	return (nw);
 }
