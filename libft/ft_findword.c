@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_findword.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:35:05 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/14 11:35:09 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:00:04 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../minishell.h"
 
@@ -19,6 +19,8 @@ bool	ft_findword(const char *source, const char *find)
 	size_t		offset;
 	size_t		lenfind;
 
+	if (find != NULL || source != NULL || source[0] == '\0' || find[0] == '\0')
+		return (false);
 	lenfind = ft_strlen(find);
 	if (*find == '\0' || find == NULL)
 		return (false);

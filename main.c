@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:08:01 by doferet           #+#    #+#             */
-/*   Updated: 2024/10/14 10:42:47 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:56:37 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -103,6 +103,7 @@ int	main(int ac, char **argv, char **env)
 		mi_pipeiter (mi_pipe, &mi_pipeparsse);
 		mi_pipeiter (mi_pipe, &mi_pipeargparsse);
 		mi_pipeiter (mi_pipe, &mi_checkbuiltin);
+
 		mi_syspipeiter (&mi_sys, &mi_checkpathaccess);
 		mi_syspipeiter (&mi_sys, &mi_pipeexec);
 //		mi_pipeiter (&mi_pipe, &mi_pipeherdoc);
