@@ -31,7 +31,7 @@ void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_error *mi_err)
 	mi_logerror(code, join_3(m1, m2, m3), mi_err);
 }
 
-int	mi_intlogerror(t_pipe *app, char *s, int code)
+int	mi_intlogerror(t_cmd *app, char *s, int code)
 {
 	perror(s);
 	mi_logerror(code, s, &app->error);

@@ -12,16 +12,16 @@
 
 #include "../minishell.h"
 
-void	mi_checkpathaccess (t_pipe *mi_pipe, t_sys *mi_sys)
+void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int			i;
 	char		*pathcmd;
 	char		**paths;
 	char		*pathstring;
 
-	if (!mi_pipe->cmd || access(mi_pipe->cmd, F_OK) == 0)
+	if (!mi_cmd->cmd || access(mi_cmd->cmd, F_OK) == 0)
 		return ;
- 	pathcmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_pipe->cmd);
+ 	pathcmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->cmd);
 	if (access(pathcmd, F_OK) == 0)
 		return ;
 	pathstring = ft_strdup(mi_getenv("PATH", mi_sys));
@@ -30,10 +30,10 @@ void	mi_checkpathaccess (t_pipe *mi_pipe, t_sys *mi_sys)
 	
 	while (paths && paths[++i])
 	{
-		pathcmd = join_3(paths[i], "/", mi_pipe->cmd);
+		pathcmd = join_3(paths[i], "/", mi_cmd->cmd);
 		if (access(pathcmd, F_OK) == 0)
 		{
-			mi_pipe->cmd = pathcmd;
+			mi_cmd->cmd = pathcmd;
 			free(paths);
 			return ;
 		}

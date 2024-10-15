@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_pipeiter.c                                      :+:      :+:    :+:   */
+/*   mi_cmditer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,27 +12,27 @@
 
 #include "../minishell.h"
 
-void	mi_pipeiter(t_pipe *mi_pipe, void (*f)(t_pipe *mi_pipe))
+void	mi_cmditer(t_cmd *mi_cmd, void (*f)(t_cmd *mi_cmd))
 {
-	while (mi_pipe != NULL)
+	while (mi_cmd != NULL)
 	{
-		(*f)(mi_pipe);
-		mi_pipe = mi_pipe->next;
+		(*f)(mi_cmd);
+		mi_cmd = mi_cmd->next;
 	}
 }
 
-void	mi_syspipeiter(t_sys *mi_sys, void (*f)(t_pipe *mi_pipe, t_sys *mi_sys))
+void	mi_syspipeiter(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd, t_sys *mi_sys))
 {
-	t_pipe	*mi_pipe;
+	t_cmd	*mi_cmd;
 
-	mi_pipe = mi_sys->pipe;
-	while (mi_pipe!= NULL)
+	mi_cmd = mi_sys->cmd;
+	while (mi_cmd!= NULL)
 	{
-		printf("mi_syspipeiter, pipe = %p\n", mi_pipe);
-		printf("mi_pipe->full_cmd addr  = %p \n", mi_pipe->full_cmd);
-		printf("mi_pipe->full_cmd = %s\n", mi_pipe->full_cmd);
+		printf("mi_syspipeiter, pipe = %p\n", mi_cmd);
+		printf("mi_cmd->full_cmd addr  = %p \n", mi_cmd->full_cmd);
+		printf("mi_cmd->full_cmd = %s\n", mi_cmd->full_cmd);
 
-		(*f)(mi_pipe, mi_sys);
-		mi_pipe = mi_pipe->next;
+		(*f)(mi_cmd, mi_sys);
+		mi_cmd = mi_cmd->next;
 	}
 }

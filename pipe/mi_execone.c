@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	mi_exefind(t_pipe *mi_pipe, t_sys *mi_sys)
+void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	char		*cmd;
 	char		**paths;
@@ -20,32 +20,32 @@ void	mi_exefind(t_pipe *mi_pipe, t_sys *mi_sys)
 	char		*error_msg;
 
 	i = 0;
-	if (access(mi_pipe->cmd, F_OK) == 0)
+	if (access(mi_cmd->cmd, F_OK) == 0)
 		return ;
 	i = 0;
-	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_pipe->cmd);
-	if (access(mi_pipe->cmd, F_OK) == 0)
+	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->cmd);
+	if (access(mi_cmd->cmd, F_OK) == 0)
 		return ;
 	paths = ft_split (mi_getenv("PATH", mi_sys), ':');
 	while (paths && paths[++i])
 	{
-		cmd = join_3(paths[i], "/", mi_pipe->cmd);
+		cmd = join_3(paths[i], "/", mi_cmd->cmd);
 		if (access(cmd, F_OK) == 0)
 		{
-			mi_pipe->cmd = cmd;
+			mi_cmd->cmd = cmd;
 			free(paths);
 			return ;
 		}
 		free(cmd);
 	}
-	error_msg = join_3 ("minishell: ", mi_pipe->cmd, ": command not found\n");
-	mi_logerror(126, error_msg, &mi_pipe->error);
+	error_msg = join_3 ("minishell: ", mi_cmd->cmd, ": command not found\n");
+	mi_logerror(126, error_msg, &mi_cmd->error);
 	free(cmd);
 	free(paths);
 	return ;
 }
 
-void	mi_exepermis(t_pipe *pi, t_sys *mi_sys)
+void	mi_exepermis(t_cmd *pi, t_sys *mi_sys)
 {
 	if (access(pi->cmd, X_OK) == 0)
 		return ;
@@ -53,38 +53,38 @@ void	mi_exepermis(t_pipe *pi, t_sys *mi_sys)
 	mi_sys->nb_error++;
 }
 
-int	mi_execchild(t_pipe *mi_pipe, char **argv, int ind, char **env)
+int	mi_execchild(t_cmd *mi_cmd, char **argv, int ind, char **env)
 {
 	printf("10\n");
-	if (mi_pipe->id == 0)
+	if (mi_cmd->id == 0)
 
 		return (0);
-	mi_pipe->id = fork();
-	if (mi_pipe->id == -1)
-		return (mi_intlogerror (mi_pipe, "fork out failed", 1));
-	if (mi_pipe->id != 0)
+	mi_cmd->id = fork();
+	if (mi_cmd->id == -1)
+		return (mi_intlogerror (mi_cmd, "fork out failed", 1));
+	if (mi_cmd->id != 0)
 		return (0);
-	if (mi_pipe->no != 0)
+	if (mi_cmd->no != 0)
 	{
-		if (dup2(mi_pipe->fdd[0], STDIN_FILENO) == -1)
+		if (dup2(mi_cmd->fdd[0], STDIN_FILENO) == -1)
 			return (1);
-		close (mi_pipe->fdd[0]);
+		close (mi_cmd->fdd[0]);
 	}
-	if (mi_pipe->next)
+	if (mi_cmd->next)
 	{
-		if (dup2(mi_pipe->fdd[1], STDOUT_FILENO) == -1)
+		if (dup2(mi_cmd->fdd[1], STDOUT_FILENO) == -1)
 			return (1);
-		close (mi_pipe->fdd[1]);
+		close (mi_cmd->fdd[1]);
 	}
-	if (mi_pipe->cmd != NULL)
-		mi_execcmd(mi_pipe, argv, ind, env);
-	dprintf(1, "%s\n", mi_pipe->cmd);
-	mi_freepipe (mi_pipe);
+	if (mi_cmd->cmd != NULL)
+		mi_execcmd(mi_cmd, argv, ind, env);
+	dprintf(1, "%s\n", mi_cmd->cmd);
+	mi_freepipe (mi_cmd);
 	exit (EXIT_FAILURE);
 	return (1);
 }
 
-void	mi_execone(t_pipe *pipe, t_sys *mi_sys)
+void	mi_execone(t_cmd *pipe, t_sys *mi_sys)
 {
 	if (ft_strncmp(pipe->cmd, "exit", 5) == 0)
 	{

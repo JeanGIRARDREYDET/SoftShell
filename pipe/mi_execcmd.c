@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	mi_execcmd(t_pipe *app, char **argv, int ind, char **env)
+int	mi_execcmd(t_cmd *app, char **argv, int ind, char **env)
 {
 	char	**arg;
 

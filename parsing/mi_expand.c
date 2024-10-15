@@ -81,7 +81,7 @@ void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 	}
 }
 
-void	mi_expand_interface (t_pipe *mi_pipe, t_sys *mi_sys)
+void	mi_expand_interface (t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	mi_expand(&mi_pipe->full_cmd, 0, mi_sys);
+	mi_expand(&mi_cmd->full_cmd, 0, mi_sys);
 }

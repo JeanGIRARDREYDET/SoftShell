@@ -71,9 +71,9 @@ typedef struct s_redirection
 	int						fd_here_doc;
 	char					*file_name;
 	struct s_redirection	*next;
-}t_redirection;
+}	t_redirection;
 
-typedef struct s_pipe
+typedef struct s_cmd
 {
 	int				id;
 	int				no;
@@ -87,8 +87,8 @@ typedef struct s_pipe
 	t_error			error;
 	int				fdd[2];
 	t_redirection	*redirection;
-	struct s_pipe	*next;
-}	t_pipe;
+	struct s_cmd	*next;
+}	t_cmd;
 
 typedef struct s_sys
 {
@@ -101,7 +101,7 @@ typedef struct s_sys
 	int				error[2];
 	t_env			senv;
 	char			**env;
-	t_pipe			*pipe;
+	t_cmd			*cmd;
 }	t_sys;
 
 bool	ft_findword(const char *source, const char *find);
@@ -113,39 +113,39 @@ void	builtin_export(char *key, t_sys *s_sys);
 void	print_export(t_sys *s_sys);
 void	builtin_pwd(void);
 void	builtin_unset(char *key, t_sys *s_sys);
-void	mi_checkbuiltin(t_pipe *mi_pipe);
-void	mi_checkpathaccess (t_pipe *mi_pipe, t_sys *mi_sys);
+void	mi_checkbuiltin(t_cmd *mi_cmd);
+void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys);
 char	*mi_getenv(char *key, t_sys *s_sys);
 void	mi_unset(char *key, t_sys *s_sys);
 void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
 
-void	mi_expand_interface(t_pipe *pipe, t_sys *mi_sys);
-void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
-void	mi_exefind(t_pipe *mi_pipe, t_sys *mi_sys);
-void	mi_oneexec(t_pipe *pipe, t_sys *mi_sys);
+void	mi_expand_interface(t_cmd *pipe, t_sys *mi_sys);
+void	mi_exec(t_cmd *pipe, t_sys *mi_sys);
+void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys);
+void	mi_oneexec(t_cmd *pipe, t_sys *mi_sys);
 
-void	mi_pipeparsse(t_pipe *pipe);
-void	mi_pipeargparsse(t_pipe *lst);
-void	mi_pipeiter(t_pipe *lst, void (*f)(t_pipe *lst));
-void	mi_syspipeiter(t_sys *sys, void (*f)(t_pipe *lst, t_sys *sys));
-void	mi_lexingline(char *ln, int i, t_pipe *cmd_pipe, t_sys *mi_sys);
+void	mi_cmdparsse(t_cmd *pipe);
+void	mi_cmdargparsse(t_cmd *lst);
+void	mi_cmditer(t_cmd *lst, void (*f)(t_cmd *lst));
+void	mi_syspipeiter(t_sys *sys, void (*f)(t_cmd *lst, t_sys *sys));
+void	mi_lexingline(char *ln, int i, t_cmd *cmd_pipe, t_sys *mi_sys);
 int		mi_pospasscote(char *ln, int i, t_error *mi_error);
 void	mi_logerror(int id, char *msg, t_error *mi_error);
 void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_error *mi_err);
-int		mi_intlogerror(t_pipe *app, char *s, int code);
+int		mi_intlogerror(t_cmd *app, char *s, int code);
 char	*ft_findcommand(char *line);
 
-void	mi_closepipe(t_pipe *mi_pipe, int nb);
-t_pipe	*mi_createpipe(t_sys *mi_sys);
-int		mi_execcmd(t_pipe *app, char **argv, int ind, char **env);
-int		mi_execchild(t_pipe *mi_pipe, char **argv, int ind, char **env);
-void	mi_exec(t_pipe *pipe, t_sys *mi_sys);
-void	mi_execone(t_pipe *pipe, t_sys *mi_sys);
-void	mi_freepipe(t_pipe *mi_pipe);
+void	mi_closepipe(t_cmd *mi_cmd, int nb);
+t_cmd	*mi_createpipe(t_sys *mi_sys);
+int		mi_execcmd(t_cmd *app, char **argv, int ind, char **env);
+int		mi_execchild(t_cmd *mi_cmd, char **argv, int ind, char **env);
+void	mi_exec(t_cmd *pipe, t_sys *mi_sys);
+void	mi_execone(t_cmd *pipe, t_sys *mi_sys);
+void	mi_freepipe(t_cmd *mi_cmd);
 void	mi_waitingpipe(t_sys *mi_sys);
-void	mi_pipeherdoc(t_pipe *pipe);
-void	mi_pipesplitcmd(t_pipe *mi_pipe);
+void	mi_cmdherdoc(t_cmd *pipe);
+void	mi_cmdsplitcmd(t_cmd *mi_cmd);
 
 t_redirection	*mi_createredirection(int redir_type);
 

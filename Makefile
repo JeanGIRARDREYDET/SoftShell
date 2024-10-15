@@ -90,9 +90,9 @@ SRCS = 			main.c \
 				common/mi_utils.c \
 				parsing/mi_expand.c \
 				parsing/mi_lexing.c \
-				parsing/mi_pipe_parsse.c \
+				parsing/mi_cmd_parsse.c \
 				parsing/mi_pospasscote.c \
-				parsing/mi_pipeiter.c \
+				parsing/mi_cmditer.c \
 				pipe/mi_closepipe.c \
 				pipe/mi_createpipe.c \
 				pipe/mi_exec.c \

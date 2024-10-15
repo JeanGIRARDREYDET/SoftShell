@@ -12,11 +12,11 @@
 
 #include "../minishell.h"
 
-t_pipe	*mi_createpipe(t_sys *mi_sys)
+t_cmd	*mi_createpipe(t_sys *mi_sys)
 {
-	t_pipe	*pipe;
+	t_cmd	*pipe;
 
-	pipe = ft_calloc(1, sizeof (t_pipe));
+	pipe = ft_calloc(1, sizeof (t_cmd));
 	if (!pipe)
 		return (NULL);
 	printf("on cree un pipe ici : %p\n", pipe);

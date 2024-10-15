@@ -13,11 +13,11 @@
 #include "../minishell.h"
 
 
-void	mi_freepipe(t_pipe *mi_pipe)
+void	mi_freepipe(t_cmd *mi_cmd)
 {
-//	ft_arrfree(mi_pipe->paths);
-	if (mi_pipe->cmd != NULL)
-		free(mi_pipe->cmd);
-	if (mi_pipe->cmd != NULL)
-		free(mi_pipe->cmd);
+//	ft_arrfree(mi_cmd->paths);
+	if (mi_cmd->cmd != NULL)
+		free(mi_cmd->cmd);
+	if (mi_cmd->cmd != NULL)
+		free(mi_cmd->cmd);
 }

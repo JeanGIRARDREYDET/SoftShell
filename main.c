@@ -14,7 +14,7 @@
 
 extern int	g_status;
 
-void	mi_pipe_acc(t_pipe *mi_pipe, t_sys *mi_sys)
+void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	char		*cmd;
 	char		**paths;
@@ -22,59 +22,59 @@ void	mi_pipe_acc(t_pipe *mi_pipe, t_sys *mi_sys)
 	char		*error_msg;
 
 	i = 0;
-	if (access(mi_pipe->cmd, F_OK) == 0)
+	if (access(mi_cmd->cmd, F_OK) == 0)
 		return ;
 	i = 0;
-	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_pipe->cmd);
-	if (access(mi_pipe->cmd, F_OK) == 0)
+	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->cmd);
+	if (access(mi_cmd->cmd, F_OK) == 0)
 		return ;
 	paths = ft_split (mi_getenv("PATH", mi_sys), ':');
 	while (paths && paths[++i])
 	{
-		cmd = join_3(paths[i], "/", mi_pipe->cmd);
+		cmd = join_3(paths[i], "/", mi_cmd->cmd);
 		if (access(cmd, F_OK) == 0)
 		{
-			mi_pipe->cmd = cmd;
+			mi_cmd->cmd = cmd;
 			free(paths);
 			return ;
 		}
 		free(cmd);
 	}
-	error_msg = join_3 ("minishell: ", mi_pipe->cmd, ": command not found\n");
-	mi_logerror(126, error_msg, &mi_pipe->error);
+	error_msg = join_3 ("minishell: ", mi_cmd->cmd, ": command not found\n");
+	mi_logerror(126, error_msg, &mi_cmd->error);
 	free(cmd);
 	free(paths);
-	free(mi_pipe->cmd);
+	free(mi_cmd->cmd);
 	return ;
 }
 
-void mi_pipeexec(t_pipe *mi_pipe, t_sys *mi_sys)
+void mi_cmdexec(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	char	**argv;
 	char	**env;
 
-	if (mi_pipe->builtin == true)
+	if (mi_cmd->builtin == true)
 	{
-		if (ft_findword("cd", mi_pipe->cmd))
-			builtin_cd(mi_pipe->arg, mi_sys);
-		else if (ft_findword("echo", mi_pipe->cmd))
-			builtin_echo(mi_pipe->arg);
-		else if (ft_findword("env", mi_pipe->cmd))
+		if (ft_findword("cd", mi_cmd->cmd))
+			builtin_cd(mi_cmd->arg, mi_sys);
+		else if (ft_findword("echo", mi_cmd->cmd))
+			builtin_echo(mi_cmd->arg);
+		else if (ft_findword("env", mi_cmd->cmd))
 			builtin_env(mi_sys);
-		else if (ft_findword("exit", mi_pipe->cmd))
+		else if (ft_findword("exit", mi_cmd->cmd))
 			builtin_exit();
-		else if (ft_findword("export", mi_pipe->cmd))
-			builtin_export(mi_pipe->arg, mi_sys);
-		else if (ft_findword("pwd", mi_pipe->cmd))
+		else if (ft_findword("export", mi_cmd->cmd))
+			builtin_export(mi_cmd->arg, mi_sys);
+		else if (ft_findword("pwd", mi_cmd->cmd))
 			builtin_pwd();
-		else if (ft_findword("unset", mi_pipe->cmd))
-			builtin_unset(mi_pipe->arg, mi_sys);
+		else if (ft_findword("unset", mi_cmd->cmd))
+			builtin_unset(mi_cmd->arg, mi_sys);
 	}
 	else
 	{
-		argv = ft_split(mi_pipe->full_cmd, ' ');
+		argv = ft_split(mi_cmd->full_cmd, ' ');
 		env = mi_sys->env;
-		mi_execchild(mi_pipe, argv, 0, env);
+		mi_execchild(mi_cmd, argv, 0, env);
 	}
 }
 
@@ -82,7 +82,7 @@ int	main(int ac, char **argv, char **env)
 {
 	char	*line;
 	t_sys	mi_sys;
-	t_pipe	*mi_pipe;
+	t_cmd	*mi_cmd;
 
 	if (ac > 1)
 	{
@@ -96,18 +96,18 @@ int	main(int ac, char **argv, char **env)
 		if (*line =='\0')
 			continue;
 		mi_sys.nb_pipe = 0;
-		mi_pipe = mi_createpipe(&mi_sys);
-		mi_lexingline (line, 0, mi_pipe, &mi_sys);
-		mi_sys.pipe = mi_pipe;
+		mi_cmd = mi_createpipe(&mi_sys);
+		mi_lexingline (line, 0, mi_cmd, &mi_sys);
+		mi_sys.cmd = mi_cmd;
 		mi_syspipeiter(&mi_sys, &mi_expand_interface);
-		mi_pipeiter (mi_pipe, &mi_pipesplitcmd);
-		mi_pipeiter (mi_pipe, &mi_pipeparsse);
-//		mi_pipeiter (mi_pipe, &mi_pipeargparsse);
-		mi_pipeiter (mi_pipe, &mi_checkbuiltin);
+		mi_cmditer (mi_cmd, &mi_cmdsplitcmd);
+		mi_cmditer (mi_cmd, &mi_cmdparsse);
+//		mi_cmditer (mi_cmd, &mi_cmdargparsse);
+		mi_cmditer (mi_cmd, &mi_checkbuiltin);
 		mi_syspipeiter (&mi_sys, &mi_checkpathaccess);
-		mi_syspipeiter (&mi_sys, &mi_pipeexec);
-//		mi_pipeiter (&mi_pipe, &mi_pipeherdoc);
-//		mi_exec(&mi_pipe, &mi_sys);
+		mi_syspipeiter (&mi_sys, &mi_cmdexec);
+//		mi_cmditer (&mi_cmd, &mi_cmdherdoc);
+//		mi_exec(&mi_cmd &mi_sys);
 		add_history(line);
 	}
 }

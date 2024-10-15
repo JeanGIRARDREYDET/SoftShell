@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-void	mi_lexingline(char *ln, int i, t_pipe *cmd_pipe, t_sys *mi_sys)
+void	mi_lexingline(char *ln, int i, t_cmd *cmd_pipe, t_sys *mi_sys)
 {	
-	t_pipe		*new_pipe;
+	t_cmd		*new_pipe;
 	// const char *redir_token[] = {"<", ">", ">>", "<<", NULL};
 	printf("mi_lexingline\n");
 	printf("\t%s\n", ln);
