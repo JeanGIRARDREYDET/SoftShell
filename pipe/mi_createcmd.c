@@ -14,27 +14,27 @@
 
 t_cmd	*mi_createcmd(t_sys *mi_sys)
 {
-	t_cmd	*pipe;
+	t_cmd	*mi_cmd;
 
-	pipe = ft_calloc(1, sizeof (t_cmd));
-	if (!pipe)
+	mi_cmd = ft_calloc(1, sizeof (t_cmd));
+	if (!mi_cmd)
 		return (NULL);
-	printf("on cree un pipe ici : %p\n", pipe);
-	pipe->id = 0;
-	pipe->no = ++mi_sys->nb_pipe;
-	pipe->full_cmd = NULL;
-	pipe->cmd = NULL;
-	pipe->arg = "";
-	pipe->args = NULL;
-	pipe->builtin = true;
-	pipe->error.msg = "";
-	pipe->error.code_error = 0;
-	pipe->type = NULL;
-	pipe->fdd[0] = 0;
-	pipe->fdd[1] = 0;
-	pipe->redirection = NULL;
-	pipe->next = NULL;
-	return (pipe);
+	printf("on cree un pipe ici : %p\n", mi_cmd);
+	mi_cmd->id = 0;
+	mi_cmd->no = ++mi_sys->nb_pipe;
+	mi_cmd->full_cmd = NULL;
+	mi_cmd->cmd = NULL;
+	mi_cmd->arg = "";
+	mi_cmd->args = NULL;
+	mi_cmd->builtin = true;
+	mi_cmd->error.msg = "";
+	mi_cmd->error.code_error = 0;
+	mi_cmd->type = NULL;
+	mi_cmd->fdd[0] = 0;
+	mi_cmd->fdd[1] = 0;
+	mi_cmd->redirection = NULL;
+	mi_cmd->next = NULL;
+	return (mi_cmd);
 }
 
 t_redirection	*mi_createredirection(int redir_type)
