@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 15:47:44 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/14 19:51:08 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/10/15 02:51:15 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -68,9 +68,6 @@ void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 	if (!full_cmd || !*full_cmd)
 		return ;
 	echap = '\0';
-	printf("i == %d\n", i);
-	printf("full_cmd addr  = %p et %p\n", full_cmd, *full_cmd);
-	printf("full_cmd = %s\n", *full_cmd);
 	while (full_cmd && full_cmd[0][i])
 	{
 		printf("full_cmd = %c\n", (*full_cmd)[i]);
