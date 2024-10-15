@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_freepipe.c                                      :+:      :+:    :+:   */
+/*   mi_freecmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "../minishell.h"
 
 
-void	mi_freepipe(t_cmd *mi_cmd)
+void	mi_freecmd(t_cmd *mi_cmd)
 {
 //	ft_arrfree(mi_cmd->paths);
 	if (mi_cmd->cmd != NULL)

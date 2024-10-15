@@ -96,16 +96,16 @@ int	main(int ac, char **argv, char **env)
 		if (*line =='\0')
 			continue;
 		mi_sys.nb_pipe = 0;
-		mi_cmd = mi_createpipe(&mi_sys);
+		mi_cmd = mi_createcmd(&mi_sys);
 		mi_lexingline (line, 0, mi_cmd, &mi_sys);
 		mi_sys.cmd = mi_cmd;
-		mi_syspipeiter(&mi_sys, &mi_expand_interface);
+		mi_syscmditer(&mi_sys, &mi_expand_interface);
 		mi_cmditer (mi_cmd, &mi_cmdsplitcmd);
 		mi_cmditer (mi_cmd, &mi_cmdparsse);
 //		mi_cmditer (mi_cmd, &mi_cmdargparsse);
 		mi_cmditer (mi_cmd, &mi_checkbuiltin);
-		mi_syspipeiter (&mi_sys, &mi_checkpathaccess);
-		mi_syspipeiter (&mi_sys, &mi_cmdexec);
+		mi_syscmditer (&mi_sys, &mi_checkpathaccess);
+		mi_syscmditer (&mi_sys, &mi_cmdexec);
 //		mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 //		mi_exec(&mi_cmd &mi_sys);
 		add_history(line);

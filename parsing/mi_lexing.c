@@ -39,7 +39,7 @@ void	mi_lexingline(char *ln, int i, t_cmd *cmd_pipe, t_sys *mi_sys)
 	}
 	else  if (ln[i] == '|')
 	{
-		new_pipe = mi_createpipe(mi_sys);
+		new_pipe = mi_createcmd(mi_sys);
 		cmd_pipe->full_cmd = ft_strtrim_param(ln, 0, i -1, WSPACE);
 		cmd_pipe->next = new_pipe;
 		mi_lexingline (ln + (++i), 0, new_pipe, mi_sys);

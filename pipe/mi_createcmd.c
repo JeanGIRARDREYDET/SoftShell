@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_createpipe.c                                    :+:      :+:    :+:   */
+/*   mi_createcmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-t_cmd	*mi_createpipe(t_sys *mi_sys)
+t_cmd	*mi_createcmd(t_sys *mi_sys)
 {
 	t_cmd	*pipe;
 
@@ -50,4 +50,3 @@ t_redirection	*mi_createredirection(int redir_type)
 	mi_redirection->next = NULL;
 	return (mi_redirection);
 }
-

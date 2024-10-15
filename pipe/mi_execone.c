@@ -79,7 +79,7 @@ int	mi_execchild(t_cmd *mi_cmd, char **argv, int ind, char **env)
 	if (mi_cmd->cmd != NULL)
 		mi_execcmd(mi_cmd, argv, ind, env);
 	dprintf(1, "%s\n", mi_cmd->cmd);
-	mi_freepipe (mi_cmd);
+	mi_freecmd (mi_cmd);
 	exit (EXIT_FAILURE);
 	return (1);
 }

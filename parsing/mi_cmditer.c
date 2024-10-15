@@ -21,7 +21,7 @@ void	mi_cmditer(t_cmd *mi_cmd, void (*f)(t_cmd *mi_cmd))
 	}
 }
 
-void	mi_syspipeiter(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd, t_sys *mi_sys))
+void	mi_syscmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd, t_sys *mi_sys))
 {
 	t_cmd	*mi_cmd;
 
@@ -31,7 +31,6 @@ void	mi_syspipeiter(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd, t_sys *mi_sys))
 		printf("mi_syspipeiter, pipe = %p\n", mi_cmd);
 		printf("mi_cmd->full_cmd addr  = %p \n", mi_cmd->full_cmd);
 		printf("mi_cmd->full_cmd = %s\n", mi_cmd->full_cmd);
-
 		(*f)(mi_cmd, mi_sys);
 		mi_cmd = mi_cmd->next;
 	}

@@ -94,11 +94,11 @@ SRCS = 			main.c \
 				parsing/mi_pospasscote.c \
 				parsing/mi_cmditer.c \
 				pipe/mi_closepipe.c \
-				pipe/mi_createpipe.c \
+				pipe/mi_createcmd.c \
 				pipe/mi_exec.c \
 				pipe/mi_execcmd.c \
 				pipe/mi_execone.c \
-				pipe/mi_freepipe.c \
+				pipe/mi_freecmd.c \
 				pipe/mi_waitingpipe.c \
 
 SRC_PATH		=	
