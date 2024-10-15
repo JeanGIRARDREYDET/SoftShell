@@ -18,8 +18,6 @@ void	mi_pipeherdoc(t_pipe *mp)
 	{
 		if (*mp->args && *mp->args[0] == '<' && *mp->args[1] == '<')
 		{
-			mp->here_doc = true;	
-			mp->heredoc = ft_strdup(mp->args[1]);
 			mp->args[0] = NULL;
 			mp->args[1] = NULL;
 		}
@@ -39,7 +37,45 @@ void	mi_pipeparsse(t_pipe *mi_pipe)
 	mi_pipe->cmd = ft_left_sep(mi_pipe->full_cmd, WSPACE);
 }
 
-void	mi_pipeargparsse(t_pipe *mi_pipe)
+char	*ft_chrrepeat(char c, int n)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = ft_calloc (n + 1, sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	while (i < n)
+	{
+		str[i] = c;
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+void mi_parseredirtocken(t_pipe *mi_pipe, int *i, int *n)
+{
+	int		j;
+	char	capt_redir;
+
+	j = 0;
+	capt_redir = mi_pipe->full_cmd[*i];
+	while (capt_redir == mi_pipe->full_cmd[*i + j])
+		j++ ;
+	if (j > 2 || mi_pipe->full_cmd[*i+j] == '\0' || mi_pipe->full_cmd[*i+j] == '<' || mi_pipe->full_cmd[*i+j] == '>')
+		mi_logerrorlong(2, "syntax error near unexpected token", ft_chrrepeat(capt_redir, j), "", &mi_pipe->error);
+	else
+	{
+		mi_pipe->split_cmd[*n] = ft_chrrepeat(capt_redir, j);
+	}
+	(*n)++;
+	*i += j;
+	ft_pos_passspace(mi_pipe->full_cmd, i);
+}
+
+void	mi_pipesplitcmd(t_pipe *mi_pipe)
 {
 	int	i;
 	int	s;
@@ -50,17 +86,19 @@ void	mi_pipeargparsse(t_pipe *mi_pipe)
 	ft_cnt_arg(mi_pipe->full_cmd, &i, &n);
 	if (n > 0)
 	{
-		mi_pipe->args = ft_calloc(n + 1, sizeof (char *));
-		if (mi_pipe->args == NULL)
+		mi_pipe->split_cmd = ft_calloc(n + 1 , sizeof (char *));
+		if (mi_pipe->split_cmd == NULL)
 			return ;
 		n = 0;
 		i = 0;
 		while (mi_pipe->full_cmd[i])
 		{
 			ft_pos_passspace(mi_pipe->full_cmd, &i);
+			if( mi_pipe->full_cmd[i] == '<' || mi_pipe->full_cmd[i] == '>')
+				mi_parseredirtocken (mi_pipe, &i, &n);
 			s = i;
 			ft_pos_passstring(mi_pipe->full_cmd, &i);
-			mi_pipe->args[n] = ft_substr(mi_pipe->full_cmd, s, i -s);
+			mi_pipe->split_cmd[n] = ft_substr(mi_pipe->full_cmd, s, i -s);
 			n++;
 		}
 	}

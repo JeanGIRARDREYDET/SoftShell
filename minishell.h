@@ -67,10 +67,10 @@ typedef struct s_error
 
 typedef struct s_redirection
 {
-	int			redir_type;
-	int			fd_here_doc;
-	char		*file_name;
-	struct		s_redirection *next;
+	int						redir_type;
+	int						fd_here_doc;
+	char					*file_name;
+	struct s_redirection	*next;
 }t_redirection;
 
 typedef struct s_pipe
@@ -78,8 +78,7 @@ typedef struct s_pipe
 	int				id;
 	int				no;
 	char			*full_cmd;
-	bool			here_doc;
-	char 			*heredoc;
+	char			**split_cmd;
 	char			*cmd;
 	char			*arg;
 	char			*type;
@@ -87,8 +86,8 @@ typedef struct s_pipe
 	bool			builtin;
 	t_error			error;
 	int				fdd[2];
-	char			*file;
-	struct s_pipe	*next;	
+	t_redirection	*redirection;
+	struct s_pipe	*next;
 }	t_pipe;
 
 typedef struct s_sys
@@ -97,11 +96,8 @@ typedef struct s_sys
 	int				here_doc;
 	int				nb_pipe;
 	int				nb_herdoc;
-	char 			**end_herdoc;
 	int				nb_error;
 	char			**cmd_args;
-	char			*exe;
-	char			*cmd;
 	int				error[2];
 	t_env			senv;
 	char			**env;
@@ -112,7 +108,7 @@ bool	ft_findword(const char *source, const char *find);
 void	builtin_cd(char *key, t_sys *s_sys);
 void	builtin_echo(char *key);
 void	builtin_env(t_sys *s_sys);
-void	builtin_exit();
+void	builtin_exit(void);
 void	builtin_export(char *key, t_sys *s_sys);
 void	print_export(t_sys *s_sys);
 void	builtin_pwd(void);
@@ -149,5 +145,9 @@ void	mi_execone(t_pipe *pipe, t_sys *mi_sys);
 void	mi_freepipe(t_pipe *mi_pipe);
 void	mi_waitingpipe(t_sys *mi_sys);
 void	mi_pipeherdoc(t_pipe *pipe);
+void	mi_pipesplitcmd(t_pipe *mi_pipe);
+
+t_redirection	*mi_createredirection(int redir_type);
+
 
 #endif

@@ -30,11 +30,24 @@ t_pipe	*mi_createpipe(t_sys *mi_sys)
 	pipe->error.msg = "";
 	pipe->error.code_error = 0;
 	pipe->type = NULL;
-	pipe->here_doc = false;
-	pipe->heredoc = NULL;
 	pipe->fdd[0] = 0;
 	pipe->fdd[1] = 0;
-	pipe->file = NULL;
+	pipe->redirection = NULL;
 	pipe->next = NULL;
 	return (pipe);
 }
+
+t_redirection	*mi_createredirection(int redir_type)
+{
+	t_redirection	*mi_redirection;
+
+	mi_redirection = ft_calloc(1, sizeof (t_redirection));
+	if (!mi_redirection)
+		return (NULL);
+	mi_redirection->redir_type = redir_type;
+	mi_redirection->fd_here_doc = 0;
+	mi_redirection->file_name = NULL;
+	mi_redirection->next = NULL;
+	return (mi_redirection);
+}
+

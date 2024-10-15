@@ -35,6 +35,5 @@ int	mi_intlogerror(t_pipe *app, char *s, int code)
 {
 	perror(s);
 	mi_logerror(code, s, &app->error);
-	free(s);
 	return (code);
 }

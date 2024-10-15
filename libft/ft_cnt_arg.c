@@ -12,10 +12,18 @@
 
 #include "../minishell.h"
 
+void	ft_pos_redir(char *ln, int *i)
+{
+	while (ln && ln[*i] && (ln[*i] == '<' || ln[*i] == '>'))
+		(*i)++;
+}
+
+
 void	ft_cnt_arg(char *ln, int *i, int *n)
 {
 	if (ln == NULL)
 		return ;
+	ft_pos_redir(ln, i);
 	ft_pos_passspace(ln, i);
 	ft_pos_passstring(ln, i);
 	(*n)++;
