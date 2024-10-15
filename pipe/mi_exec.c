@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
- 
+
 void	mi_exec(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	if (mi_sys->nb_pipe == 0)

@@ -57,7 +57,6 @@ int	mi_execchild(t_cmd *mi_cmd, char **argv, int ind, char **env)
 {
 	printf("10\n");
 	if (mi_cmd->id == 0)
-
 		return (0);
 	mi_cmd->id = fork();
 	if (mi_cmd->id == -1)
