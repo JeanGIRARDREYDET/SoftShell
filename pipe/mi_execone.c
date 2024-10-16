@@ -56,9 +56,8 @@ void	mi_exepermis(t_cmd *pi, t_sys *mi_sys)
 int	mi_execchild(t_cmd *mi_cmd, char **argv, int ind, char **env)
 {
 	printf("10\n");
-	if (mi_cmd->id == 0)
-		return (0);
 	mi_cmd->id = fork();
+	dprintf(2, "id = %d\n", mi_cmd->id);
 	if (mi_cmd->id == -1)
 		return (mi_intlogerror (mi_cmd, "fork out failed", 1));
 	if (mi_cmd->id != 0)

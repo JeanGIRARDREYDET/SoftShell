@@ -86,7 +86,7 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 	ft_cnt_arg(mi_cmd->full_cmd, &i, &n);
 	if (n > 0)
 	{
-		mi_cmd->split_cmd = ft_calloc(n + 1 , sizeof (char *));
+		mi_cmd->split_cmd = ft_calloc(n + 1, sizeof(char *));
 		if (mi_cmd->split_cmd == NULL)
 			return ;
 		n = 0;
@@ -94,7 +94,7 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 		while (mi_cmd->full_cmd[i])
 		{
 			ft_pos_passspace(mi_cmd->full_cmd, &i);
-			if( mi_cmd->full_cmd[i] == '<' || mi_cmd->full_cmd[i] == '>')
+			if (mi_cmd->full_cmd[i] == '<' || mi_cmd->full_cmd[i] == '>')
 				mi_parseredirtocken (mi_cmd, &i, &n);
 			s = i;
 			ft_pos_passstring(mi_cmd->full_cmd, &i);
