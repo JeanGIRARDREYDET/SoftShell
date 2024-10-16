@@ -52,7 +52,7 @@ void	mi_exepermis(t_cmd *pi, t_sys *mi_sys)
 	mi_logerrorlong(126, "mi: ", pi->cmd, ": Permission denied", &pi->error);
 	mi_sys->nb_error++;
 }
-
+// https://www.mbillaud.fr/notes/pipeline.html
 int	mi_execchild(t_cmd *mi_cmd, char **argv, int ind, char **env)
 {
 	printf("10\n");
