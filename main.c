@@ -51,7 +51,6 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 void mi_cmdexec(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	char	**argv;
-	char	**env;
 
 	if (mi_cmd->builtin == true)
 	{
@@ -73,7 +72,6 @@ void mi_cmdexec(t_cmd *mi_cmd, t_sys *mi_sys)
 	else
 	{
 		argv = ft_split(mi_cmd->full_cmd, ' ');
-		env = mi_sys->env;
 		mi_execchild(mi_cmd, mi_sys);
 	}
 }

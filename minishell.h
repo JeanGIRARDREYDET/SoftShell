@@ -85,7 +85,7 @@ typedef struct s_cmd
 	char			**args;
 	bool			builtin;
 	t_error			error;
-	int				fdd[2];
+	int				fd[2];
 	t_redirection	*redirection;
 	struct s_cmd	*next;
 }	t_cmd;
@@ -99,6 +99,7 @@ typedef struct s_sys
 	int				nb_error;
 	char			**cmd_args;
 	int				error[2];
+	int				fd_in;
 	t_env			senv;
 	char			**env;
 	t_cmd			*cmd;

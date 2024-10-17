@@ -55,6 +55,7 @@ void	mi_setdefaul_initialization( t_sys *s_sys)
 	s_sys->senv._ = NULL;
 	s_sys->senv.home = NULL;
 	s_sys->senv.len = 0;
+	s_sys->fd_in = STDIN_FILENO;
 }
 
 void	mi_sysinitialization(char **env, t_sys *s_sys)
