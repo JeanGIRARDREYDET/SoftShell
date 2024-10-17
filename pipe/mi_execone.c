@@ -53,64 +53,88 @@ void	mi_exepermis(t_cmd *pi, t_sys *mi_sys)
 	mi_sys->nb_error++;
 }
 // https://www.mbillaud.fr/notes/pipeline.html
-int	mi_execchild(t_cmd *mi_cmd, char **argv, int ind, char **env)
+int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
 {
+
+
 	printf("10\n");
 	mi_cmd->id = fork();
-	dprintf(2, "id = %d\n", mi_cmd->id);
+	dprintf(2, "<mi_execchild id = %d>\n", mi_cmd->id);
 	if (mi_cmd->id == -1)
 		return (mi_intlogerror (mi_cmd, "fork out failed", 1));
 	if (mi_cmd->id != 0)
-		return (0);
-	if (mi_cmd->no != 0)
 	{
+	/*
+	waitpid(mi_cmd->id, &mi_cmd->status, 0);
+		if (WIFEXITED(mi_cmd->status))
+			mi_cmd->status = WEXITSTATUS(mi_cmd->status);
+		if (mi_cmd->status == 0)
+			return (0);
+	*/	
+		return (1);
+	}
+	if (mi_cmd->no == 0)
+	{
+		dprintf(2, "\t78 id = %d\n", mi_cmd->id);
+		if (dup2(mi_cmd->fdd[1], STDOUT_FILENO) == -1)
+			return (1);
+		close (mi_cmd->fdd[1]);
+	}
+	else if (mi_cmd->next == NULL)
+	{
+		dprintf(2, "\t end id = %d\n", mi_cmd->id);
 		if (dup2(mi_cmd->fdd[0], STDIN_FILENO) == -1)
 			return (1);
 		close (mi_cmd->fdd[0]);
 	}
-	if (mi_cmd->next)
+	else
 	{
+		dprintf(2, "\t92  id = %d\n", mi_cmd->id);
+		if (dup2(mi_cmd->fdd[0], STDIN_FILENO) == -1)
+			return (1);
+		close (mi_cmd->fdd[0]);
 		if (dup2(mi_cmd->fdd[1], STDOUT_FILENO) == -1)
 			return (1);
 		close (mi_cmd->fdd[1]);
 	}
 	if (mi_cmd->cmd != NULL)
-		mi_execcmd(mi_cmd, argv, ind, env);
+		mi_execcmd(mi_cmd, mi_sys);
 	dprintf(1, "%s\n", mi_cmd->cmd);
 	mi_freecmd (mi_cmd);
+	dprintf(2, "</mi_execchild id = %d>\n", mi_cmd->id);
 	exit (EXIT_FAILURE);
 	return (1);
 }
 
-void	mi_execone(t_cmd *pipe, t_sys *mi_sys)
+void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	if (ft_strncmp(pipe->cmd, "exit", 5) == 0)
+	if (ft_strncmp(mi_cmd->cmd, "exit", 5) == 0)
 	{
 		printf("exit\n");
 		exit(0);
 	}
-	else if (ft_strncmp(pipe->cmd, "env", 4) == 0)
+	else if (ft_strncmp(mi_cmd->cmd, "env", 4) == 0)
 		builtin_env(mi_sys);
-	else if (ft_strncmp(pipe->cmd, "env", 4) == 0)
+	else if (ft_strncmp(mi_cmd->cmd, "env", 4) == 0)
 		builtin_env(mi_sys);
-	else if (ft_strncmp(pipe->cmd, "pwd", 4) == 0)
+	else if (ft_strncmp(mi_cmd->cmd, "pwd", 4) == 0)
 		builtin_pwd();
-	else if (ft_strncmp(pipe->cmd, "echo", 4) == 0)
-		builtin_echo(ft_post_left_sep(pipe->cmd, WSPACE));
-	else if (ft_strncmp(pipe->cmd, "cd", 2) == 0)
-		builtin_cd(ft_post_left_sep(pipe->cmd, WSPACE), mi_sys);
-	else if (ft_strncmp(pipe->cmd, "unset", 5) == 0)
-		builtin_unset(pipe->args[0], mi_sys);
-	else if (ft_strncmp(pipe->cmd, "export", 6) == 0)
-		builtin_export(ft_post_left_sep(pipe->cmd, WSPACE), mi_sys);
+	else if (ft_strncmp(mi_cmd->cmd, "echo", 4) == 0)
+		builtin_echo(ft_post_left_sep(mi_cmd->cmd, WSPACE));
+	else if (ft_strncmp(mi_cmd->cmd, "cd", 2) == 0)
+		builtin_cd(ft_post_left_sep(mi_cmd->cmd, WSPACE), mi_sys);
+	else if (ft_strncmp(mi_cmd->cmd, "unset", 5) == 0)
+		builtin_unset(mi_cmd->args[0], mi_sys);
+	else if (ft_strncmp(mi_cmd->cmd, "export", 6) == 0)
+		builtin_export(ft_post_left_sep(mi_cmd->cmd, WSPACE), mi_sys);
 	else
-		pipe->builtin = false;
-	if (pipe->builtin == false)
+		mi_cmd->builtin = false;
+	if (mi_cmd->builtin == false)
 	{
-		mi_exefind(pipe, mi_sys);
-		if (pipe->cmd)
-			mi_exepermis(pipe, mi_sys);
-		if (pipe->cmd)
-			mi_execchild(pipe, pipe->args, 0, mi_sys->env);
+		mi_exefind(mi_cmd, mi_sys);
+		if (mi_cmd->cmd)
+			mi_exepermis(mi_cmd, mi_sys);
+		if (mi_cmd->cmd)
+			mi_execchild(mi_cmd, mi_sys);
 	}
 }

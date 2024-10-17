@@ -138,8 +138,8 @@ char	*ft_findcommand(char *line);
 
 void	mi_closecmd(t_cmd *mi_cmd, int nb);
 t_cmd	*mi_createcmd(t_sys *mi_sys);
-int		mi_execcmd(t_cmd *mi_cmd, char **argv, int ind, char **env);
-int		mi_execchild(t_cmd *mi_cmd, char **argv, int ind, char **env);
+int		mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys);
+int		mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_exec(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_freecmd(t_cmd *mi_cmd);

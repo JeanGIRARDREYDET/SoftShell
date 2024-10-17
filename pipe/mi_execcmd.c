@@ -12,12 +12,15 @@
 
 #include "../minishell.h"
 
-int	mi_execcmd(t_cmd *app, char **argv, int ind, char **env)
+int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	char	**arg;
+	
 
-	if (app->cmd == NULL)
+	dprintf(2, "cmd = %s\n", mi_cmd->cmd);
+	if (mi_cmd->cmd == NULL)
 		return (1);
+	/*
+	char	**arg;
 	arg = ft_split(argv[ind + 2], '\x20');
 	if (arg == NULL)
 	{
@@ -25,13 +28,16 @@ int	mi_execcmd(t_cmd *app, char **argv, int ind, char **env)
 		perror(argv[ind + 2]);
 		return (1);
 	}
-	FILE *fptr = fopen("sample.txt", "w");
-	fprintf(fptr, "Error: (%s)\n", app->cmd);
-	if (execve(app->cmd, arg, env) == -1)
+	*/
+
+	
+	
+
+	if (execve(mi_cmd->cmd, mi_cmd->split_cmd, mi_sys->env) == -1)
 	{
-		perror(ft_strjoin("Command :", app->cmd));
-		mi_logerror(126, "Command found but in error ", &app->error);
-		free(arg);
+		perror(ft_strjoin("Command :", mi_cmd->cmd));
+		mi_logerror(126, "Command found but in error ", &mi_cmd->error);
+	//  free(arg);
 		return (errno);
 	}
 	return (1);

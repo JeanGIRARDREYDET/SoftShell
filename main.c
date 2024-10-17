@@ -74,7 +74,7 @@ void mi_cmdexec(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		argv = ft_split(mi_cmd->full_cmd, ' ');
 		env = mi_sys->env;
-		mi_execchild(mi_cmd, argv, 0, env);
+		mi_execchild(mi_cmd, mi_sys);
 	}
 }
 
