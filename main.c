@@ -93,6 +93,9 @@ int	main(int ac, char **argv, char **env)
 	while (1)
 	{
 		line = readline("minishell> ");
+
+		while (*line !='\0' && ft_strrchr (WSPACE, *line ) != NULL) 
+			line++;
 		if (*line =='\0')
 			continue;
 		mi_sys.nb_pipe = 0;
