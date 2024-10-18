@@ -34,6 +34,7 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 	mi_cmd->fd[1] = 0;
 	mi_cmd->redirection = NULL;
 	mi_cmd->next = NULL;
+	mi_sys->fd_in = STDIN_FILENO;
 	return (mi_cmd);
 }
 

@@ -56,56 +56,54 @@ void	mi_exepermis(t_cmd *pi, t_sys *mi_sys)
 // l0
 int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	int input_fd = -1;
-	printf("mi_execchild\n");
+//	printf("mi_execchild\n");
 	if (mi_cmd->next != NULL)
 	{
+//		printf("pipe\n");
 		if (pipe(mi_cmd->fd) == -1)
 			return (mi_intlogerror (mi_cmd, "pipe out failed", 1));
 	}
 	mi_cmd->id = fork();
-	dprintf(2, "<mi_execchild no='%d' id='%d' cmd='%s'>\n", mi_cmd->no, mi_cmd->id , mi_cmd->cmd);
+//	dprintf(2, "<mi_execchild no='%d' id='%d' cmd='%s'>\n", mi_cmd->no, mi_cmd->id , mi_cmd->cmd);
 	if (mi_cmd->id == -1)
 		return (mi_intlogerror (mi_cmd, "fork out failed", 1));
-	
-	
-	dprintf(2, "72/n");
+//	dprintf(2, "72/n");
 	if (mi_cmd->id == 0)
 	{
 		if (mi_cmd->no != 0)
 		{
-			dprintf(2, "	sec+	fd ='%d'\n", input_fd);
-			if (dup2(input_fd, STDIN_FILENO) == -1)
+//			dprintf(2, "	sec+	fd ='%d'\n", mi_cmd->fd[0]);
+			if (dup2(mi_sys->fd_in, STDIN_FILENO) == -1)
 				return (1);
-			close (input_fd);
-			dprintf(2, "	sec+ end	fd ='%d'\n", input_fd);
-
+			close (mi_sys->fd_in);
+//			dprintf(2, "	sec+ end	fd ='%d'\n", mi_cmd->fd[0]);
 		}
-		dprintf(2, "96/n");
+//		dprintf(2, "96/n");
 		if (mi_cmd->next != NULL)
 		{
-			dprintf(2, "	-last	fd ='%d'\n", input_fd);
+//			dprintf(2, "	-last	fd ='%d'\n", mi_cmd->fd[1]);
 			if (dup2(mi_cmd->fd[1], STDOUT_FILENO) == -1)
 				return (1);
-			dprintf(2, "	-last close	fd ='%d'\n", input_fd);
+//			dprintf(2, "	-last close	fd ='%d'\n", mi_cmd->fd[1]);
 			close (mi_cmd->fd[0]);
 			close (mi_cmd->fd[1]);
-			dprintf(2, "	-last end	fd ='%d'\n", input_fd);
+//			dprintf(2, "	-last end	fd ='%d'\n", mi_cmd->fd[1]);
 		}
 		if (mi_cmd->cmd != NULL)
 			mi_execcmd(mi_cmd, mi_sys);
-		dprintf(2, "	- 106 close	fd ='%d'\n", input_fd);
-		if (mi_cmd->no != 0)
-			close (input_fd);
-		dprintf(2, "	- 109 close	fd ='%d'\n", input_fd);
-		if (mi_cmd->next != NULL)
-		{
-			dprintf(2, "	-close	fd ='%d'\n", input_fd);
-			close (mi_cmd->fd[1]);
-			input_fd = mi_cmd->fd[0];
-		}
+		exit (EXIT_FAILURE);
 	}
-	dprintf(2, "</mi_execchild no='%d' id='%d' cmd='%s'>\n", mi_cmd->no, mi_cmd->id, mi_cmd->cmd);
+	if (mi_cmd->no != 0)
+		close (mi_sys->fd_in);
+//	dprintf(2, "	- 109 close	fd ='%d'\n", mi_sys->fd_in);
+	if (mi_cmd->next != NULL)
+	{
+//		dprintf(2, "	-close	fd ='%d'\n", mi_sys->fd_in);
+		close (mi_cmd->fd[1]);
+		mi_sys->fd_in = mi_cmd->fd[0];
+//		dprintf(2, "	-close	fd ='%d'\n", mi_sys->fd_in);
+	}
+//	dprintf(2, "</mi_execchild no='%d' id='%d' cmd='%s'>\n", mi_cmd->no, mi_cmd->id, mi_cmd->cmd);
 	//	mi_freecmd (mi_cmd);
 	//	exit (EXIT_FAILURE);
 	return (0);
