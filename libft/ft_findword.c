@@ -18,10 +18,12 @@ bool	ft_findword(const char *source, const char *find)
 	size_t		i;
 	size_t		offset;
 	size_t		lenfind;
+	size_t		lensource;
 
-	if (find != NULL || source != NULL || source[0] == '\0' || find[0] == '\0')
+	if (find == NULL || source == NULL || source[0] == '\0' || find[0] == '\0')
 		return (false);
 	lenfind = ft_strlen(find);
+	lensource = ft_strlen(source);
 	if (*find == '\0' || find == NULL)
 		return (false);
 	i = 0;
