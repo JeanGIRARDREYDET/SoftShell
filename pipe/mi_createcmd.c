@@ -30,8 +30,8 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 	mi_cmd->error.msg = "";
 	mi_cmd->error.code_error = 0;
 	mi_cmd->type = NULL;
-	mi_cmd->fdd[0] = 0;
-	mi_cmd->fdd[1] = 0;
+	mi_cmd->fd[0] = 0;
+	mi_cmd->fd[1] = 0;
 	mi_cmd->redirection = NULL;
 	mi_cmd->next = NULL;
 	return (mi_cmd);

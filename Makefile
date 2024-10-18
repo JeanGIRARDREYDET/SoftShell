@@ -6,7 +6,7 @@ NAME = minishell
 
 CC = cc
 
-C_FLAGS 		= -g3 -Wall -Wextra -Werror -fsanitize=address,leak,undefined
+C_FLAGS 		= -g3 -Wall -Wextra -Werror -fsanitize=address,leak,undefined 
 #-Wundef
 READLINE_LIB	= -lreadline
 
