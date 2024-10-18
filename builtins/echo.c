@@ -19,7 +19,6 @@
 
 void	builtin_echo(char *key)
 {
-
 	int	n;
 
 	n = 1;

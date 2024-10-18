@@ -28,7 +28,7 @@ bool	ft_findword(const char *source, const char *find)
 		return (false);
 	i = 0;
 	p = (char *)source;
-	while ((i < lenfind) && (*p != '\0'))
+	while ((i < lensource) && (*p != '\0'))
 	{
 		offset = 0;
 		while (find[offset] == p[offset] && offset < lenfind - i + 1)
