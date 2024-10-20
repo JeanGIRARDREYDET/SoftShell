@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 01:00:49 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/15 02:49:03 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/10/20 19:39:39 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,9 +19,9 @@ void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys)
 	char		**paths;
 	char		*pathstring;
 
-	if (!mi_cmd->cmd || access(mi_cmd->cmd, F_OK) == 0)
+	if (!mi_cmd->cmd || access(mi_cmd->cmd, F_OK) == 0 || mi_cmd->builtin == true)
 		return ;
- 	pathcmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->cmd);
+ 	pathcmd = join_3(mi_getenv_env("PWD", mi_sys->env), "/", mi_cmd->cmd);
 	if (access(pathcmd, F_OK) == 0)
 		return ;
 	pathstring = ft_strdup(mi_getenv("PATH", mi_sys));

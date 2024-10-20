@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:35:05 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/14 20:00:04 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:09:34 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -34,7 +34,7 @@ bool	ft_findword(const char *source, const char *find)
 		while (find[offset] == p[offset] && offset < lenfind - i + 1)
 		{
 			offset++;
-			if (p[offset] == ' ' && find[offset] == '\0')
+			if ((p[offset] == ' ' || p[offset] == '\0') && find[offset] == '\0')
 				return (true);
 		}
 		p++;

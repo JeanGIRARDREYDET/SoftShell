@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 13:47:03 by doferet           #+#    #+#             */
-/*   Updated: 2024/10/14 10:54:37 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/10/20 19:15:36 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -145,8 +145,9 @@ void	mi_exec(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_freecmd(t_cmd *mi_cmd);
 void	mi_waitingpipe(t_sys *mi_sys);
-void	mi_cmdherdoc(t_cmd *mi_cmd);
+void	mi_cmdherdoc(t_cmd *mi_cmd); 
 void	mi_cmdsplitcmd(t_cmd *mi_cmd);
+char	*mi_getenv_env(char *key, char **env);
 
 t_redirection	*mi_createredirection(int redir_type);
 

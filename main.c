@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:08:01 by doferet           #+#    #+#             */
-/*   Updated: 2024/10/14 18:56:37 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/10/20 19:22:16 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -50,7 +50,7 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 
 void mi_cmdexec(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	char	**argv;
+	// char	**argv;
 
 	if (mi_cmd->builtin == true)
 	{
@@ -71,7 +71,7 @@ void mi_cmdexec(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	else
 	{
-		argv = ft_split(mi_cmd->full_cmd, ' ');
+		// argv = ft_split(mi_cmd->full_cmd, ' ');
 		mi_execchild(mi_cmd, mi_sys);
 	}
 }
