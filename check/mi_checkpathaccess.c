@@ -39,6 +39,7 @@ void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		
 	}
+
 	ft_arrclose(paths);
 	free(pathcmd);
 }
