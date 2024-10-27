@@ -27,7 +27,7 @@ void	builtin_echo(char *key)
 		n = 0;
 		key += 3;
 	}
-	printf("%s", key);
+	write(STDOUT_FILENO, key, ft_strlen(key));
 	if (n == 1)
-			printf("\n");
+			write(STDOUT_FILENO,"\n",1);
 }

@@ -26,6 +26,7 @@ void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys)
 		return ;
 	pathstring = ft_strdup(mi_getenv("PATH", mi_sys));
 	paths = ft_split (pathstring, ':');
+	free(pathstring);
 	i = 0;
 	
 	while (paths && paths[++i])
@@ -39,4 +40,5 @@ void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		free(pathcmd);
 	}
+	free(paths);
 }

@@ -19,15 +19,24 @@ echo, le parent renvoie bien dollyne, si on ouvre un autre bash, il n'aura pas
 cette variable donc si on utilise exporte l'enfant a bien la variable myname
 */
 
-void	print_export(t_sys *sys)
+void	print_export(t_sys *mi_sys)
 {
 	int	i;
 
 	i = 0;
-	while (sys->env != NULL && sys->env[i] != 0)
+	dprintf(2, "			print_export\n");
+	dprintf(2, "			print_export env  %s\n", mi_sys->env[0]);
+	if (mi_sys->env == NULL)
 	{
-		printf("declare -x %s\n", sys->env[i]);
-		i++;
+		dprintf(2, "			print_export NULL\n");
+		return ;
+	}
+	while (mi_sys->env[i++])
+	{
+		//printf("declare -x %s\n", sys->env[i]);
+		write(STDOUT_FILENO, "declare -x ", 11);
+		write(STDOUT_FILENO, mi_sys->env[i], ft_strlen(mi_sys->env[i]));
+		write(STDOUT_FILENO,"\n",1);
 	}
 }
 
@@ -42,7 +51,8 @@ void	s_env_create_value(char *line, t_sys *s_sys)
 	while (s_sys->env[++i])
 		ienv[i] = ft_strdup(s_sys->env[i]);
 	ienv[i] = line;
-	free(s_sys->env);
+	free (s_sys->env);
+	printf ("export len  %d\n", i);
 	s_sys->env = ienv;
 }
 
@@ -77,10 +87,13 @@ int	export_values(char *key, t_sys *s_sys)
 	return (0);
 }
 
-void	builtin_export(char *key, t_sys *s_sys)
+void	builtin_export(char *key, t_sys *mi_sys)
 {
-	if (key[0] == '\0')
-		print_export(s_sys);
+		dprintf(2, "			builtin_export env  %s\n", mi_sys->env[0]);
+	if (mi_sys->env == NULL)
+		dprintf(2, "			builtin_export env  NULL\n");
+	if (!key || key[0] == '\0')
+		print_export(mi_sys);
 	else
-		export_values(key, s_sys);
+		export_values(key, mi_sys);
 }

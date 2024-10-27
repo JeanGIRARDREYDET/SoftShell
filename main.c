@@ -48,32 +48,15 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 	return ;
 }
 
+
 void mi_cmdexec(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	// char	**argv;
 
-	if (mi_cmd->builtin == true)
-	{
-		if (ft_findword("cd", mi_cmd->cmd))
-			builtin_cd(mi_cmd->arg, mi_sys);
-		else if (ft_findword("echo", mi_cmd->cmd))
-			builtin_echo(mi_cmd->arg);
-		else if (ft_findword("env", mi_cmd->cmd))
-			builtin_env(mi_sys);
-		else if (ft_findword("exit", mi_cmd->cmd))
-			builtin_exit();
-		else if (ft_findword("export", mi_cmd->cmd))
-			builtin_export(mi_cmd->arg, mi_sys);
-		else if (ft_findword("pwd", mi_cmd->cmd))
-			builtin_pwd();
-		else if (ft_findword("unset", mi_cmd->cmd))
-			builtin_unset(mi_cmd->arg, mi_sys);
-	}
-	else
-	{
+
+
 		// argv = ft_split(mi_cmd->full_cmd, ' ');
 		mi_execchild(mi_cmd, mi_sys);
-	}
 }
 
 int	main(int ac, char **argv, char **env)

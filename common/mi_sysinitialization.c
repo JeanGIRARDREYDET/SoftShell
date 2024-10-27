@@ -65,7 +65,7 @@ void	mi_sysinitialization(char **env, t_sys *s_sys)
 
 	mi_setdefaul_initialization(s_sys);
 	s_sys->senv.len = read_env(env, s_sys);
-	ienv = (char **)ft_calloc(s_sys->senv.len, sizeof(char *));
+	ienv = (char **)ft_calloc(s_sys->senv.len + 1, sizeof(char *));
 	i = -1;
 	while (env[++i])
 	{

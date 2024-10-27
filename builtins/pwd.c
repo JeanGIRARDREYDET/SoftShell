@@ -14,5 +14,14 @@
 
 void	builtin_pwd(void)
 {
-	printf("%s\n", getcwd(NULL, 0));
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
+	{
+		perror("pwd");
+		exit(1);
+	}
+	write(STDOUT_FILENO, pwd, ft_strlen(pwd));
+	write(STDOUT_FILENO, "\n", 1);
 }
