@@ -57,11 +57,12 @@ static char	**str_add_malloc_clild_neq(char **my_split, char const *s, char c)
 		str_start = s;
 		while (*s != c && *s)
 			s++;
-		my_split[i++] = ft_substr(str_start, 0, s - str_start);
+		my_split[i++] = 
+		ft_substr(str_start, 0, s - str_start);
 		if (!my_split[i - 1])
 		{
 			while (i)
-				free(my_split[--i]);
+				free(my_split[i--]);
 			return (NULL);
 		}
 	}

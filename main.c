@@ -90,6 +90,7 @@ int	main(int ac, char **argv, char **env)
 		mi_cmditer (mi_cmd, &mi_checkbuiltin);
 		mi_syscmditer (&mi_sys, &mi_checkpathaccess);
 		mi_syscmditer (&mi_sys, &mi_cmdexec);
+		mi_freecmd(mi_cmd);
 //		mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 //		mi_exec(&mi_cmd &mi_sys);
 		add_history(line);
