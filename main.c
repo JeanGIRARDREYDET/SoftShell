@@ -58,6 +58,11 @@ void mi_cmdexec(t_cmd *mi_cmd, t_sys *mi_sys)
 		// argv = ft_split(mi_cmd->full_cmd, ' ');
 		mi_execchild(mi_cmd, mi_sys);
 }
+void mi_checkline(char *line)
+{
+	if(ft_findword("exit", line ))
+			builtin_exit();
+}
 
 int	main(int ac, char **argv, char **env)
 {
@@ -79,6 +84,7 @@ int	main(int ac, char **argv, char **env)
 			line++;
 		if (*line =='\0')
 			continue;
+		mi_checkline(line);
 		mi_sys.nb_pipe = 0;
 		mi_cmd = mi_createcmd(&mi_sys);
 		mi_lexingline (line, 0, mi_cmd, &mi_sys);

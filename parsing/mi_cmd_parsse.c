@@ -27,6 +27,7 @@ void	mi_cmdherdoc(t_cmd *mp)
 
 void	mi_cmdparsse(t_cmd *mi_cmd)
 {	int i;
+
 	if (mi_cmd->full_cmd == NULL)
 		return ;
 	i = ft_pos_left_chars(mi_cmd->full_cmd, WSPACE);

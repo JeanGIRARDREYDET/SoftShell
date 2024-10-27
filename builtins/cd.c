@@ -20,7 +20,7 @@ void	cd_home(t_sys *mi_sys)
 {
 	if (!mi_sys->senv.home)
 	{
-		printf("cd: HOME not set\n");
+		ft_putstr_fd("cd: HOME not set\n" ,STDOUT_FILENO);
 		return ;
 	}
 	mi_sys->senv.pwd = mi_sys->senv.home;
@@ -35,7 +35,7 @@ void	cd_back(t_sys *mi_sys)
 	mi_sys->senv.pwd = mi_getenv("PWD", mi_sys);
 	if (!mi_sys->senv.pwd)
 	{
-		printf("cd: DIR not set\n");
+		ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
 		return ;
 	}
 	while (mi_sys->senv.pwd[i])
@@ -63,7 +63,8 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 	printf("key : %s value : %s\n", key, mi_sys->senv.pwd);
 	if (access(mi_sys->senv.pwd, F_OK) == 0)
 	{
-		printf("%s is existing\n", key);
+		ft_putstr_fd(key, STDOUT_FILENO);
+		ft_putstr_fd(" is existing\n", STDOUT_FILENO);
 		mi_setenv("PWD", mi_sys->senv.pwd, mi_sys);
 	}
 	else
