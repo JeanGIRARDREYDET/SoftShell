@@ -19,7 +19,6 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 	mi_cmd = ft_calloc(1, sizeof (t_cmd));
 	if (!mi_cmd)
 		return (NULL);
-	printf("on cree un pipe ici : %p\n", mi_cmd);
 	mi_cmd->id = 0;
 	mi_cmd->no = mi_sys->nb_pipe++;
 	mi_cmd->full_cmd = NULL;

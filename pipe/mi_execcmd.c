@@ -34,32 +34,19 @@ void mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 		builtin_unset(mi_cmd->arg, mi_sys);
 }
 
+//	dprintf(2, "	mi_execcmd ('%s') \n", mi_cmd->cmd);
 
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	dprintf(2, "	mi_execcmd ('%s') \n", mi_cmd->cmd);
-
-if (mi_sys->env == NULL)
-	{
-		dprintf(2, "			mi_execcmd env  NULL\n");
-
-	}
-
 	if (mi_cmd->cmd == NULL)
 		return (1);
-	//		dprintf(2, "		cmd builtin\n");	
 	if(mi_cmd->builtin == true)
-	{
-		dprintf(2, "	<cmd builtin>\n");
 		mi_exebuiltin(mi_cmd, mi_sys);
-		dprintf(2, "	</cmd builtin>\n");
-	}else if (execve(mi_cmd->cmd, mi_cmd->split_cmd, mi_sys->env) == -1)
+	else if (execve(mi_cmd->cmd, mi_cmd->split_cmd, mi_sys->env) == -1)
 	{
-//		dprintf(2, "		cmd error\n");
 		perror(ft_strjoin("Command :", mi_cmd->cmd));
 		mi_logerror(126, "Command found but in error ", &mi_cmd->error);
 		return (errno);
 	}
-//	dprintf(2, "		cmd ret1./m\n");
 	return (1);
 }

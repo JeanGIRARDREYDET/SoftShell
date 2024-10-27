@@ -29,7 +29,8 @@ void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys)
 	free(pathstring);
 	i = 0;
 	while (paths && paths[++i])
-	{free(pathcmd);
+	{
+		free(pathcmd);
 		pathcmd = join_3(paths[i], "/", mi_cmd->cmd);
 		if (access(pathcmd, F_OK) == 0)
 		{
@@ -37,9 +38,7 @@ void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys)
 			ft_arrclose(paths);
 			return ;
 		}
-		
 	}
-
 	ft_arrclose(paths);
 	free(pathcmd);
 }

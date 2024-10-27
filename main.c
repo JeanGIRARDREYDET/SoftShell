@@ -79,12 +79,12 @@ int	main(int ac, char **argv, char **env)
 	while (1)
 	{
 		line = readline("minishell> ");
-
-		while (*line !='\0' && ft_strrchr (WSPACE, *line ) != NULL) 
+		while (*line !='\0' && ft_strrchr (WSPACE, *line ) != NULL)
 			line++;
 		if (*line =='\0')
 			continue;
 		mi_checkline(line);
+
 		mi_sys.nb_pipe = 0;
 		mi_cmd = mi_createcmd(&mi_sys);
 		mi_lexingline (line, 0, mi_cmd, &mi_sys);
