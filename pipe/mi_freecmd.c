@@ -24,7 +24,7 @@ void	mi_freecmd(t_cmd *mi_cmd)
 	if (mi_cmd->full_cmd != NULL)
 		free(mi_cmd->full_cmd);
 	if (mi_cmd->split_cmd != NULL)
-		free(mi_cmd->split_cmd);
+		ft_arrclose(mi_cmd->split_cmd);
 	if (mi_cmd->redirection != NULL)
 		free(mi_cmd->redirection);
 	if (mi_cmd->next != NULL)

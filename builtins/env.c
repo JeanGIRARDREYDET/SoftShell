@@ -20,7 +20,10 @@ void	builtin_env(t_sys *mi_sys)
 	while (mi_sys->env != NULL && mi_sys->env[i] != 0)
 	{
 		if (ft_strin(mi_sys->env[i], '='))
-			printf(" %s\n", mi_sys->env[i]);
+		{
+			write(STDOUT_FILENO, mi_sys->env[i], ft_strlen(mi_sys->env[i]));
+			write(STDOUT_FILENO, "\n", 1);
+		}
 		i++;
 	}
 }

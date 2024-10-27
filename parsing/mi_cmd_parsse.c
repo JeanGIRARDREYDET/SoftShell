@@ -34,6 +34,8 @@ void	mi_cmdparsse(t_cmd *mi_cmd)
 		mi_cmd->arg = NULL;
 	else
 		mi_cmd->arg = ft_post_left_sep(mi_cmd->full_cmd, WSPACE);
+	if (mi_cmd->cmd)
+		free(mi_cmd->cmd);
 	mi_cmd->cmd = ft_left_sep(mi_cmd->full_cmd, WSPACE);
 }
 
@@ -98,7 +100,7 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 				mi_parseredirtocken (mi_cmd, &i, &n);
 			s = i;
 			ft_pos_passstring(mi_cmd->full_cmd, &i);
-			mi_cmd->split_cmd[n] = ft_substr(mi_cmd->full_cmd, s, i -s);
+			mi_cmd->split_cmd[n] = ft_substr(mi_cmd->full_cmd, s, i - s);
 			n++;
 		}
 	}
