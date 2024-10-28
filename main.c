@@ -99,7 +99,8 @@ int	main(int ac, char **argv, char **env)
 		mi_cmditer (mi_cmd, &mi_checkbuiltin);
 		mi_syscmditer (&mi_sys, &mi_checkpathaccess);
 		mi_syscmditer (&mi_sys, &mi_cmdexec);
-		if (mi_cmd->id > 0 || mi_cmd->builtin)
+		mi_waitingpipe(&mi_sys);
+	//	if (mi_cmd->id > 0)
 			mi_freecmd(mi_cmd);
 //		mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 //		mi_exec(&mi_cmd &mi_sys);

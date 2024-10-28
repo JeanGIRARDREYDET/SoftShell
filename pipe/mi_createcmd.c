@@ -16,7 +16,7 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 {
 	t_cmd	*mi_cmd;
 
-	mi_cmd = ft_calloc(1, sizeof (t_cmd));
+	mi_cmd = ft_calloc(1, sizeof (t_cmd)+1);
 	if (!mi_cmd)
 		return (NULL);
 	mi_cmd->id = 0;
