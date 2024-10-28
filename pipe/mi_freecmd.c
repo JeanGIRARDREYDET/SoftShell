@@ -17,6 +17,7 @@ void	mi_freecmd(t_cmd *mi_cmd)
 {
 	if (mi_cmd->cmd != NULL)
 		free(mi_cmd->cmd);
+	mi_cmd->cmd = NULL;
 //	if (mi_cmd->arg != NULL)
 //		free(mi_cmd->arg);
 	if (mi_cmd->args != NULL)
