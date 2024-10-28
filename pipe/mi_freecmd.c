@@ -15,7 +15,8 @@
 
 void	mi_freecmd(t_cmd *mi_cmd)
 {
-	if (mi_cmd->cmd != NULL)
+
+	if (mi_cmd->cmd!= NULL)
 		free(mi_cmd->cmd);
 	mi_cmd->cmd = NULL;
 //	if (mi_cmd->arg != NULL)
@@ -24,11 +25,12 @@ void	mi_freecmd(t_cmd *mi_cmd)
 		ft_arrclose(mi_cmd->args);
 	if (mi_cmd->full_cmd != NULL)
 		free(mi_cmd->full_cmd);
-	if (mi_cmd->split_cmd != NULL)
+	if (mi_cmd->split_cmd)
 		ft_arrclose(mi_cmd->split_cmd);
+	mi_cmd->split_cmd = NULL;
 	if (mi_cmd->redirection != NULL)
 		free(mi_cmd->redirection);
 	if (mi_cmd->next != NULL)
 		mi_freecmd(mi_cmd->next);
-	free(mi_cmd);
+	mi_cmd = NULL;
 }

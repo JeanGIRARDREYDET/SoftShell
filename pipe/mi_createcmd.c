@@ -23,6 +23,7 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 	mi_cmd->no = mi_sys->nb_pipe++;
 	mi_cmd->full_cmd = NULL;
 	mi_cmd->cmd = NULL;
+	mi_cmd->split_cmd = NULL;
 	mi_cmd->arg = "";
 	mi_cmd->args = NULL;
 	mi_cmd->builtin = true;

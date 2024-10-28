@@ -90,13 +90,17 @@ int	main(int ac, char **argv, char **env)
 		mi_lexingline (line, 0, mi_cmd, &mi_sys);
 		mi_sys.cmd = mi_cmd;
 		mi_syscmditer(&mi_sys, &mi_expand_interface);
+
 		mi_cmditer (mi_cmd, &mi_cmdsplitcmd);
+		if (mi_cmd->split_cmd)
+			dprintf(2, "	mi_execcmd ('%s') \n", mi_cmd->split_cmd[0]);
 		mi_cmditer (mi_cmd, &mi_cmdparsse);
 //		mi_cmditer (mi_cmd, &mi_cmdargparsse);
 		mi_cmditer (mi_cmd, &mi_checkbuiltin);
 		mi_syscmditer (&mi_sys, &mi_checkpathaccess);
 		mi_syscmditer (&mi_sys, &mi_cmdexec);
-		mi_freecmd(mi_cmd);
+		if (mi_cmd->id > 0 || mi_cmd->builtin)
+			mi_freecmd(mi_cmd);
 //		mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 //		mi_exec(&mi_cmd &mi_sys);
 		add_history(line);

@@ -37,7 +37,8 @@ void	mi_cmdparsse(t_cmd *mi_cmd)
 		mi_cmd->arg = ft_post_left_sep(mi_cmd->full_cmd, WSPACE);
 	if (mi_cmd->cmd)
 		free(mi_cmd->cmd);
-	mi_cmd->cmd = ft_left_sep(mi_cmd->full_cmd, WSPACE);
+//	mi_cmd->cmd = ft_left_sep(mi_cmd->full_cmd, WSPACE);
+	mi_cmd->cmd = mi_cmd->split_cmd[0];
 }
 
 char	*ft_chrrepeat(char c, int n)

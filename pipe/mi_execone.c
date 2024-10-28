@@ -95,7 +95,6 @@ int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
 		if (mi_cmd->cmd != NULL)
 		{
 			mi_execcmd(mi_cmd, mi_sys);
-			mi_freecmd(mi_cmd);
 		}
 		exit (EXIT_FAILURE);
 	}
