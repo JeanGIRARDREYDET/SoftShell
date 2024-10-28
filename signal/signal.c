@@ -6,11 +6,11 @@
 /*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:22:50 by doferet           #+#    #+#             */
-/*   Updated: 2024/10/18 12:05:48 by doferet          ###   ########.fr       */
+/*   Updated: 2024/10/28 11:11:35 by doferet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../minishell.h"
 
 // intercepter les signaux :
 // CTRL+D = quitte le programme et ecrit "exit"
