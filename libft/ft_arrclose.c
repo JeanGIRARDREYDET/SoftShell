@@ -18,7 +18,12 @@ void	ft_arrclose(char **arr)
 
 	i = 0;
 	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
+	}
+	if (arr)
+		free(arr);
 	arr = NULL;
 }
