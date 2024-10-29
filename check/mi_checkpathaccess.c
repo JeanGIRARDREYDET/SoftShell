@@ -34,7 +34,8 @@ void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys)
 		pathcmd = join_3(paths[i], "/", mi_cmd->cmd);
 		if (access(pathcmd, F_OK) == 0)
 		{
-			mi_cmd->cmd = pathcmd;
+			mi_cmd->cmd = ft_strdup(pathcmd);
+			free(pathcmd);
 			ft_arrclose(paths);
 			return ;
 		}

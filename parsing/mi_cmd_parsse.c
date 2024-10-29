@@ -21,24 +21,30 @@ void	mi_cmdherdoc(t_cmd *mp)
 			mp->args[0] = NULL;
 			mp->args[1] = NULL;
 		}
- 		mp->args++;
+		mp->args++;
 	}
 }
 
 void	mi_cmdparsse(t_cmd *mi_cmd)
-{	int i;
+{	int	i;
 
 	if (mi_cmd->full_cmd == NULL)
 		return ;
 	i = ft_pos_left_chars(mi_cmd->full_cmd, WSPACE);
-	if (mi_cmd->full_cmd[i] =='\0')
+	if (mi_cmd->full_cmd[i] == '\0')
 		mi_cmd->arg = NULL;
 	else
 		mi_cmd->arg = ft_post_left_sep(mi_cmd->full_cmd, WSPACE);
-//	if (mi_cmd->cmd)
-//		free(mi_cmd->cmd);
-//	mi_cmd->cmd = ft_left_sep(mi_cmd->full_cmd, WSPACE);
-	mi_cmd->cmd = mi_cmd->split_cmd[0];
+	if (ft_findword (BUILTINS, mi_cmd->split_cmd[0]))
+	{
+		mi_cmd->builtin_cmd = mi_cmd->split_cmd[0];
+		mi_cmd->builtin = true;
+	}
+	else
+	{
+		mi_cmd->builtin = false;
+		mi_cmd->cmd = ft_strdup(mi_cmd->split_cmd[0]);
+	}
 }
 
 char	*ft_chrrepeat(char c, int n)

@@ -8,7 +8,7 @@ CC = cc
 
 C_FLAGS 		= -g3 -Wall -Wextra -Werror -fsanitize=address,leak,undefined 
 #-Wundef
-READLINE_LIB	= -lreadline
+READLINE_LIB	= -lreadline 
 
 SRCS = 			main.c \
 				builtins/cd.c \

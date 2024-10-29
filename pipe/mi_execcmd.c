@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_execcmd.c                                        :+:      :+:    :+:   */
+/*   mi_execcmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include "../minishell.h"
 
-void mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
+void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	char	*cmd;
 
-	cmd = mi_cmd->cmd;
+	cmd = mi_cmd->builtin_cmd;
 	if (mi_sys->env == NULL)
 	{
 		dprintf(2, "			mi_exebuiltin env  NULL\n");
@@ -41,7 +41,7 @@ void mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	if (mi_cmd->cmd == NULL)
+	if (mi_cmd->cmd == NULL && mi_cmd->builtin_cmd == NULL)
 		return (1);
 	if (mi_cmd->builtin == true)
 		mi_exebuiltin(mi_cmd, mi_sys);
