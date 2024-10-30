@@ -42,30 +42,37 @@ void	cd_back(t_sys *mi_sys)
 			i++;
 	while (mi_sys->senv.pwd[i] != '/' && i > 1)
 		i--;
-	mi_setenv("PWD", ft_substr(mi_sys->senv.pwd, 0, i), mi_sys);
-	mi_sys->senv.pwd = mi_getenv("PWD", mi_sys);
+	mi_sys->senv.pwd = ft_substr(mi_sys->senv.pwd, 0, i);
 }
 
 void	builtin_cd(char *key, t_sys *mi_sys)
 {
+	dprintf(2,"builtin_cd 52 key : %s\n", key);
 	mi_sys->senv.oldpwd = mi_sys->senv.pwd;
 	mi_setenv("OLDPWD", mi_sys->senv.oldpwd, mi_sys);
+
 	if (key == NULL || key[0] == '\0')
 		cd_home(mi_sys);
 	else if (ft_strncmp(key, "..", 3) == 0)
 		cd_back(mi_sys);
 	else
 	{
+		dprintf(2,"builtin_cd 61 key : %s\n", key);
 		chdir(key);
 		mi_sys->senv.pwd = getcwd(NULL, 0);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
 	}
-	printf("key : %s value : %s\n", key, mi_sys->senv.pwd);
+	dprintf(2,"builtin_cd 68 key : %s\n", key);
 	if (access(mi_sys->senv.pwd, F_OK) == 0)
 	{
-		ft_putstr_fd(key, STDOUT_FILENO);
+		ft_putstr_fd(mi_sys->senv.pwd, STDOUT_FILENO);
 		ft_putstr_fd(" is existing\n", STDOUT_FILENO);
-		mi_setenv("PWD", mi_sys->senv.pwd, mi_sys);
+		ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
+		dprintf(2,"71 key : %s value : %s\n", key, mi_sys->senv.pwd);
+		if(chdir( mi_sys->senv.pwd) == 0)
+			mi_setenv("PWD", mi_sys->senv.pwd, mi_sys);
+		else
+			ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
 	}
 	else
 	{

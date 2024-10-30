@@ -16,15 +16,20 @@ int mi_setenv(char *key, char *value, t_sys *sys)
 {
 	int i;
 	int len;
+	char *tmp;
 
+	dprintf(2,"mi_setenv key  20 : %s value : %s\n", key, value);
 	i = 0;
 	len = ft_strlen(key);
 	while (sys->env[i])
 	{
 		if (ft_strncmp (sys->env[i], key, len) == 0)
 		{
+			dprintf(2,"mi_setenv key  28 : %s value : %s\n", key, value);
+			tmp = join_3(key, "=", value);
 			free(sys->env[i]);
-			sys->env[i] = join_3(key, "=",value);
+			
+			sys->env[i] = tmp;
 			return (i);
 			break;
 		}
