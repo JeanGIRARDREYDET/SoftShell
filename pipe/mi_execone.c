@@ -45,15 +45,13 @@ void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 	return ;
 }
 
-void	mi_exepermis(t_cmd *pi, t_sys *mi_sys)
+void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 {
-	if (access(pi->cmd, X_OK) == 0)
+	if (access(mi->cmd, X_OK) == 0)
 		return ;
-	mi_logerrorlong(126, "mi: ", pi->cmd, ": Permission denied", &pi->error);
+	mi_logerrorlong(126, "mi: ", mi->cmd, ": Permission denied", &mi->error);
 	mi_sys->nb_error++;
 }
-
-
 
 // https://www.mbillaud.fr/notes/pipeline.html
 // l0
@@ -95,7 +93,6 @@ int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
 		{
 			mi_execcmd(mi_cmd, mi_sys);
 		}
-		
 	}
 	if (mi_cmd->no != 0)
 		close (mi_sys->fd_in);

@@ -31,10 +31,10 @@ void	mi_freecmd(t_cmd *mi_cmd)
 	if (mi_cmd->next != NULL)
 		mi_freecmd(mi_cmd->next);
 	if (mi_cmd->cmd != NULL)
-		{
-			free(mi_cmd->cmd);
-				mi_cmd->cmd = NULL;
-		}
+	{
+		free(mi_cmd->cmd);
+		mi_cmd->cmd = NULL;
+	}
 	mi_cmd->next = NULL;
 	free(mi_cmd);
 }

@@ -41,9 +41,10 @@ void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	dprintf(2, "	mi_execcmd ('%s') \n", mi_cmd->cmd);
-	if ((mi_cmd->cmd == NULL && mi_cmd->cmd == NULL ) || mi_cmd->error.code_error != 0)
+	if (mi_cmd->cmd == NULL && mi_cmd->cmd == NULL )
 		return (1);
+	if(mi_cmd->error.code_error != 0)
+		exit(0);
 	if (mi_cmd->builtin == true)
 	{
 		mi_exebuiltin(mi_cmd, mi_sys);

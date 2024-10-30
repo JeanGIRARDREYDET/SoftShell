@@ -35,8 +35,9 @@ void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		free(pathcmd);
 	}
+	mi_logerror(126, ft_strjoin("command not found ", mi_cmd->cmd), &mi_cmd->error);
 	ft_arrclose(paths);
-	mi_logerrorlong(126, "command not found " ,"",mi_cmd->cmd, &mi_cmd->error);
+	
 }
 
 void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
