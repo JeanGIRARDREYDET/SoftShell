@@ -19,11 +19,19 @@ void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys)
 	char		**paths;
 	char		*pathstring;
 
-	if (!mi_cmd->cmd || access(mi_cmd->cmd, F_OK) == 0 || mi_cmd->builtin == true)
+	if (!mi_cmd->cmd || mi_cmd->builtin == true)
 		return ;
+	if (access(mi_cmd->cmd, F_OK) == 0)
+	{
+		mi_cmd->cmd = ft_strdup(mi_cmd->cmd);
+		return ;
+	}
 	pathcmd = join_3(mi_getenv_env("PWD", mi_sys->env), "/", mi_cmd->cmd);
 	if (access(pathcmd, F_OK) == 0)
+	{
+		mi_cmd->cmd = pathcmd;
 		return ;
+	}
 	pathstring = ft_strdup(mi_getenv("PATH", mi_sys));
 	paths = ft_split (pathstring, ':');
 	free(pathstring);
@@ -43,3 +51,5 @@ void	mi_checkpathaccess (t_cmd *mi_cmd, t_sys *mi_sys)
 	ft_arrclose(paths);
 	free(pathcmd);
 }
+
+

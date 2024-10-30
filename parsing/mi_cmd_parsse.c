@@ -26,7 +26,8 @@ void	mi_cmdherdoc(t_cmd *mp)
 }
 
 void	mi_cmdparsse(t_cmd *mi_cmd)
-{	int	i;
+{
+	int	i;
 
 	if (mi_cmd->full_cmd == NULL)
 		return ;
@@ -43,7 +44,7 @@ void	mi_cmdparsse(t_cmd *mi_cmd)
 	else
 	{
 		mi_cmd->builtin = false;
-		mi_cmd->cmd = ft_strdup(mi_cmd->split_cmd[0]);
+		mi_cmd->cmd = mi_cmd->split_cmd[0];
 	}
 }
 
