@@ -47,7 +47,7 @@ char	*mi_getenv_env(char *key, char **env)
 			break ;
 		i++;
 	}
-	if(env[i])
+	if (env[i])
 		return (env[i] + len + 1);
 	return (NULL);
 }

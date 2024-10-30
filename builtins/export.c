@@ -24,11 +24,9 @@ void	print_export(t_sys *mi_sys)
 	int	i;
 
 	i = 0;
-	dprintf(2, "			print_export\n");
-	dprintf(2, "			print_export env  %s\n", mi_sys->env[0]);
+
 	if (mi_sys->env == NULL)
 	{
-		dprintf(2, "			print_export NULL\n");
 		return ;
 	}
 	while (mi_sys->env[i++])
@@ -49,14 +47,11 @@ void	s_env_create_value(char *line, t_sys *s_sys)
 	s_sys->senv.len = s_sys->senv.len + 2;
 	ienv = (char **)ft_calloc(s_sys->senv.len, sizeof(char *));
 	i = -1;
-	printf ("export i  %d\n", i);
 	while (s_sys->env[++i])
 		ienv[i] = ft_strdup(s_sys->env[i]);
 	ienv[i] = line;
 	free (s_sys->env);
-	printf ("export 57 len  %d\n", i);
 	s_sys->env = ienv;
-	printf ("export 59 len  %d\n", i);
 }
 
 void	s_env_create_update_value(char *line, t_sys *s_sys)
@@ -88,7 +83,6 @@ int	export_values(char *key, t_sys *s_sys)
 	s_env_create_update_value(ft_strdupleft (key, next_value), s_sys);
 	if (key[next_value] != '\0')
 		export_values(key + next_value, s_sys);
-	printf ("</export_values>\n");
 	return (0);
 }
 
@@ -101,5 +95,4 @@ void	builtin_export(char *key, t_sys *mi_sys)
 		print_export(mi_sys);
 	else
 		export_values(key, mi_sys);
-	printf ("</builtin_export>\n");
 }

@@ -56,7 +56,7 @@ int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 		mi_logerror(126, "Command found but in error ", &mi_cmd->error);
 		return (errno);
 	}
-		perror(ft_strjoin("command not found: :", mi_cmd->cmd));
-		mi_logerror(126, "command not found ", &mi_cmd->error);
-		return (errno);
+	perror(ft_strjoin("command not found: :", mi_cmd->cmd));
+	mi_logerror(126, "command not found ", &mi_cmd->error);
+	return (errno);
 }
