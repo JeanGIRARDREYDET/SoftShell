@@ -91,11 +91,11 @@ int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
 			close (mi_cmd->fd[1]);
 //			dprintf(2, "	-last end	fd ='%d'\n", mi_cmd->fd[1]);
 		}
-		if (mi_cmd->cmd != NULL || mi_cmd->builtin_cmd !=NULL)
+		if (mi_cmd->cmd != NULL)
 		{
 			mi_execcmd(mi_cmd, mi_sys);
 		}
-		exit (EXIT_FAILURE);
+		
 	}
 	if (mi_cmd->no != 0)
 		close (mi_sys->fd_in);
@@ -179,27 +179,33 @@ if (mi_cmd->id != 0)
 //	return (1);
 //}
 
+
+
+/*
+
+*/
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 {
+	printf("mi_execone\n");
 	if (ft_strncmp(mi_cmd->cmd, "exit", 5) == 0)
 	{
 		printf("exit\n");
 		exit(0);
 	}
-	else if (ft_strncmp(mi_cmd->builtin_cmd, "env", 4) == 0)
+	else if (ft_strncmp(mi_cmd->cmd, "env", 4) == 0)
 		builtin_env(mi_sys);
-	else if (ft_strncmp(mi_cmd->builtin_cmd, "env", 4) == 0)
+	else if (ft_strncmp(mi_cmd->cmd, "env", 4) == 0)
 		builtin_env(mi_sys);
-	else if (ft_strncmp(mi_cmd->builtin_cmd, "pwd", 4) == 0)
+	else if (ft_strncmp(mi_cmd->cmd, "pwd", 4) == 0)
 		builtin_pwd();
-	else if (ft_strncmp(mi_cmd->builtin_cmd, "echo", 4) == 0)
+	else if (ft_strncmp(mi_cmd->cmd, "echo", 4) == 0)
 		builtin_echo(ft_post_left_sep(mi_cmd->cmd, WSPACE));
-	else if (ft_strncmp(mi_cmd->builtin_cmd, "cd", 2) == 0)
-		builtin_cd(ft_post_left_sep(mi_cmd->builtin_cmd, WSPACE), mi_sys);
-	else if (ft_strncmp(mi_cmd->builtin_cmd, "unset", 5) == 0)
+	else if (ft_strncmp(mi_cmd->cmd, "cd", 2) == 0)
+		builtin_cd(ft_post_left_sep(mi_cmd->cmd, WSPACE), mi_sys);
+	else if (ft_strncmp(mi_cmd->cmd, "unset", 5) == 0)
 		builtin_unset(mi_cmd->args[0], mi_sys);
-	else if (ft_strncmp(mi_cmd->builtin_cmd, "export", 6) == 0)
-		builtin_export(ft_post_left_sep(mi_cmd->builtin_cmd, WSPACE), mi_sys);
+	else if (ft_strncmp(mi_cmd->cmd, "export", 6) == 0)
+		builtin_export(ft_post_left_sep(mi_cmd->cmd, WSPACE), mi_sys);
 	else
 		mi_cmd->builtin = false;
 	if (mi_cmd->builtin == false)

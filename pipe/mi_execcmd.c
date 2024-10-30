@@ -16,7 +16,7 @@ void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	char	*cmd;
 
-	cmd = mi_cmd->builtin_cmd;
+	cmd = mi_cmd->cmd;
 	if (mi_sys->env == NULL)
 	{
 		dprintf(2, "			mi_exebuiltin env  NULL\n");
@@ -41,15 +41,21 @@ void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	if (mi_cmd->cmd == NULL && mi_cmd->builtin_cmd == NULL)
+	dprintf(2, "	mi_execcmd ('%s') \n", mi_cmd->cmd);
+	if ((mi_cmd->cmd == NULL && mi_cmd->cmd == NULL ) || mi_cmd->error.code_error != 0)
 		return (1);
 	if (mi_cmd->builtin == true)
+	{
 		mi_exebuiltin(mi_cmd, mi_sys);
+		return (1);
+	}
 	else if (execve(mi_cmd->cmd, mi_cmd->split_cmd, mi_sys->env) == -1)
 	{
 		perror(ft_strjoin("Command :", mi_cmd->cmd));
 		mi_logerror(126, "Command found but in error ", &mi_cmd->error);
 		return (errno);
 	}
-	return (1);
+		perror(ft_strjoin("command not found: :", mi_cmd->cmd));
+		mi_logerror(126, "command not found ", &mi_cmd->error);
+		return (errno);
 }

@@ -75,6 +75,7 @@ int	main(int ac, char **argv, char **env)
 		printf("Error: minishell does not take arguments. Try: ./%s\n", argv[0]);
 		exit(0);
 	}
+	
 	mi_sysinitialization(env, &mi_sys);
 	while (1)
 	{
@@ -92,7 +93,7 @@ int	main(int ac, char **argv, char **env)
 		mi_syscmditer(&mi_sys, &mi_expand_interface);
 		mi_cmditer (mi_cmd, &mi_cmdsplitcmd);
 		mi_cmditer (mi_cmd, &mi_cmdparsse);
-//		mi_cmditer (mi_cmd, &mi_checkbuiltin);
+		mi_cmditer (mi_cmd, &mi_checkbuiltin);
 		mi_syscmditer (&mi_sys, &mi_checkpathaccess);
 		mi_syscmditer (&mi_sys, &mi_cmdexec);
 		mi_waitingpipe(&mi_sys);
