@@ -25,10 +25,13 @@ void	mi_syscmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd, t_sys *mi_sys))
 {
 	t_cmd	*mi_cmd;
 
+	dprintf(2, "mi_syscmditer\n");
 	mi_cmd = mi_sys->cmd;
 	while (mi_cmd != NULL)
 	{
+		dprintf(2, "	syscmditer\n");
 		(*f)(mi_cmd, mi_sys);
 		mi_cmd = mi_cmd->next;
 	}
+	dprintf(2, "/mi_syscmditer\n");
 }

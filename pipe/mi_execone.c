@@ -59,7 +59,6 @@ int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	if (mi_cmd->next != NULL)
 	{
-//		printf("pipe\n");
 		if (pipe(mi_cmd->fd) == -1)
 			return (mi_intlogerror (mi_cmd, "pipe out failed", 1));
 	}
