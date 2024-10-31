@@ -63,15 +63,17 @@ int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
 		if (pipe(mi_cmd->fd) == -1)
 			return (mi_intlogerror (mi_cmd, "pipe out failed", 1));
 	}
-	mi_cmd->id = fork();
+	if (mi_sys->nb_pipe >1)
+		mi_cmd->id = fork();
 //	dprintf(2, "<mi_execchild no='%d' id='%d' cmd='%s'>\n", mi_cmd->no, mi_cmd->id , mi_cmd->cmd);
 	if (mi_cmd->id == -1)
 		return (mi_intlogerror (mi_cmd, "fork out failed", 1));
-//	dprintf(2, "72/n");
+	dprintf(2, "------\n");
 	if (mi_cmd->id == 0)
 	{
 		if (mi_cmd->no != 0)
 		{
+			dprintf(2, "	A\n");
 //			dprintf(2, "	sec+	fd ='%d'\n", mi_cmd->fd[0]);
 			if (dup2(mi_sys->fd_in, STDIN_FILENO) == -1)
 				return (1);
@@ -81,6 +83,7 @@ int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
 //		dprintf(2, "96/n");
 		if (mi_cmd->next != NULL)
 		{
+			dprintf(2, "	B\n");
 //			dprintf(2, "	-last	fd ='%d'\n", mi_cmd->fd[1]);
 			if (dup2(mi_cmd->fd[1], STDOUT_FILENO) == -1)
 				return (1);
@@ -91,14 +94,19 @@ int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		if (mi_cmd->cmd != NULL)
 		{
+			dprintf(2, "	C nb pipe = %s\n", mi_cmd->full_cmd);
 			mi_execcmd(mi_cmd, mi_sys);
 		}
 	}
 	if (mi_cmd->no != 0)
+	{	dprintf(2, "	/A\n");
 		close (mi_sys->fd_in);
+	}
+		
 //	dprintf(2, "	- 109 close	fd ='%d'\n", mi_sys->fd_in);
 	if (mi_cmd->next != NULL)
 	{
+		dprintf(2, "	/B\n");
 //		dprintf(2, "	-close	fd ='%d'\n", mi_sys->fd_in);
 		close (mi_cmd->fd[1]);
 		mi_sys->fd_in = mi_cmd->fd[0];
@@ -181,36 +189,4 @@ if (mi_cmd->id != 0)
 /*
 
 */
-void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
-{
-	printf("mi_execone\n");
-	if (ft_strncmp(mi_cmd->cmd, "exit", 5) == 0)
-	{
-		printf("exit\n");
-		exit(0);
-	}
-	else if (ft_strncmp(mi_cmd->cmd, "env", 4) == 0)
-		builtin_env(mi_sys);
-	else if (ft_strncmp(mi_cmd->cmd, "env", 4) == 0)
-		builtin_env(mi_sys);
-	else if (ft_strncmp(mi_cmd->cmd, "pwd", 4) == 0)
-		builtin_pwd();
-	else if (ft_strncmp(mi_cmd->cmd, "echo", 4) == 0)
-		builtin_echo(ft_post_left_sep(mi_cmd->cmd, WSPACE));
-	else if (ft_strncmp(mi_cmd->cmd, "cd", 2) == 0)
-		builtin_cd(ft_post_left_sep(mi_cmd->cmd, WSPACE), mi_sys);
-	else if (ft_strncmp(mi_cmd->cmd, "unset", 5) == 0)
-		builtin_unset(mi_cmd->args[0], mi_sys);
-	else if (ft_strncmp(mi_cmd->cmd, "export", 6) == 0)
-		builtin_export(ft_post_left_sep(mi_cmd->cmd, WSPACE), mi_sys);
-	else
-		mi_cmd->builtin = false;
-	if (mi_cmd->builtin == false)
-	{
-		mi_exefind(mi_cmd, mi_sys);
-		if (mi_cmd->cmd)
-			mi_exepermis(mi_cmd, mi_sys);
-		if (mi_cmd->cmd)
-			mi_execchild(mi_cmd, mi_sys);
-	}
-}
+

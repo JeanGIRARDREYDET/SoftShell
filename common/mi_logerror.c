@@ -18,15 +18,12 @@ void	mi_logerror(int code_error, char *msg, t_error *mi_error)
 
 	perror(msg);
 	error = ft_calloc(1, sizeof(t_error));
-	mi_error->code_error = code_error;
-	mi_error->msg = msg;
-	mi_error->next = NULL;
-	while (mi_error->next != NULL)
-		mi_error = mi_error->next;
-	if(mi_error->code_error != 0)
-		mi_error->next = error;
-	else
-		mi_error = error;
+	error->code_error = code_error;
+	error->msg = msg;
+	error->next = NULL;
+//	while (mi_error != NULL)
+//		mi_error = mi_error->next;
+	mi_error = error;
 }
 
 void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_error *mi_err)

@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/06 12:08:01 by doferet           #+#    #+#             */
+/*   Created: 2024/09/06 12:08:01 by jegirard          #+#    #+#             */
 /*   Updated: 2024/10/20 19:22:16 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
@@ -53,10 +53,11 @@ void mi_cmdexec(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	// char	**argv;
 
-
+	dprintf(2, "cmdecec\n");
 
 		// argv = ft_split(mi_cmd->full_cmd, ' ');
 		mi_execchild(mi_cmd, mi_sys);
+	dprintf(2, "/cmdecec\n");
 }
 void mi_checkline(char *line)
 {
