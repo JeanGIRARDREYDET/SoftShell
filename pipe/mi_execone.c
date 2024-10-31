@@ -62,14 +62,15 @@ int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
 		if (pipe(mi_cmd->fd) == -1)
 			return (mi_intlogerror (mi_cmd, "pipe out failed", 1));
 	}
-	if (mi_sys->nb_pipe >1)
+	if (mi_sys->nb_pipe > 1)
 		mi_cmd->id = fork();
+	dprintf(2, " id = %d\n",mi_cmd->id);
 //	dprintf(2, "<mi_execchild no='%d' id='%d' cmd='%s'>\n", mi_cmd->no, mi_cmd->id , mi_cmd->cmd);
 	if (mi_cmd->id == -1)
 		return (mi_intlogerror (mi_cmd, "fork out failed", 1));
-	dprintf(2, "------\n");
 	if (mi_cmd->id == 0)
 	{
+		
 		if (mi_cmd->no != 0)
 		{
 			dprintf(2, "	A\n");
