@@ -20,7 +20,7 @@ void	mi_freeerror(t_error *mi_error, t_sys *mi_sys)
 	while (mi_error != NULL)
 	{
 		tmp = mi_error->next;
-	//	free(mi_error);
+		//free(mi_error);
 		mi_error = tmp;
 	}
 }
