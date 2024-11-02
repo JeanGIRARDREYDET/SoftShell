@@ -57,7 +57,7 @@ char	*ft_chrrepeat(char c, int n)
 	return (str);
 }
 
-void mi_parseredirtocken(t_cmd *mi_cmd, int *i, int *n)
+void	mi_parseredirtocken(t_cmd *mi_cmd, int *i, int *n)
 {
 	int		j;
 	char	capt_redir;

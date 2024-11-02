@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mi_expand.c                                        :+:      :+:    :+:   */
@@ -8,7 +8,7 @@
 /*   Created: 2024/10/04 15:47:44 by jegirard          #+#    #+#             */
 /*   Updated: 2024/10/15 02:51:15 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -37,28 +37,45 @@ char	*find_expand(char *line)
 	return (ft_substr(line, c1, c2 - c1));
 }
 
-void	mi_expand_find(char **full_cmd, int i, t_sys *sys)
+void	mi_expand_find_error(char **full_cmd, int i, int len, t_sys *sys)
+{
+	char	*code_error;
+	char	*replace;
+
+	code_error = ft_itoa(sys->code_error);
+	replace = ft_strsubreplace(full_cmd[0], i, len + 1, code_error);
+	free(*full_cmd);
+	free(code_error);
+	*full_cmd = replace;
+}
+
+void	mi_expand_find_env(char **full_cmd, int i, int len, t_sys *sys)
 {
 	char	*search;
 	char	*find;
 	char	*replace;
+
+	search = ft_substr(full_cmd[0], i, len);
+	find = mi_getenv(search + 1, sys);
+	free(search);
+	if (!find)
+		return ;
+	replace = ft_strsubreplace(full_cmd[0], i, len, find);
+	free(*full_cmd);
+	*full_cmd = replace;
+}
+
+void	mi_expand_find(char **full_cmd, int i, t_sys *sys)
+{
 	int		len;
 
 	len = 1;
-	while (full_cmd[0][len +i] && ft_isalnum(full_cmd[0][len +i]))
+	while (full_cmd[0][len + i] && ft_isalnum(full_cmd[0][len + i]))
 		len++;
+	if (len == 1 && full_cmd[0][i + 1] == '?')
+		mi_expand_find_error(full_cmd, i, len, sys);
 	if (len > 1)
-	{
-		search = ft_substr(full_cmd[0], i, len);
-		find = mi_getenv(search + 1, sys);
-		free(search);
-		if (find)
-		{
-			replace = ft_strsubreplace(full_cmd[0], i, len, find);
-			free(*full_cmd);
-			*full_cmd = replace;
-		}
-	}
+		mi_expand_find_env(full_cmd, i, len, sys);
 }
 
 void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
@@ -74,13 +91,13 @@ void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 			echap = full_cmd[0][i];
 		else if (full_cmd[0][i] == echap)
 			echap = '\0';
-		if (echap!='\'' && full_cmd[0][i] == '$')
+		if (echap != '\'' && full_cmd[0][i] == '$')
 			mi_expand_find(full_cmd, i, mi_sys);
 		i++;
 	}
 }
 
-void	mi_expand_interface (t_cmd *mi_cmd, t_sys *mi_sys)
+void	mi_expand_interface(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	mi_expand(&mi_cmd->full_cmd, 0, mi_sys);
 }

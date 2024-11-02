@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/06 12:08:01 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/20 19:22:16 by jegirard         ###   ########.fr       */
+/*   Created: 2024/11/02 17:29:03 by jegirard          #+#    #+#             */
+/*   Updated: 2024/11/02 17:29:09 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -47,39 +47,39 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 	free(mi_cmd->cmd);
 	return ;
 }
-
-
-
 void mi_checkline(char *line)
 {
 	if(ft_findword("exit", line ))
 			builtin_exit();
 }
 
-int	main(int ac, char **argv, char **env)
+void mi_checkmsargument(int argc, char **argv)
+{
+	if (argc > 1)
+	{
+		printf("Error: minishell does not take arguments. Try: ./%s\n", argv[0]);
+		exit(0);
+	}
+}
+
+int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_sys	mi_sys;
 	t_cmd	*mi_cmd;
 
-	if (ac > 1)
-	{
-		printf("Error: minishell does not take arguments. Try: ./%s\n", argv[0]);
-		exit(0);
-	}
-	
+	mi_checkmsargument(argc, argv);
 	mi_sysinitialization(env, &mi_sys);
 	while (1)
 	{
 		line = readline("minishell> ");
 		while (*line !='\0' && ft_strrchr (WSPACE, *line ) != NULL)
 			line++;
-		if (*line =='\0')
+		if (*line == '\0')
 			continue;
 		mi_checkline(line);
-
 		mi_sys.nb_pipe = 0;
-		mi_cmd = mi_createcmd(&mi_sys);
+		mi_cmd = mi_createcmd (&mi_sys);
 		mi_lexingline (line, 0, mi_cmd, &mi_sys);
 		mi_sys.cmd = mi_cmd;
 		mi_syscmditer(&mi_sys, &mi_expand_interface);
@@ -88,9 +88,8 @@ int	main(int ac, char **argv, char **env)
 		mi_cmditer (mi_cmd, &mi_checkbuiltin);
 		mi_syscmditer (&mi_sys, &mi_checkpathaccess);
 		mi_syscmditer (&mi_sys, &mi_execone);
-		mi_waitingpipe(&mi_sys);
-		if (mi_cmd->id > 0)
-			mi_freecmd(mi_cmd);
+		mi_waitingpipe (&mi_sys);
+		mi_freecmd(mi_cmd,&mi_sys);
 //		mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 //		mi_exec(&mi_cmd &mi_sys);
 		add_history(line);

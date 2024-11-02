@@ -12,10 +12,11 @@
 
 #include "../minishell.h"
 
-void	mi_freeerror(t_error *mi_error)
+void	mi_freeerror(t_error *mi_error, t_sys *mi_sys)
 {
 	t_error	*tmp;
 
+	mi_sys->code_error = mi_error->code_error;
 	while (mi_error != NULL)
 	{
 		tmp = mi_error->next;
@@ -24,9 +25,10 @@ void	mi_freeerror(t_error *mi_error)
 	}
 }
 
-void	mi_freecmd(t_cmd *mi_cmd)
+void	mi_freecmd (t_cmd *mi_cmd, t_sys *mi_sys)
 {
-
+	if (!(mi_cmd->id > 0))
+		return ;
 //	if (mi_cmd->arg != NULL)
 //		free(mi_cmd->arg);
 //	if (mi_cmd->args != NULL)
@@ -39,13 +41,13 @@ void	mi_freecmd(t_cmd *mi_cmd)
 	if (mi_cmd->redirection != NULL)
 		free(mi_cmd->redirection);
 	if (mi_cmd->next != NULL)
-		mi_freecmd(mi_cmd->next);
+		mi_freecmd(mi_cmd->next, mi_sys);
 	if (mi_cmd->cmd != NULL)
 	{
 		free(mi_cmd->cmd);
 		mi_cmd->cmd = NULL;
 	}
-	mi_freeerror(&mi_cmd->error);
+	mi_freeerror(&mi_cmd->error, mi_sys);
 	mi_cmd->next = NULL;
 	free(mi_cmd);
 }

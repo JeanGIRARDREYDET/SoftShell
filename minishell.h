@@ -99,9 +99,10 @@ typedef struct s_sys
 	int				nb_error;
 	char			**cmd_args;
 	int				error[2];
+	int				code_error;
 	int				fd_in;
 	t_env			senv;
-	char			**env;
+	char			**env;;
 	t_cmd			*cmd;
 }	t_sys;
 
@@ -145,7 +146,7 @@ int		mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys);
 int		mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_exec(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys);
-void	mi_freecmd(t_cmd *mi_cmd);
+void	mi_freecmd(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_waitingpipe(t_sys *mi_sys);
 void	mi_cmdherdoc(t_cmd *mi_cmd); 
 void	mi_cmdsplitcmd(t_cmd *mi_cmd);
