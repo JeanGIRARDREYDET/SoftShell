@@ -123,7 +123,7 @@ void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
 
 void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys);
-void	mi_expand_interface(t_cmd *me_cmd, t_sys *mi_sys);
+void	mi_expand_interface(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_exec(t_cmd *me_cmd, t_sys *mi_sys);
 void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_oneexec(t_cmd *me_cmd, t_sys *mi_sys);
