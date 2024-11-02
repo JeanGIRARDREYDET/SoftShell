@@ -16,11 +16,11 @@ void	mi_freeerror(t_error *mi_error)
 {
 	t_error	*tmp;
 
-	while (mi_error->msg != NULL)
+	while (mi_error != NULL)
 	{
-		tmp = mi_error;
-		mi_error = mi_error->next;
-		free(tmp);
+		tmp = mi_error->next;
+	//	free(mi_error);
+		mi_error = tmp;
 	}
 }
 
