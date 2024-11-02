@@ -64,7 +64,6 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 			return ;
 		}
 	}
-	//if (mi_sys->nb_pipe > 1)
 	mi_cmd->id = fork();
 	if (mi_cmd->id == -1)
 	{

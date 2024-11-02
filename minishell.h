@@ -121,6 +121,7 @@ void	mi_unset(char *key, t_sys *s_sys);
 void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
 
+void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_expand_interface(t_cmd *me_cmd, t_sys *mi_sys);
 void	mi_exec(t_cmd *me_cmd, t_sys *mi_sys);
 void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys);
@@ -139,6 +140,7 @@ char	*ft_findcommand(char *line);
 
 void	mi_closecmd(t_cmd *mi_cmd, int nb);
 t_cmd	*mi_createcmd(t_sys *mi_sys);
+void	mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys);
 int		mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys);
 int		mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_exec(t_cmd *mi_cmd, t_sys *mi_sys);

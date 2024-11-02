@@ -96,6 +96,7 @@ SRCS = 			main.c \
 				pipe/mi_closepipe.c \
 				pipe/mi_createcmd.c \
 				pipe/mi_exec.c \
+				pipe/mi_execbuiltin.c \
 				pipe/mi_execcmd.c \
 				pipe/mi_execone.c \
 				pipe/mi_freecmd.c \
