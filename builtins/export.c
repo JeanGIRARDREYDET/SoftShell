@@ -57,7 +57,7 @@ void	s_env_create_value(char *line, t_sys *s_sys)
 void	s_env_create_update_value(char *line, t_sys *s_sys)
 {
 	int			pos;
-printf ("s_env_create_update_value\n");
+	printf ("s_env_create_update_value\n");
 	pos = ft_get_confpos(line, '=', s_sys->env);
 	if (pos == -1)
 		s_env_create_value (line, s_sys);
@@ -67,6 +67,7 @@ printf ("s_env_create_update_value\n");
 		s_sys->env[pos] = line;
 	}
 	printf ("s_env_create_update_value\n");
+	exit(EXIT_SUCCESS);
 }
 
 int	export_values(char *key, t_sys *s_sys)
@@ -83,7 +84,7 @@ int	export_values(char *key, t_sys *s_sys)
 	s_env_create_update_value(ft_strdupleft (key, next_value), s_sys);
 	if (key[next_value] != '\0')
 		export_values(key + next_value, s_sys);
-	return (0);
+	exit(EXIT_SUCCESS);
 }
 
 void	builtin_export(char *key, t_sys *mi_sys)
@@ -95,4 +96,5 @@ void	builtin_export(char *key, t_sys *mi_sys)
 		print_export(mi_sys);
 	else
 		export_values(key, mi_sys);
+	
 }

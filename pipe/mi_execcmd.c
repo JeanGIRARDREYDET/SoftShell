@@ -35,6 +35,7 @@ void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 		builtin_pwd();
 	else if (ft_findword("unset", cmd))
 		builtin_unset(mi_cmd->arg, mi_sys);
+	exit( EXIT_FAILURE);
 }
 
 //	dprintf(2, "	mi_execcmd ('%s') \n", mi_cmd->cmd);

@@ -53,69 +53,50 @@ void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 	mi_sys->nb_error++;
 }
 
-// https://www.mbillaud.fr/notes/pipeline.html
-// l0
-int	mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys)
+
+void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	if (mi_cmd->next != NULL)
 	{
 		if (pipe(mi_cmd->fd) == -1)
-			return (mi_intlogerror (mi_cmd, "pipe out failed", 1));
+		{	
+			mi_intlogerror (mi_cmd, "pipe out failed", 1);
+			return ;
+		}
 	}
-	if (mi_sys->nb_pipe > 1)
-		mi_cmd->id = fork();
-	dprintf(2, " id = %d\n",mi_cmd->id);
-//	dprintf(2, "<mi_execchild no='%d' id='%d' cmd='%s'>\n", mi_cmd->no, mi_cmd->id , mi_cmd->cmd);
+	//if (mi_sys->nb_pipe > 1)
+	mi_cmd->id = fork();
 	if (mi_cmd->id == -1)
-		return (mi_intlogerror (mi_cmd, "fork out failed", 1));
+	{
+		mi_intlogerror (mi_cmd, "fork out failed", 1);
+		return ;
+	}
 	if (mi_cmd->id == 0)
 	{
-		
 		if (mi_cmd->no != 0)
 		{
-			dprintf(2, "	A\n");
-//			dprintf(2, "	sec+	fd ='%d'\n", mi_cmd->fd[0]);
 			if (dup2(mi_sys->fd_in, STDIN_FILENO) == -1)
-				return (1);
+				return ;
 			close (mi_sys->fd_in);
-//			dprintf(2, "	sec+ end	fd ='%d'\n", mi_cmd->fd[0]);
 		}
-//		dprintf(2, "96/n");
 		if (mi_cmd->next != NULL)
 		{
-			dprintf(2, "	B\n");
-//			dprintf(2, "	-last	fd ='%d'\n", mi_cmd->fd[1]);
 			if (dup2(mi_cmd->fd[1], STDOUT_FILENO) == -1)
-				return (1);
-//			dprintf(2, "	-last close	fd ='%d'\n", mi_cmd->fd[1]);
+				return ;
 			close (mi_cmd->fd[0]);
 			close (mi_cmd->fd[1]);
-//			dprintf(2, "	-last end	fd ='%d'\n", mi_cmd->fd[1]);
 		}
 		if (mi_cmd->cmd != NULL)
-		{
-			dprintf(2, "	C nb pipe = %s\n", mi_cmd->full_cmd);
 			mi_execcmd(mi_cmd, mi_sys);
-		}
 	}
 	if (mi_cmd->no != 0)
-	{	dprintf(2, "	/A\n");
 		close (mi_sys->fd_in);
-	}
-		
-//	dprintf(2, "	- 109 close	fd ='%d'\n", mi_sys->fd_in);
 	if (mi_cmd->next != NULL)
 	{
-		dprintf(2, "	/B\n");
-//		dprintf(2, "	-close	fd ='%d'\n", mi_sys->fd_in);
 		close (mi_cmd->fd[1]);
 		mi_sys->fd_in = mi_cmd->fd[0];
-//		dprintf(2, "	-close	fd ='%d'\n", mi_sys->fd_in);
 	}
-//	dprintf(2, "</mi_execchild no='%d' id='%d' cmd='%s'>\n", mi_cmd->no, mi_cmd->id, mi_cmd->cmd);
-	//	mi_freecmd (mi_cmd);
-	//	exit (EXIT_FAILURE);
-	return (0);
+	return ;
 }
 
 	/*

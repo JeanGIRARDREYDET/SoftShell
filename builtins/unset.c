@@ -21,5 +21,8 @@ void	builtin_unset(char *key, t_sys *s_sys)
 
 	pos = ft_get_confpos(key, '=', s_sys->env);
 	if (pos != -1)
+	{
 		free(s_sys->env[pos]);
+		exit(EXIT_SUCCESS);
+	}
 }

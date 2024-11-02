@@ -49,16 +49,7 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 }
 
 
-void mi_cmdexec(t_cmd *mi_cmd, t_sys *mi_sys)
-{
-	// char	**argv;
 
-	dprintf(2, "cmdecec\n");
-
-		// argv = ft_split(mi_cmd->full_cmd, ' ');
-		mi_execchild(mi_cmd, mi_sys);
-	dprintf(2, "/cmdecec\n");
-}
 void mi_checkline(char *line)
 {
 	if(ft_findword("exit", line ))
@@ -96,7 +87,7 @@ int	main(int ac, char **argv, char **env)
 		mi_cmditer (mi_cmd, &mi_cmdparsse);
 		mi_cmditer (mi_cmd, &mi_checkbuiltin);
 		mi_syscmditer (&mi_sys, &mi_checkpathaccess);
-		mi_syscmditer (&mi_sys, &mi_cmdexec);
+		mi_syscmditer (&mi_sys, &mi_execone);
 		mi_waitingpipe(&mi_sys);
 		if (mi_cmd->id > 0)
 			mi_freecmd(mi_cmd);
