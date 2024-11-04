@@ -97,25 +97,6 @@ void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 	}
 }
 
-void	ft_subchar(char *s, char c)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (!s || !s[0] || !c || c == '\0' || s ==NULL)
-		return ;
-	while (s[i] && s[i] != '\0')
-	{
-		s[j]= s[i];
-		if (s[j] != c)
-			j++;
-		i++;	
-	}
-	s[j] = '\0';
-}
-
 void	mi_expand_interface(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	mi_expand(&mi_cmd->full_cmd, 0, mi_sys);
