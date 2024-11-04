@@ -50,7 +50,6 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 	dprintf(2,"builtin_cd 52 key : %s\n", key);
 	mi_sys->senv.oldpwd = mi_sys->senv.pwd;
 	mi_setenv("OLDPWD", mi_sys->senv.oldpwd, mi_sys);
-
 	if (key == NULL || key[0] == '\0')
 		cd_home(mi_sys);
 	else if (ft_strncmp(key, "..", 3) == 0)

@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
@@ -8,7 +8,7 @@
 /*   Created: 2023/11/07 09:25:48 by jegirard          #+#    #+#             */
 /*   Updated: 2024/10/15 02:47:40 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 /*
 Description :	The strlen() function calculates the length of the string pointed
@@ -27,7 +27,7 @@ Retour :		The strlen() function returns the number of bytes in the string
 size_t	ft_strlen(char const *str)
 {
 	size_t	i;
-	
+
 	i = 0;
 	if (!str)
 		return (0);

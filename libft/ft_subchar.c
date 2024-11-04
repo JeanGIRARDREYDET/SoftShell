@@ -21,14 +21,14 @@ void	ft_subchar(char *s, char c)
 
 	i = 0;
 	j = 0;
-	if (!s || !s[0] || !c || c == '\0' || s ==NULL)
+	if (!s || !s[0] || !c || c == '\0' || s == NULL)
 		return ;
 	while (s[i] && s[i] != '\0')
 	{
-		s[j]= s[i];
+		s[j] = s[i];
 		if (s[j] != c)
 			j++;
-		i++;	
+		i++;
 	}
 	s[j] = '\0';
 }

@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **env)
 		while (*line !='\0' && ft_strrchr (WSPACE, *line ) != NULL)
 			line++;
 		if (*line == '\0')
-			continue;
+			continue ;
 		mi_checkline(line);
 		mi_sys.nb_pipe = 0;
 		mi_cmd = mi_createcmd (&mi_sys);
@@ -89,7 +89,7 @@ int	main(int argc, char **argv, char **env)
 		mi_syscmditer (&mi_sys, &mi_checkpathaccess);
 		mi_syscmditer (&mi_sys, &mi_execone);
 		mi_waitingpipe (&mi_sys);
-		mi_freecmd(mi_cmd,&mi_sys);
+		mi_freecmd(mi_cmd, &mi_sys);
 //		mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 //		mi_exec(&mi_cmd &mi_sys);
 		add_history(line);
