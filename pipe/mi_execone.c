@@ -55,10 +55,10 @@ void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	if (mi_sys->nb_pipe == 1)
+	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin)
 	{
-		mi_execcmd(mi_cmd, mi_sys);
-		return;
+		mi_execbuiltin(mi_cmd, mi_sys);
+		return ; 
 	}
 
 	if (mi_cmd->next != NULL)
