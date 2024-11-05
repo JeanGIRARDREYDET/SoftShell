@@ -37,6 +37,6 @@ void	mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 		builtin_unset(mi_cmd->arg, mi_sys);
 	else
 		exit (EXIT_FAILURE);
-	if (mi_sys->nb_pipe> 1)
+	if (mi_sys->nb_pipe > 1)
 		exit(mi_sys->exit_status);
 }

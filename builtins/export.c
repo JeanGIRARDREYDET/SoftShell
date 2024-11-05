@@ -24,14 +24,12 @@ void	print_export(t_sys *mi_sys)
 	int	i;
 
 	i = 0;
-
 	if (mi_sys->env == NULL)
 	{
 		return ;
 	}
 	while (mi_sys->env[i++])
 	{
-		//printf("declare -x %s\n", sys->env[i]);
 		write(STDOUT_FILENO, "declare -x ", 11);
 		write(STDOUT_FILENO, mi_sys->env[i], ft_strlen(mi_sys->env[i]));
 		write(STDOUT_FILENO,"\n",1);
@@ -61,7 +59,7 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 void	s_env_create_update_value(char *line, t_sys *mi_sys)
 {
 	int			pos;
-	printf ("s_env_create_update_value\n");
+
 	pos = ft_get_confpos(line, '=', mi_sys->env);
 	if (pos == -1)
 		s_env_create_value (line, mi_sys);
@@ -70,7 +68,6 @@ void	s_env_create_update_value(char *line, t_sys *mi_sys)
 		free(mi_sys->env[pos]);
 		mi_sys->env[pos] = line;
 	}
-	printf ("s_env_create_update_value\n");
 	mi_sys->exit_status = EXIT_SUCCESS;
 }
 
@@ -94,7 +91,6 @@ int	export_values(char *key, t_sys *mi_sys)
 
 void	builtin_export(char *key, t_sys *mi_sys)
 {
-		dprintf(2, "			builtin_export env %s\n", mi_sys->env[0]);
 	if (mi_sys->env == NULL)
 		dprintf(2, "			builtin_export env NULL\n");
 	if (!key || key[0] == '\0')

@@ -16,7 +16,7 @@
 
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	dprintf(2, "	mi_execcmd error('%d') \n", mi_cmd->error.code_error);
+	
 	if (mi_cmd->cmd == NULL && mi_cmd->cmd == NULL )
 		return (1);
 	if (mi_cmd->error.code_error != 0)

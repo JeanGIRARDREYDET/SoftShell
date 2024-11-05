@@ -23,8 +23,6 @@ void	mi_logerror(int code_error, char *msg, t_error *error)
 	error->code_error = code_error;
 	error->msg = msg;
 	error->next = NULL;
-//	
-	
 }
 
 void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_error *mi_err)

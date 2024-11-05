@@ -58,9 +58,8 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin)
 	{
 		mi_execbuiltin(mi_cmd, mi_sys);
-		return ; 
+		return ;
 	}
-
 	if (mi_cmd->next != NULL)
 	{
 		if (pipe(mi_cmd->fd) == -1)
@@ -103,7 +102,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	return ;
 }
 
-	/*
+/*
 if (mi_cmd->id != 0)
 	{
 
