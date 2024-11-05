@@ -30,5 +30,4 @@ void	builtin_echo(char *key)
 	write(STDOUT_FILENO, key, ft_strlen(key));
 	if (n == 1)
 			write(STDOUT_FILENO,"\n",1);
-	exit(EXIT_SUCCESS);
 }

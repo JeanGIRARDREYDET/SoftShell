@@ -23,6 +23,5 @@ void	builtin_unset(char *key, t_sys *s_sys)
 	if (pos != -1)
 	{
 		free(s_sys->env[pos]);
-		exit(EXIT_SUCCESS);
 	}
 }

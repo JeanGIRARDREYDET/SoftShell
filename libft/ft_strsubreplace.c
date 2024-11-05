@@ -12,32 +12,37 @@
 
 #include "../minishell.h"
 
+struct s_CompReplace
+{
+	int						i;
+	int						j;
+};
+
 char	*ft_strsubreplace(char *str, int start, int len, char *replace)
 {
-	char	*nw;
-	int		i;
-	int		j;
+	char					*nw;
+	struct s_CompReplace	cr;
 
-	i = 0;
-	j = 0;
+	cr.i = 0;
+	cr.j = 0;
 	nw = ft_calloc(ft_strlen(str) + ft_strlen(replace) - len + 1, sizeof(char));
-	while (i < start)
+	while (cr.i < start)
 	{
-		nw[i] = str[i];
-		i++;
+		nw[cr.i] = str[cr.i];
+		cr.i++;
 	}
-	while (replace[j])
+	while (replace[cr.j])
 	{
-		nw[i] = replace[j];
-		i++;
-		j++;
+		nw[cr.i] = replace[cr.j];
+		cr.i++;
+		cr.j++;
 	}
-	j = start + len;
-	while (str[j])
+	cr.j = start + len;
+	while (str[cr.j])
 	{
-		nw[i] = str[j];
-		i++;
-		j++;
+		nw[cr.i] = str[cr.j];
+		cr.i++;
+		cr.j++;
 	}
 	return (nw);
 }

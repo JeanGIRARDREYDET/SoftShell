@@ -98,12 +98,14 @@ typedef struct s_sys
 	int				nb_herdoc;
 	int				nb_error;
 	char			**cmd_args;
-	int				error[2];
+	int				terror[2];
 	int				code_error;
+	t_error			error;
 	int				fd_in;
 	t_env			senv;
-	char			**env;;
+	char			**env;
 	t_cmd			*cmd;
+	int 			exit_status;
 }	t_sys;
 
 bool	ft_findword(const char *source, const char *find);

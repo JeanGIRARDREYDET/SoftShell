@@ -72,7 +72,7 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 			mi_setenv("PWD", mi_sys->senv.pwd, mi_sys);
 		else
 			ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
-		exit(EXIT_SUCCESS);
+		mi_sys->exit_status = EXIT_SUCCESS;
 	}
 	else
 	{

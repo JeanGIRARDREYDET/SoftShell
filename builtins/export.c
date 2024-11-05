@@ -38,39 +38,43 @@ void	print_export(t_sys *mi_sys)
 	}
 }
 
-void	s_env_create_value(char *line, t_sys *s_sys)
+void	s_env_create_value(char *line, t_sys *mi_sys)
 {
 	char		**ienv;
 	int			i;
-	printf ("export s_sys->senv.le  %d\n", s_sys->senv.len);
 
-	s_sys->senv.len = s_sys->senv.len + 2;
-	ienv = (char **)ft_calloc(s_sys->senv.len, sizeof(char *));
+	mi_sys->senv.len = mi_sys->senv.len + 2;
+	ienv = (char **)ft_calloc(mi_sys->senv.len, sizeof(char *));
+	if (ienv == NULL)
+	{
+		mi_logerror(126, "Cannot allocate memory", &mi_sys->error);
+		mi_sys->exit_status = EXIT_FAILURE;
+	}
 	i = -1;
-	while (s_sys->env[++i])
-		ienv[i] = ft_strdup(s_sys->env[i]);
+	while (mi_sys->env[++i])
+		ienv[i] = ft_strdup(mi_sys->env[i]);
 	ienv[i] = line;
-	free (s_sys->env);
-	s_sys->env = ienv;
+	free (mi_sys->env);
+	mi_sys->env = ienv;
 }
 
-void	s_env_create_update_value(char *line, t_sys *s_sys)
+void	s_env_create_update_value(char *line, t_sys *mi_sys)
 {
 	int			pos;
 	printf ("s_env_create_update_value\n");
-	pos = ft_get_confpos(line, '=', s_sys->env);
+	pos = ft_get_confpos(line, '=', mi_sys->env);
 	if (pos == -1)
-		s_env_create_value (line, s_sys);
+		s_env_create_value (line, mi_sys);
 	else
 	{
-		free(s_sys->env[pos]);
-		s_sys->env[pos] = line;
+		free(mi_sys->env[pos]);
+		mi_sys->env[pos] = line;
 	}
 	printf ("s_env_create_update_value\n");
-	exit(EXIT_SUCCESS);
+	mi_sys->exit_status = EXIT_SUCCESS;
 }
 
-int	export_values(char *key, t_sys *s_sys)
+int	export_values(char *key, t_sys *mi_sys)
 {
 	int			next_value;
 
@@ -81,20 +85,20 @@ int	export_values(char *key, t_sys *s_sys)
 	next_value = 0 ;
 	while (key[next_value] != '\0' && key[next_value] > 32)
 		next_value++;
-	s_env_create_update_value(ft_strdupleft (key, next_value), s_sys);
+	s_env_create_update_value(ft_strdupleft (key, next_value), mi_sys);
 	if (key[next_value] != '\0')
-		export_values(key + next_value, s_sys);
-	exit(EXIT_SUCCESS);
+		export_values(key + next_value, mi_sys);
+	mi_sys->exit_status = EXIT_SUCCESS;
+	return (mi_sys->exit_status);
 }
 
 void	builtin_export(char *key, t_sys *mi_sys)
 {
-		dprintf(2, "			builtin_export env  %s\n", mi_sys->env[0]);
+		dprintf(2, "			builtin_export env %s\n", mi_sys->env[0]);
 	if (mi_sys->env == NULL)
-		dprintf(2, "			builtin_export env  NULL\n");
+		dprintf(2, "			builtin_export env NULL\n");
 	if (!key || key[0] == '\0')
 		print_export(mi_sys);
 	else
 		export_values(key, mi_sys);
-	
 }

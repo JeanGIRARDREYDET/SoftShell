@@ -26,5 +26,5 @@ void	builtin_env(t_sys *mi_sys)
 		}
 		i++;
 	}
-	exit(EXIT_SUCCESS);
+	mi_sys->exit_status = EXIT_SUCCESS;
 }
