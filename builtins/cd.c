@@ -47,6 +47,7 @@ void	cd_back(t_sys *mi_sys)
 
 void	builtin_cd(char *key, t_sys *mi_sys)
 {
+	int ret;
 	dprintf(2, "builtin_cd 52 key : %s\n", key);
 	mi_sys->senv.oldpwd = mi_sys->senv.pwd;
 	mi_setenv("OLDPWD", mi_sys->senv.oldpwd, mi_sys);
@@ -57,7 +58,9 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 	else
 	{
 		dprintf(2,"builtin_cd 61 key : %s\n", key);
-		chdir(key);
+		ret = chdir(key);
+		if(ret < 0)
+			mi_logerror(errno, strerror(errno), &mi_sys->error);
 		mi_sys->senv.pwd = getcwd(NULL, 0);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
 	}
@@ -65,11 +68,13 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 	if (access(mi_sys->senv.pwd, F_OK) == 0)
 	{
 		ft_putstr_fd(mi_sys->senv.pwd, STDOUT_FILENO);
-		if(chdir( mi_sys->senv.pwd) == 0)
-			mi_setenv("PWD", mi_sys->senv.pwd, mi_sys);
-		else
-			mi_logerror(1, "No such file or directory", &mi_sys->error);
-			//ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
+		ret = chdir(mi_sys->senv.pwd);
+		if(ret < 0)
+			mi_logerror(errno, strerror(errno), &mi_sys->error);
+		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
+		
+		//mi_logerror(1, "No such file or directory", &mi_sys->error);
+		//ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
 		mi_sys->exit_status = EXIT_SUCCESS;
 	}
 	else
