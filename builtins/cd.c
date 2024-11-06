@@ -20,7 +20,7 @@ void	cd_home(t_sys *mi_sys)
 {
 	if (!mi_sys->senv.home)
 	{
-		ft_putstr_fd("cd: HOME not set\n" ,STDOUT_FILENO);
+		ft_putstr_fd("cd: HOME not set\n", STDOUT_FILENO);
 		return ;
 	}
 	mi_sys->senv.pwd = mi_sys->senv.home;
@@ -35,7 +35,7 @@ void	cd_back(t_sys *mi_sys)
 	mi_sys->senv.pwd = mi_getenv("PWD", mi_sys);
 	if (!mi_sys->senv.pwd)
 	{
-		ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
+		ft_putstr_fd ("cd: DIR not set\n", STDOUT_FILENO);
 		return ;
 	}
 	while (mi_sys->senv.pwd[i])
@@ -47,8 +47,6 @@ void	cd_back(t_sys *mi_sys)
 
 void	builtin_cd(char *key, t_sys *mi_sys)
 {
-	int ret;
-	dprintf(2, "builtin_cd 52 key : %s\n", key);
 	mi_sys->senv.oldpwd = mi_sys->senv.pwd;
 	mi_setenv("OLDPWD", mi_sys->senv.oldpwd, mi_sys);
 	if (key == NULL || key[0] == '\0')
@@ -57,48 +55,23 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 		cd_back(mi_sys);
 	else
 	{
-		dprintf(2,"builtin_cd 61 key : %s\n", key);
-		ret = chdir(key);
-		if(ret < 0)
+		if (chdir(key))
 			mi_logerror(errno, strerror(errno), &mi_sys->error);
 		mi_sys->senv.pwd = getcwd(NULL, 0);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
 	}
-	dprintf(2,"builtin_cd 68 key : %s\n", key);
 	if (access(mi_sys->senv.pwd, F_OK) == 0)
 	{
 		ft_putstr_fd(mi_sys->senv.pwd, STDOUT_FILENO);
-		ret = chdir(mi_sys->senv.pwd);
-		if(ret < 0)
+		if ( chdir(mi_sys->senv.pwd))
 			mi_logerror(errno, strerror(errno), &mi_sys->error);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
-		
-		//mi_logerror(1, "No such file or directory", &mi_sys->error);
-		//ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
+		// ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
 		mi_sys->exit_status = EXIT_SUCCESS;
 	}
 	else
 	{
 		perror("access");
-		
-		mi_sys->exit_status =EXIT_FAILURE;
+		mi_sys->exit_status = EXIT_FAILURE;
 	}
-/*
-	// changing the current 
-	// working directory(cwd)
-	// to /usr 
-	if (chdir("/usr") != 0) 
-		perror("chdir() to /usr failed"); 
- 
-	// changing the cwd to /tmp 
-	if (chdir("/tmp") != 0) 
-		perror("chdir() to /temp failed"); 
- 
-	// there is no /error 
-	// directory in my pc 
-	if (chdir("/error") != 0) 
- 
-	// so chdir will return -1 
-	perror("chdir() to /error failed"); 
-	*/
 }

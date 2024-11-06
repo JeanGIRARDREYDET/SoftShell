@@ -47,10 +47,11 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 	free(mi_cmd->cmd);
 	return ;
 }
+
 void mi_checkline(char *line)
 {
-	if(ft_findword("exit", line ))
-			builtin_exit();
+	if (ft_findword("exit", line))
+		builtin_exit();
 }
 
 void mi_checkmsargument(int argc, char **argv)
@@ -72,7 +73,7 @@ int	main(int argc, char **argv, char **env)
 	mi_sysinitialization(env, &mi_sys);
 	while (1)
 	{
-		line = readline("minishell> ");
+		line = readline ("minishell> ");
 		while (*line !='\0' && ft_strrchr (WSPACE, *line ) != NULL)
 			line++;
 		if (*line == '\0')

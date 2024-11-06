@@ -16,7 +16,7 @@ void	mi_logerror(int code_error, char *msg, t_error *error)
 {
 	write(STDERR_FILENO, msg, ft_strlen(msg));
 	write(STDERR_FILENO, "\n", 1);
-	while (error->next != NULL)
+	while (!error->code_error && error->next != NULL)
 		error = error->next;
 	if (error == NULL)
 		error = ft_calloc(1, sizeof(t_error));
