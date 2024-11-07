@@ -45,6 +45,16 @@ void	cd_back(t_sys *mi_sys)
 	mi_sys->senv.pwd = ft_substr(mi_sys->senv.pwd, 0, i);
 }
 
+void	mi_logerrorsys(int no, char *msg, t_sys *mi_sys)
+{
+	if (msg)
+	{
+		write(STDERR_FILENO, msg, ft_strlen(msg));
+		write(STDERR_FILENO, "\n", 1);
+	}
+	mi_sys->error2 = mi_errornew(no, msg);
+}
+
 void	builtin_cd(char *key, t_sys *mi_sys)
 {
 	mi_sys->senv.oldpwd = mi_sys->senv.pwd;
@@ -56,7 +66,12 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 	else
 	{
 		if (chdir(key))
+		{
 			mi_logerror(errno, strerror(errno), &mi_sys->error);
+			mi_logerrorsys(errno, strerror(errno), mi_sys);
+
+		}
+
 		mi_sys->senv.pwd = getcwd(NULL, 0);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
 	}

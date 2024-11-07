@@ -88,6 +88,7 @@ typedef struct s_cmd
 	bool			builtin;
 	int				nb_error;
 	t_error			error;
+	t_error			*error2;
 	int				fd[2];
 	t_redirection	*redirection;
 	struct s_cmd	*next;
@@ -104,6 +105,7 @@ typedef struct s_sys
 	int				terror[2];
 	int				code_error;
 	t_error			error;
+	t_error			*error2;
 	int				fd_in;
 	t_env			senv;
 	char			**env;
@@ -111,6 +113,7 @@ typedef struct s_sys
 	int 			exit_status;
 }	t_sys;
 
+void	mi_logerrorsys(int no, char *msg, t_sys *mi_sys);
 void	signal_handle_sigint(int sign);
 bool	ft_findword(const char *source, const char *find);
 void	builtin_cd(char *key, t_sys *s_sys);
@@ -142,6 +145,7 @@ void	mi_syscmditer(t_sys *sys, void (*f)(t_cmd *lst, t_sys *sys));
 void	mi_lexingline(char *ln, int i, t_cmd *me_cmd, t_sys *mi_sys);
 int		mi_pospasscote(char *ln, int i, t_error *mi_error);
 void	mi_logerror(int id, char *msg, t_error *mi_error);
+void	mi_logerror2(int id, char *msg, t_error *mi_error);
 void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_error *mi_err);
 int		mi_intlogerror(t_cmd *app, char *s, int code);
 char	*ft_findcommand(char *line);
