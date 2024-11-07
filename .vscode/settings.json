@@ -4,6 +4,7 @@
         "stdarg.h": "c",
         "minishell.h": "c",
         "stddef.h": "c",
-        "history.h": "c"
+        "history.h": "c",
+        "unistd.h": "c"
     }
 }

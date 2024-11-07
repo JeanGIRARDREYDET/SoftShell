@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-extern int	g_status;
+
 
 void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 {
@@ -69,11 +69,17 @@ int	main(int argc, char **argv, char **env)
 	t_sys	mi_sys;
 	t_cmd	*mi_cmd;
 
+	
 	mi_checkmsargument(argc, argv);
 	mi_sysinitialization(env, &mi_sys);
 	while (1)
 	{
+		signal(SIGINT, &signal_handle_sigint);
 		line = readline ("minishell> ");
+		if (line)
+			add_history(line);
+		else
+			break ;
 		while (*line !='\0' && ft_strrchr (WSPACE, *line ) != NULL)
 			line++;
 		if (*line == '\0')
@@ -93,6 +99,6 @@ int	main(int argc, char **argv, char **env)
 		mi_freecmd(mi_cmd, &mi_sys);
 //		mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 //		mi_exec(&mi_cmd &mi_sys);
-		add_history(line);
+		//add_history(line);
 	}
 }

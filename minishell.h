@@ -46,6 +46,8 @@
 # define TECHAP "\"'"
 # define BUILTINS " echo cd pwd export unset env exit "
 
+extern int	g_signal;
+
 typedef struct s_env
 {
 	int				len;
@@ -109,6 +111,7 @@ typedef struct s_sys
 	int 			exit_status;
 }	t_sys;
 
+void	signal_handle_sigint(int sign);
 bool	ft_findword(const char *source, const char *find);
 void	builtin_cd(char *key, t_sys *s_sys);
 void	builtin_echo(char *key);
