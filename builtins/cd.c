@@ -62,7 +62,6 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 	}
 	if (access(mi_sys->senv.pwd, F_OK) == 0)
 	{
-		ft_putstr_fd(mi_sys->senv.pwd, STDOUT_FILENO);
 		if ( chdir(mi_sys->senv.pwd))
 			mi_logerror(errno, strerror(errno), &mi_sys->error);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);

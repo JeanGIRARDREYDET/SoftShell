@@ -42,7 +42,7 @@ void	mi_expand_find_error(char **full_cmd, int i, int len, t_sys *sys)
 	char	*code_error;
 	char	*replace;
 
-	code_error = ft_itoa(sys->code_error);
+	code_error = ft_itoa(sys->error.code_error);
 	replace = ft_strsubreplace(full_cmd[0], i, len + 1, code_error);
 	free(*full_cmd);
 	free(code_error);

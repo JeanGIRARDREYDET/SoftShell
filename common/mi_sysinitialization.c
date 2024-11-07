@@ -56,6 +56,7 @@ void	mi_setdefaul_initialization( t_sys *s_sys)
 	s_sys->senv.home = NULL;
 	s_sys->senv.len = 0;
 	s_sys->fd_in = STDIN_FILENO;
+	s_sys->error = *mi_errornew(0, NULL);
 }
 
 void	mi_sysinitialization(char **env, t_sys *s_sys)
@@ -84,7 +85,7 @@ void	mi_sysinitialization(char **env, t_sys *s_sys)
 		ft_sys_get_pwd(&s_sys->senv.pwd);
 		ienv[i++] = ft_strjoin("PWD=", s_sys->senv.pwd);
 	}
-	if(!shlvl)
+	if (!shlvl)
 		ienv[i++] = ft_strjoin("SHLVL=", s_sys->senv.shlvl);
 	s_sys->env = ienv;
 	s_sys->senv.len = i;

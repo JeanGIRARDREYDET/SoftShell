@@ -12,17 +12,29 @@
 
 #include "../minishell.h"
 
-void	mi_logerror(int code_error, char *msg, t_error *error)
+t_error	*mi_errornew(int code_error, char *msg)
 {
-	write(STDERR_FILENO, msg, ft_strlen(msg));
-	write(STDERR_FILENO, "\n", 1);
-	while (!error->code_error && error->next != NULL)
-		error = error->next;
+	t_error	*error;
+
+	error = ft_calloc(1, sizeof(t_error));
 	if (error == NULL)
-		error = ft_calloc(1, sizeof(t_error));
+		return (NULL);
 	error->code_error = code_error;
 	error->msg = msg;
 	error->next = NULL;
+	return (error);
+}
+
+void	mi_logerror(int code_error, char *msg, t_error *error)
+{
+
+	write(STDERR_FILENO, msg, ft_strlen(msg));
+	write(STDERR_FILENO, "\n", 1);
+	while (error->next != NULL)
+		error = error->next;
+	error->code_error = code_error;
+	error->msg = msg;
+	error->next = NULL;	
 }
 
 void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_error *mi_err)

@@ -84,6 +84,7 @@ typedef struct s_cmd
 	char			*type;
 	char			**args;
 	bool			builtin;
+	int				nb_error;
 	t_error			error;
 	int				fd[2];
 	t_redirection	*redirection;
@@ -124,6 +125,7 @@ void	mi_unset(char *key, t_sys *s_sys);
 void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
 
+t_error	*mi_errornew(int code_error, char *msg);
 void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_expand_interface(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_exec(t_cmd *me_cmd, t_sys *mi_sys);
