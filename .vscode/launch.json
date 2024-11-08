@@ -27,7 +27,6 @@
             "preLaunchTask": "make",
             "miDebuggerPath": "/usr/bin/gdb",
             "console": "internalConsole"
-            
         }
     ]
 }

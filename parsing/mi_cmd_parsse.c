@@ -97,7 +97,7 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 		{
 			ft_pos_passspace(mi_cmd->full_cmd, &i);
 			if (mi_cmd->full_cmd[i] == '<' || mi_cmd->full_cmd[i] == '>')
-				mi_parseredirtocken ( &i, &n, mi_cmd, mi_sys);
+				mi_parseredirtocken(&i, &n, mi_cmd, mi_sys);
 			s = i;
 			ft_pos_passstring(mi_cmd->full_cmd, &i);
 			mi_cmd->split_cmd[n] = ft_substr(mi_cmd->full_cmd, s, i - s);

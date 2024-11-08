@@ -43,8 +43,6 @@ void	cd_back(t_sys *mi_sys)
 	mi_sys->senv.pwd = ft_substr(mi_sys->senv.pwd, 0, i);
 }
 
-
-
 void	builtin_cd(char *key, t_sys *mi_sys)
 {
 	mi_sys->senv.oldpwd = mi_sys->senv.pwd;

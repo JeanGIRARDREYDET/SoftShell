@@ -108,7 +108,7 @@ typedef struct s_sys
 	t_env			senv;
 	char			**env;
 	t_cmd			*cmd;
-	int 			exit_status;
+	int				exit_status;
 }	t_sys;
 
 void	signal_handle_sigint(int sign);

@@ -42,12 +42,11 @@ void	mi_logerror(int code_error, char *msg, t_sys *mi_sys)
 	}
 }
 
-
 void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_sys *mi_sys)
 {
 	mi_logerror(code, join_3(m1, m2, m3), mi_sys);
 }
-
+ 
 int	mi_intlogerror(t_sys *mi_sys, char *s, int code)
 {
 	perror(s);
