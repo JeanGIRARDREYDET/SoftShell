@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-
-
 void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	char		*cmd;
@@ -48,13 +46,13 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 	return ;
 }
 
-void mi_checkline(char *line)
+void	mi_checkline(char *line)
 {
 	if (ft_findword("exit", line))
 		builtin_exit();
 }
 
-void mi_checkmsargument(int argc, char **argv)
+void	mi_checkmsargument(int argc, char **argv)
 {
 	if (argc > 1)
 	{
@@ -79,7 +77,7 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 		else
 			break ;
-		while (*line !='\0' && ft_strrchr (WSPACE, *line ) != NULL)
+		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
 		if (*line == '\0')
 			continue ;
@@ -96,8 +94,6 @@ int	main(int argc, char **argv, char **env)
 		mi_syscmditer (&mi_sys, &mi_execone);
 		mi_waitingpipe (&mi_sys);
 		mi_freecmd(mi_cmd, &mi_sys);
-//		mi_cmditer (&mi_cmd, &mi_cmdherdoc);
-//		mi_exec(&mi_cmd &mi_sys);
-		//add_history(line);
+		mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 	}
 }
