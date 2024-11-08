@@ -25,37 +25,32 @@ t_error	*mi_errornew(int code_error, char *msg)
 	return (error);
 }
 
-void	mi_logerror(int code_error, char *msg, t_error *error)
+void	mi_logerror(int code_error, char *msg, t_sys *mi_sys)
 {
+	t_error	*error;
+
 	write(STDERR_FILENO, msg, ft_strlen(msg));
 	write(STDERR_FILENO, "\n", 1);
-	while (error->next != NULL)
-		error = error->next;
-	error->code_error = code_error;
-	error->msg = msg;
-	error->next = NULL;
+	if (mi_sys->error == NULL)
+		mi_sys->error = mi_errornew(code_error, msg);
+	else
+	{
+		error = mi_sys->error;
+		while (error->next != NULL)
+			error = error->next;
+		error->next = mi_errornew(code_error, msg);
+	}
 }
 
-void	mi_logerror2(int code_error, char *msg, t_error *error)
+
+void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_sys *mi_sys)
 {
-	write(STDERR_FILENO, msg, ft_strlen(msg));
-	write(STDERR_FILENO, "\n", 1);
-	while (error->next != NULL)
-		error = error->next;
-	error->code_error = code_error;
-	error->msg = msg;
-	error->next = NULL;
+	mi_logerror(code, join_3(m1, m2, m3), mi_sys);
 }
 
-
-void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_error *mi_err)
-{
-	mi_logerror(code, join_3(m1, m2, m3), mi_err);
-}
-
-int	mi_intlogerror(t_cmd *app, char *s, int code)
+int	mi_intlogerror(t_sys *mi_sys, char *s, int code)
 {
 	perror(s);
-	mi_logerror(code, s, &app->error);
+	mi_logerror(code, s, mi_sys);
 	return (code);
 }

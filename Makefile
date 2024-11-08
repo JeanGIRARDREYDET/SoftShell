@@ -86,6 +86,7 @@ SRCS = 			main.c \
 				libft/ft_strtrim_param.c \
 				common/mi_getenv.c \
 				common/mi_logerror.c \
+				common/mi_logerrorsys.c \
 				common/mi_setenv.c \
 				common/mi_sysinitialization.c \
 				common/mi_unsetenv.c \

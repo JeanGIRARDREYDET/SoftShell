@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_pospasscote.c                                   :+:      :+:    :+:   */
+/*   mi_logerrorsys.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 18:37:57 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/04 18:38:00 by jegirard         ###   ########.fr       */
+/*   Created: 2024/11/08 18:42:01 by jegirard          #+#    #+#             */
+/*   Updated: 2024/11/08 18:42:05 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	mi_pospasscote(char *ln, int i, t_sys *mi_sys)
+void	mi_logerrorsys(int no, char *msg, t_sys *mi_sys)
 {
-	char	echap;
-
-	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != 0 && ln[i] != '|')
-		i++;
-	if (ft_strin(TECHAP, ln[i]))
+	if (msg)
 	{
-		echap = ln[i];
-		i++;
-		i += ft_pos_left_char ((ln + i), echap);
-		if (ln[i] == echap)
-			i++;
-		else
-			mi_logerror(130, "erreur de quot", mi_sys);
+		write(STDERR_FILENO, msg, ft_strlen(msg));
+		write(STDERR_FILENO, "\n", 1);
 	}
-	return (i);
+	mi_sys->error = mi_errornew(no, msg);
+}
+
+void	mi_logerrorcmd(int no, char *msg, t_cmd *mi_cmd)
+{
+	if (msg)
+	{
+		write(STDERR_FILENO, msg, ft_strlen(msg));
+		write(STDERR_FILENO, "\n", 1);
+	}
+	mi_cmd->error = mi_errornew(no, msg);
 }

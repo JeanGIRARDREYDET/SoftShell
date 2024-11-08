@@ -39,7 +39,7 @@ void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 		free(cmd);
 	}
 	error_msg = join_3 ("minishell: ", mi_cmd->cmd, ": command not found\n");
-	mi_logerror(126, error_msg, &mi_cmd->error);
+	mi_logerror(126, error_msg, mi_sys);
 	free(cmd);
 	free(paths);
 	return ;
@@ -49,7 +49,7 @@ void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 {
 	if (access(mi->cmd, X_OK) == 0)
 		return ;
-	mi_logerrorlong(126, "mi: ", mi->cmd, ": Permission denied", &mi->error);
+	mi_logerrorlong(126, "mi: ", mi->cmd, ": Permission denied", mi_sys);
 	mi_sys->nb_error++;
 }
 
@@ -64,14 +64,14 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		if (pipe(mi_cmd->fd) == -1)
 		{	
-			mi_intlogerror (mi_cmd, "pipe out failed", 1);
+			mi_intlogerror (mi_sys, "pipe out failed", 1);
 			return ;
 		}
 	}
 	mi_cmd->id = fork();
 	if (mi_cmd->id == -1)
 	{
-		mi_intlogerror (mi_cmd, "fork out failed", 1);
+		mi_intlogerror (mi_sys, "fork out failed", 1);
 		return ;
 	}
 	if (mi_cmd->id == 0)

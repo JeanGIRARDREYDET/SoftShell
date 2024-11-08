@@ -39,7 +39,7 @@ char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set)
 	char	*p;
 	int		i;
 
-	if (!(s1 && set && fin))
+	if (!(s1 && set && fin ) || fin < debut)
 		return (0);
 	while (ft_strchr (set, s1[debut]) && s1[debut] != '\0')
 		debut++;

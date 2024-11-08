@@ -14,8 +14,6 @@
 //utiliser la fonction getcwd qui copie le chemin d'acces absolu du repertoire 
 //de travail courant dans la chaine pointee par buf qui est de longueur size
 
-#include "../minishell.h"
-
 void	cd_home(t_sys *mi_sys)
 {
 	if (!mi_sys->senv.home)
@@ -45,15 +43,7 @@ void	cd_back(t_sys *mi_sys)
 	mi_sys->senv.pwd = ft_substr(mi_sys->senv.pwd, 0, i);
 }
 
-void	mi_logerrorsys(int no, char *msg, t_sys *mi_sys)
-{
-	if (msg)
-	{
-		write(STDERR_FILENO, msg, ft_strlen(msg));
-		write(STDERR_FILENO, "\n", 1);
-	}
-	mi_sys->error2 = mi_errornew(no, msg);
-}
+
 
 void	builtin_cd(char *key, t_sys *mi_sys)
 {
@@ -67,8 +57,7 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 	{
 		if (chdir(key))
 		{
-			mi_logerror(errno, strerror(errno), &mi_sys->error);
-			mi_logerrorsys(errno, strerror(errno), mi_sys);
+			mi_logerror(errno, strerror(errno), mi_sys);
 		}
 		mi_sys->senv.pwd = getcwd(NULL, 0);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
@@ -76,7 +65,7 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 	if (access(mi_sys->senv.pwd, F_OK) == 0)
 	{
 		if ( chdir(mi_sys->senv.pwd))
-			mi_logerror(errno, strerror(errno), &mi_sys->error);
+			mi_logerror(errno, strerror(errno), mi_sys);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
 		// ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
 		mi_sys->exit_status = EXIT_SUCCESS;

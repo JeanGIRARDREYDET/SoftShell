@@ -37,26 +37,26 @@ char	*find_expand(char *line)
 	return (ft_substr(line, c1, c2 - c1));
 }
 
-void	mi_expand_find_error(char **full_cmd, int i, int len, t_sys *sys)
+void	mi_expand_find_error(char **full_cmd, int i, int len, t_sys *mi_sys)
 {
 	char	*code_error;
 	char	*replace;
 
-	code_error = ft_itoa(sys->error.code_error);
+	code_error = ft_itoa(mi_sys->error->code_error);
 	replace = ft_strsubreplace(full_cmd[0], i, len + 1, code_error);
 	free(*full_cmd);
 	free(code_error);
 	*full_cmd = replace;
 }
 
-void	mi_expand_find_env(char **full_cmd, int i, int len, t_sys *sys)
+void	mi_expand_find_env(char **full_cmd, int i, int len, t_sys *mi_sys)
 {
 	char	*search;
 	char	*find;
 	char	*replace;
 
 	search = ft_substr(full_cmd[0], i, len);
-	find = mi_getenv(search + 1, sys);
+	find = mi_getenv(search + 1, mi_sys);
 	free(search);
 	if (!find)
 		return ;
@@ -65,7 +65,7 @@ void	mi_expand_find_env(char **full_cmd, int i, int len, t_sys *sys)
 	*full_cmd = replace;
 }
 
-void	mi_expand_find(char **full_cmd, int i, t_sys *sys)
+void	mi_expand_find(char **full_cmd, int i, t_sys *mi_sys)
 {
 	int		len;
 
@@ -73,9 +73,9 @@ void	mi_expand_find(char **full_cmd, int i, t_sys *sys)
 	while (full_cmd[0][len + i] && ft_isalnum(full_cmd[0][len + i]))
 		len++;
 	if (len == 1 && full_cmd[0][i + 1] == '?')
-		mi_expand_find_error(full_cmd, i, len, sys);
+		mi_expand_find_error(full_cmd, i, len, mi_sys);
 	if (len > 1)
-		mi_expand_find_env(full_cmd, i, len, sys);
+		mi_expand_find_env(full_cmd, i, len, mi_sys);
 }
 
 void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)

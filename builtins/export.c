@@ -45,7 +45,7 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 	ienv = (char **)ft_calloc(mi_sys->senv.len, sizeof(char *));
 	if (ienv == NULL)
 	{
-		mi_logerror(126, "Cannot allocate memory", &mi_sys->error);
+		mi_logerror(126, "Cannot allocate memory", mi_sys);
 		mi_sys->exit_status = EXIT_FAILURE;
 	}
 	i = -1;

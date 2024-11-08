@@ -57,7 +57,7 @@ char	*ft_chrrepeat(char c, int n)
 	return (str);
 }
 
-void	mi_parseredirtocken(t_cmd *mi_cmd, int *i, int *n)
+void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int		j;
 	char	capt_redir;
@@ -67,7 +67,7 @@ void	mi_parseredirtocken(t_cmd *mi_cmd, int *i, int *n)
 	while (capt_redir == mi_cmd->full_cmd[*i + j])
 		j++ ;
 	if (j > 2 || mi_cmd->full_cmd[*i+j] == '\0' || mi_cmd->full_cmd[*i+j] == '<' || mi_cmd->full_cmd[*i+j] == '>')
-		mi_logerrorlong(2, "syntax error near unexpected token", ft_chrrepeat(capt_redir, j), "", &mi_cmd->error);
+		mi_logerrorlong(2, "syntax error near unexpected token", ft_chrrepeat(capt_redir, j), "", mi_sys);
 	else
 	{
 		mi_cmd->split_cmd[*n] = ft_chrrepeat(capt_redir, j);
@@ -77,7 +77,7 @@ void	mi_parseredirtocken(t_cmd *mi_cmd, int *i, int *n)
 	ft_pos_passspace(mi_cmd->full_cmd, i);
 }
 
-void	mi_cmdsplitcmd(t_cmd *mi_cmd)
+void	mi_cmdsplitcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int	i;
 	int	s;
@@ -97,7 +97,7 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 		{
 			ft_pos_passspace(mi_cmd->full_cmd, &i);
 			if (mi_cmd->full_cmd[i] == '<' || mi_cmd->full_cmd[i] == '>')
-				mi_parseredirtocken (mi_cmd, &i, &n);
+				mi_parseredirtocken ( &i, &n, mi_cmd, mi_sys);
 			s = i;
 			ft_pos_passstring(mi_cmd->full_cmd, &i);
 			mi_cmd->split_cmd[n] = ft_substr(mi_cmd->full_cmd, s, i - s);
