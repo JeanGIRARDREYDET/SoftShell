@@ -33,7 +33,7 @@ void	mi_logerror(int code_error, char *msg, t_error *error)
 		error = error->next;
 	error->code_error = code_error;
 	error->msg = msg;
-	error->next = NULL;	
+	error->next = NULL;
 }
 
 void	mi_logerror2(int code_error, char *msg, t_error *error)

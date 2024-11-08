@@ -69,9 +69,7 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 		{
 			mi_logerror(errno, strerror(errno), &mi_sys->error);
 			mi_logerrorsys(errno, strerror(errno), mi_sys);
-
 		}
-
 		mi_sys->senv.pwd = getcwd(NULL, 0);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
 	}

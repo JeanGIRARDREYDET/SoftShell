@@ -69,7 +69,6 @@ int	main(int argc, char **argv, char **env)
 	t_sys	mi_sys;
 	t_cmd	*mi_cmd;
 
-	
 	mi_checkmsargument(argc, argv);
 	mi_sysinitialization(env, &mi_sys);
 	while (1)

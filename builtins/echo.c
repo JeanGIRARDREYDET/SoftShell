@@ -20,14 +20,21 @@
 void	builtin_echo(char *key)
 {
 	int	n;
+	int i;
 
 	n = 1;
-	if (key != NULL && key[0] == '-' && key[1] == 'n' && key[2] < 33)
+	i = 2;
+	if (key != NULL && *key == '-' && key[1] == 'n')
 	{
-		n = 0;
-		key += 3;
+		key++;
+		while(*key == 'n')
+			key++;
+		if (*key < 33)
+			n = 0;
 	}
+	while (*key < 33)
+		key++;
 	write(STDOUT_FILENO, key, ft_strlen(key));
 	if (n == 1)
-			write(STDOUT_FILENO,"\n",1);
+		write(STDOUT_FILENO, "\n", 1);
 }
