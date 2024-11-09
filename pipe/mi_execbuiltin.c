@@ -28,7 +28,7 @@ void	mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 	else if (ft_findword("env", cmd))
 		builtin_env(mi_sys);
 	else if (ft_findword("exit", cmd))
-		builtin_exit();
+		builtin_exit(mi_sys);
 	else if (ft_findword("export", cmd))
 		builtin_export(mi_cmd->arg, mi_sys);
 	else if (ft_findword("pwd", cmd))

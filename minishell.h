@@ -116,7 +116,7 @@ bool	ft_findword(const char *source, const char *find);
 void	builtin_cd(char *key, t_sys *s_sys);
 void	builtin_echo(char *key);
 void	builtin_env(t_sys *s_sys);
-void	builtin_exit(void);
+void	builtin_exit(t_sys *s_sys);
 void	builtin_export(char *key, t_sys *s_sys);
 void	print_export(t_sys *s_sys);
 void	builtin_pwd(void);

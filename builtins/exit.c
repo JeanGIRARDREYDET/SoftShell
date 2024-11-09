@@ -12,7 +12,9 @@
 
 #include "../minishell.h"
 
-void	builtin_exit(void)
+void	builtin_exit(t_sys *mi_sys)
 {
+	mi_freecmd(mi_sys->cmd, mi_sys);
+	mi_sys = NULL;
 	exit(EXIT_SUCCESS);
 }
