@@ -105,12 +105,13 @@ typedef struct s_sys
 	int				code_error;
 	t_error			*error;
 	int				fd_in;
-	t_env			senv;
+	t_env			*senv;
 	char			**env;
 	t_cmd			*cmd;
 	int				exit_status;
 }	t_sys;
 
+void	mi_freesys(t_sys *mi_sys);
 void	signal_handle_sigint(int sign);
 bool	ft_findword(const char *source, const char *find);
 void	builtin_cd(char *key, t_sys *s_sys);

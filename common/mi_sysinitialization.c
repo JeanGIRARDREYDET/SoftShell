@@ -12,81 +12,96 @@
 
 #include "../minishell.h"
 
-void	read_env_line(char *line, t_sys *s_sys)
-
+void	read_env_line(char *line, t_sys *mi_sys)
 {
+	char	*tmp;
 	if (ft_strnstr (line, "PATH=", 5) != 0)
-		s_sys->senv.path = line + 5;
+		mi_sys->senv->path = line + 5;
 	if (ft_strnstr (line, "PWD=", 4) != 0)
-		s_sys->senv.pwd = line + 4;
+		mi_sys->senv->pwd = line + 4;
 	if (ft_strnstr (line, "HOME=", 5) != 0)
-		s_sys->senv.home = line + 5;
+		mi_sys->senv->home = line + 5;
 	if (ft_strnstr (line, "SHLVL=", 6) != 0)
-		s_sys->senv.shlvl = ft_itoa((1 + ft_atoi(line + 6)));
-	if (ft_strnstr (line, "_=", 2) != 0)
-		s_sys->senv._ = line + 2;
-}
-
-int	read_env(char **env, t_sys *s_sys)
-{
-	s_sys->senv.shlvl = "1";
-	s_sys->senv.len = 0;
-	while (env[s_sys->senv.len])
 	{
-		read_env_line(env[s_sys->senv.len], s_sys);
-		s_sys->senv.len++;
+		if (mi_sys->senv->shlvl != NULL)
+			free(mi_sys->senv->shlvl);
+		tmp = ft_itoa(1 + ft_atoi(line + 6));
+		mi_sys->senv->shlvl = ft_strdup("8"); 
+		free(tmp);
 	}
-	s_sys->senv.len++;
-	if (s_sys->senv.pwd == 0)
-		s_sys->senv.len++;
-	if (s_sys->senv.shlvl == NULL)
-		s_sys->senv.len++;
-	if (s_sys->senv._ == 0)
-		s_sys->senv.len++;
-	return (s_sys->senv.len);
+		
+	if (ft_strnstr (line, "_=", 2) != 0)
+		mi_sys->senv->_ = line + 2;
 }
 
-void	mi_setdefaul_initialization( t_sys *s_sys)
+int	read_env(char **env, t_sys *mi_sys)
 {
-	s_sys->senv.path = "/usr/bin:/bin:/usr/sbin:/sbin";
-	s_sys->senv.pwd = NULL;
-	s_sys->nb_pipe = 0;
-	s_sys->senv.shlvl = "1";
-	s_sys->senv._ = NULL;
-	s_sys->senv.home = NULL;
-	s_sys->senv.len = 0;
-	s_sys->fd_in = STDIN_FILENO;
-	s_sys->error = NULL;
+	mi_sys->senv->shlvl = ft_strdup("1");
+	mi_sys->senv->len = 0;
+	while (env[mi_sys->senv->len])
+	{
+		read_env_line(env[mi_sys->senv->len], mi_sys);
+		mi_sys->senv->len++;
+	}
+	mi_sys->senv->len++;
+	if (mi_sys->senv->pwd == 0)
+		mi_sys->senv->len++;
+	if (mi_sys->senv->shlvl == NULL)
+		mi_sys->senv->len++;
+	if (mi_sys->senv->_ == 0)
+		mi_sys->senv->len++;
+	return (mi_sys->senv->len);
 }
 
-void	mi_sysinitialization(char **env, t_sys *s_sys)
+void	mi_setdefaul_initialization( t_sys *mi_sys)
+{	mi_sys->senv = (t_env*)ft_calloc(1, sizeof(t_env));
+	mi_sys->senv->path = "/usr/bin:/bin:/usr/sbin:/sbin";
+	mi_sys->senv->pwd = NULL;
+	mi_sys->nb_pipe = 0;
+	mi_sys->cmd = NULL;
+	mi_sys->senv->shlvl = NULL;
+	mi_sys->senv->_ = NULL;
+	mi_sys->senv->home = NULL;
+	mi_sys->senv->len = 0;
+	mi_sys->fd_in = STDIN_FILENO;
+	mi_sys->error = NULL;
+}
+
+void	mi_sysinitialization(char **env, t_sys *mi_sys)
 {
 	int		i;
 	char	**ienv;
 	bool	shlvl;
 
 	shlvl = false;
-	mi_setdefaul_initialization(s_sys);
-	s_sys->senv.len = read_env(env, s_sys);
-	ienv = (char **)ft_calloc(s_sys->senv.len + 1, sizeof(char *));
+	mi_setdefaul_initialization(mi_sys);
+	mi_sys->senv->len = read_env(env, mi_sys);
+	ienv = (char **)ft_calloc(mi_sys->senv->len + 1, sizeof(char *));
 	i = -1;
 	while (env[++i])
 	{
 		if (ft_strnstr (env[i], "SHLVL=", 6) != 0 && !shlvl)
 		{
-			ienv[i] = ft_strjoin("SHLVL=", s_sys->senv.shlvl);
+			ienv[i] = ft_strjoin("SHLVL=", mi_sys->senv->shlvl);
 			shlvl = true;
 		}
 		if (ft_strnstr (env[i], "SHLVL=", 6) == 0)
 			ienv[i] = ft_strdup(env[i]);
 	}
-	if (s_sys->senv.pwd == NULL)
+	if (mi_sys->senv->pwd == NULL)
 	{
-		ft_sys_get_pwd(&s_sys->senv.pwd);
-		ienv[i++] = ft_strjoin("PWD=", s_sys->senv.pwd);
+		ft_sys_get_pwd(&mi_sys->senv->pwd);
+		ienv[i++] = ft_strjoin("PWD=", mi_sys->senv->pwd);
 	}
 	if (!shlvl)
-		ienv[i++] = ft_strjoin("SHLVL=", s_sys->senv.shlvl);
-	s_sys->env = ienv;
-	s_sys->senv.len = i;
+		ienv[i++] = ft_strjoin("SHLVL=", mi_sys->senv->shlvl);
+	mi_sys->env = ienv;
+	mi_sys->senv->len = i;
+	if (mi_sys->senv != NULL)
+	{
+		if (mi_sys->senv->shlvl != NULL)
+			free(mi_sys->senv->shlvl);
+		free(mi_sys->senv);
+		mi_sys->senv = NULL;
+	}
 }

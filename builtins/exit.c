@@ -14,7 +14,6 @@
 
 void	builtin_exit(t_sys *mi_sys)
 {
-	mi_freecmd(mi_sys->cmd, mi_sys);
-	mi_sys = NULL;
+	mi_freesys(mi_sys);
 	exit(EXIT_SUCCESS);
 }

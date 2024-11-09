@@ -15,13 +15,13 @@
 // unset values and attributes of variables and functions
 // unset peut supprimer une variable cree dans env
 
-void	builtin_unset(char *key, t_sys *s_sys)
+void	builtin_unset(char *key, t_sys *mi_sys)
 {
 	int	pos;
 
-	pos = ft_get_confpos(key, '=', s_sys->env);
+	pos = ft_get_confpos(key, '=', mi_sys->env);
 	if (pos != -1)
 	{
-		free(s_sys->env[pos]);
+		free(mi_sys->env[pos]);
 	}
 }

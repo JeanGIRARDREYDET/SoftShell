@@ -31,8 +31,6 @@ void	mi_freeonecmd (t_cmd *mi_cmd)
 
 	if (!mi_cmd || !(mi_cmd->id > 0))
 		return ;
-//	if (mi_cmd->arg != NULL)
-//		free(mi_cmd->arg);
 	if (mi_cmd->args != NULL)
 		ft_arrclose(mi_cmd->args);
 	if (mi_cmd->full_cmd != NULL)
@@ -46,6 +44,7 @@ void	mi_freeonecmd (t_cmd *mi_cmd)
 void	mi_freecmd (t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	t_cmd	*tmp;
+
 	if (!mi_cmd || !(mi_cmd->id > 0))
 		return ;
 	while (mi_cmd && mi_cmd != NULL)
@@ -56,4 +55,21 @@ void	mi_freecmd (t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	mi_sys->cmd = NULL;
 	mi_freeerror(mi_sys);
+}
+
+void	mi_freesys(t_sys *mi_sys)
+{
+	if (mi_sys == NULL)
+		return ;
+	if (mi_sys->env != NULL && mi_sys->env != NULL)
+		ft_arrclose(mi_sys->env);
+	if (mi_sys->senv != NULL && mi_sys->senv->shlvl && mi_sys->senv->shlvl != NULL)
+		free(mi_sys->senv->shlvl);
+	if (mi_sys->cmd && mi_sys->cmd != NULL)
+		mi_freecmd(mi_sys->cmd, mi_sys);
+	if (mi_sys->env != NULL && mi_sys->env != NULL)
+		free(mi_sys->senv);
+
+//	if (mi_sys->senv != NULL)
+//		mi_freeenv(&(mi_sys->senv));
 }

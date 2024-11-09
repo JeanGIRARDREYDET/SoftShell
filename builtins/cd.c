@@ -16,13 +16,13 @@
 
 void	cd_home(t_sys *mi_sys)
 {
-	if (!mi_sys->senv.home)
+	if (!mi_sys->senv->home)
 	{
 		ft_putstr_fd("cd: HOME not set\n", STDOUT_FILENO);
 		return ;
 	}
-	mi_sys->senv.pwd = mi_sys->senv.home;
-	mi_setenv("PWD", mi_sys->senv.home, mi_sys);
+	mi_sys->senv->pwd = mi_sys->senv->home;
+	mi_setenv("PWD", mi_sys->senv->home, mi_sys);
 }
 
 void	cd_back(t_sys *mi_sys)
@@ -30,23 +30,23 @@ void	cd_back(t_sys *mi_sys)
 	int	i;
 
 	i = 0;
-	mi_sys->senv.pwd = mi_getenv("PWD", mi_sys);
-	if (!mi_sys->senv.pwd)
+	mi_sys->senv->pwd = mi_getenv("PWD", mi_sys);
+	if (!mi_sys->senv->pwd)
 	{
 		ft_putstr_fd ("cd: DIR not set\n", STDOUT_FILENO);
 		return ;
 	}
-	while (mi_sys->senv.pwd[i])
+	while (mi_sys->senv->pwd[i])
 			i++;
-	while (mi_sys->senv.pwd[i] != '/' && i > 1)
+	while (mi_sys->senv->pwd[i] != '/' && i > 1)
 		i--;
-	mi_sys->senv.pwd = ft_substr(mi_sys->senv.pwd, 0, i);
+	mi_sys->senv->pwd = ft_substr(mi_sys->senv->pwd, 0, i);
 }
 
 void	builtin_cd(char *key, t_sys *mi_sys)
 {
-	mi_sys->senv.oldpwd = mi_sys->senv.pwd;
-	mi_setenv("OLDPWD", mi_sys->senv.oldpwd, mi_sys);
+	mi_sys->senv->oldpwd = mi_sys->senv->pwd;
+	mi_setenv("OLDPWD", mi_sys->senv->oldpwd, mi_sys);
 	if (key == NULL || key[0] == '\0')
 		cd_home(mi_sys);
 	else if (ft_strncmp(key, "..", 3) == 0)
@@ -57,12 +57,12 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 		{
 			mi_logerror(errno, strerror(errno), mi_sys);
 		}
-		mi_sys->senv.pwd = getcwd(NULL, 0);
+		mi_sys->senv->pwd = getcwd(NULL, 0);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
 	}
-	if (access(mi_sys->senv.pwd, F_OK) == 0)
+	if (access(mi_sys->senv->pwd, F_OK) == 0)
 	{
-		if ( chdir(mi_sys->senv.pwd))
+		if ( chdir(mi_sys->senv->pwd))
 			mi_logerror(errno, strerror(errno), mi_sys);
 		mi_setenv("PWD", getcwd(NULL, 0), mi_sys);
 		// ft_putstr_fd("cd: DIR not set\n" ,STDOUT_FILENO);
