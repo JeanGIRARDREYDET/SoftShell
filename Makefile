@@ -135,6 +135,9 @@ fclean : clean
 	$(CMD_RM) $(NAME)
 	@echo -e "$(RED)all deleted!$(DEFAULT)"
 
+test : 
+	valgrind --leak-check=full  --show-reachable=yes --track-fds=yes --trace-children=yes -s --track-origins=yes --suppressions=readline.supp ./minishell
+
 re : fclean all
 
 .PHONY : clean fcleam re
