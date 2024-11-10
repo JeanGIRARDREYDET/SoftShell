@@ -107,6 +107,7 @@ typedef struct s_sys
 	int				fd_in;
 	t_env			*senv;
 	char			**env;
+	int				len_env;
 	t_cmd			*cmd;
 	int				exit_status;
 }	t_sys;

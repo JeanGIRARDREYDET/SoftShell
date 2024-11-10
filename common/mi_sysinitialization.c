@@ -29,7 +29,6 @@ void	read_env_line(char *line, t_sys *mi_sys)
 		mi_sys->senv->shlvl = ft_strdup("8"); 
 		free(tmp);
 	}
-		
 	if (ft_strnstr (line, "_=", 2) != 0)
 		mi_sys->senv->_ = line + 2;
 }
