@@ -32,7 +32,7 @@ void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 		cmd = join_3(paths[i], "/", mi_cmd->cmd);
 		if (access(cmd, F_OK) == 0)
 		{
-			mi_cmd->cmd = cmd;
+			mi_cmd->cmd = ft_strdup(cmd);
 			free(paths);
 			return ;
 		}

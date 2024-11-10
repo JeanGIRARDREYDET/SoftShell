@@ -37,6 +37,12 @@ void	mi_freeonecmd (t_cmd *mi_cmd)
 		ft_arrclose(mi_cmd->args);
 	if (mi_cmd->full_cmd)
 		free(mi_cmd->full_cmd);
+
+	if (mi_cmd->cmd != NULL)
+	{
+		free(mi_cmd->cmd);
+		mi_cmd->cmd = NULL;
+	}
 	if (mi_cmd->split_cmd != NULL)
 		ft_arrclose(mi_cmd->split_cmd);
 	if (mi_cmd->redirection != NULL)
