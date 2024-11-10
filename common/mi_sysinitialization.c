@@ -36,20 +36,20 @@ void	read_env_line(char *line, t_sys *mi_sys)
 int	read_env(char **env, t_sys *mi_sys)
 {
 	mi_sys->senv->shlvl = ft_strdup("1");
-	mi_sys->senv->len = 0;
-	while (env[mi_sys->senv->len])
+	mi_sys->len_env = 0;
+	while (env[mi_sys->len_env])
 	{
-		read_env_line(env[mi_sys->senv->len], mi_sys);
-		mi_sys->senv->len++;
+		read_env_line(env[mi_sys->len_env], mi_sys);
+		mi_sys->len_env++;
 	}
-	mi_sys->senv->len++;
+	mi_sys->len_env++;
 	if (mi_sys->senv->pwd == 0)
-		mi_sys->senv->len++;
+		mi_sys->len_env++;
 	if (mi_sys->senv->shlvl == NULL)
-		mi_sys->senv->len++;
+		mi_sys->len_env++;
 	if (mi_sys->senv->_ == 0)
-		mi_sys->senv->len++;
-	return (mi_sys->senv->len);
+		mi_sys->len_env++;
+	return (mi_sys->len_env);
 }
 
 void	mi_setdefaul_initialization( t_sys *mi_sys)
@@ -61,7 +61,7 @@ void	mi_setdefaul_initialization( t_sys *mi_sys)
 	mi_sys->senv->shlvl = NULL;
 	mi_sys->senv->_ = NULL;
 	mi_sys->senv->home = NULL;
-	mi_sys->senv->len = 0;
+	mi_sys->len_env = 0;
 	mi_sys->fd_in = STDIN_FILENO;
 	mi_sys->error = NULL;
 }
@@ -74,8 +74,8 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 
 	shlvl = false;
 	mi_setdefaul_initialization(mi_sys);
-	mi_sys->senv->len = read_env(env, mi_sys);
-	ienv = (char **)ft_calloc(mi_sys->senv->len + 1, sizeof(char *));
+	mi_sys->len_env = read_env(env, mi_sys);
+	ienv = (char **)ft_calloc(mi_sys->len_env + 1, sizeof(char *));
 	i = -1;
 	while (env[++i])
 	{
@@ -95,7 +95,14 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 	if (!shlvl)
 		ienv[i++] = ft_strjoin("SHLVL=", mi_sys->senv->shlvl);
 	mi_sys->env = ienv;
-	mi_sys->senv->len = i;
+	mi_sys->len_env = i;
+
+/*
+	if (mi_sys->senv != NULL && mi_sys->senv->shlvl && mi_sys->senv->shlvl != NULL)
+		free(mi_sys->senv->shlvl);
+	if (mi_sys->senv != NULL && mi_sys->senv != NULL)
+		free(mi_sys->senv);	
+*/
 	if (mi_sys->senv != NULL)
 	{
 		if (mi_sys->senv->shlvl != NULL)

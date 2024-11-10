@@ -17,7 +17,7 @@ void	mi_checkbuiltin(t_cmd *mi_cmd)
 	if (ft_findword (BUILTINS, mi_cmd->cmd))
 	{
 		mi_cmd->builtin = true;
-		mi_cmd->cmd = ft_strdup(mi_cmd->cmd);
+		mi_cmd->cmd = mi_cmd->cmd;
 	}
 	else
 		mi_cmd->builtin = false;

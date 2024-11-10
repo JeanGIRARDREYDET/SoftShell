@@ -50,7 +50,6 @@ extern int	g_signal;
 
 typedef struct s_env
 {
-	int				len;
 	char			*oldpwd;
 	char			*pwd;
 	char			*path;
@@ -157,7 +156,7 @@ int		mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys);
 int		mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_exec(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys);
-void	mi_freecmd(t_cmd *mi_cmd, t_sys *mi_sys);
+void	mi_freecmd(t_sys *mi_sys);
 void	mi_waitingpipe(t_sys *mi_sys);
 void	mi_cmdherdoc(t_cmd *mi_cmd);
 void	mi_cmdsplitcmd(t_cmd *mi_cmd, t_sys *mi_sys);

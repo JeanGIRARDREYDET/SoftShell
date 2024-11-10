@@ -95,7 +95,8 @@ int	main(int argc, char **argv, char **env)
 		mi_syscmditer (&mi_sys, &mi_checkpathaccess);
 		mi_syscmditer (&mi_sys, &mi_execone);
 		mi_waitingpipe (&mi_sys);
-		mi_freecmd(mi_cmd, &mi_sys);
+		mi_freecmd(&mi_sys);
+		
 	//  mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 
 		

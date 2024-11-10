@@ -23,5 +23,12 @@ void	builtin_unset(char *key, t_sys *mi_sys)
 	if (pos != -1)
 	{
 		free(mi_sys->env[pos]);
+		while (mi_sys->env[pos + 1] != NULL)
+		{
+			mi_sys->env[pos] = mi_sys->env[pos + 1];
+			pos++;
+		}
+		mi_sys->env[pos] = NULL;
+		mi_sys->len_env--;
 	}
 }

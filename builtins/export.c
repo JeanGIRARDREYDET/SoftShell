@@ -41,8 +41,8 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 	char		**ienv;
 	int			i;
 
-	mi_sys->senv->len = mi_sys->senv->len + 2;
-	ienv = (char **)ft_calloc(mi_sys->senv->len, sizeof(char *));
+	mi_sys->len_env += 2+ 2;
+	ienv = (char **)ft_calloc(mi_sys->len_env, sizeof(char *));
 	if (ienv == NULL)
 	{
 		mi_logerror(126, "Cannot allocate memory", mi_sys);
