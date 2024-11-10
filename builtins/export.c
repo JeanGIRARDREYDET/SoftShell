@@ -71,20 +71,27 @@ void	s_env_create_update_value(char *line, t_sys *mi_sys)
 	mi_sys->exit_status = EXIT_SUCCESS;
 }
 
-int	export_values(char *key, t_sys *mi_sys)
+int	mi_export_values(char *key, t_sys *mi_sys)
 {
 	int			next_value;
+	char		*msg;
 
 	while (key[0] != '\0' && key[0] < 33)
 		key++;
 	if (key[0] == '=')
-		printf("export: `%s': not a valid identifier\n", key);
+	{
+		msg = join_3("export: `", key, "' not a valid identifier");
+		mi_logerror(1, msg, mi_sys);
+		free(msg);
+		mi_sys->exit_status = EXIT_FAILURE;
+		return (mi_sys->exit_status);
+	}
 	next_value = 0 ;
 	while (key[next_value] != '\0' && key[next_value] > 32)
 		next_value++;
 	s_env_create_update_value(ft_strdupleft (key, next_value), mi_sys);
 	if (key[next_value] != '\0')
-		export_values(key + next_value, mi_sys);
+		mi_export_values(key + next_value, mi_sys);
 	mi_sys->exit_status = EXIT_SUCCESS;
 	return (mi_sys->exit_status);
 }
@@ -92,9 +99,9 @@ int	export_values(char *key, t_sys *mi_sys)
 void	builtin_export(char *key, t_sys *mi_sys)
 {
 	if (mi_sys->env == NULL)
-		dprintf(2, "			builtin_export env NULL\n");
+		mi_logerror(1, "export: env NULL", mi_sys);
 	if (!key || key[0] == '\0')
 		print_export(mi_sys);
 	else
-		export_values(key, mi_sys);
+		mi_export_values(key, mi_sys);
 }

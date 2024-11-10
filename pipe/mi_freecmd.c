@@ -16,10 +16,12 @@ void	mi_freeerror(t_sys *mi_sys)
 {
 	t_error	*tmp;
 
+	mi_sys->code_error = 0;
 	if (mi_sys->error == NULL)
 		return ;
 	while (mi_sys->error && mi_sys->error != NULL)
 	{
+		mi_sys->code_error = mi_sys->error->code_error;
 		tmp = mi_sys->error->next;
 		free(mi_sys->error);
 		mi_sys->error = tmp;
@@ -35,7 +37,7 @@ void	mi_freeonecmd (t_cmd *mi_cmd)
 		ft_arrclose(mi_cmd->args);
 	if (mi_cmd->full_cmd)
 		free(mi_cmd->full_cmd);
-	if (mi_cmd->split_cmd!= NULL)
+	if (mi_cmd->split_cmd != NULL)
 		ft_arrclose(mi_cmd->split_cmd);
 	if (mi_cmd->redirection != NULL)
 		free(mi_cmd->redirection);
