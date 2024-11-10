@@ -37,7 +37,6 @@ void	mi_freeonecmd (t_cmd *mi_cmd)
 		ft_arrclose(mi_cmd->args);
 	if (mi_cmd->full_cmd)
 		free(mi_cmd->full_cmd);
-
 	if (mi_cmd->cmd != NULL)
 	{
 		free(mi_cmd->cmd);
