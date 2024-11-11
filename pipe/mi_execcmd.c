@@ -16,20 +16,28 @@
 
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	if (mi_cmd->cmd == NULL && mi_cmd->cmd == NULL )
+	char	*errormsg;
+
+	if (mi_cmd->cmd == NULL )
 		return (1);
-	if (mi_sys->error)
-		exit(0);
 	if (mi_cmd->builtin == true)
 	{
 		mi_execbuiltin(mi_cmd, mi_sys);
-		return (1);
+		return (127);
+	}
+	if (!mi_cmd->cmd_found)
+	{
+		errormsg = ft_strjoin(mi_cmd->cmd, "command not found");
+		mi_cmd->cmd = ft_strdup(mi_cmd->cmd);
+		mi_logerror(127, errormsg, mi_sys);
+		free(errormsg);
+		exit(127);
+		return (127);
 	}
 	else if (execve(mi_cmd->cmd, mi_cmd->split_cmd, mi_sys->env) == -1)
 	{
 		mi_logerror(126, "Command found but in error ", mi_sys);
 		return (126);
 	}
-	mi_logerror(127, "command not found ", mi_sys);
-	return (1);
+	return (127);
 }

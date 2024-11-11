@@ -128,6 +128,7 @@ char	*mi_getenv(char *key, t_sys *s_sys);
 void	mi_unset(char *key, t_sys *s_sys);
 void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
+void	mi_freeerror(t_sys *mi_sys);
 
 int		mi_export_values(char *key, t_sys *mi_sys);
 t_error	*mi_errornew(int code_error, char *msg);
