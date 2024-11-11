@@ -21,7 +21,6 @@ int	set_io_files(t_app *s, int argc, char **argv)
 	if (s->fdd[0][0] == -1)
 	{
 		ft_perror(s, argv[1], 1, 0);
-		ft_perror(s, strerror(errno), 1, 0);
 		close(s->fdd[0][1]);
 		error = 0;
 	}
@@ -29,7 +28,7 @@ int	set_io_files(t_app *s, int argc, char **argv)
 	if (s->fdd[0][1] == -1)
 	{
 		ft_perror(s, argv[argc - 1], 1, 1);
-		ft_perror(s, strerror(errno), 1, 1);
+
 		error = 0;
 	}
 	return (error);

@@ -17,10 +17,10 @@ void	ft_sys_get_pwd(char **buf)
 	*buf = getcwd(NULL, 0);
 	if (*buf == NULL)
 	{
-		fprintf(stderr, "Cannot get current working directory path\n" );
+		write(STDERR_FILENO, "Cannot get current working directory path\n", 43);
 		if (errno == ERANGE)
 		{
-			fprintf (stderr, "Buffer size is too small.\n");
+			write (STDERR_FILENO, "Buffer size is too small.\n", 26);
 		}
 		exit (EXIT_FAILURE);
 	}
