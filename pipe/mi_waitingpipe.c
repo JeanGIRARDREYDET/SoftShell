@@ -11,9 +11,23 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <fcntl.h>
 
 void	mi_waitingpipe(t_sys *mi_sys)
 {
-	if (wait (&mi_sys->status) != 32512)
-		wait (&mi_sys->status);
+	int	i;
+	int status;
+
+	i = 1;
+	while (i < mi_sys->nb_pipe && wait (&status) != 32512)
+		i++;
+	wait (&status);
+	if (!(mi_sys->nb_pipe == 1 && mi_sys->cmd->builtin))
+		mi_logerror (WEXITSTATUS(status), NULL, mi_sys);
 }

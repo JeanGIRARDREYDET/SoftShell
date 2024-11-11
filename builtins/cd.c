@@ -95,8 +95,8 @@ void	builtin_cd(char *key, t_sys *mi_sys)
 	}
 	else if (*new_pwd != '\0')
 	{
-		perror("access");
-		mi_logerror(errno, strerror(errno), mi_sys);
+		// perror("access");
+		mi_logerror(1, "No such file or directory", mi_sys);
 		mi_sys->exit_status = EXIT_FAILURE;
 	}
 	free(new_pwd);

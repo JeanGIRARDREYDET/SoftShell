@@ -26,7 +26,7 @@ void	read_env_line(char *line, t_sys *mi_sys)
 		if (mi_sys->senv->shlvl != NULL)
 			free(mi_sys->senv->shlvl);
 		tmp = ft_itoa(1 + ft_atoi(line + 6));
-		mi_sys->senv->shlvl = ft_strdup("8"); 
+		mi_sys->senv->shlvl = ft_strdup(tmp); 
 		free(tmp);
 	}
 	if (ft_strnstr (line, "_=", 2) != 0)

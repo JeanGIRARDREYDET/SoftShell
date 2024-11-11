@@ -28,11 +28,16 @@ t_error	*mi_errornew(int code_error, char *msg)
 void	mi_logerror(int code_error, char *msg, t_sys *mi_sys)
 {
 	t_error	*error;
-
-	write(STDERR_FILENO, msg, ft_strlen(msg));
-	write(STDERR_FILENO, "\n", 1);
+	if (msg!=NULL)
+	{
+		write(STDERR_FILENO, msg, ft_strlen(msg));
+		write(STDERR_FILENO, "\n", 1);
+	}
+	
 	if (mi_sys->error == NULL)
 		mi_sys->error = mi_errornew(code_error, msg);
+	else if (code_error == 0)
+		return ;
 	else
 	{
 		error = mi_sys->error;

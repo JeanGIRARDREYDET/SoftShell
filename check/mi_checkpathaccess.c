@@ -62,7 +62,7 @@ void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		errormsg = ft_strjoin("command not found ", mi_cmd->cmd);
 		mi_cmd->cmd = ft_strdup(mi_cmd->cmd);
-		mi_logerror(126, errormsg, mi_sys);
+		mi_logerror(127, errormsg, mi_sys);
 		free(errormsg);
 	}
 }
