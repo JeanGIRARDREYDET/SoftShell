@@ -96,9 +96,11 @@ typedef struct s_sys
 {
 	int				status;
 	int				here_doc;
+	int 			max_id;	
 	int				nb_pipe;
 	int				nb_herdoc;
 	int				nb_error;
+	int				c;
 	char			**cmd_args;
 	int				terror[2];
 	int				code_error;

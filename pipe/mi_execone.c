@@ -69,6 +69,8 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 	}
 	mi_cmd->id = fork();
+	mi_sys->max_id = mi_cmd->id;
+	
 	if (mi_cmd->id == -1)
 	{
 		mi_intlogerror (mi_sys, "fork out failed", 1);

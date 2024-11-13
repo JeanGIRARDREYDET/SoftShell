@@ -26,13 +26,9 @@
 
 void	mi_waitingpipe(t_sys *mi_sys)
 {
-	int	i;
 	int	status;
 
-	i = 1;
-	while (i < mi_sys->nb_pipe)
-		i++;
-	wait (&status);
+	waitpid (mi_sys->max_id, &status, 0);
 	if (!(mi_sys->nb_pipe == 1 && mi_sys->cmd->builtin))
 	{
 		mi_freeerror (mi_sys);
