@@ -56,7 +56,7 @@ void	mi_freecmd (t_sys *mi_sys)
 	if (!mi_sys->cmd)
 		return ;
 	while (mi_sys->cmd && mi_sys->cmd != NULL)
-	{
+	{	
 		tmp = mi_sys->cmd->next;
 		mi_freeonecmd(mi_sys->cmd);
 		mi_sys->cmd = tmp;

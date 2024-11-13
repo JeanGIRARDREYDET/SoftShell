@@ -96,7 +96,7 @@ typedef struct s_sys
 {
 	int				status;
 	int				here_doc;
-	int 			max_id;	
+	int 			max_id;
 	int				nb_pipe;
 	int				nb_herdoc;
 	int				nb_error;

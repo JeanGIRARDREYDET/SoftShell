@@ -32,3 +32,16 @@ void	ft_subchar(char *s, char c)
 	}
 	s[j] = '\0';
 }
+
+void	ft_subchars(char *str, char *chars)
+{
+	int	i;
+
+	i = 0;
+	while (chars[i])
+	{
+		ft_subchar(str, chars[i]);
+		i++;
+	}
+	i++;
+}
