@@ -51,7 +51,8 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 	i = -1;
 	while (mi_sys->env[++i])
 		ienv[i] = ft_strdup(mi_sys->env[i]);
-	ienv[i] = line;
+	if (ienv != NULL && ienv[i] != NULL)
+		ienv[i] = line;
 	free (mi_sys->env);
 	mi_sys->env = ienv;
 }

@@ -117,7 +117,7 @@ void	mi_freesys(t_sys *mi_sys);
 void	signal_handle_sigint(int sign);
 bool	ft_findword(const char *source, const char *find);
 void	builtin_cd(char *key, t_sys *s_sys);
-void	builtin_echo(char *key);
+void	builtin_echo(t_sys *s_sys);
 void	builtin_env(t_sys *s_sys);
 void	builtin_exit(t_sys *s_sys);
 void	builtin_export(char *key, t_sys *s_sys);
@@ -131,6 +131,8 @@ void	mi_unset(char *key, t_sys *s_sys);
 void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
 void	mi_freeerror(t_sys *mi_sys);
+void	mi_freeonecmd (t_cmd *mi_cmd);
+size_t	ft_tablen2(char **str);
 
 int		mi_export_values(char *key, t_sys *mi_sys);
 t_error	*mi_errornew(int code_error, char *msg);

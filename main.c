@@ -17,15 +17,18 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 	char	*cmd;
 	char	**paths;
 	int		i;
-	char	*error_msg;
 
 	i = 0;
 	if (access(mi_cmd->cmd, F_OK) == 0)
 		return ;
-	i = 0;
+
 	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->cmd);
 	if (access(mi_cmd->cmd, F_OK) == 0)
+	{
+		free(cmd);
 		return ;
+	}
+	free(cmd);
 	paths = ft_split(mi_getenv("PATH", mi_sys), ':');
 	while (paths && paths[++i])
 	{
@@ -38,8 +41,6 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		free(cmd);
 	}
-	error_msg = join_3("minishell: ", mi_cmd->cmd, ": command not found\n");
-	free(cmd);
 	free(paths);
 	free(mi_cmd->cmd);
 	return ;
@@ -76,7 +77,7 @@ int	main(int argc, char **argv, char **env)
 		if (line)
 			add_history(line);
 		else
-			break ;
+			builtin_exit(&mi_sys);
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
 		if (*line == '\0')

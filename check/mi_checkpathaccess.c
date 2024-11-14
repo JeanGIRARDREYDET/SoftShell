@@ -19,6 +19,7 @@ void	mi_checkoneaccess(char *path, t_cmd *mi_cmd)
 	pathcmd = join_3(path, "/", mi_cmd->cmd);
 	if (access(pathcmd, F_OK) == 0)
 	{
+		free(mi_cmd->cmd);
 		mi_cmd->cmd = ft_strdup(pathcmd);
 		mi_cmd->cmd_found = true ;
 	}
@@ -50,7 +51,7 @@ void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 		return ;
 	if (!mi_cmd->cmd_found && access(mi_cmd->cmd, F_OK) == 0)
 	{
-		mi_cmd->cmd = ft_strdup(mi_cmd->cmd);
+	//	mi_cmd->cmd = ft_strdup(mi_cmd->cmd);
 		mi_cmd->cmd_found = true ;
 	}
 	mi_checkoneaccess(mi_getenv_env("PWD", mi_sys->env), mi_cmd);

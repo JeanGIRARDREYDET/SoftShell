@@ -14,11 +14,13 @@
 
 char	*find_expand(char *line)
 {
-	int	i;
-	int	c1;
-	int	c2;
+	size_t	i;
+	size_t	c1;
+	size_t	c2;
 
 	i = 0;
+	c1 = 0;
+	c2 = 0;
 	while (line[i] != '\0')
 	{
 		while (line[i] != '$')

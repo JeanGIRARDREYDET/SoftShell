@@ -16,24 +16,41 @@
 //si "-n" est reconnu et qu'il y a une chaine de caractere alors il ne fait pas de retour a la ligne et la print
 //si "-n" est reconnu mais qu'il n'y a pas de parametre, rien ne se passe
 
-void	builtin_echo(char *key)
+void	echo_param(char **param, int *j, int len, int *nl)
 {
-	int	n;
-	int	i;
+	int	k;
 
-	n = 1;
-	i = 2;
-	if (key != NULL && *key == '-' && key[1] == 'n')
+	while (*j < len && *nl == 1 && param[*j][0] == '-')
 	{
-		key++ ;
-		while (*key == 'n')
-			key++;
-		if (*key < 33)
-			n = 0;
+		k = 1;
+		while (param[*j][k] == 'n')
+			k++;
+		if (param[*j][k - 1] == 'n' && param[*j][k] == '\0')
+		{
+			*nl = 0;
+			*j = *j + 1;
+		}
+		else
+			break ;
 	}
-	while (*key < 33)
-		key++;
-	write(STDOUT_FILENO, key, ft_strlen(key));
-	if (n == 1)
+}
+
+void	builtin_echo(t_sys *me_sys)
+{
+	int		nl;
+	int		len;
+	int		j;
+
+	nl = 1;
+	len = ft_tablen2(me_sys->cmd->split_cmd);
+	j = 1;
+	echo_param(me_sys->cmd->split_cmd, &j, len, &nl);
+	while (j < len)
+	{
+		ft_putstr_fd(me_sys->cmd->split_cmd[j++], STDOUT_FILENO);
+		if (j < len)
+			write(STDOUT_FILENO, " ", 1);
+	}
+	if (nl == 1)
 		write(STDOUT_FILENO, "\n", 1);
 }

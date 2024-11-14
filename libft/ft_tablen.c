@@ -35,3 +35,15 @@ size_t	ft_tablen(char const **str)
 		i++;
 	return (i);
 }
+
+size_t	ft_tablen2(char **str)
+{
+	size_t	i;
+
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}

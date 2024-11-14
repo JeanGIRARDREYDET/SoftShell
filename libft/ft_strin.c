@@ -21,7 +21,7 @@ bool	ft_strin(const char *s, const char c)
 	{
 		i++;
 	}
-	if (s[i] == c && s[i] != 0)
+	if (s && s[i] == c && s[i] != 0)
 		return (true);
 	return (false);
 }
