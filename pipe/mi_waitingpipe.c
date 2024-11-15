@@ -28,9 +28,9 @@ void	mi_waitingpipe(t_sys *mi_sys)
 {
 	int	status;
 
-	waitpid (mi_sys->max_id, &status, 0);
 	if (!(mi_sys->nb_pipe == 1 && mi_sys->cmd->builtin))
 	{
+		waitpid (mi_sys->max_id, &status, 0);
 		mi_freeerror (mi_sys);
 		mi_logerror (WEXITSTATUS(status), NULL, mi_sys);
 	}	

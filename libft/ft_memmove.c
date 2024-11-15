@@ -12,6 +12,8 @@
 
 #include "../minishell.h"
 
+//#include <stdio.h>
+
 /*
 Description :	
 			The memmove() function copies n bytes from memory area src to memory
@@ -39,13 +41,13 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	p = (char *)dest;
 	if (dest > src)
 	{
-		dest = dest + n -1;
-		src = src + n -1;
+		dest = dest + n - 1;
+		src = src + n - 1;
 		while (0 < n--)
 			*(unsigned char *)(dest--) = *(unsigned char *)(src--);
 	}
 	else
-		while (0 < n--)
-			*(unsigned char *)dest++ = *(unsigned char *)src++;
+		while (p != NULL && 0 < n--)
+			*(unsigned char *)p++ = *(unsigned char *)src++;
 	return ((void *)p);
 }

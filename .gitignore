@@ -3,3 +3,7 @@
 minishell
 
 builtins/*.o
+libft/*.o
+*.o
+*.html
+libft/*.o

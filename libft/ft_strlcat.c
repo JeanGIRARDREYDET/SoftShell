@@ -43,18 +43,19 @@ static void	ft_cat_run(char *dst, const char *src, size_t dstsize, size_t len)
 	size_t	i;
 
 	i = 0;
-	while (len < (dstsize - 1) && src[i] != '\0')
+	while (dst && dst[len] && len < (dstsize - 1) && src[i] != '\0')
 	{
 		dst[len] = src[i];
 		i++;
 		len++;
 	}
-	dst[len] = '\0';
+	if (dst && dst[len])
+		dst[len] = '\0';
 }
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	dest_len;	
+	size_t	dest_len;
 	size_t	src_len;
 
 	if ((!dst) && dstsize == 0)
