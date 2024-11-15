@@ -24,7 +24,7 @@ BONUS_SOURCES = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c\
 				ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c\
 				ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 LIB = ar rc
 
