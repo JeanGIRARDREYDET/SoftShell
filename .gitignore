@@ -1,7 +1,6 @@
 *.o
 *.swp
 minishell
-
 builtins/*.o
 libft/*.o
 *.o
