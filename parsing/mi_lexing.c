@@ -33,7 +33,7 @@ void	mi_lexingline(char *ln, int i, t_cmd *mi_cmd, t_sys *mi_sys)
 		mi_cmd->full_cmd = ft_strtrim_param(ln, 0, i -1, WSPACE);
 		if (!mi_cmd->full_cmd)
 		{
-			mi_logerror (2, join_3("syntax error near ",ln," unexpected token"), mi_sys);
+			mi_logerror (2, join_3("syntax error near ", ln, " unexpected token"), mi_sys);
 			return ;
 		}
 		mi_cmd->next = new_cmd;
