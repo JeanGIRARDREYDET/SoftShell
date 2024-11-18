@@ -46,16 +46,16 @@ char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set)
 		debut++;
 	while (ft_strchr(set, s1[fin]) && fin >= debut && s1[fin] != '\0')
 		fin--;
-	len = fin - debut;
+	len = fin - debut + 1;
 	p = (char *) ft_calloc (len, sizeof(char));
 	if (!p)
 		return (NULL);
 	i = 0;
-	while (debut+i <= fin)
+	while (debut+i < fin)
 	{
 		p[i] = s1[debut+i];
 		i++;
 	}
-	//p[i] = '\0';
+//	p[i] = '\0';
 	return (p);
 }

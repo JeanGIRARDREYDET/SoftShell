@@ -26,6 +26,6 @@ void	ft_cnt_arg(char *ln, int *i, int *n)
 	ft_pos_passspace(ln, i);
 	ft_pos_passstring(ln, i);
 	(*n)++;
-	if (ln[*i])
+	if (ln && ln[*i])
 		ft_cnt_arg(ln, i, n);
 }

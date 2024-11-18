@@ -87,7 +87,7 @@ void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 	if (!full_cmd || !*full_cmd)
 		return ;
 	echap = '\0';
-	while (full_cmd && full_cmd[0][i])
+	while (full_cmd && full_cmd[0][i] != '\0')
 	{
 		if (echap == '\0' && ft_strin(TECHAP, full_cmd[0][i]))
 			echap = full_cmd[0][i];

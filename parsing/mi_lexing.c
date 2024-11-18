@@ -12,37 +12,34 @@
 
 #include "../minishell.h"
 
-void	mi_lexingline(char *ln, int i, t_cmd *mi_cmd, t_sys *mi_sys)
-{	
-	t_cmd		*new_cmd;
+void mi_lexingline(char *ln, int i, t_cmd *mi_cmd, t_sys *mi_sys)
+{
+	t_cmd	*new_cmd;
 	char	*msg_error;
+	int		start;
 
-	if (!ln[i] || ln[i] == '\0')
+	start = i;
+	while (ln[i] && ln[i] != '\0')
 	{
-
-		mi_cmd->full_cmd = ft_strtrim_param(ln, 0, i, WSPACE);
-		mi_cmd->next = NULL;
-		return ;
-	}
-	else if (ft_strin(TECHAP, ln[i]))
-	{
-		mi_pospasscote(ln, &i, mi_sys);
-		mi_lexingline (ln, i, mi_cmd, mi_sys);
-	}
-	else if (ln[i] == '|')
-	{
-		new_cmd = mi_createcmd(mi_sys);
-		mi_cmd->full_cmd = ft_strtrim_param(ln, 0, i -1, WSPACE);
-		if (!mi_cmd->full_cmd)
+		if (ft_strin(TECHAP, ln[i]))
+			mi_pospasscote(ln, &i, mi_sys);
+		else if (ln[i] == '|')
 		{
-			msg_error = join_3("syntax error near ", ln, " unexpected token");
-			mi_logerror (2, msg_error, mi_sys);
-			free(msg_error);
-			return ;
+			new_cmd = mi_createcmd(mi_sys);
+			mi_cmd->full_cmd = ft_strtrim_param(ln,start, i - 1, WSPACE);
+			if (!mi_cmd->full_cmd)
+			{
+				msg_error = join_3("syntax error near ", ln, " unexpected token");
+				mi_logerror(2, msg_error, mi_sys);
+				free(msg_error);
+				return;
+			}
+			mi_cmd->next = new_cmd;
+			mi_cmd = new_cmd;
+			start=i+1;
 		}
-		mi_cmd->next = new_cmd;
-		mi_lexingline (ln + (++i), 0, new_cmd, mi_sys);
+		i++;
 	}
-	else
-		mi_lexingline (ln, ++i, mi_cmd, mi_sys);
+	mi_cmd->full_cmd = ft_strtrim_param(ln, start, i, WSPACE);
+	mi_cmd->next = NULL;
 }
