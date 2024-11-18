@@ -26,7 +26,7 @@ void	read_env_line(char *line, t_sys *mi_sys)
 		if (mi_sys->senv->shlvl != NULL)
 			free(mi_sys->senv->shlvl);
 		tmp = ft_itoa(1 + ft_atoi(line + 6));
-		mi_sys->senv->shlvl = ft_strdup(tmp); 
+		mi_sys->senv->shlvl = ft_strdup(tmp);
 		free(tmp);
 	}
 	if (ft_strnstr (line, "_=", 2) != 0)
@@ -75,7 +75,7 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 	shlvl = false;
 	mi_setdefaul_initialization(mi_sys);
 	mi_sys->len_env = read_env(env, mi_sys);
-	ienv = (char **)ft_calloc(mi_sys->len_env + 1, sizeof(char *));
+	ienv = (char **)ft_calloc(mi_sys->len_env, sizeof(char *));
 	i = -1;
 	while (env[++i])
 	{
