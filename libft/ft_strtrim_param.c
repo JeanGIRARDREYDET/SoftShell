@@ -53,6 +53,7 @@ char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set)
 	i = 0;
 	while (debut+i < fin)
 	{
+
 		p[i] = s1[debut+i];
 		i++;
 	}
