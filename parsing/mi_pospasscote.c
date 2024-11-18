@@ -12,21 +12,19 @@
 
 #include "../minishell.h"
 
-int	mi_pospasscote(char *ln, int i, t_sys *mi_sys)
+void	mi_pospasscote(char *ln, int *i, t_sys *mi_sys)
 {
 	char	echap;
 
-	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != 0 && ln[i] != '|')
+	while (ln[*i] && ln[*i] != '\'' && ln[*i] != '"' && ln[*i] != 0 && ln[*i] != '|')
 		i++;
-	if (ft_strin(TECHAP, ln[i]))
+	if (ft_strin(TECHAP, ln[*i]))
 	{
-		echap = ln[i];
-		i++;
-		i += ft_pos_left_char ((ln + i), echap);
-		if (ln[i] == echap)
-			i++;
+		echap = ln[*i];
+		(*i)++;
+		*i += ft_pos_left_char ((ln + *i), echap);
+			(*i)++;
 		else
 			mi_logerror(130, "erreur de quot", mi_sys);
 	}
-	return (i);
 }

@@ -38,19 +38,24 @@ char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set)
 {
 	char	*p;
 	int		i;
+	int		len;
 
 	if (!s1 || !set || !fin || fin < debut)
 		return (0);
 	while (ft_strchr (set, s1[debut]) && s1[debut] != '\0')
 		debut++;
-	while (ft_strchr(set, s1[fin]) && fin > debut && s1[fin] != '\0')
+	while (ft_strchr(set, s1[fin]) && fin >= debut && s1[fin] != '\0')
 		fin--;
-	p = (char *) ft_calloc ((fin - debut + 2), sizeof(char));
+	len = fin - debut;
+	p = (char *) ft_calloc (len, sizeof(char));
 	if (!p)
 		return (NULL);
 	i = 0;
-	while (debut <= fin)
-		p[i++] = s1[debut++];
-	p[i] = '\0';
+	while (debut+i <= fin)
+	{
+		p[i] = s1[debut+i];
+		i++;
+	}
+	//p[i] = '\0';
 	return (p);
 }
