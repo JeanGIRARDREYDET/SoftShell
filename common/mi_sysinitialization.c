@@ -96,7 +96,6 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 		ienv[i++] = ft_strjoin("SHLVL=", mi_sys->senv->shlvl);
 	mi_sys->env = ienv;
 	mi_sys->len_env = i;
-
 /*
 	if (mi_sys->senv != NULL && mi_sys->senv->shlvl && mi_sys->senv->shlvl != NULL)
 		free(mi_sys->senv->shlvl);
