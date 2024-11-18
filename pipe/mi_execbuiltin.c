@@ -12,11 +12,9 @@
 
 #include "../minishell.h"
 
-void	mi_execexitepipe(t_sys *mi_sys)
+void	mi_execexitepipe(int status, t_sys *mi_sys)
 {
-	int			status;
-
-	status = mi_sys->exit_status;
+	dprintf(2, "		%d	mi_execexitepipe\n", status);
 	mi_freesys(mi_sys);
 	exit(status);
 }
@@ -47,5 +45,5 @@ void	mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 	else
 		exit (EXIT_FAILURE);
 	if (mi_sys->nb_pipe > 1)
-		mi_execexitepipe(mi_sys);
+		mi_execexitepipe(mi_sys->exit_status, mi_sys);
 }
