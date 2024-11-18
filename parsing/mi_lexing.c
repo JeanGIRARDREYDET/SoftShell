@@ -19,20 +19,19 @@ void	mi_lexingline(char *ln, int i, t_cmd *mi_cmd, t_sys *mi_sys)
 
 	if (!ln[i] || ln[i] == '\0')
 	{
-		//free(mi_cmd->full_cmd);
+
 		mi_cmd->full_cmd = ft_strtrim_param(ln, 0, i, WSPACE);
 		mi_cmd->next = NULL;
 		return ;
 	}
 	else if (ft_strin(TECHAP, ln[i]))
 	{
-		i = mi_pospasscote(ln, i, mi_sys);
+		mi_pospasscote(ln, &i, mi_sys);
 		mi_lexingline (ln, i, mi_cmd, mi_sys);
 	}
 	else if (ln[i] == '|')
 	{
 		new_cmd = mi_createcmd(mi_sys);
-	//	free(mi_cmd->full_cmd);
 		mi_cmd->full_cmd = ft_strtrim_param(ln, 0, i -1, WSPACE);
 		if (!mi_cmd->full_cmd)
 		{
