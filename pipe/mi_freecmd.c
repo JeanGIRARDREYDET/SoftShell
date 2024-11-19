@@ -75,4 +75,7 @@ void	mi_freesys(t_sys *mi_sys)
 		mi_freecmd(mi_sys);
 	if (mi_sys->error != NULL)
 		mi_freeerror(mi_sys);
+	rl_clear_history();
 }
+
+

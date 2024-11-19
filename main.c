@@ -74,14 +74,14 @@ int	main(int argc, char **argv, char **env)
 	{
 		signal(SIGINT, &signal_handle_sigint);
 		line = readline("minishell> ");
-		if (line)
-			add_history(line);
-		else
+		if(line && *line == '\0')
+			continue ;
+		else if(line)
+			add_history(line);	
+		else if(!line)
 			builtin_exit(&mi_sys);
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
-		if (*line == '\0')
-			continue ;
 		mi_checkline(line, &mi_sys);
 		mi_sys.nb_pipe = 0;
 		mi_cmd = mi_createcmd(&mi_sys);
@@ -97,4 +97,5 @@ int	main(int argc, char **argv, char **env)
 		mi_freecmd(&mi_sys);
 		//  mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 	}
+	
 }

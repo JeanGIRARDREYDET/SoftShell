@@ -77,6 +77,7 @@ typedef struct s_cmd
 {
 	int				id;
 	int				no;
+	char			*line;
 	char			*full_cmd;
 	char			**split_cmd;
 	char			*cmd;
@@ -131,7 +132,7 @@ void	mi_unset(char *key, t_sys *s_sys);
 void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
 void	mi_freeerror(t_sys *mi_sys);
-void	mi_freeonecmd (t_cmd *mi_cmd);
+void	mi_freeonecmd(t_cmd *mi_cmd);
 size_t	ft_tablen2(char **str);
 
 int		mi_export_values(char *key, t_sys *mi_sys);
