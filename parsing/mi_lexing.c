@@ -40,6 +40,7 @@ void mi_lexingline(char *ln, int i, t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		i++;
 	}
+
 	mi_cmd->full_cmd = ft_strtrim_param(ln, start, i, WSPACE);
 	mi_cmd->next = NULL;
 }

@@ -21,7 +21,7 @@ void	mi_pospasscote(char *ln, int *i, t_sys *mi_sys)
 	if (ft_strin(TECHAP, ln[*i]))
 	{
 		echap = ln[*i];
-		(*i)++;
+	//	(*i)++;
 		*i += ft_pos_left_char ((ln + *i), echap);
 		if (ln[*i] == echap)
 			(*i)++;
