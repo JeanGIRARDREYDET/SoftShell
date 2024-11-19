@@ -26,7 +26,7 @@ void mi_lexingline(char *ln, int i, t_cmd *mi_cmd, t_sys *mi_sys)
 		else if (ln[i] == '|')
 		{
 			new_cmd = mi_createcmd(mi_sys);
-			mi_cmd->full_cmd = ft_strtrim_param(ln, start, i - 1, WSPACE);
+			mi_cmd->full_cmd = ft_strtrim_param(ln, start, i, WSPACE);
 			if (!mi_cmd->full_cmd)
 			{
 				msg_error = join_3("syntax error near ", ln, " unexpected token");
