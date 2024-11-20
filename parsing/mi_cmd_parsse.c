@@ -100,6 +100,8 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 				mi_parseredirtocken(&i, &n, mi_cmd, mi_sys);
 			s = i;
 			ft_pos_passstring(mi_cmd->full_cmd, &i);
+			if(i-s<1)
+				continue;
 			mi_cmd->split_cmd[n] = ft_substr(mi_cmd->full_cmd, s, i - s);
 			ft_subchar(mi_cmd->split_cmd[n], '\"');
 			n++;
