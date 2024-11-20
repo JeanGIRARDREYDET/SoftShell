@@ -14,9 +14,8 @@
 
 void	mi_execexitepipe(int status, t_sys *mi_sys)
 {
-	dprintf(2, "		%d	mi_execexitepipe\n", status);
 	mi_freesys(mi_sys);
-	exit(status);
+	exit((int)status);
 }
 
 void	mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys)

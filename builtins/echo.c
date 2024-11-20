@@ -45,8 +45,11 @@ void	builtin_echo(t_sys *me_sys)
 	len = ft_tablen2(me_sys->cmd->split_cmd);
 	j = 1;
 	echo_param(me_sys->cmd->split_cmd, &j, len, &nl);
+	
+
 	while (j < len)
 	{
+		write(STDOUT_FILENO, me_sys->cmd->split_cmd[j], ft_strlen(me_sys->cmd->split_cmd[j]));
 		ft_putstr_fd(me_sys->cmd->split_cmd[j++], STDOUT_FILENO);
 		if (j < len)
 			write(STDOUT_FILENO, " ", 1);
