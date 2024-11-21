@@ -51,6 +51,7 @@ void	mi_freeonecmd (t_cmd *mi_cmd)
 
 void	mi_freecmd (t_sys *mi_sys)
 {
+	dprintf(2, "mi_freecmd\n");
 	t_cmd	*tmp;
 
 	if (!mi_sys->cmd)

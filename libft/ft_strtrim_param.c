@@ -48,7 +48,7 @@ char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set)
 		fin--;
 	while (ft_strchr(set, s1[fin]) && fin >= debut && s1[fin] != '\0')
 		fin--;
-	len = fin - debut + 2;
+	len = fin - debut +2;
 	p = (char *) ft_calloc (len, sizeof(char));
 	if (!p)
 		return (NULL);

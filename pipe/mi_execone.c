@@ -57,6 +57,10 @@ void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 {
+
+	if (mi_cmd->full_cmd)
+		free(mi_cmd->full_cmd);
+	mi_cmd->full_cmd = NULL;
 	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin)
 	{
 		mi_execbuiltin(mi_cmd, mi_sys);
