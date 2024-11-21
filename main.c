@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **env)
 		mi_checkline(line, &mi_sys);
 		mi_sys.nb_pipe = 0;
 		mi_cmd = mi_createcmd(&mi_sys);
-		mi_lexingline(line, 0, mi_cmd, &mi_sys);
+		mi_lexingline(line, mi_cmd, &mi_sys);
 		mi_sys.cmd = mi_cmd;
 		mi_syscmditer(&mi_sys, &mi_expand_interface);
 		mi_syscmditer(&mi_sys, &mi_cmdsplitcmd);

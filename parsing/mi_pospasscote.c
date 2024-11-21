@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	mi_pospasscote(char *ln, int *pos, t_sys *mi_sys)
+void	mi_pospasscote(char *ln, size_t *pos, t_sys *mi_sys)
 {
 	char	echap;
 	int		i;

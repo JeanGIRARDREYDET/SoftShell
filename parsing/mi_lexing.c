@@ -12,14 +12,16 @@
 
 #include "../minishell.h"
 
-void mi_lexingline(char *ln, int i, t_cmd *mi_cmd, t_sys *mi_sys)
+void mi_lexingline(char *ln, t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	t_cmd	*new_cmd;
 	char	*msg_error;
-	int		start;
+	size_t		start;
+	size_t	i;
 
+	i = 0;
 	start = i;
-	while (ln[i] && ln[i] != '\0')
+	while ( ft_strlen(ln) >= i && ln[i])
 	{
 		if (ft_strin(TECHAP, ln[i]))
 			mi_pospasscote(ln, &i, mi_sys);
