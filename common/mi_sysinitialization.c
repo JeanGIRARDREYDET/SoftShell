@@ -64,6 +64,7 @@ void	mi_setdefaul_initialization( t_sys *mi_sys)
 	mi_sys->len_env = 0;
 	mi_sys->fd_in = STDIN_FILENO;
 	mi_sys->error = NULL;
+	mi_sys->exit_status = 0;
 }
 
 void	mi_sysinitialization(char **env, t_sys *mi_sys)

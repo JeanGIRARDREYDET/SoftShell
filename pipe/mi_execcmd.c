@@ -27,7 +27,7 @@ int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	if (!mi_cmd->cmd_found)
 	{
-		errormsg = ft_strjoin(mi_cmd->cmd, " command not found");
+		errormsg = ft_strjoin(mi_cmd->cmd, ": command not found");
 		mi_logerror(127, errormsg, mi_sys);
 		free(errormsg);
 		exit(127);
