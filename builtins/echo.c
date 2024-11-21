@@ -35,25 +35,27 @@ void	echo_param(char **param, int *j, int len, int *nl)
 	}
 }
 
-void	builtin_echo(t_sys *me_sys)
+void	builtin_echo(t_cmd *mi_cmd)
 {
 	int		nl;
 	int		len;
 	int		j;
 
 	nl = 1;
-	len = ft_tablen2(me_sys->cmd->split_cmd);
+	len = ft_tablen2(mi_cmd->split_cmd);
 	j = 1;
-	echo_param(me_sys->cmd->split_cmd, &j, len, &nl);
+	echo_param(mi_cmd->split_cmd, &j, len, &nl);
 	
 
 	while (j < len)
 	{
-		write(STDOUT_FILENO, me_sys->cmd->split_cmd[j], ft_strlen(me_sys->cmd->split_cmd[j]));
-		ft_putstr_fd(me_sys->cmd->split_cmd[j++], STDOUT_FILENO);
+		write(STDOUT_FILENO, mi_cmd->split_cmd[j], ft_strlen(mi_cmd->split_cmd[j]));
+	///	ft_putstr_fd(me_sys->cmd->split_cmd[j], STDOUT_FILENO);
 		if (j < len)
 			write(STDOUT_FILENO, " ", 1);
+		j++;	
 	}
 	if (nl == 1)
 		write(STDOUT_FILENO, "\n", 1);
+	
 }

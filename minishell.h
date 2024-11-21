@@ -118,7 +118,7 @@ void	mi_freesys(t_sys *mi_sys);
 void	signal_handle_sigint(int sign);
 bool	ft_findword(const char *source, const char *find);
 void	builtin_cd(char *key, t_sys *s_sys);
-void	builtin_echo(t_sys *s_sys);
+void	builtin_echo(t_cmd *me_cmd);
 void	builtin_env(t_sys *s_sys);
 void	builtin_exit(t_sys *s_sys);
 void	builtin_export(char *key, t_sys *s_sys);

@@ -41,7 +41,7 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 	char		**ienv;
 	int			i;
 
-	mi_sys->len_env += 2+ 2;
+	mi_sys->len_env += 2;
 	ienv = (char **)ft_calloc(mi_sys->len_env, sizeof(char *));
 	if (ienv == NULL)
 	{
@@ -51,7 +51,7 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 	i = -1;
 	while (mi_sys->env[++i])
 		ienv[i] = ft_strdup(mi_sys->env[i]);
-	if (ienv != NULL && ienv[i] != NULL)
+	if (ienv != NULL && ienv[i] == NULL)
 		ienv[i] = line;
 	free (mi_sys->env);
 	mi_sys->env = ienv;
