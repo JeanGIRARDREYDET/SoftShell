@@ -44,9 +44,12 @@ void	mi_freeonecmd (t_cmd *mi_cmd)
 	}
 	if (mi_cmd->split_cmd != NULL)
 		ft_arrclose(mi_cmd->split_cmd);
+	mi_cmd->split_cmd = NULL;
 	if (mi_cmd->redirection != NULL)
 		free(mi_cmd->redirection);
-	free(mi_cmd);
+	if (mi_cmd != NULL)
+		free(mi_cmd);
+	mi_cmd = NULL;
 }
 
 void	mi_freecmd (t_sys *mi_sys)

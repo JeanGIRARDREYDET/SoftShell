@@ -29,11 +29,13 @@ void mi_lexingline(char *ln, t_cmd *mi_cmd, t_sys *mi_sys)
 		{
 			new_cmd = mi_createcmd(mi_sys);
 			mi_cmd->full_cmd = ft_strtrim_param(ln, start, i, WSPACE);
-			if (!mi_cmd->full_cmd)
+			if (*mi_cmd->full_cmd=='\0')
 			{
 				msg_error = join_3("syntax error near ", ln, " unexpected token");
 				mi_logerror(2, msg_error, mi_sys);
 				free(msg_error);
+				mi_sys->cmd = mi_cmd;
+				mi_freecmd(mi_sys);
 				return;
 			}
 			mi_cmd->next = new_cmd;
@@ -44,4 +46,5 @@ void mi_lexingline(char *ln, t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	mi_cmd->full_cmd = ft_strtrim_param(ln, start, i -1, WSPACE);
 	mi_cmd->next = NULL;
+	mi_sys->cmd = mi_cmd;
 }
