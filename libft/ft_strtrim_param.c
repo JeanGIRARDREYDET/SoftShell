@@ -40,8 +40,8 @@ char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set)
 	int		i;
 	int		len;
 
-	if (!s1 || !set || !fin || fin < debut)
-		return (0);
+	if (!s1 || !set || !fin || fin <= debut)
+		return (NULL);
 	while (ft_strchr (set, s1[debut]) && s1[debut] != '\0')
 		debut++;
 	if (s1[fin] == '|')
@@ -49,6 +49,8 @@ char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set)
 	while (ft_strchr(set, s1[fin]) && fin >= debut && s1[fin] != '\0')
 		fin--;
 	len = fin - debut +2;
+	if (len ==1)
+		return (NULL);
 	p = (char *) ft_calloc (len, sizeof(char));
 	if (!p)
 		return (NULL);
