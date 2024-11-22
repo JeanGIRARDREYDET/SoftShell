@@ -22,7 +22,7 @@ void	builtin_exit(t_sys *mi_sys)
 	i = 0;
 	n = 0;
 	code_exit = 255;
-	code_exit &= mi_sys->code_error;
+//	code_exit &= mi_sys->code_error;
 	if (mi_sys->cmd && mi_sys->cmd->arg)
 	{
 		arg = mi_sys->cmd->arg;
@@ -37,7 +37,7 @@ void	builtin_exit(t_sys *mi_sys)
 				return (mi_logerror(130, "numeric argument required", mi_sys));
 		}
 	}
-	write(STDOUT_FILENO, "exit\n", 5);
+	write(STDOUT_FILENO, "exit", 5);
 	mi_freesys(mi_sys);
 	exit(code_exit);
 }

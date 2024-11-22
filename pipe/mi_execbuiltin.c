@@ -42,7 +42,11 @@ void	mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 	else if (ft_findword("unset", cmd))
 		builtin_unset(mi_cmd->arg, mi_sys);
 	else
+	{
+		dprintf(2, "	mi_execbuiltin exit\n");
 		exit (EXIT_FAILURE);
+	}
+		
 	if (mi_sys->nb_pipe > 1)
 		mi_execexitepipe(mi_sys->exit_status, mi_sys);
 }

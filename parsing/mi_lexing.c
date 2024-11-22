@@ -12,16 +12,20 @@
 
 #include "../minishell.h"
 
-void mi_lexingline(char *ln, t_cmd *mi_cmd, t_sys *mi_sys)
+void	mi_lexingline(char *ln, t_sys *mi_sys)
 {
-	t_cmd	*new_cmd;
-	char	*msg_error;
+	t_cmd		*new_cmd;
+	t_cmd		*mi_cmd;
+	char		*msg_error;
 	size_t		start;
-	size_t	i;
+	size_t		i;
 
+	mi_sys->nb_pipe = 0;
+	mi_cmd = mi_createcmd(mi_sys);
 	i = 0;
 	start = i;
-	while ( ft_strlen(ln) >= i && ln[i])
+	mi_sys->cmd = mi_cmd;
+	while (ft_strlen(ln) >= i && ln[i])
 	{
 		if (ft_strin(TECHAP, ln[i]))
 			mi_pospasscote(ln, &i, mi_sys);
@@ -36,6 +40,7 @@ void mi_lexingline(char *ln, t_cmd *mi_cmd, t_sys *mi_sys)
 				free(msg_error);
 				mi_sys->cmd = mi_cmd;
 				mi_freecmd(mi_sys);
+				mi_sys->cmd = NULL;
 				return;
 			}
 			mi_cmd->next = new_cmd;
@@ -46,5 +51,5 @@ void mi_lexingline(char *ln, t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	mi_cmd->full_cmd = ft_strtrim_param(ln, start, i -1, WSPACE);
 	mi_cmd->next = NULL;
-	mi_sys->cmd = mi_cmd;
+	
 }

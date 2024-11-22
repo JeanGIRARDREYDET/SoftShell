@@ -66,7 +66,6 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_sys	mi_sys;
-	t_cmd	*mi_cmd;
 
 	mi_checkmsargument(argc, argv);
 	mi_sysinitialization(env, &mi_sys);
@@ -83,14 +82,11 @@ int	main(int argc, char **argv, char **env)
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
 		mi_checkline(line, &mi_sys);
-		mi_sys.nb_pipe = 0;
-		mi_cmd = mi_createcmd(&mi_sys);
-		mi_lexingline(line, mi_cmd, &mi_sys);
-		mi_sys.cmd = mi_cmd;
+		mi_lexingline(line, &mi_sys);
 		mi_syscmditer(&mi_sys, &mi_expand_interface);
 		mi_syscmditer(&mi_sys, &mi_cmdsplitcmd);
-		mi_cmditer(mi_cmd, &mi_cmdparsse);
-		mi_cmditer(mi_cmd, &mi_checkbuiltin);
+		mi_cmditer(mi_sys.cmd, &mi_cmdparsse);
+		mi_cmditer(mi_sys.cmd, &mi_checkbuiltin);
 		mi_syscmditer(&mi_sys, &mi_checkpathaccess);
 		mi_syscmditer(&mi_sys, &mi_execone);
 		mi_waitingpipe(&mi_sys);

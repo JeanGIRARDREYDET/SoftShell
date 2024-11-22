@@ -147,7 +147,7 @@ void	mi_cmdparsse(t_cmd *me_cmd);
 void	mi_cmdargparsse(t_cmd *lst);
 void	mi_cmditer(t_cmd *lst, void (*f)(t_cmd *lst));
 void	mi_syscmditer(t_sys *sys, void (*f)(t_cmd *lst, t_sys *sys));
-void	mi_lexingline(char *ln, t_cmd *me_cmd, t_sys *mi_sys);
+void	mi_lexingline(char *ln, t_sys *mi_sys);
 void	mi_pospasscote(char *ln, size_t *i, t_sys *mi_sys);
 void	mi_logerror(int code_error, char *msg, t_sys *mi_sys);
 void	mi_logerror2(int id, char *msg, t_error *mi_error);
