@@ -81,7 +81,7 @@ typedef struct s_cmd
 	char			*full;
 	char			**split;
 	char			*cmd;
-	bool			cmd_found;
+	bool			found;
 	char			*arg;
 	char			*type;
 	char			**args;
@@ -143,7 +143,7 @@ void	mi_exec(t_cmd *me_cmd, t_sys *mi_sys);
 void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_oneexec(t_cmd *me_cmd, t_sys *mi_sys);
 
-void	mi_cmdparsse(t_cmd *me_cmd);
+void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_cmdargparsse(t_cmd *lst);
 void	mi_cmditer(t_cmd *lst, void (*f)(t_cmd *lst));
 void	mi_syscmditer(t_sys *sys, void (*f)(t_cmd *lst, t_sys *sys));
@@ -166,9 +166,9 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_freecmd(t_sys *mi_sys);
 void	mi_waitingpipe(t_sys *mi_sys);
 void	mi_cmdherdoc(t_cmd *mi_cmd);
-void	mi_cmdsplitcmd(t_cmd *mi_cmd, t_sys *mi_sys);
+void	mi_cmdsplitcmd(t_cmd *mi_cmd);
 char	*mi_getenv_env(char *key, char **env);
 
-t_redirection	*mi_createredirection(int redir_type);
+void	mi_creredirection(t_cmd *cmd, t_sys *sys, int type, char *file_name);
 
 #endif

@@ -84,8 +84,8 @@ int	main(int argc, char **argv, char **env)
 		mi_checkline(line, &mi_sys);
 		mi_lexingline(line, &mi_sys);
 		mi_syscmditer(&mi_sys, &mi_expand_interface);
-		mi_syscmditer(&mi_sys, &mi_cmdsplitcmd);
-		mi_cmditer(mi_sys.cmd, &mi_cmdparsse);
+		mi_cmditer(mi_sys.cmd, &mi_cmdsplitcmd);
+		mi_syscmditer(&mi_sys, &mi_cmdparsse);
 		mi_cmditer(mi_sys.cmd, &mi_checkbuiltin);
 		mi_syscmditer(&mi_sys, &mi_checkpathaccess);
 		mi_syscmditer(&mi_sys, &mi_execone);

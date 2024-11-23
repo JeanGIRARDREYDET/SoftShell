@@ -77,8 +77,8 @@ void	mi_freesys(t_sys *mi_sys)
 		return ;
 	if (mi_sys->env != NULL && mi_sys->env != NULL)
 		ft_arrclose(mi_sys->env);
-	if (mi_sys->cmd && mi_sys->cmd != NULL)
-		mi_freecmd(mi_sys);
+//	if (mi_sys->cmd && mi_sys->cmd != NULL)
+//		mi_freecmd(mi_sys);
 	if (mi_sys->error != NULL)
 		mi_freeerror(mi_sys);
 	rl_clear_history();
