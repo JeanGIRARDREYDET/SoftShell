@@ -34,7 +34,7 @@ int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 		exit(127);
 		return (127);
 	}
-	else if (execve(mi_cmd->cmd, mi_cmd->split_cmd, mi_sys->env) == -1)
+	else if (execve(mi_cmd->cmd, mi_cmd->split, mi_sys->env) == -1)
 	{
 		mi_logerror(126, "Command found but in error ", mi_sys);
 		return (126);

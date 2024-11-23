@@ -29,24 +29,24 @@ void	mi_freeerror(t_sys *mi_sys)
 	mi_sys->error = NULL;
 }
 
-void	mi_freeonecmd (t_cmd *mi_cmd)
+void	mi_freeonecmd(t_cmd *mi_cmd)
 {
 	if (!mi_cmd)
 		return ;
 	if (mi_cmd->args != NULL)
 		ft_arrclose(mi_cmd->args);
 	mi_cmd->args = NULL;
-	if (mi_cmd->full_cmd!= NULL)
-		free(mi_cmd->full_cmd);
-	mi_cmd->full_cmd = NULL;
+	if (mi_cmd->full != NULL)
+		free(mi_cmd->full);
+	mi_cmd->full = NULL;
 	if (mi_cmd->cmd != NULL)
 	{
 		free(mi_cmd->cmd);
 		mi_cmd->cmd = NULL;
 	}
-	if (mi_cmd->split_cmd != NULL)
-		ft_arrclose(mi_cmd->split_cmd);
-	mi_cmd->split_cmd = NULL;
+	if (mi_cmd->split != NULL)
+		ft_arrclose(mi_cmd->split);
+	mi_cmd->split = NULL;
 	if (mi_cmd->redirection != NULL)
 		free(mi_cmd->redirection);
 	mi_cmd->redirection = NULL;
@@ -55,7 +55,7 @@ void	mi_freeonecmd (t_cmd *mi_cmd)
 	mi_cmd = NULL;
 }
 
-void	mi_freecmd (t_sys *mi_sys)
+void	mi_freecmd(t_sys *mi_sys)
 {
 	t_cmd	*tmp;
 
@@ -83,5 +83,3 @@ void	mi_freesys(t_sys *mi_sys)
 		mi_freeerror(mi_sys);
 	rl_clear_history();
 }
-
-

@@ -78,8 +78,8 @@ typedef struct s_cmd
 	int				id;
 	int				no;
 	char			*line;
-	char			*full_cmd;
-	char			**split_cmd;
+	char			*full;
+	char			**split;
 	char			*cmd;
 	bool			cmd_found;
 	char			*arg;

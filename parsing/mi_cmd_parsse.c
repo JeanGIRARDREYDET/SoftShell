@@ -29,14 +29,14 @@ void	mi_cmdparsse(t_cmd *mi_cmd)
 {
 	int	i;
 
-	if (mi_cmd->full_cmd == NULL)
+	if (mi_cmd->full == NULL)
 		return ;
-	i = ft_pos_left_chars(mi_cmd->full_cmd, WSPACE);
-	if (mi_cmd->full_cmd[i] == '\0')
+	i = ft_pos_left_chars(mi_cmd->full, WSPACE);
+	if (mi_cmd->full[i] == '\0')
 		mi_cmd->arg = NULL;
 	else
-		mi_cmd->arg = ft_post_left_sep(mi_cmd->full_cmd, WSPACE);
-	mi_cmd->cmd = ft_strdup(mi_cmd->split_cmd[0]);
+		mi_cmd->arg = ft_post_left_sep(mi_cmd->full, WSPACE);
+	mi_cmd->cmd = ft_strdup(mi_cmd->split[0]);
 }
 
 char	*ft_chrrepeat(char c, int n)
@@ -63,18 +63,18 @@ void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys)
 	char	capt_redir;
 
 	j = 0;
-	capt_redir = mi_cmd->full_cmd[*i];
-	while (capt_redir == mi_cmd->full_cmd[*i + j])
+	capt_redir = mi_cmd->full[*i];
+	while (capt_redir == mi_cmd->full[*i + j])
 		j++ ;
-	if (j > 2 || mi_cmd->full_cmd[*i+j] == '\0' || mi_cmd->full_cmd[*i+j] == '<' || mi_cmd->full_cmd[*i+j] == '>')
+	if (j > 2 || mi_cmd->full[*i+j] == '\0' || mi_cmd->full[*i+j] == '<' || mi_cmd->full[*i+j] == '>')
 		mi_logerrorlong(2, "syntax error near unexpected token", ft_chrrepeat(capt_redir, j), "", mi_sys);
 	else
 	{
-		mi_cmd->split_cmd[*n] = ft_chrrepeat(capt_redir, j);
+		mi_cmd->split[*n] = ft_chrrepeat(capt_redir, j);
 	}
 	(*n)++;
 	*i += j;
-	ft_pos_passspace(mi_cmd->full_cmd, i);
+	ft_pos_passspace(mi_cmd->full, i);
 }
 
 void	mi_cmdsplitcmd(t_cmd *mi_cmd, t_sys *mi_sys)
@@ -85,25 +85,25 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 
 	i = 0;
 	n = 0;
-	ft_cnt_arg(mi_cmd->full_cmd, &i, &n);
+	ft_cnt_arg(mi_cmd->full, &i, &n);
 	if (n > 0)
 	{
-		mi_cmd->split_cmd = ft_calloc(n + 1, sizeof(char *));
-		if (mi_cmd->split_cmd == NULL)
+		mi_cmd->split = ft_calloc(n + 1, sizeof(char *));
+		if (mi_cmd->split == NULL)
 			return ;
 		n = 0;
 		i = 0;
-		while (mi_cmd->full_cmd[i])
+		while (mi_cmd->full[i])
 		{
-			ft_pos_passspace(mi_cmd->full_cmd, &i);
-			if (mi_cmd->full_cmd[i] == '<' || mi_cmd->full_cmd[i] == '>')
+			ft_pos_passspace(mi_cmd->full, &i);
+			if (mi_cmd->full[i] == '<' || mi_cmd->full[i] == '>')
 				mi_parseredirtocken(&i, &n, mi_cmd, mi_sys);
 			s = i;
-			ft_pos_passstring(mi_cmd->full_cmd, &i);
+			ft_pos_passstring(mi_cmd->full, &i);
 			if(i-s<1)
 				continue;
-			mi_cmd->split_cmd[n] = ft_substr(mi_cmd->full_cmd, s, i - s);
-			ft_subchar(mi_cmd->split_cmd[n], '\"');
+			mi_cmd->split[n] = ft_substr(mi_cmd->full, s, i - s);
+			ft_subchar(mi_cmd->split[n], '\"');
 			n++;
 		}
 	}

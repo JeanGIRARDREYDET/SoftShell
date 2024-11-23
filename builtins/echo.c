@@ -42,15 +42,15 @@ void	builtin_echo(t_cmd *mi_cmd)
 	int		j;
 
 	nl = 1;
-	len = ft_tablen2(mi_cmd->split_cmd);
+	len = ft_tablen2(mi_cmd->split);
 	j = 1;
-	echo_param(mi_cmd->split_cmd, &j, len, &nl);
+	echo_param(mi_cmd->split, &j, len, &nl);
 	
 
 	while (j < len)
 	{
-		write(STDOUT_FILENO, mi_cmd->split_cmd[j], ft_strlen(mi_cmd->split_cmd[j]));
-	///	ft_putstr_fd(me_sys->cmd->split_cmd[j], STDOUT_FILENO);
+		write(STDOUT_FILENO, mi_cmd->split[j], ft_strlen(mi_cmd->split[j]));
+	///	ft_putstr_fd(me_sys->cmd->split[j], STDOUT_FILENO);
 		if (j < len)
 			write(STDOUT_FILENO, " ", 1);
 		j++;	
