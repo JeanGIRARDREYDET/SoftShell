@@ -14,10 +14,10 @@
 
 void	mi_checkbuiltin(t_cmd *mi_cmd)
 {
-	if (ft_findword (BUILTINS, mi_cmd->cmd))
+	if (ft_findword (BUILTINS, mi_cmd->args[0]))
 	{
 		mi_cmd->builtin = true;
-		mi_cmd->cmd = mi_cmd->cmd;
+		mi_cmd->args[0] = mi_cmd->args[0];
 	}
 	else
 		mi_cmd->builtin = false;

@@ -19,11 +19,11 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 	int		i;
 
 	i = 0;
-	if (access(mi_cmd->cmd, F_OK) == 0)
+	if (access(mi_cmd->args[0], F_OK) == 0)
 		return ;
 
-	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->cmd);
-	if (access(mi_cmd->cmd, F_OK) == 0)
+	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->args[0]);
+	if (access(mi_cmd->args[0], F_OK) == 0)
 	{
 		free(cmd);
 		return ;
@@ -32,17 +32,17 @@ void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
 	paths = ft_split(mi_getenv("PATH", mi_sys), ':');
 	while (paths && paths[++i])
 	{
-		cmd = join_3(paths[i], "/", mi_cmd->cmd);
+		cmd = join_3(paths[i], "/", mi_cmd->args[0]);
 		if (access(cmd, F_OK) == 0)
 		{
-			mi_cmd->cmd = ft_strdup(cmd);
+			mi_cmd->args[0] = ft_strdup(cmd);
 			free(paths);
 			return ;
 		}
 		free(cmd);
 	}
 	free(paths);
-	free(mi_cmd->cmd);
+	free(mi_cmd->args[0]);
 	return ;
 }
 

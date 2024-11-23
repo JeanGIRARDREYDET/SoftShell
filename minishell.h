@@ -80,7 +80,6 @@ typedef struct s_cmd
 	char			*line;
 	char			*full;
 	char			**split;
-	char			*cmd;
 	bool			found;
 	char			*arg;
 	char			*type;

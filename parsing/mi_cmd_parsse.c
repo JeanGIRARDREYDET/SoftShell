@@ -94,7 +94,7 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 			n++;
 		}
 		i++;
-		mi_cmd->cmd = ft_strdup(mi_cmd->args[0]);
+		mi_cmd->args[0] = ft_strdup(mi_cmd->args[0]);
 	}
 }
 void	mi_cmdsplitcmd(t_cmd *mi_cmd)

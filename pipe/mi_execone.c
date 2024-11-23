@@ -19,11 +19,11 @@ void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 	int			i;
 	char		*error_msg;
 
-	if (access(mi_cmd->cmd, F_OK) == 0)
+	if (access(mi_cmd->args[0], F_OK) == 0)
 		return ;
 	i = 0;
-	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->cmd);
-	if (access(mi_cmd->cmd, F_OK) == 0)
+	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->args[0]);
+	if (access(mi_cmd->args[0], F_OK) == 0)
 	{
 		free(cmd);
 		return ;
@@ -32,16 +32,16 @@ void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 	paths = ft_split (mi_getenv("PATH", mi_sys), ':');
 	while (paths && paths[++i])
 	{
-		cmd = join_3(paths[i], "/", mi_cmd->cmd);
+		cmd = join_3(paths[i], "/", mi_cmd->args[0]);
 		if (access(cmd, F_OK) == 0)
 		{
-			mi_cmd->cmd = ft_strdup(cmd);
+			mi_cmd->args[0] = ft_strdup(cmd);
 			free(paths);
 			return ;
 		}
 		free(cmd);
 	}
-	error_msg = join_3 ("minishell: ", mi_cmd->cmd, ": command not found\n");
+	error_msg = join_3 ("minishell: ", mi_cmd->args[0], ": command not found\n");
 	mi_logerror(126, error_msg, mi_sys);
 	free(paths);
 	return ;
@@ -49,9 +49,9 @@ void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 
 void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 {
-	if (access(mi->cmd, X_OK) == 0)
+	if (access(mi->args[0], X_OK) == 0)
 		return ;
-	mi_logerrorlong(126, "mi: ", mi->cmd, ": Permission denied", mi_sys);
+	mi_logerrorlong(126, "mi: ", mi->args[0], ": Permission denied", mi_sys);
 	mi_sys->nb_error++;
 }
 
@@ -95,7 +95,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 			close (mi_cmd->fd[0]);
 			close (mi_cmd->fd[1]);
 		}
-		if (mi_cmd->cmd != NULL)
+		if (mi_cmd->args[0] != NULL)
 			mi_execcmd(mi_cmd, mi_sys);
 	}
 	if (mi_cmd->no != 0)
