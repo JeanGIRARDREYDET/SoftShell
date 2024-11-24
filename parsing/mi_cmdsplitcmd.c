@@ -19,7 +19,6 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 	int	n;
 
 	i = 0;
-
 	n = 0;
 	ft_cnt_arg(mi_cmd->full, &i, &n);
 	if (n > 0)
@@ -34,8 +33,8 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 			ft_pos_passspace(mi_cmd->full, &i);
 			s = i;
 			ft_pos_passstring(mi_cmd->full, &i);
-			if(i-s<1)
-				continue;
+			if (i-s<1)
+				continue ;
 			mi_cmd->split[n] = ft_substr(mi_cmd->full, s, i - s);
 			ft_subchar(mi_cmd->split[n], '\"');
 			n++;

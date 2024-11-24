@@ -22,6 +22,7 @@ SRCS = 			main.c \
 				builtins/unset.c \
 				check/mi_checkbuiltin.c \
 				check/mi_checkpathaccess.c \
+				check/mi_set_io_files.c \
 				io/signal.c \
 				libft/ft_arrclose.c \
 				libft/ft_atoi.c \

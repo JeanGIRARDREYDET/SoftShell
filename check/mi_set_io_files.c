@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_io_files.c                                     :+:      :+:    :+:   */
+/*   mi_set_io_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,26 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../struct.h"
+#include "../minishell.h"
 
-int	set_io_files(t_app *s, int argc, char **argv)
+void	mi_set_io_files(t_redirection *mi_re, t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	int	error;
-
-	error = 0;
-	s->fdd[0][0] = open(argv[1], O_RDONLY);
-	if (s->fdd[0][0] == -1)
+	mi_cmd->fd[0] = 1;
+	if (mi_re->redir_type == INPUT)
+		mi_re->fd = open(mi_re->file_name, O_RDONLY);
+	else if (mi_re->redir_type == OUTPUT)
+		mi_re->fd = open(mi_re->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (mi_re->redir_type == APPEND)
+		mi_re->fd = open(mi_re->file_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (mi_re->fd == -1 && mi_re->redir_type != HEREDOC)
 	{
-		ft_perror(s, argv[1], 1, 0);
-		close(s->fdd[0][1]);
-		error = 0;
+		mi_logerror(((2 & mi_re->fd)>>1), "errormsg", mi_sys);
+		close(mi_re->fd);
 	}
-	s->fdd[0][1] = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (s->fdd[0][1] == -1)
-	{
-		ft_perror(s, argv[argc - 1], 1, 1);
-
-		error = 0;
-	}
-	return (error);
+	return ;
 }

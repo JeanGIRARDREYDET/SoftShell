@@ -35,11 +35,11 @@
 # include <stdbool.h>
 # include "./libft/libft.h"
 
-# define PIPE 1
-# define HEREDOC 2
+# define INPUT 0
+# define HEREDOC 1
+# define OUTPUT 2
 # define APPEND 3
-# define INPUT 4
-# define OUTPUT 5
+# define PIPE 5
 # define SPE 6
 
 # define WSPACE " \a\b\t\n\v\f\r"
@@ -68,7 +68,7 @@ typedef struct s_error
 typedef struct s_redirection
 {
 	int						redir_type;
-	int						fd_here_doc;
+	int						fd;
 	char					*file_name;
 	struct s_redirection	*next;
 }	t_redirection;
@@ -169,5 +169,6 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd);
 char	*mi_getenv_env(char *key, char **env);
 
 void	mi_creredirection(t_cmd *cmd, t_sys *sys, int type, char *file_name);
+void	mi_set_io_files(t_redirection *mi_re, t_cmd *mi_cmd, t_sys *mi_sys);
 
 #endif

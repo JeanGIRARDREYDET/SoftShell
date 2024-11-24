@@ -12,40 +12,6 @@
 
 #include "minishell.h"
 
-void	mi_cmd_acc(t_cmd *mi_cmd, t_sys *mi_sys)
-{
-	char	*cmd;
-	char	**paths;
-	int		i;
-
-	i = 0;
-	if (access(mi_cmd->args[0], F_OK) == 0)
-		return ;
-
-	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->args[0]);
-	if (access(mi_cmd->args[0], F_OK) == 0)
-	{
-		free(cmd);
-		return ;
-	}
-	free(cmd);
-	paths = ft_split(mi_getenv("PATH", mi_sys), ':');
-	while (paths && paths[++i])
-	{
-		cmd = join_3(paths[i], "/", mi_cmd->args[0]);
-		if (access(cmd, F_OK) == 0)
-		{
-			mi_cmd->args[0] = ft_strdup(cmd);
-			free(paths);
-			return ;
-		}
-		free(cmd);
-	}
-	free(paths);
-	free(mi_cmd->args[0]);
-	return ;
-}
-
 void	mi_checkline(char *line, t_sys *mi_sys)
 {
 	if (ft_findword("exit", line))

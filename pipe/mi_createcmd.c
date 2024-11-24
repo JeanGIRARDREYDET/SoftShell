@@ -22,7 +22,6 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 	mi_cmd->id = 0;
 	mi_cmd->no = mi_sys->nb_pipe++;
 	mi_cmd->full = NULL;
-//	mi_cmd->cmd = NULL;
 	mi_cmd->split = NULL;
 	mi_cmd->arg = "";
 	mi_cmd->args = NULL;
@@ -39,17 +38,17 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 void	mi_creredirection(t_cmd *cmd, t_sys *sys, int type, char *file_name)
 {
 	t_redirection	*mi_redirection;
+
 	if (!file_name)
 	{
-		mi_logerror(2, "syntax error near unexpected token",  sys);
-		return;
+		mi_logerror(2, "syntax error near unexpected token", sys);
+		return ;
 	}
-
 	mi_redirection = ft_calloc(1, sizeof (t_redirection));
 	if (!mi_redirection)
 		return ;
 	mi_redirection->redir_type = type;
-	mi_redirection->fd_here_doc = 0;
+	mi_redirection->fd = 0;
 	mi_redirection->file_name = file_name;
 	mi_redirection->next = NULL;
 	if (cmd->redirection == NULL)
@@ -60,5 +59,5 @@ void	mi_creredirection(t_cmd *cmd, t_sys *sys, int type, char *file_name)
 			cmd->redirection = cmd->redirection->next;
 		cmd->redirection->next = mi_redirection;
 	}
-	return;
+	return ;
 }

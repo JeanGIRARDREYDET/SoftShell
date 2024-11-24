@@ -28,7 +28,7 @@ void	mi_cmdherdoc(t_cmd *mp)
 void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int	i;
-	int n ;
+	int	n;
 
 	n = 0;
 	i = 0;
@@ -41,8 +41,8 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 		i++;
 	}
 	mi_cmd->args = ft_calloc(i-(2*n)+1 , sizeof(char *));
-	i=0;
-	n=0;
+	i = 0;
+	n = 0;
 	while (mi_cmd->split[i])
 	{
 		if (mi_cmd->split[i + 1] && (mi_cmd->split[i][0] == '<' || mi_cmd->split[i][0] == '>'))
@@ -55,4 +55,3 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 		i++;
 	}
 }
-
