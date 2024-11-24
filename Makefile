@@ -27,6 +27,7 @@ SRCS = 			main.c \
 				libft/ft_atoi.c \
 				libft/ft_bzero.c \
 				libft/ft_calloc.c \
+				libft/ft_chrrepeat.c \
 				libft/ft_cnt_arg.c \
 				libft/ft_findword.c \
 				libft/ft_get_confpos.c \
@@ -93,9 +94,11 @@ SRCS = 			main.c \
 				common/mi_sysinitialization.c \
 				common/mi_unsetenv.c \
 				common/mi_utils.c \
+				parsing/mi_cmdsplitcmd.c \
 				parsing/mi_expand.c \
 				parsing/mi_lexing.c \
 				parsing/mi_cmd_parsse.c \
+				parsing/mi_parseredirtocken.c \
 				parsing/mi_pospasscote.c \
 				parsing/mi_cmditer.c \
 				pipe/mi_closepipe.c \

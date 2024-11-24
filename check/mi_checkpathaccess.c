@@ -33,7 +33,7 @@ void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 	char		*pathstring;
 
 	pathstring = mi_getenv("PATH", mi_sys);
-	if(pathstring != NULL)
+	if (pathstring != NULL)
 	{
 		paths = ft_split (pathstring, ':');
 		i = 0;
