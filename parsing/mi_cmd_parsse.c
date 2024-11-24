@@ -60,7 +60,7 @@ void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		*i += 1;
 		if (mi_cmd->split[*i])
-			mi_creredirection(mi_cmd, mi_sys, j, mi_cmd->split[*i]);
+			mi_creredirection(mi_cmd, mi_sys, (j-1)|(capt_redir&2), mi_cmd->split[*i]);
 	}
 	(*n)++;
 }
