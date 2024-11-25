@@ -40,7 +40,7 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 			mi_parseredirtocken(&i, &n, mi_cmd, mi_sys);
 		i++;
 	}
-	mi_cmd->args = ft_calloc(i-(2*n)+1 , sizeof(char *));
+	mi_cmd->args = ft_calloc(i - (2 * n) + 1, sizeof(char *));
 	i = 0;
 	n = 0;
 	while (mi_cmd->split[i])

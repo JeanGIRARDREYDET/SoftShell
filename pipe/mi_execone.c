@@ -82,8 +82,6 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	if (mi_cmd->id == 0)
 	{
-	
-		
 		if (mi_cmd->no != 0)
 		{
 			if (dup2(mi_sys->fd_in, STDIN_FILENO) == -1)
@@ -92,7 +90,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		if (mi_cmd->redirection != NULL)
 		{
-			mi_set_io_files(mi_cmd->redirection, mi_cmd, mi_sys);
+			mi_set_io_files(mi_lastredirection(mi_cmd->redirection), mi_cmd, mi_sys);
 			dup2(mi_cmd->redirection->fd, STDOUT_FILENO);
 			close (mi_cmd->redirection->fd);
 		}

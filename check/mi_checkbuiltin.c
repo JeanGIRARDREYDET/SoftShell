@@ -14,6 +14,8 @@
 
 void	mi_checkbuiltin(t_cmd *mi_cmd)
 {
+	if (!mi_cmd->args || !mi_cmd->args[0])
+		return ;
 	if (ft_findword (BUILTINS, mi_cmd->args[0]))
 	{
 		mi_cmd->builtin = true;
