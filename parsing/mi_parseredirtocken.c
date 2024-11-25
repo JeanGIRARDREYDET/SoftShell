@@ -31,3 +31,12 @@ void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	(*n)++;
 }
+
+t_redirection *mi_lastredirection(t_redirection *mi_re)
+{
+	if (mi_re == NULL)
+		return (NULL);
+	while (mi_re->next)
+		mi_re = mi_re->next;
+	return (mi_re);
+}
