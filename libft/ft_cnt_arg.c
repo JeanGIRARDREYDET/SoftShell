@@ -20,11 +20,15 @@ void	ft_pos_redir(char *ln, int *i)
 
 void	ft_cnt_arg(char *ln, int *i, int *n)
 {
+	int			s;
+
 	if (ln == NULL)
 		return ;
-	ft_pos_redir(ln, i);
 	ft_pos_passspace(ln, i);
-	ft_pos_passstring(ln, i);
+	s = *i;
+	ft_pos_redir(ln, i);
+	if (s == *i)
+		ft_pos_passstring(ln, i);
 	(*n)++;
 	if (ln && ln[*i])
 		ft_cnt_arg(ln, i, n);

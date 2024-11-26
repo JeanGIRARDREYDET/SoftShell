@@ -32,7 +32,9 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 		{
 			ft_pos_passspace(mi_cmd->full, &i);
 			s = i;
-			ft_pos_passstring(mi_cmd->full, &i);
+			ft_pos_redir(mi_cmd->full, &i);
+			if (s==i)
+				ft_pos_passstring(mi_cmd->full, &i);
 			if (i-s<1)
 				continue ;
 			mi_cmd->split[n] = ft_substr(mi_cmd->full, s, i - s);
