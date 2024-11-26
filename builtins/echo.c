@@ -35,7 +35,7 @@ void	echo_param(char **param, int *j, int len, int *nl)
 	}
 }
 
-void	builtin_echo(t_cmd *mi_cmd)
+void	builtin_echo(t_cmd *mi_cmd, int fd)
 {
 	int		nl;
 	int		len;
@@ -45,17 +45,14 @@ void	builtin_echo(t_cmd *mi_cmd)
 	len = ft_tablen2(mi_cmd->args);
 	j = 1;
 	echo_param(mi_cmd->args, &j, len, &nl);
-	
-
 	while (j < len)
 	{
-		write(STDOUT_FILENO, mi_cmd->args[j], ft_strlen(mi_cmd->args[j]));
-	///	ft_putstr_fd(me_sys->cmd->split[j], STDOUT_FILENO);
+		write(fd, mi_cmd->args[j], ft_strlen(mi_cmd->args[j]));
 		if (j < len)
-			write(STDOUT_FILENO, " ", 1);
+			write(fd, " ", 1);
 		j++;	
 	}
 	if (nl == 1)
-		write(STDOUT_FILENO, "\n", 1);
+		write(fd, "\n", 1);
 	
 }

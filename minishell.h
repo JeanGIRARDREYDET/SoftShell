@@ -117,7 +117,7 @@ void		mi_freesys(t_sys *mi_sys);
 void		signal_handle_sigint(int sign);
 bool		ft_findword(const char *source, const char *find);
 void		builtin_cd(char *key, t_sys *s_sys);
-void		builtin_echo(t_cmd *me_cmd);
+void		builtin_echo(t_cmd *me_cmd, int fd);
 void		builtin_env(t_sys *s_sys);
 void		builtin_exit(t_sys *s_sys);
 void		builtin_export(char *key, t_sys *s_sys);
@@ -156,7 +156,7 @@ char		*ft_findcommand(char *line);
 
 void		mi_closecmd(t_cmd *mi_cmd, int nb);
 t_cmd		*mi_createcmd(t_sys *mi_sys);
-void		mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys);
+void		mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys, int fd);
 int			mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys);
 int			mi_execchild(t_cmd *mi_cmd, t_sys *mi_sys);
 void		mi_exec(t_cmd *mi_cmd, t_sys *mi_sys);

@@ -18,7 +18,7 @@ void	mi_execexitepipe(int status, t_sys *mi_sys)
 	exit((int)status);
 }
 
-void	mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
+void	mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys, int fd)
 {
 	char		*cmd;
 
@@ -30,7 +30,7 @@ void	mi_execbuiltin(t_cmd *mi_cmd, t_sys *mi_sys)
 	if (ft_findword("cd", cmd))
 		builtin_cd(mi_cmd->arg, mi_sys);
 	else if (ft_findword("echo", cmd))
-		builtin_echo(mi_cmd);
+		builtin_echo(mi_cmd, fd);
 	else if (ft_findword("env", cmd))
 		builtin_env(mi_sys);
 	else if (ft_findword("exit", cmd))
