@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 13:47:03 by doferet           #+#    #+#             */
-/*   Updated: 2024/10/20 19:15:36 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/11/26 22:40:08 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -116,7 +116,7 @@ typedef struct s_sys
 void		mi_freesys(t_sys *mi_sys);
 void		signal_handle_sigint(int sign);
 bool		ft_findword(const char *source, const char *find);
-void		builtin_cd(char *key, t_sys *s_sys);
+void		builtin_cd(char **key, t_sys *s_sys);
 void		builtin_echo(t_cmd *me_cmd, int fd);
 void		builtin_env(t_sys *s_sys, int fd);
 void		builtin_exit(t_sys *s_sys);
@@ -170,5 +170,6 @@ char		*mi_getenv_env(char *key, char **env);
 void		mi_creredirection(t_cmd *cmd, t_sys *sys, int type, char *f_name);
 void		mi_set_io_files(t_redirection *mi_re, t_sys *mi_sys);
 int			mi_lastredirection(t_redirection *mi_re, t_sys *mi_sys);
+void		s_env_create_update_value(char *key, t_sys *mi_sys);
 
 #endif

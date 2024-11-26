@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:01:34 by jegirard          #+#    #+#             */
-/*   Updated: 2024/11/26 19:48:00 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/11/26 22:41:24 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -76,24 +76,25 @@ char	*cd_getpwd(char *key, t_sys *mi_sys)
 	return (new_pwd);
 }
 
-void	builtin_cd(char *key, t_sys *mi_sys)
+void	builtin_cd(char **key, t_sys *mi_sys)
 {
-	char	*tmp_pwd[1];
-	char	*new_pwd[1];
+	char	*tmp_pwd;
+	char	*new_pwd;
 
-	new_pwd[0] = cd_getpwd(key, mi_sys);
-	if (*new_pwd[0] != '\0' && access(new_pwd[0], F_OK) == 0 && chdir(new_pwd[0]) == 0)
+	new_pwd = cd_getpwd(key[1], mi_sys);
+	if (*new_pwd != '\0' && access(new_pwd, F_OK) == 0 && chdir(new_pwd) == 0)
 	{
-		tmp_pwd[0] = ft_strjoin("OLDPWD=", mi_getenv("PWD", mi_sys));
-		mi_export_values(tmp_pwd, mi_sys);
+		tmp_pwd = ft_strjoin("OLDPWD=", mi_getenv("PWD", mi_sys));
+		s_env_create_update_value (tmp_pwd, mi_sys);
+	//	mi_export_values({"dd",tmp_pwd}, mi_sys);
 	//	free(tmp_pwd);
 		mi_setenv("OLDPWD", mi_getenv("PWD", mi_sys), mi_sys);
-		tmp_pwd[0] = getcwd(NULL, 0);
-		mi_setenv("PWD", tmp_pwd[0], mi_sys);
+		tmp_pwd = getcwd(NULL, 0);
+		mi_setenv("PWD", tmp_pwd, mi_sys);
 	//	free(tmp_pwd);
 		mi_sys->exit_status = EXIT_SUCCESS;
 	}
-	else if (*new_pwd[0] != '\0')
+	else if (*new_pwd != '\0')
 	{
 		// perror("access");
 		mi_logerror(1, "No such file or directory", mi_sys);
