@@ -47,7 +47,7 @@ void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	mi_cmd->found = false;
-	if (!mi_cmd->args[0] || mi_cmd->builtin == true)
+	if ( mi_cmd->builtin == true || !mi_cmd->args[0] )
 		return ;
 	if (!mi_cmd->found && access(mi_cmd->args[0], F_OK) == 0)
 	{

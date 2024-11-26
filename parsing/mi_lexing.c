@@ -48,6 +48,6 @@ void	mi_lexingline(char *ln, t_sys *mi_sys)
 		}
 		i++;
 	}
-	mi_cmd->full = ft_strtrim_param(ln, start, i -1, WSPACE);
+	mi_cmd->full = ft_strtrim_param(ln, start, i, WSPACE);
 	mi_cmd->next = NULL;
 }
