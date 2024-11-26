@@ -18,7 +18,6 @@ void	mi_pospasscote(char *ln, size_t *pos, t_sys *mi_sys)
 	int		i;
 
 	i = *pos;
-
 	while (ln[i] && ln[i] != '\'' && ln[i] != '"' && ln[i] != '\0')
 		i++;
 	if (ft_strin(TECHAP, ln[i]))

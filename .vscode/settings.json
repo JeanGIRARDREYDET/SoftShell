@@ -5,6 +5,7 @@
         "minishell.h": "c",
         "stddef.h": "c",
         "history.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "mi_lastredirection.C": "cpp"
     }
 }

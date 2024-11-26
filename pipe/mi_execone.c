@@ -57,6 +57,7 @@ void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 {
+	
 	if (mi_cmd->full)
 		free(mi_cmd->full);
 	mi_cmd->full = NULL;
@@ -90,9 +91,10 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		if (mi_cmd->redirection != NULL)
 		{
-			mi_set_io_files(mi_lastredirection(mi_cmd->redirection), mi_cmd, mi_sys);
+			close (mi_cmd->fd[1]);
+			mi_cmd->fd[1] = mi_lastredirection(mi_cmd->redirection, mi_sys);
 			dup2(mi_cmd->redirection->fd, STDOUT_FILENO);
-			close (mi_cmd->redirection->fd);
+//			close (mi_cmd->redirection->fd);
 		}
 		if (mi_cmd->next != NULL)
 		{

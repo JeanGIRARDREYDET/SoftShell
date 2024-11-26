@@ -12,11 +12,10 @@
 
 #include "../minishell.h"
 
-void	mi_set_io_files(t_redirection *mi_re, t_cmd *mi_cmd, t_sys *mi_sys)
+void	mi_set_io_files(t_redirection *mi_re, t_sys *mi_sys)
 {
 	if (mi_re == NULL)
 		return ;
-	mi_cmd->fd[0] = 1;
 	if (mi_re->redir_type == INPUT)
 		mi_re->fd = open(mi_re->file_name, O_RDONLY);
 	else if (mi_re->redir_type == OUTPUT)

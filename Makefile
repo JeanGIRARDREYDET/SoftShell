@@ -24,6 +24,7 @@ SRCS = 			main.c \
 				check/mi_checkpathaccess.c \
 				check/mi_set_io_files.c \
 				io/signal.c \
+				io/mi_lastredirection.c \
 				libft/ft_arrclose.c \
 				libft/ft_atoi.c \
 				libft/ft_bzero.c \

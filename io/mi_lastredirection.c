@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_parseredirtocke.c                               :+:      :+:    :+:   */
+/*   mi_lastredirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 10:09:36 by jegirard          #+#    #+#             */
-/*   Updated: 2024/11/24 10:09:41 by jegirard         ###   ########.fr       */
+/*   Created: 2024/11/26 11:23:07 by jegirard          #+#    #+#             */
+/*   Updated: 2024/11/26 11:23:13 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys)
+int mi_lastredirection(t_redirection *mi_re,t_sys *mi_sys)
 {
-	int		j;
-	char	capt_redir;
+	t_redirection	*mi_return;
 
-	j = 0;
-	capt_redir = mi_cmd->split[*i][0];
-	while (capt_redir == mi_cmd->split[*i][j])
-		j++ ;
-	if (j > 2)
-		mi_logerrorlong(2, "syntax error near unexpected token", ft_chrrepeat(capt_redir, j), "", mi_sys);
-	else
+	mi_return = NULL;
+	if (mi_re == NULL)
+		return (-1);
+	while (mi_re->next)
 	{
-		*i += 1;
-		if (mi_cmd->split[*i])
-			mi_creredirection(mi_cmd, mi_sys, (j-1)|(capt_redir&2), mi_cmd->split[*i]);
+		if (mi_re->redir_type != HEREDOC)
+		{	
+			mi_set_io_files(mi_re, mi_sys);
+			close(mi_re->fd);
+			mi_return = mi_re;
+		}
+			
+		mi_re = mi_re->next;
 	}
-	(*n)++;
+	if ( mi_re->redir_type != HEREDOC)
+		mi_return = mi_re;
+	mi_set_io_files(mi_return, mi_sys);
+	return (mi_return->fd);
 }
-

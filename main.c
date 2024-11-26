@@ -54,10 +54,6 @@ int	main(int argc, char **argv, char **env)
 		mi_syscmditer(&mi_sys, &mi_cmdparsse);
 		mi_cmditer(mi_sys.cmd, &mi_checkbuiltin);
 		mi_syscmditer(&mi_sys, &mi_checkpathaccess);
-		if (mi_sys.cmd->redirection != NULL)
-		{
-			dprintf(2, "mi_cmd->redirection->file_name = %s\n", mi_sys.cmd->redirection->file_name);
-		}
 		mi_syscmditer(&mi_sys, &mi_execone);
 		mi_waitingpipe(&mi_sys);
 		mi_freecmd(&mi_sys);
