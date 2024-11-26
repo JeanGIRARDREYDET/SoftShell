@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	builtin_pwd(void)
+void	builtin_pwd(int fd)
 {
 	char	*pwd;
 
@@ -22,7 +22,7 @@ void	builtin_pwd(void)
 		perror("pwd");
 		exit(1);
 	}
-	write(STDOUT_FILENO, pwd, ft_strlen(pwd));
-	write(STDOUT_FILENO, "\n", 1);
+	write(fd, pwd, ft_strlen(pwd));
+	write(fd, "\n", 1);
 	free(pwd);
 }

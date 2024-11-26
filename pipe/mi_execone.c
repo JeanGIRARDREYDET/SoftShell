@@ -64,9 +64,9 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin)
 	{	
 		if (mi_cmd->redirection != NULL)
-			mi_execbuiltin(mi_cmd, mi_sys , mi_lastredirection(mi_cmd->redirection, mi_sys));
+			mi_execbuiltin(mi_cmd, mi_lastredirection(mi_cmd->redirection, mi_sys), mi_sys);
 		else
-			mi_execbuiltin(mi_cmd, mi_sys, STDOUT_FILENO);
+			mi_execbuiltin(mi_cmd, STDOUT_FILENO, mi_sys);
 		return ;
 	}
 	if (mi_cmd->next != NULL)

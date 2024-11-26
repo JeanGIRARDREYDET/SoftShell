@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	builtin_env(t_sys *mi_sys)
+void	builtin_env(t_sys *mi_sys, int fd)
 {
 	int	i;
 
@@ -21,8 +21,8 @@ void	builtin_env(t_sys *mi_sys)
 	{
 		if (ft_strin(mi_sys->env[i], '='))
 		{
-			write(STDOUT_FILENO, mi_sys->env[i], ft_strlen(mi_sys->env[i]));
-			write(STDOUT_FILENO, "\n", 1);
+			write(fd, mi_sys->env[i], ft_strlen(mi_sys->env[i]));
+			write(fd, "\n", 1);
 		}
 		i++;
 	}

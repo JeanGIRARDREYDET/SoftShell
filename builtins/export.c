@@ -19,7 +19,7 @@ echo, le parent renvoie bien dollyne, si on ouvre un autre bash, il n'aura pas
 cette variable donc si on utilise exporte l'enfant a bien la variable myname
 */
 
-void	print_export(t_sys *mi_sys)
+void	print_export(t_sys *mi_sys, int fd)
 {
 	int	i;
 
@@ -30,9 +30,9 @@ void	print_export(t_sys *mi_sys)
 	}
 	while (mi_sys->env[i++])
 	{
-		write(STDOUT_FILENO, "declare -x ", 11);
-		write(STDOUT_FILENO, mi_sys->env[i], ft_strlen(mi_sys->env[i]));
-		write(STDOUT_FILENO,"\n",1);
+		write(fd, "declare -x ", 11);
+		write(fd, mi_sys->env[i], ft_strlen(mi_sys->env[i]));
+		write(fd,"\n",1);
 	}
 }
 
@@ -72,12 +72,24 @@ void	s_env_create_update_value(char *line, t_sys *mi_sys)
 	mi_sys->exit_status = EXIT_SUCCESS;
 }
 
-int	mi_export_values(char *key, t_sys *mi_sys)
+int	mi_export_values(char **key, t_sys *mi_sys)
 {
-	int			next_value;
-	char		*msg;
+	int i;
 
+	i = 0;
+
+	while ( key[i++] != NULL)
+	{
+		dprintf(2, "key[%d] = %s\n", i, key[i]);
+		s_env_create_update_value(ft_strdup(key[i]), mi_sys);
+		i++;
+	}
+	// int			next_value;
+//	char		*msg;
+
+	/*
 	while (key[0] != '\0' && key[0] < 33)
+
 		key++;
 	if (key[0] == '=')
 	{
@@ -94,15 +106,17 @@ int	mi_export_values(char *key, t_sys *mi_sys)
 	if (key[next_value] != '\0')
 		mi_export_values(key + next_value, mi_sys);
 	mi_sys->exit_status = EXIT_SUCCESS;
+	*/
 	return (mi_sys->exit_status);
 }
 
-void	builtin_export(char *key, t_sys *mi_sys)
+void	builtin_export(char **key, int fd, t_sys *mi_sys)
 {
-	if (mi_sys->env == NULL)
+
+	if (!mi_sys->env)
 		mi_logerror(1, "export: env NULL", mi_sys);
-	if (!key || key[0] == '\0')
-		print_export(mi_sys);
+	else if(!key)
+		print_export(mi_sys, fd);
 	else
 		mi_export_values(key, mi_sys);
 }
