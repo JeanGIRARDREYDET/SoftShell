@@ -28,7 +28,7 @@ void	cd_home(char **new_pwd, t_sys *mi_sys)
 	*new_pwd = ft_strdup(home);
 }
 
-void	cd_back(char **new_pwd, t_sys *mi_sys)
+void	cd_back(char **new_pwd, int fd, t_sys *mi_sys)
 {
 	char	*home;
 
@@ -40,6 +40,7 @@ void	cd_back(char **new_pwd, t_sys *mi_sys)
 		return ;
 	}
 	*new_pwd = ft_strdup(home);
+	builtin_pwd(fd);
 }
 
 void	cd_parent(char **new_pwd, t_sys *mi_sys)
@@ -61,7 +62,7 @@ void	cd_parent(char **new_pwd, t_sys *mi_sys)
 		i--;
 	*new_pwd = ft_substr(back, 0, i);
 }
-char	*cd_getpwd(char *key, t_sys *mi_sys)
+char	*cd_getpwd(char *key, int fd, t_sys *mi_sys)
 {
 	char	*new_pwd;
 
@@ -70,18 +71,18 @@ char	*cd_getpwd(char *key, t_sys *mi_sys)
 	else if (ft_strncmp(key, "..", 3) == 0)
 		cd_parent(&new_pwd, mi_sys);
 	else if (ft_strncmp(key, "-", 3) == 0)
-		cd_back(&new_pwd, mi_sys);
+		cd_back(&new_pwd, fd, mi_sys);
 	else
 		new_pwd = ft_strdup(key);
 	return (new_pwd);
 }
 
-void	builtin_cd(char **key, t_sys *mi_sys)
+void	builtin_cd(char **key, int fd, t_sys *mi_sys)
 {
 	char	*tmp_pwd;
 	char	*new_pwd;
 
-	new_pwd = cd_getpwd(key[1], mi_sys);
+	new_pwd = cd_getpwd(key[1], fd, mi_sys);
 	if (*new_pwd != '\0' && access(new_pwd, F_OK) == 0 && chdir(new_pwd) == 0)
 	{
 		tmp_pwd = ft_strjoin("OLDPWD=", mi_getenv("PWD", mi_sys));
