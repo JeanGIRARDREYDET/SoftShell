@@ -110,8 +110,6 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	if (mi_cmd->no != 0)
 		close (mi_sys->fd_in);
-
-
 	if (mi_cmd->next != NULL)
 	{
 		close (mi_cmd->fd[1]);

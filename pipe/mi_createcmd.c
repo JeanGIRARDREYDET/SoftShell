@@ -35,31 +35,31 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 	return (mi_cmd);
 }
 
-void	mi_creredirection(t_cmd *cmd, t_sys *sys, int type, char *file_name)
+void	mi_crered(t_cmd *cmd, t_sys *sys, int type, char *file_name)
 {
-	t_red	*mi_redirection;
-	t_red	*li_redirection;
+	t_red	*mi_red;
+	t_red	*li_red;
 
 	if (!file_name)
 	{
 		mi_logerror(2, "syntax error near unexpected token", sys);
 		return ;
 	}
-	li_redirection = cmd->red;
-	mi_redirection = ft_calloc(1, sizeof (t_red));
-	if (!mi_redirection)
+	li_red = cmd->red;
+	mi_red = ft_calloc(1, sizeof (t_red));
+	if (!mi_red)
 		return ;
-	mi_redirection->redir_type = type;
-	mi_redirection->fd = 0;
-	mi_redirection->file_name = file_name;
-	mi_redirection->next = NULL;
+	mi_red->redir_type = type;
+	mi_red->fd = 0;
+	mi_red->file_name = file_name;
+	mi_red->next = NULL;
 	if (cmd->red == NULL)
-		cmd->red = mi_redirection;
+		cmd->red = mi_red;
 	else
 	{
-		while (li_redirection->next)
-			li_redirection = li_redirection->next;
-		li_redirection->next = mi_redirection;
+		while (li_red->next)
+			li_red = li_red->next;
+		li_red->next = mi_red;
 	}
 	return ;
 }

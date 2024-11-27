@@ -65,12 +65,12 @@ typedef struct s_error
 	struct s_error	*next;
 }	t_error;
 
-typedef struct s_redirection
+typedef struct s_red
 {
 	int						redir_type;
 	int						fd;
 	char					*file_name;
-	struct s_redirection	*next;
+	struct s_red			*next;
 }	t_red;
 
 typedef struct s_cmd
@@ -168,7 +168,7 @@ void	mi_cmdherdoc(t_cmd *mi_cmd);
 void	mi_cmdsplitcmd(t_cmd *mi_cmd);
 char	*mi_getenv_env(char *key, char **env);
 
-void	mi_creredirection(t_cmd *cmd, t_sys *sys, int type, char *f_name);
+void	mi_crered(t_cmd *cmd, t_sys *sys, int type, char *f_name);
 void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys);
 int		mi_lastred(t_red *mi_re, t_sys *mi_sys);
 void	s_env_create_update_value(char *key, t_sys *mi_sys);
