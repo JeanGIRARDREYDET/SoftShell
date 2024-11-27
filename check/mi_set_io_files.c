@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	mi_set_io_files(t_redirection *mi_re, t_sys *mi_sys)
+void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys)
 {
 	if (mi_re == NULL)
 		return ;

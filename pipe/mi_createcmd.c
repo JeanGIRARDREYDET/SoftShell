@@ -29,7 +29,7 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 	mi_cmd->type = NULL;
 	mi_cmd->fd[0] = 0;
 	mi_cmd->fd[1] = 0;
-	mi_cmd->redirection = NULL;
+	mi_cmd->red = NULL;
 	mi_cmd->next = NULL;
 	mi_sys->fd_in = STDIN_FILENO;
 	return (mi_cmd);
@@ -37,24 +37,24 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 
 void	mi_creredirection(t_cmd *cmd, t_sys *sys, int type, char *file_name)
 {
-	t_redirection	*mi_redirection;
-	t_redirection	*li_redirection;
+	t_red	*mi_redirection;
+	t_red	*li_redirection;
 
 	if (!file_name)
 	{
 		mi_logerror(2, "syntax error near unexpected token", sys);
 		return ;
 	}
-	li_redirection = cmd->redirection;
-	mi_redirection = ft_calloc(1, sizeof (t_redirection));
+	li_redirection = cmd->red;
+	mi_redirection = ft_calloc(1, sizeof (t_red));
 	if (!mi_redirection)
 		return ;
 	mi_redirection->redir_type = type;
 	mi_redirection->fd = 0;
 	mi_redirection->file_name = file_name;
 	mi_redirection->next = NULL;
-	if (cmd->redirection == NULL)
-		cmd->redirection = mi_redirection;
+	if (cmd->red == NULL)
+		cmd->red = mi_redirection;
 	else
 	{
 		while (li_redirection->next)

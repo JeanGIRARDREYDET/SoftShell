@@ -57,14 +57,13 @@ void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	
 	if (mi_cmd->full)
 		free(mi_cmd->full);
 	mi_cmd->full = NULL;
 	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin)
 	{	
-		if (mi_cmd->redirection != NULL)
-			mi_execbuiltin(mi_cmd, mi_lastredirection(mi_cmd->redirection, mi_sys), mi_sys);
+		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND) )
+			mi_execbuiltin(mi_cmd, mi_lastred(mi_cmd->red, mi_sys), mi_sys);
 		else
 			mi_execbuiltin(mi_cmd, STDOUT_FILENO, mi_sys);
 		return ;
@@ -92,11 +91,11 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 				return ;
 			close (mi_sys->fd_in);
 		}
-		if (mi_cmd->redirection != NULL)
+		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND) )
 		{
 			close (mi_cmd->fd[1]);
-			mi_cmd->fd[1] = mi_lastredirection(mi_cmd->redirection, mi_sys);
-			dup2(mi_cmd->redirection->fd, STDOUT_FILENO);
+			mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys);
+			dup2(mi_cmd->red->fd, STDOUT_FILENO);
 //			close (mi_cmd->redirection->fd);
 		}
 		if (mi_cmd->next != NULL)

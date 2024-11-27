@@ -82,11 +82,10 @@ void	s_env_create_update_value(char *key, t_sys *mi_sys)
 
 int	mi_export_values(char **key, t_sys *mi_sys)
 {
-	int i;
+	int			i;
 
 	i = 1;
-
-	while ( key[i] != NULL)
+	while (key[i] != NULL)
 		s_env_create_update_value(key[i++], mi_sys);
 	return (mi_sys->exit_status);
 }
@@ -95,7 +94,7 @@ void	builtin_export(char **key, int fd, t_sys *mi_sys)
 {
 	if (!mi_sys->env)
 		mi_logerror(1, "export: env NULL", mi_sys);
-	else if(key && key[1] != NULL)
+	else if (key && key[1] != NULL)
 		mi_export_values(key, mi_sys);
 	else
 		print_export(mi_sys, fd);

@@ -24,7 +24,7 @@ SRCS = 			main.c \
 				check/mi_checkpathaccess.c \
 				check/mi_set_io_files.c \
 				io/signal.c \
-				io/mi_lastredirection.c \
+				io/mi_lastred.c \
 				libft/ft_arrclose.c \
 				libft/ft_atoi.c \
 				libft/ft_bzero.c \
@@ -103,6 +103,7 @@ SRCS = 			main.c \
 				parsing/mi_parseredirtocken.c \
 				parsing/mi_pospasscote.c \
 				parsing/mi_cmditer.c \
+				parsing/mi_redis.c \
 				pipe/mi_closepipe.c \
 				pipe/mi_createcmd.c \
 				pipe/mi_exec.c \

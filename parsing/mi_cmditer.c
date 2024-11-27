@@ -44,3 +44,12 @@ void	mi_sysargsiter(char **args, t_sys *s, void (*f)(char *args, t_sys *s))
 		i++;
 	}
 }
+
+void	mi_rediriter( t_cmd *c, t_red *r, void (*f)( t_cmd *c, t_red *r))
+{
+	while (r != NULL)
+	{
+		(*f)(c, r);
+		r = r->next ;
+	}
+}

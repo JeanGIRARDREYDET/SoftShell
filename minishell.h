@@ -71,7 +71,7 @@ typedef struct s_redirection
 	int						fd;
 	char					*file_name;
 	struct s_redirection	*next;
-}	t_redirection;
+}	t_red;
 
 typedef struct s_cmd
 {
@@ -88,7 +88,7 @@ typedef struct s_cmd
 	int				nb_error;
 	t_error			*error;
 	int				fd[2];
-	t_redirection	*redirection;
+	t_red			*red;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -169,9 +169,10 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd);
 char	*mi_getenv_env(char *key, char **env);
 
 void	mi_creredirection(t_cmd *cmd, t_sys *sys, int type, char *f_name);
-void	mi_set_io_files(t_redirection *mi_re, t_sys *mi_sys);
-int		mi_lastredirection(t_redirection *mi_re, t_sys *mi_sys);
+void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys);
+int		mi_lastred(t_red *mi_re, t_sys *mi_sys);
 void	s_env_create_update_value(char *key, t_sys *mi_sys);
-
+void	mi_rediriter( t_cmd *c, t_red *r, void (*f)( t_cmd *c, t_red *r));
+bool	mi_redis(t_cmd *mi_cmd, int type);
 
 #endif
