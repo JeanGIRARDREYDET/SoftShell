@@ -62,7 +62,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 
 
 	out = (int[]){OUTPUT, APPEND};
-	in = (int[]){INPUT, INPUT};
+	in  = (int[]){INPUT, INPUT};
 	if (mi_cmd->full)
 		free(mi_cmd->full);
 	mi_cmd->full = NULL;
