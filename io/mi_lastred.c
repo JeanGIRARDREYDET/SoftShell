@@ -20,6 +20,7 @@ bool ft_intisinarray(int *array, int find)
 	i = 0;
 	while (array[i] != -1)
 	{
+		dprintf(2, "array[%d] = %d\n", i, array[i]);
 		if (array[i] == find)
 			return (true);
 		i++;
