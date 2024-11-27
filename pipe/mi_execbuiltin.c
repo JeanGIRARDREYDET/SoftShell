@@ -40,7 +40,7 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	else if (ft_findword("pwd", cmd))
 		builtin_pwd(fd);
 	else if (ft_findword("unset", cmd))
-		builtin_unset(mi_cmd->arg, mi_sys);
+		mi_sysargsiter(mi_cmd->args, mi_sys, &builtin_unset);
 	else
 	{
 		dprintf(2, "	mi_execbuiltin exit\n");

@@ -32,3 +32,15 @@ void	mi_syscmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd, t_sys *mi_sys))
 		mi_cmd = mi_cmd->next;
 	}
 }
+
+void	mi_sysargsiter(char **args, t_sys *s, void (*f)(char *args, t_sys *s))
+{
+	int	i;
+
+	i = 1;
+	while (args[i] != NULL)
+	{
+		(*f)(args[i], s);
+		i++;
+	}
+}
