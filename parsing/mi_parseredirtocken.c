@@ -31,4 +31,3 @@ void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	(*n)++;
 }
-

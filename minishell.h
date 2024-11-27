@@ -170,7 +170,7 @@ char	*mi_getenv_env(char *key, char **env);
 
 void	mi_crered(t_cmd *cmd, t_sys *sys, int type, char *f_name);
 void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys);
-int		mi_lastred(t_red *mi_re, t_sys *mi_sys);
+int mi_lastred(t_red *mi_re,t_sys *mi_sys, int *find);
 void	s_env_create_update_value(char *key, t_sys *mi_sys);
 void	mi_rediriter( t_cmd *c, t_red *r, void (*f)( t_cmd *c, t_red *r));
 bool	mi_redis(t_cmd *mi_cmd, int type);
