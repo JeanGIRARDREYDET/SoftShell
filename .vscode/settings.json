@@ -6,6 +6,7 @@
         "stddef.h": "c",
         "history.h": "c",
         "unistd.h": "c",
-        "mi_lastredirection.C": "cpp"
+        "mi_lastredirection.C": "cpp",
+        "type_traits": "c"
     }
 }

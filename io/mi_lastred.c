@@ -12,6 +12,21 @@
 
 #include "../minishell.h"
 
+
+bool ft_intisinarray(int *array, int find)
+{
+	int i;
+
+	i = 0;
+	while (array[i] != -1)
+	{
+		if (array[i] == find)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 int mi_lastred(t_red *mi_re,t_sys *mi_sys, int *find)
 {
 	t_red	*mi_return;
@@ -21,7 +36,7 @@ int mi_lastred(t_red *mi_re,t_sys *mi_sys, int *find)
 		return (-1);
 	while (mi_re->next)
 	{
-		if (mi_re->redir_type == find[0] || mi_re->redir_type == find[1])
+		if (ft_intisinarray(find, mi_re->redir_type))
 		{
 			mi_set_io_files(mi_re, mi_sys);
 			close(mi_re->fd);
@@ -29,7 +44,7 @@ int mi_lastred(t_red *mi_re,t_sys *mi_sys, int *find)
 		}	
 		mi_re = mi_re->next;
 	}
-	if (mi_re->redir_type == find[0] || mi_re->redir_type == find[1])
+	if (ft_intisinarray(find, mi_re->redir_type))
 		mi_return = mi_re;
 	mi_set_io_files(mi_return, mi_sys);
 	return (mi_return->fd);
