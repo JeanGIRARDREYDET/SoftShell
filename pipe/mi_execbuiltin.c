@@ -27,19 +27,19 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	{
 		dprintf(2, "			mi_exebuiltin env  NULL\n");
 	}
-	if (ft_findword("cd", cmd))
+	if (ft_findword(cmd, "cd"))
 		builtin_cd(mi_cmd->args, fd, mi_sys);
-	else if (ft_findword("echo", cmd))
+	else if (ft_findword(cmd, "echo"))
 		builtin_echo(mi_cmd, fd);
-	else if (ft_findword("env", cmd))
+	else if (ft_findword(cmd, "env"))
 		builtin_env(mi_sys, fd);
-	else if (ft_findword("exit", cmd))
+	else if (ft_findword(cmd, "exit"))
 		builtin_exit(mi_sys);
-	else if (ft_findword("export", cmd))
+	else if (ft_findword(cmd, "export"))
 		builtin_export(mi_cmd->args, fd, mi_sys);
-	else if (ft_findword("pwd", cmd))
+	else if (ft_findword(cmd, "pwd"))
 		builtin_pwd(fd);
-	else if (ft_findword("unset", cmd))
+	else if (ft_findword(cmd, "unset"))
 		mi_sysargsiter(mi_cmd->args, mi_sys, &builtin_unset);
 	else
 	{

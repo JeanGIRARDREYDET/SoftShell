@@ -40,7 +40,7 @@ char	*mi_getenv_env(char *key, char **env)
 
 	i = 0;
 	len = ft_strlen(key);
-	while (*env[i])
+	while (env[i] && *env[i])
 	{
 		end = env[i][len];
 		if (ft_strncmp (env[i], key, len) == 0 && end == '=')

@@ -14,7 +14,7 @@
 
 void	mi_checkline(char *line, t_sys *mi_sys)
 {
-	if (ft_findword("exit", line))
+	if (ft_findword(line ,"exit"))
 		builtin_exit(mi_sys);
 }
 
@@ -34,7 +34,7 @@ void	mi_heredoc(t_red *red, t_sys *mi_sys)
 while (1)
 	{
 	line = readline(">");
-	if (ft_findword(line, red->file_name))
+	if (ft_findword(red->file_name, line))
 		break;
 	}
 	dprintf(2,"    %d  %d\n", red->redir_type, mi_sys->here_doc);
@@ -63,7 +63,7 @@ int	main(int argc, char **argv, char **env)
 		mi_syscmditer(&mi_sys, &mi_expand_interface);
 		mi_cmditer(mi_sys.cmd, &mi_cmdsplitcmd);
 		mi_syscmditer(&mi_sys, &mi_cmdparsse);
-		mi_sysrediter(&mi_sys,HEREDOC, &mi_heredoc);
+		mi_sysrediter(&mi_sys, HEREDOC, &mi_heredoc);
 		mi_cmditer(mi_sys.cmd, &mi_checkbuiltin);
 		mi_syscmditer(&mi_sys, &mi_checkpathaccess);
 		mi_syscmditer(&mi_sys, &mi_execone);
