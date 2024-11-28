@@ -172,7 +172,7 @@ void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys);
 int		mi_lastred(t_red *mi_re, t_sys *mi_sys, int *find);
 void	s_env_create_update_value(char *key, t_sys *mi_sys);
 bool	mi_redis(t_cmd *mi_cmd, int type);
-void    mi_rediriter(  t_red *r,t_sys *s, void (*f)(t_red *r, t_sys *s ));
-void	mi_sysrediter(t_sys *mi_sys, void (*f)(t_red *red, t_sys *s));
+void	mi_rediriter(t_red *r, t_sys *s, int t, void (*f)(t_red *r, t_sys *s));
+void	mi_sysrediter(t_sys *s, int t, void (*f)(t_red *red, t_sys *s));
 
 #endif
