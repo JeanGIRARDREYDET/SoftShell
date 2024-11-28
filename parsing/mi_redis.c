@@ -14,11 +14,17 @@
 
 bool	mi_redis(t_cmd *mi_cmd, int type)
 {
+	t_red			*mi_red;
+
+	mi_red = mi_cmd->red;
 	while (mi_cmd->red)
 	{
-		if (mi_cmd->red->redir_type == type)
+		if (mi_red->redir_type == type)
 			return (true);
-		mi_cmd->red = mi_cmd->red->next;
+		else if (!mi_red->next)
+			break ;
+		else
+			mi_red = mi_red->next;
 	}
 	return (false);
 }
