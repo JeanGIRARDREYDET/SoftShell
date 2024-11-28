@@ -14,7 +14,7 @@
 
 void	mi_checkline(char *line, t_sys *mi_sys)
 {
-	if (ft_findword(line ,"exit"))
+	if (ft_findword(" exit ", line))
 		builtin_exit(mi_sys);
 }
 
