@@ -144,8 +144,7 @@ void	mi_oneexec(t_cmd *me_cmd, t_sys *mi_sys);
 void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_cmdargparsse(t_cmd *lst);
 void	mi_cmditer(t_cmd *lst, void (*f)(t_cmd *lst));
-void	mi_syscmditer(t_sys *sys, void (*f)(t_cmd *lst, t_sys *sys));
-void	mi_sysargsiter(char **args, t_sys *s, void (*f)(char *args, t_sys *s));
+void	mi_syscmditer(t_sys *sys, void (*f)(t_cmd *lst, t_sys *sys));;
 void	mi_lexingline(char *ln, t_sys *mi_sys);
 void	mi_pospasscote(char *ln, size_t *i, t_sys *mi_sys);
 void	mi_logerror(int code_error, char *msg, t_sys *mi_sys);
@@ -170,9 +169,10 @@ char	*mi_getenv_env(char *key, char **env);
 
 void	mi_crered(t_cmd *cmd, t_sys *sys, int type, char *f_name);
 void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys);
-int mi_lastred(t_red *mi_re,t_sys *mi_sys, int *find);
+int		mi_lastred(t_red *mi_re, t_sys *mi_sys, int *find);
 void	s_env_create_update_value(char *key, t_sys *mi_sys);
-void	mi_rediriter( t_cmd *c, t_red *r, void (*f)( t_cmd *c, t_red *r));
 bool	mi_redis(t_cmd *mi_cmd, int type);
+void    mi_rediriter(  t_red *r,t_sys *s, void (*f)(t_red *r, t_sys *s ));
+void	mi_sysrediter(t_sys *mi_sys, void (*f)(t_red *red, t_sys *s));
 
 #endif
