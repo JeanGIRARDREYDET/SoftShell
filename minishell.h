@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 13:47:03 by doferet           #+#    #+#             */
-/*   Updated: 2024/11/26 22:40:08 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/11/29 09:28:52 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -44,7 +44,7 @@
 
 # define WSPACE " \a\b\t\n\v\f\r"
 # define TECHAP "\"'"
-# define BUILTINS " echo cd pwd export unset env exit "
+# define BUILTINS "echo cd pwd export unset env exit"
 
 extern int	g_signal;
 

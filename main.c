@@ -1,20 +1,20 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:29:03 by jegirard          #+#    #+#             */
-/*   Updated: 2024/11/02 17:29:09 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:42:27 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
 void	mi_checkline(char *line, t_sys *mi_sys)
 {
-	if (ft_findword(" exit ", line))
+	if (ft_findword("exit", line))
 		builtin_exit(mi_sys);
 }
 
@@ -30,8 +30,9 @@ void	mi_checkmsargument(int argc, char **argv)
 
 
 void	mi_heredoc(t_red *red, t_sys *mi_sys)
-{	char	*line;
-while (1)
+{	
+	char	*line;
+	while (1)
 	{
 	line = readline(">");
 	if (ft_findword(red->file_name, line))
