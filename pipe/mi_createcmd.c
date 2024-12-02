@@ -25,7 +25,7 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 	mi_cmd->split = NULL;
 	mi_cmd->arg = "";
 	mi_cmd->args = NULL;
-	mi_cmd->builtin = true;
+	mi_cmd->builtin = false;
 	mi_cmd->type = NULL;
 	mi_cmd->fd[0] = 0;
 	mi_cmd->fd[1] = 0;

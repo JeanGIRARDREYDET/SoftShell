@@ -33,23 +33,23 @@ void	mi_syscmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd, t_sys *mi_sys))
 	}
 }
 
-void	mi_sysargsiter(char **args, t_sys *s, void (*f)(char *args, t_sys *s))
+void	mi_sysargsiter(char **r, t_sys *s, void (*f)(char *r, t_sys *s))
 {
 	int	i;
 
 	i = 1;
-	while (args[i] != NULL)
+	while (r[i] != NULL)
 	{
-		(*f)(args[i], s);
+		(*f)(r[i], s);
 		i++;
 	}
 }
 
-void	mi_rediriter(t_red *r, t_sys *s, int r_type, void (*f)(t_red *r, t_sys *s ))
+void	mi_rediriter(t_red *r, t_sys *s, int t, void (*f)(t_red *r, t_sys *s ))
 {
 	while (r != NULL)
 	{
-		if (r->redir_type == r_type)
+		if (r->redir_type == t)
 			(*f)(r,s);
 		r = r->next ;
 	}
