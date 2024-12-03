@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	mi_checkoneaccess(char *path, t_cmd *mi_cmd)
+static void	mi_checkoneaccess(char *path, t_cmd *mi_cmd)
 {
 	char		*pathcmd;
 
@@ -26,7 +26,7 @@ void	mi_checkoneaccess(char *path, t_cmd *mi_cmd)
 	free(pathcmd);
 }
 
-void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
+static void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int			i;
 	char		**paths;
@@ -47,7 +47,7 @@ void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	mi_cmd->found = false;
-	if ( mi_cmd->builtin == true || !mi_cmd->args[0] )
+	if (!mi_cmd || mi_cmd->builtin == true || !mi_cmd->args || !mi_cmd->args[0])
 		return ;
 	if (!mi_cmd->found && access(mi_cmd->args[0], F_OK) == 0)
 	{
