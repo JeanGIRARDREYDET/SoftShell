@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 void	mi_checkline(char *line, t_sys *mi_sys)
 {
 	if (ft_findword("exit", line))
