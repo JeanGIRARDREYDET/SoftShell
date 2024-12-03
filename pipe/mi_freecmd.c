@@ -29,6 +29,27 @@ void	mi_freeerror(t_sys *mi_sys)
 	mi_sys->error = NULL;
 }
 
+void	mi_freered(t_cmd *mi_cmd)
+{
+	t_red	*tmp;
+
+	if (!mi_cmd->red)
+		return ;
+	while (mi_cmd->red && mi_cmd->red != NULL)
+	{
+		tmp = mi_cmd->red->next;
+		if (mi_cmd->red->fd)
+			close(mi_cmd->red->fd);
+		if (mi_cmd->red->redir_type == HEREDOC)
+			unlink(mi_cmd->red->file_name);
+		if (mi_cmd->red->file_name)
+			free(mi_cmd->red->file_name);
+		free(mi_cmd->red);
+		mi_cmd->red = tmp;
+	}
+	mi_cmd->red = NULL;
+}
+
 void	mi_freeonecmd(t_cmd *mi_cmd)
 {
 	if (!mi_cmd)
@@ -43,7 +64,7 @@ void	mi_freeonecmd(t_cmd *mi_cmd)
 		ft_arrclose(mi_cmd->split);
 	mi_cmd->split = NULL;
 	if (mi_cmd->red != NULL)
-		free(mi_cmd->red);
+		mi_freered(mi_cmd);
 	mi_cmd->red = NULL;
 	if (mi_cmd != NULL)
 		free(mi_cmd);
