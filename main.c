@@ -11,7 +11,7 @@
 /******************************************************************************/
 
 #include "minishell.h"
-#include <stdint.h>
+
 
 void	mi_checkline(char *line, t_sys *mi_sys)
 {
@@ -29,47 +29,6 @@ void	mi_checkmsargument(int argc, char **argv)
 	}
 }
 
-static int	ft_putnbr_base(char *file, unsigned long n, char *bs, int len, unsigned long lb)
-{
-	file[1] = '1';
-	if (len == 0)
-		
-	if (n >= lb)
-		len = (ft_putnbr_base(file, n / lb, bs, len, lb));
-
-	write (1, &bs[n % lb], 1);
-	file[len+24] = *(&bs[n % lb]);
-	return (++len);
-}
-
-
-void	mi_heredoc(t_red *red, t_sys *mi_sys)
-{	
-	char	*line;
-	char 	*tmp;
-	char 	*tmp2;
-	char 	*file;
-
-	file = ft_strdup("/tmp/minidhell_heredoc_012345");
-	
-	uintptr_t address_as_uintptr = (uintptr_t)red;
-
-    // Cast the address of the pointer to a long
-	ft_putnbr_base(file, address_as_uintptr, B62, 0, 61);
-	tmp = ft_strdup("");
-	dprintf(2,"\n%p\n", tmp);
-
-	while (1)
-	{
-		line = readline(">");
-		if (ft_findword(red->file_name, line))
-			break;
-		tmp2 = ft_strdup(tmp);
-		tmp = join_3(tmp,"\n",line);
-		free(tmp2);
-	}
-	mi_sys->nb_herdoc++;
-}
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;

@@ -29,6 +29,7 @@
 # include <stdarg.h>
 # include <string.h>
 # include <stddef.h>
+# include <stdint.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <linux/limits.h>
@@ -45,7 +46,8 @@
 # define WSPACE " \a\b\t\n\v\f\r"
 # define TECHAP "\"'"
 # define BUILTINS "echo cd pwd export unset env exit"
-# define B62 "0123456789abcdefghijklmnopqrstuvwxysABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# define B64 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+_"
+#define HERDOCTEMPLATE "/tmp/minishell_heredoc_012345"
 
 extern int	g_signal;
 
@@ -71,6 +73,7 @@ typedef struct s_red
 	int						redir_type;
 	int						fd;
 	char					*file_name;
+	char					*eof;
 	struct s_red			*next;
 }	t_red;
 
@@ -176,5 +179,6 @@ bool	mi_redis(t_cmd *mi_cmd, int type);
 void	mi_rediriter(t_red *r, t_sys *s, int t, void (*f)(t_red *r, t_sys *s));
 void	mi_sysrediter(t_sys *s, int t, void (*f)(t_red *red, t_sys *s));
 void	mi_sysargsiter(char **args, t_sys *s, void (*f)(char *args, t_sys *s));
+void	mi_heredoc(t_red *red, t_sys *mi_sys);
 
 #endif

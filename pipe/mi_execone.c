@@ -61,7 +61,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	int	*in;
 
 	out = (int[]){OUTPUT, APPEND};
-	in  = (int[]){INPUT, INPUT};
+	in  = (int[]){INPUT, HEREDOC};
 	if (mi_cmd->full)
 		free(mi_cmd->full);
 	mi_cmd->full = NULL;
@@ -90,7 +90,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	if (mi_cmd->id == 0)
 	{
-		if (mi_redis(mi_cmd, INPUT))
+		if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
 		{
 			mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys,in);
 			dup2(mi_cmd->red->fd, STDIN_FILENO);

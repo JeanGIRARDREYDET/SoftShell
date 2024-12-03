@@ -35,6 +35,30 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 	return (mi_cmd);
 }
 
+static int	fname(char *file, long n,  int len, long lb)
+{
+	if (n >= lb)
+		len = (fname(file, n / lb, len, lb));
+	if (file[len+24])
+		file[len+24] = *(&B64[n % lb]);
+	return (++len);
+}
+
+void	mi_creredfilename(t_red *mi_re, int type, char *file_name)
+{
+	uintptr_t			addresse;
+
+	if (type == HEREDOC)
+	{
+		mi_re->eof = file_name;
+		addresse = (uintptr_t)mi_re;
+		mi_re->file_name = ft_strdup(HERDOCTEMPLATE);
+		fname(mi_re->file_name, addresse, 0, 64);
+	}
+	else
+		mi_re->file_name = file_name;
+}
+
 void	mi_crered(t_cmd *cmd, t_sys *sys, int type, char *file_name)
 {
 	t_red	*mi_red;
@@ -51,7 +75,7 @@ void	mi_crered(t_cmd *cmd, t_sys *sys, int type, char *file_name)
 		return ;
 	mi_red->redir_type = type;
 	mi_red->fd = 0;
-	mi_red->file_name = file_name;
+	mi_creredfilename(mi_red, type, file_name);
 	mi_red->next = NULL;
 	if (cmd->red == NULL)
 		cmd->red = mi_red;

@@ -47,7 +47,7 @@ void	mi_sysargsiter(char **r, t_sys *s, void (*f)(char *r, t_sys *s))
 
 void	mi_rediriter(t_red *r, t_sys *s, int t, void (*f)(t_red *r, t_sys *s ))
 {
-	while (r != NULL)
+	while (r && r != NULL)
 	{
 		if (r->redir_type == t)
 			(*f)(r,s);
