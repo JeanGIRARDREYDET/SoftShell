@@ -37,7 +37,8 @@ void	cd_back(char **new_pwd, int fd, t_sys *mi_sys)
 		return ;
 	}
 	*new_pwd = ft_strdup(mi_sys->senv->oldpwd);
-	builtin_pwd(fd);
+	write(fd, mi_sys->senv->oldpwd, ft_strlen(mi_sys->senv->oldpwd));
+	write(fd, "\n", 1);
 }
 
 void	cd_parent(char **new_pwd, t_sys *mi_sys)
