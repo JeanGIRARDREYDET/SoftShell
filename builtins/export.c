@@ -30,7 +30,7 @@ void	print_export(t_sys *mi_sys, int fd)
 	{
 		write(fd, "declare -x \"", 12);
 		write(fd, mi_sys->env[i], ft_strlen(mi_sys->env[i]));
-		write(fd,"\"\n",2);
+		write(fd, "\"\n", 2);
 		i++;
 	}
 }
@@ -55,7 +55,6 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 	free (mi_sys->env);
 	mi_sys->env = ienv;
 }
-
 
 void	s_env_create_update_value(char *key, t_sys *mi_sys)
 {
@@ -88,7 +87,6 @@ void	s_env_create_update_key_value(char *key, char *value, t_sys *mi_sys)
 	str_pwd = join_3(key, "=", value);
 	s_env_create_update_value (str_pwd, mi_sys);
 }
-
 
 int	mi_export_values(char **key, t_sys *mi_sys)
 {

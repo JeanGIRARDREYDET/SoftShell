@@ -16,16 +16,13 @@
 
 void	cd_home(char **new_pwd, t_sys *mi_sys)
 {
-	char	*home;
-
-	home = mi_getenv("HOME", mi_sys);
-	if (!home)
+	if (!mi_sys->senv->home)
 	{
 		mi_logerror(1, "cd: HOME not set", mi_sys);
 		*new_pwd = ft_strdup("");
 		return ;
 	}
-	*new_pwd = ft_strdup(home);
+	*new_pwd = ft_strdup(mi_sys->senv->home);
 }
 
 void	cd_back(char **new_pwd, int fd, t_sys *mi_sys)
@@ -59,6 +56,7 @@ void	cd_parent(char **new_pwd, t_sys *mi_sys)
 	while (back[i] != '/' && i > 1)
 		i--;
 	*new_pwd = ft_substr(back, 0, i);
+	free(back);
 }
 char	*cd_getpwd(char *key, int fd, t_sys *mi_sys)
 {
@@ -88,10 +86,11 @@ void	builtin_cd(char **key, int fd, t_sys *mi_sys)
 		if(mi_sys->senv->oldpwd)
 			free(mi_sys->senv->oldpwd);
 		mi_sys->senv->oldpwd = ft_strdup(start_pwd);	
+		free(new_pwd);
 		new_pwd = getcwd(NULL, 0);
 		mi_setenv("PWD", new_pwd, mi_sys);
 		s_env_create_update_key_value("PWD", new_pwd, mi_sys);
-	if(mi_sys->senv->pwd)
+		if(mi_sys->senv->pwd)
 			free(mi_sys->senv->pwd);
 		mi_sys->senv->pwd = ft_strdup(new_pwd);
 	//	free(tmp_pwd);
@@ -103,5 +102,6 @@ void	builtin_cd(char **key, int fd, t_sys *mi_sys)
 		mi_logerror(1, "No such file or directory", mi_sys);
 		mi_sys->exit_status = EXIT_FAILURE;
 	}
-//	free(new_pwd);
+	free(start_pwd);
+	free(new_pwd);
 }

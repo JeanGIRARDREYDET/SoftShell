@@ -18,7 +18,9 @@ void	read_env_line(char *line, t_sys *mi_sys)
 	if (ft_strnstr (line, "PATH=", 5) != 0)
 		mi_sys->senv->path = line + 5;
 	if (ft_strnstr (line, "PWD=", 4) != 0)
-		mi_sys->senv->pwd = line + 4;
+		mi_sys->senv->pwd = ft_strdup(line + 4);
+	if (ft_strnstr (line, "OLDPWD=", 7) != 0)
+		mi_sys->senv->pwd = ft_strdup(line + 7);
 	if (ft_strnstr (line, "HOME=", 5) != 0)
 		mi_sys->senv->home = line + 5;
 	if (ft_strnstr (line, "SHLVL=", 6) != 0)

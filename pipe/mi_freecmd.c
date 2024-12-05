@@ -97,5 +97,9 @@ void	mi_freesys(t_sys *mi_sys)
 		mi_freecmd(mi_sys);
 	if (mi_sys->error != NULL)
 		mi_freeerror(mi_sys);
+	if(mi_sys->senv->oldpwd)
+		free(mi_sys->senv->oldpwd);
+	if(mi_sys->senv->pwd)
+		free(mi_sys->senv->pwd);
 	rl_clear_history();
 }
