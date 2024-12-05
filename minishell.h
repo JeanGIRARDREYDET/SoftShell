@@ -157,6 +157,7 @@ void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_sys *msys);
 int		mi_intlogerror(t_sys *mi_sys, char *s, int code);
 void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys);
 char	*ft_findcommand(char *line);
+void	s_env_create_update_key_value(char *key, char *value, t_sys *mi_sys);
 
 void	mi_closecmd(t_cmd *mi_cmd, int nb);
 t_cmd	*mi_createcmd(t_sys *mi_sys);

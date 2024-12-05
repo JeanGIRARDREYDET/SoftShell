@@ -56,6 +56,7 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 	mi_sys->env = ienv;
 }
 
+
 void	s_env_create_update_value(char *key, t_sys *mi_sys)
 {
 	int			pos;
@@ -79,6 +80,15 @@ void	s_env_create_update_value(char *key, t_sys *mi_sys)
 	}
 	mi_sys->exit_status = EXIT_SUCCESS;
 }
+
+void	s_env_create_update_key_value(char *key, char *value, t_sys *mi_sys)
+{
+	char			*str_pwd;
+
+	str_pwd = join_3(key, "=", value);
+	s_env_create_update_value (str_pwd, mi_sys);
+}
+
 
 int	mi_export_values(char **key, t_sys *mi_sys)
 {

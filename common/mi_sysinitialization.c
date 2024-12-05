@@ -103,6 +103,8 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 	if (mi_sys->senv != NULL && mi_sys->senv != NULL)
 		free(mi_sys->senv);	
 */
+
+/*
 	if (mi_sys->senv != NULL)
 	{
 		if (mi_sys->senv->shlvl != NULL)
@@ -110,4 +112,6 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 		free(mi_sys->senv);
 		mi_sys->senv = NULL;
 	}
+*/
+
 }

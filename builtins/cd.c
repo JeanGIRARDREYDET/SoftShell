@@ -30,16 +30,13 @@ void	cd_home(char **new_pwd, t_sys *mi_sys)
 
 void	cd_back(char **new_pwd, int fd, t_sys *mi_sys)
 {
-	char	*home;
-
-	home = mi_getenv("OLDPWD", mi_sys);
-	if (!home)
+	if (!mi_sys->senv->oldpwd)
 	{
 		mi_logerror(1, "cd: OLDPWD not set", mi_sys);
 		*new_pwd = ft_strdup("");
 		return ;
 	}
-	*new_pwd = ft_strdup(home);
+	*new_pwd = ft_strdup(mi_sys->senv->oldpwd);
 	builtin_pwd(fd);
 }
 
@@ -49,7 +46,7 @@ void	cd_parent(char **new_pwd, t_sys *mi_sys)
 	char	*back;
 
 	i = 0;
-	back = mi_getenv("PWD", mi_sys);
+	back = getcwd(NULL, 0);
 	if (!back)
 	{
 		mi_logerror(1, "cd: curent DIR not set", mi_sys);
@@ -79,19 +76,23 @@ char	*cd_getpwd(char *key, int fd, t_sys *mi_sys)
 
 void	builtin_cd(char **key, int fd, t_sys *mi_sys)
 {
-	char	*tmp_pwd;
+	char	*start_pwd;
 	char	*new_pwd;
 
+	start_pwd = getcwd(NULL, 0);
 	new_pwd = cd_getpwd(key[1], fd, mi_sys);
 	if (*new_pwd != '\0' && access(new_pwd, F_OK) == 0 && chdir(new_pwd) == 0)
 	{
-		tmp_pwd = ft_strjoin("OLDPWD=", mi_getenv("PWD", mi_sys));
-		s_env_create_update_value (tmp_pwd, mi_sys);
-	//	mi_export_values({"dd",tmp_pwd}, mi_sys);
-	//	free(tmp_pwd);
-		mi_setenv("OLDPWD", mi_getenv("PWD", mi_sys), mi_sys);
-		tmp_pwd = getcwd(NULL, 0);
-		mi_setenv("PWD", tmp_pwd, mi_sys);
+		s_env_create_update_key_value("OLDPWD", start_pwd, mi_sys);
+		if(mi_sys->senv->oldpwd)
+			free(mi_sys->senv->oldpwd);
+		mi_sys->senv->oldpwd = ft_strdup(start_pwd);	
+		new_pwd = getcwd(NULL, 0);
+		mi_setenv("PWD", new_pwd, mi_sys);
+		s_env_create_update_key_value("PWD", new_pwd, mi_sys);
+	if(mi_sys->senv->pwd)
+			free(mi_sys->senv->pwd);
+		mi_sys->senv->pwd = ft_strdup(new_pwd);
 	//	free(tmp_pwd);
 		mi_sys->exit_status = EXIT_SUCCESS;
 	}
