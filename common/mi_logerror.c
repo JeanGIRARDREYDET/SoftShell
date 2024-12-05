@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mi_logerror.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:47:50 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/23 14:47:55 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:20:30 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../minishell.h"
 
@@ -28,6 +28,10 @@ t_error	*mi_errornew(int code_error, char *msg)
 void	mi_logerror(int code_error, char *msg, t_sys *mi_sys)
 {
 	t_error	*error;
+
+	if(code_error != 0)
+		mi_sys->nb_error++;
+	
 	if (msg!=NULL)
 	{
 		write(STDERR_FILENO, msg, ft_strlen(msg));

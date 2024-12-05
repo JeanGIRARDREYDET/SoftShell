@@ -6,25 +6,18 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 18:38:45 by jegirard          #+#    #+#             */
-/*   Updated: 2024/11/29 16:53:36 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:56:41 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../minishell.h"
 
-void	mi_cmditer(t_cmd *mi_cmd, void (*f)(t_cmd *mi_cmd))
-{
-	while (mi_cmd != NULL)
-	{
-		(*f)(mi_cmd);
-		mi_cmd = mi_cmd->next;
-	}
-}
-
 void	mi_syscmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd, t_sys *mi_sys))
 {
 	t_cmd	*mi_cmd;
 
+	if (mi_sys->nb_error > 0)
+		return ;
 	mi_cmd = mi_sys->cmd;
 	while (mi_cmd != NULL)
 	{
@@ -32,6 +25,21 @@ void	mi_syscmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd, t_sys *mi_sys))
 		mi_cmd = mi_cmd->next;
 	}
 }
+
+void	mi_cmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd))
+{
+	t_cmd	*mi_cmd;
+
+	if (mi_sys->nb_error > 0)
+		return ;
+	mi_cmd = mi_sys->cmd;
+	while (mi_cmd != NULL)
+	{
+		(*f)(mi_cmd);
+		mi_cmd = mi_cmd->next;
+	}
+}
+
 
 void	mi_sysargsiter(char **r, t_sys *s, void (*f)(char *r, t_sys *s))
 {
@@ -59,6 +67,8 @@ void	mi_sysrediter(t_sys *mi_sys,int r_type, void (*f)(t_red *red, t_sys *mi_sys
 {
 	t_cmd	*mi_cmd;
 
+	if (mi_sys->nb_error > 0)
+		return ;
 	mi_cmd = mi_sys->cmd;
 	while (mi_cmd != NULL)
 	{

@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 13:47:03 by doferet           #+#    #+#             */
-/*   Updated: 2024/11/29 09:28:52 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:54:54 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -147,7 +147,6 @@ void	mi_oneexec(t_cmd *me_cmd, t_sys *mi_sys);
 
 void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_cmdargparsse(t_cmd *lst);
-void	mi_cmditer(t_cmd *lst, void (*f)(t_cmd *lst));
 void	mi_syscmditer(t_sys *sys, void (*f)(t_cmd *lst, t_sys *sys));;
 void	mi_lexingline(char *ln, t_sys *mi_sys);
 void	mi_pospasscote(char *ln, size_t *i, t_sys *mi_sys);
@@ -181,5 +180,6 @@ void	mi_rediriter(t_red *r, t_sys *s, int t, void (*f)(t_red *r, t_sys *s));
 void	mi_sysrediter(t_sys *s, int t, void (*f)(t_red *red, t_sys *s));
 void	mi_sysargsiter(char **args, t_sys *s, void (*f)(char *args, t_sys *s));
 void	mi_heredoc(t_red *red, t_sys *mi_sys);
+void	mi_cmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd));
 
 #endif

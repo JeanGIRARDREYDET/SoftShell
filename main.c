@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:29:03 by jegirard          #+#    #+#             */
-/*   Updated: 2024/11/29 16:41:15 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:54:33 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -33,10 +33,10 @@ void	mi_analyse(char *line, t_sys *mi_sys)
 	mi_checkline(line, mi_sys);
 	mi_lexingline(line, mi_sys);
 	mi_syscmditer(mi_sys, &mi_expand_interface);
-	mi_cmditer(mi_sys->cmd, &mi_cmdsplitcmd);
+	mi_cmditer(mi_sys, &mi_cmdsplitcmd);
 	mi_syscmditer(mi_sys, &mi_cmdparsse);
 	mi_sysrediter(mi_sys, HEREDOC, &mi_heredoc);
-	mi_cmditer(mi_sys->cmd, &mi_checkbuiltin);
+	mi_cmditer(mi_sys, &mi_checkbuiltin);
 	mi_syscmditer(mi_sys, &mi_checkpathaccess);
 }
 
