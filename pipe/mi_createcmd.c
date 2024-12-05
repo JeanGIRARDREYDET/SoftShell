@@ -35,12 +35,12 @@ t_cmd	*mi_createcmd(t_sys *mi_sys)
 	return (mi_cmd);
 }
 
-static int	fname(char *file, long n,  int len, long lb)
+static int	fname(char *file, long n, int len, long lb)
 {
 	if (n >= lb)
 		len = (fname(file, n / lb, len, lb));
-	if (file[len+24])
-		file[len+24] = *(&B64[n % lb]);
+	if (file[len + 24])
+		file[len + 24] = *(&B64[n % lb]);
 	return (++len);
 }
 

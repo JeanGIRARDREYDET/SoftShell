@@ -26,10 +26,8 @@ void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys)
 		mi_re->fd = open(mi_re->file_name, O_RDONLY);
 	if (mi_re->fd == -1)
 	{
-		mi_logerror(((2 & mi_re->fd)>>1), "errormsg", mi_sys);
+		mi_logerror(((2 & mi_re->fd) >> 1), "errormsg", mi_sys);
 		close(mi_re->fd);
 	}
 	return ;
 }
-
-

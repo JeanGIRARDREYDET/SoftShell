@@ -13,7 +13,8 @@
 #include "../minishell.h"
 
 //dans bash echo -n ecrit ce qu'il y a apres n sans retour a la ligne
-//si "-n" est reconnu et qu'il y a une chaine de caractere alors il ne fait pas de retour a la ligne et la print
+//si "-n" est reconnu et qu'il y a une chaine de caractere alors il ne fait pas 
+// de retour a la ligne et la print
 //si "-n" est reconnu mais qu'il n'y a pas de parametre, rien ne se passe
 
 void	echo_param(char **param, int *j, int len, int *nl)
@@ -50,9 +51,8 @@ void	builtin_echo(t_cmd *mi_cmd, int fd)
 		write(fd, mi_cmd->args[j], ft_strlen(mi_cmd->args[j]));
 		if (j < len)
 			write(fd, " ", 1);
-		j++;	
+		j++;
 	}
 	if (nl == 1)
 		write(fd, "\n", 1);
-	
 }

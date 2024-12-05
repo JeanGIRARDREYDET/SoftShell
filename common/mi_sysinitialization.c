@@ -15,6 +15,7 @@
 void	read_env_line(char *line, t_sys *mi_sys)
 {
 	char	*tmp;
+
 	if (ft_strnstr (line, "PATH=", 5) != 0)
 		mi_sys->senv->path = line + 5;
 	if (ft_strnstr (line, "PWD=", 4) != 0)
@@ -56,7 +57,7 @@ int	read_env(char **env, t_sys *mi_sys)
 
 void	mi_setdefaul_initialization( t_sys *mi_sys)
 {
-	mi_sys->senv = (t_env*)ft_calloc(1, sizeof(t_env));
+	mi_sys->senv = (t_env*) ft_calloc (1, sizeof (t_env));
 	mi_sys->senv->path = "/usr/bin:/bin:/usr/sbin:/sbin";
 	mi_sys->senv->pwd = NULL;
 	mi_sys->nb_pipe = 0;
@@ -100,21 +101,4 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 		ienv[i++] = ft_strjoin("SHLVL=", mi_sys->senv->shlvl);
 	mi_sys->env = ienv;
 	mi_sys->len_env = i;
-/*
-	if (mi_sys->senv != NULL && mi_sys->senv->shlvl && mi_sys->senv->shlvl != NULL)
-		free(mi_sys->senv->shlvl);
-	if (mi_sys->senv != NULL && mi_sys->senv != NULL)
-		free(mi_sys->senv);	
-*/
-
-/*
-	if (mi_sys->senv != NULL)
-	{
-		if (mi_sys->senv->shlvl != NULL)
-			free(mi_sys->senv->shlvl);
-		free(mi_sys->senv);
-		mi_sys->senv = NULL;
-	}
-*/
-
 }

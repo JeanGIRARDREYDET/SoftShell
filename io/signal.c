@@ -59,12 +59,10 @@
 // clean_after_execute(children_pid); // free
 // return(exit_status);
 
-int g_signal = 0;
+int	g_signal = 0;
 
 void	signal_handle_sigint(int sign)
 {
-	// if (signal == SIGINT)
-	// 	g_signal = 1;
 	(void)sign;
 	printf("\n");
 	rl_replace_line("", 0);
@@ -73,12 +71,12 @@ void	signal_handle_sigint(int sign)
 		rl_redisplay();
 }
 
-void signal_handle_sigquit(void)
+void	signal_handle_sigquit(void)
 {
 	printf("'^\'");
 	rl_on_new_line();
-	if(g_signal == 0)
-		return;
+	if (g_signal == 0)
+		return ;
 }
 
 void	signal_in_heredoc(int signal)
@@ -86,20 +84,3 @@ void	signal_in_heredoc(int signal)
 	g_signal = signal;
 	close(STDIN_FILENO);
 }
-
-// void	send_signal(int signal)
-// {
-// 	g_signal = signal;
-// 	signal(SIGINT, &signal_handle_sigint);
-// 	signal(SIGQUIT, SIG_IGN);
-// }
-
-//pour une commande bloquante comme cat | ls
-// => ctrl+\ quitte avec '^\' sans retour a la ligne
-// => ctrl+D revient a la ligne sans rien ecrire
-// => ctrl+C quitte avec ^C et revient a la ligne
-
-//debut du prompt
-//=> ctrl+d quit le programme en ecrivant "exit"
-//=> ctrl+c retourne a la ligne en ecrivant "^C"
-//=> ctrl+\ ne fait rien

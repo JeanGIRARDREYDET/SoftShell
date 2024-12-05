@@ -17,7 +17,7 @@ void	ft_pos_passstring(char *ln, int *i)
 	char	echap;
 
 	echap = '\0';
-	while ( ln && ln[*i] != '\0' && ln[*i] != '<' && ln[*i] != '>'
+	while (ln && ln[*i] != '\0' && ln[*i] != '<' && ln[*i] != '>'
 		&& (!ft_strchr(WSPACE, ln[*i]) || echap != '\0'))
 	{
 		if ((echap == '\0') && ft_strchr(TECHAP, ln[*i]))

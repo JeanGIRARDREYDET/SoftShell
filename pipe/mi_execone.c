@@ -60,15 +60,16 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	int	*out;
 	int	*in;
 
-	out = (int[]){OUTPUT, APPEND};
-	in  = (int[]){INPUT, HEREDOC};
+	out = (int []){OUTPUT, APPEND};
+	in = (int []){INPUT, HEREDOC};
 	if (mi_cmd->full)
 		free(mi_cmd->full);
 	mi_cmd->full = NULL;
 	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin)
-	{	
+	{
 		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
-			mi_execbuiltin(mi_cmd, mi_lastred(mi_cmd->red, mi_sys ,out), mi_sys);
+			mi_execbuiltin(mi_cmd,
+				mi_lastred(mi_cmd->red, mi_sys, out), mi_sys);
 		else
 			mi_execbuiltin(mi_cmd, STDOUT_FILENO, mi_sys);
 		return ;
@@ -92,7 +93,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
 		{
-			mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys,in);
+			mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
 			dup2(mi_cmd->red->fd, STDIN_FILENO);
 			close (mi_cmd->red->fd);
 		}
@@ -102,12 +103,11 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 				return ;
 			close (mi_sys->fd_in);
 		}
-		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND) )
+		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 		{
 			close (mi_cmd->fd[1]);
-			mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys,out);
+			mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys, out);
 			dup2(mi_cmd->red->fd, STDOUT_FILENO);
-//			close (mi_cmd->redirection->fd);
 		}
 		if (mi_cmd->next != NULL)
 		{

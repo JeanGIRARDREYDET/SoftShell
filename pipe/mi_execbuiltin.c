@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mi_execbuiltin.c                                   :+:      :+:    :+:   */
@@ -8,7 +8,7 @@
 /*   Created: 2024/11/02 13:50:25 by jegirard          #+#    #+#             */
 /*   Updated: 2024/11/29 08:56:25 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -24,9 +24,7 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 
 	cmd = mi_cmd->args[0];
 	if (mi_sys->env == NULL)
-	{
 		dprintf(2, "			mi_exebuiltin env  NULL\n");
-	}
 	if (ft_findword(cmd, "cd"))
 		builtin_cd(mi_cmd->args, fd, mi_sys);
 	else if (ft_findword(cmd, "echo"))
@@ -41,12 +39,6 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 		builtin_pwd(fd);
 	else if (ft_findword(cmd, "unset"))
 		mi_sysargsiter(mi_cmd->args, mi_sys, &builtin_unset);
-	else
-	{
-		dprintf(2, "	mi_execbuiltin exit\n");
-		close (fd);
-		exit (EXIT_FAILURE);
-	}
 	if (mi_sys->nb_pipe > 1)
 		mi_execexitepipe(mi_sys->exit_status, mi_sys);
 }

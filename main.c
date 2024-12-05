@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -8,7 +8,7 @@
 /*   Created: 2024/11/02 17:29:03 by jegirard          #+#    #+#             */
 /*   Updated: 2024/11/29 16:41:15 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -28,10 +28,22 @@ void	mi_checkmsargument(int argc, char **argv)
 	}
 }
 
+void	mi_analyse(char *line, t_sys *mi_sys)
+{
+	mi_checkline(line, mi_sys);
+	mi_lexingline(line, mi_sys);
+	mi_syscmditer(mi_sys, &mi_expand_interface);
+	mi_cmditer(mi_sys->cmd, &mi_cmdsplitcmd);
+	mi_syscmditer(mi_sys, &mi_cmdparsse);
+	mi_sysrediter(mi_sys, HEREDOC, &mi_heredoc);
+	mi_cmditer(mi_sys->cmd, &mi_checkbuiltin);
+	mi_syscmditer(mi_sys, &mi_checkpathaccess);
+}
+
 int	main(int argc, char **argv, char **env)
 {
-	char	*line;
-	t_sys	mi_sys;
+	char			*line;
+	t_sys			mi_sys;
 
 	mi_checkmsargument(argc, argv);
 	mi_sysinitialization(env, &mi_sys);
@@ -47,17 +59,9 @@ int	main(int argc, char **argv, char **env)
 			builtin_exit(&mi_sys);
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
-		mi_checkline(line, &mi_sys);
-		mi_lexingline(line, &mi_sys);
-		mi_syscmditer(&mi_sys, &mi_expand_interface);
-		mi_cmditer(mi_sys.cmd, &mi_cmdsplitcmd);
-		mi_syscmditer(&mi_sys, &mi_cmdparsse);
-		mi_sysrediter(&mi_sys, HEREDOC, &mi_heredoc);
-		mi_cmditer(mi_sys.cmd, &mi_checkbuiltin);
-		mi_syscmditer(&mi_sys, &mi_checkpathaccess);
+		mi_analyse(line, &mi_sys);
 		mi_syscmditer(&mi_sys, &mi_execone);
 		mi_waitingpipe(&mi_sys);
 		mi_freecmd(&mi_sys);
-		//  mi_cmditer (&mi_cmd, &mi_cmdherdoc);
 	}
 }

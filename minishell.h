@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
@@ -8,7 +8,7 @@
 /*   Created: 2024/09/05 13:47:03 by doferet           #+#    #+#             */
 /*   Updated: 2024/11/29 09:28:52 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -47,7 +47,7 @@
 # define TECHAP "\"'"
 # define BUILTINS "echo cd pwd export unset env exit"
 # define B64 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+_"
-#define HERDOCTEMPLATE "/tmp/minishell_heredoc_012345"
+# define HERDOCTEMPLATE "/tmp/minishell_heredoc_012345"
 
 extern int	g_signal;
 

@@ -12,10 +12,9 @@
 
 #include "../minishell.h"
 
-
-bool ft_intisinarray(int *array, int find)
+bool	ft_intisinarray(int *array, int find)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (array[i] != -1)
@@ -27,7 +26,7 @@ bool ft_intisinarray(int *array, int find)
 	return (false);
 }
 
-int mi_lastred(t_red *mi_re,t_sys *mi_sys, int *find)
+int	mi_lastred(t_red *mi_re, t_sys *mi_sys, int *find)
 {
 	t_red	*mi_return;
 
