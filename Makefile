@@ -111,7 +111,8 @@ SRCS = 			main.c \
 				pipe/mi_execbuiltin.c \
 				pipe/mi_execcmd.c \
 				pipe/mi_execone.c \
-				pipe/mi_freecmd.c \
+				common/mi_freecmd.c \
+				common/mi_freesys.c \
 				pipe/mi_waitingpipe.c \
 
 SRC_PATH		=	

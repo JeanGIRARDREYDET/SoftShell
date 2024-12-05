@@ -20,7 +20,7 @@ void	read_env_line(char *line, t_sys *mi_sys)
 	if (ft_strnstr (line, "PWD=", 4) != 0)
 		mi_sys->senv->pwd = ft_strdup(line + 4);
 	if (ft_strnstr (line, "OLDPWD=", 7) != 0)
-		mi_sys->senv->pwd = ft_strdup(line + 7);
+		mi_sys->senv->oldpwd = ft_strdup(line + 7);
 	if (ft_strnstr (line, "HOME=", 5) != 0)
 		mi_sys->senv->home = line + 5;
 	if (ft_strnstr (line, "SHLVL=", 6) != 0)
@@ -55,7 +55,8 @@ int	read_env(char **env, t_sys *mi_sys)
 }
 
 void	mi_setdefaul_initialization( t_sys *mi_sys)
-{	mi_sys->senv = (t_env*)ft_calloc(1, sizeof(t_env));
+{
+	mi_sys->senv = (t_env*)ft_calloc(1, sizeof(t_env));
 	mi_sys->senv->path = "/usr/bin:/bin:/usr/sbin:/sbin";
 	mi_sys->senv->pwd = NULL;
 	mi_sys->nb_pipe = 0;
