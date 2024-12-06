@@ -22,9 +22,10 @@ void   mi_unbordercote(char *args, t_sys *mi_sys)
 	j = 0;
 	if (mi_sys->nb_error > 0 || args== NULL)
 		return ;
+	while (args[i] == '$' && args[i] != '\0')
+		i++;	
 	while (args[i] != '\'' && args[i] != '\"' && args[i] != '\0')
 		i++;
-	j = i;
 	if (args[i] == '\'' || args[i] == '\"')
 		replace = args[i];
 	else
