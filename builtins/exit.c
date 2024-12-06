@@ -22,7 +22,6 @@ void	builtin_exit(t_sys *mi_sys)
 	i = 0;
 	n = 0;
 	code_exit = 255;
-//	code_exit &= mi_sys->code_error;
 	if (mi_sys->cmd && mi_sys->cmd->arg)
 	{
 		arg = mi_sys->cmd->arg;

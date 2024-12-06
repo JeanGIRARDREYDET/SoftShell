@@ -96,7 +96,7 @@ SRCS = 			main.c \
 				common/mi_setenv.c \
 				common/mi_sysinitialization.c \
 				common/mi_unsetenv.c \
-				common/mi_utils.c \
+				common/mi_envcreateupdate.c \
 				parsing/mi_cmdsplitcmd.c \
 				parsing/mi_unbordercote.c \
 				parsing/mi_expand.c \
@@ -112,9 +112,12 @@ SRCS = 			main.c \
 				pipe/mi_execbuiltin.c \
 				pipe/mi_execcmd.c \
 				pipe/mi_execone.c \
+				pipe/mi_exefind.c \
+				pipe/mi_exepermis.c \
 				common/mi_freecmd.c \
 				common/mi_freesys.c \
 				pipe/mi_waitingpipe.c \
+				parsing/mi_syscmditer.c \
 
 SRC_PATH		=	
 BIN_PATH		=	

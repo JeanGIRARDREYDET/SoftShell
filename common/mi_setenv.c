@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	mi_setenv (char *key, char *value, t_sys *sys)
+int	mi_setenv(char *key, char *value, t_sys *sys)
 {
 	int			i;
 	int			len;

@@ -25,11 +25,10 @@ void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys)
 	if (j > 2)
 	{
 		msg_error = ft_strjoin("syntax error near unexpected token",
-			ft_chrrepeat(capt_redir, j));
+			ft_chrrepeat (capt_redir, j));
 		mi_logerror(2, msg_error, mi_sys);
 		free(msg_error);
 	}
-		
 	else
 	{
 		*i += 1;

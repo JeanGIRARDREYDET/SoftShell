@@ -30,8 +30,6 @@
 # include <string.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <linux/limits.h>
 # include <stdbool.h>
 # include "./libft/libft.h"

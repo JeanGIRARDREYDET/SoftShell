@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mi_waitingpipe.c                                   :+:      :+:    :+:   */
@@ -8,26 +8,18 @@
 /*   Created: 2024/10/08 11:37:40 by jegirard          #+#    #+#             */
 /*   Updated: 2024/12/06 15:15:37 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
+
+#include "../minishell.h"
 
 // dans cette fonction, on attend la fin de l'execution du deriers processus 
 // lance
 // pour le dernier a rendre la main ou aurai utilise 
 // while (i < mi_sys->nb_pipe && wait (&status) != 32512)
 
-#include "../minishell.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <fcntl.h>
-
 void	mi_waitingpipe(t_sys *mi_sys)
 {
-	int	status;
-
+	int			status;
 
 	if (mi_sys->nb_error > 0)
 		return ;

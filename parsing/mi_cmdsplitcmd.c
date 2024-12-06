@@ -42,4 +42,3 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 		}
 	}
 }
-

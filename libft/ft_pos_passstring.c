@@ -12,10 +12,12 @@
 
 #include "../minishell.h"
 
+// && ln[*i] != '<' && ln[*i] != '>'
+
 void	ft_pos_passstring(char *ln, int *i)
 {
 	char	echap;
-// && ln[*i] != '<' && ln[*i] != '>'
+
 	echap = '\0';
 	while (ln && ln[*i] != '\0'
 		&& (!ft_strchr(WSPACE, ln[*i]) || echap != '\0'))

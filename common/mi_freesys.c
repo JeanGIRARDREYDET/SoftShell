@@ -29,7 +29,7 @@ void	mi_freeerror(t_sys *mi_sys)
 	mi_sys->error = NULL;
 }
 
-void mi_freesev(t_sys *mi_sys)
+void	mi_freesev(t_sys *mi_sys)
 {
 	if (mi_sys->senv)
 	{

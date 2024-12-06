@@ -36,7 +36,8 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 		return ;
 	while (mi_cmd->split[i])
 	{
-		if (mi_cmd->split[i + 1] && (mi_cmd->split[i][0] == '<' || mi_cmd->split[i][0] == '>'))
+		if (mi_cmd->split[i + 1] && (mi_cmd->split[i][0] == '<'
+			|| mi_cmd->split[i][0] == '>'))
 			mi_parseredirtocken(&i, &n, mi_cmd, mi_sys);
 		i++;
 	}
@@ -45,7 +46,8 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 	n = 0;
 	while (mi_cmd->split[i])
 	{
-		if (mi_cmd->split[i + 1] && (mi_cmd->split[i][0] == '<' || mi_cmd->split[i][0] == '>'))
+		if (mi_cmd->split[i + 1] && (mi_cmd->split[i][0] == '<'
+			|| mi_cmd->split[i][0] == '>'))
 			i++;
 		else
 		{

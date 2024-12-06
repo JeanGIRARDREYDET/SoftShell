@@ -12,53 +12,6 @@
 
 #include "../minishell.h"
 
-void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
-{
-	char		*cmd;
-	char		**paths;
-	int			i;
-	char		*error_msg;
-
-	if (access(mi_cmd->args[0], F_OK) == 0)
-		return ;
-	i = 0;
-	cmd = join_3(mi_getenv("PWD", mi_sys), "/", mi_cmd->args[0]);
-	if (access(mi_cmd->args[0], F_OK) == 0)
-	{
-		free(cmd);
-		return ;
-	}
-	free(cmd);
-	paths = ft_split (mi_getenv("PATH", mi_sys), ':');
-	while (paths && paths[++i])
-	{
-		cmd = join_3(paths[i], "/", mi_cmd->args[0]);
-		if (access(cmd, F_OK) == 0)
-		{
-			mi_cmd->args[0] = ft_strdup(cmd);
-			free(paths);
-			return ;
-		}
-		free(cmd);
-	}
-	error_msg = join_3 ("minishell: ", mi_cmd->args[0], ": command not found\n");
-	mi_logerror(126, error_msg, mi_sys);
-	free(paths);
-	return ;
-}
-
-void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
-{
-	char	*error_msg;
-
-	if (access(mi->args[0], X_OK) == 0)
-		return ;
-	error_msg = join_3("minishell: ", mi->args[0], ": Permission denied\n");
-	mi_logerror(126, error_msg, mi_sys);
-	free(error_msg);
-	mi_sys->nb_error++;
-}
-
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int	*out;
