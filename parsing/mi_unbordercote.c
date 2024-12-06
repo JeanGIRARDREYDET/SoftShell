@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mi_unbordercote.c                                  :+:      :+:    :+:   */
@@ -8,22 +8,22 @@
 /*   Created: 2024/12/06 08:49:06 by jegirard          #+#    #+#             */
 /*   Updated: 2024/12/06 08:52:04 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
-void   mi_unbordercote(char *args, t_sys *mi_sys)
+void	mi_unbordercote(char *args, t_sys *mi_sys)
 {
 	int			i;
 	int			j;
-	char 		replace;
+	char		replace;
 
 	i = 0;
 	j = 0;
-	if (mi_sys->nb_error > 0 || args== NULL)
+	if (mi_sys->nb_error > 0 || args == NULL)
 		return ;
 	while (args[i] == '$' && args[i] != '\0')
-		i++;	
+		i++;
 	while (args[i] != '\'' && args[i] != '\"' && args[i] != '\0')
 		i++;
 	if (args[i] == '\'' || args[i] == '\"')

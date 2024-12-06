@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mi_logerror.c                                      :+:      :+:    :+:   */
@@ -8,7 +8,7 @@
 /*   Created: 2024/09/23 14:47:50 by jegirard          #+#    #+#             */
 /*   Updated: 2024/12/05 20:20:30 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -31,7 +31,6 @@ void	mi_logerror(int code_error, char *msg, t_sys *mi_sys)
 
 	if(code_error != 0)
 		mi_sys->nb_error++;
-	
 	if (msg!=NULL)
 	{
 		write(STDERR_FILENO, msg, ft_strlen(msg));
@@ -49,11 +48,6 @@ void	mi_logerror(int code_error, char *msg, t_sys *mi_sys)
 			error = error->next;
 		error->next = mi_errornew(code_error, msg);
 	}
-}
-
-void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_sys *mi_sys)
-{
-	mi_logerror(code, join_3(m1, m2, m3), mi_sys);
 }
 
 int	mi_intlogerror(t_sys *mi_sys, char *s, int code)

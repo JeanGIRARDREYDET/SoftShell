@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mi_execone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:50:42 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/04 19:50:46 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:52:49 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../minishell.h"
 
@@ -49,9 +49,13 @@ void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 
 void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 {
+	char	*error_msg;
+
 	if (access(mi->args[0], X_OK) == 0)
 		return ;
-	mi_logerrorlong(126, "mi: ", mi->args[0], ": Permission denied", mi_sys);
+	error_msg = join_3("minishell: ", mi->args[0], ": Permission denied\n");
+	mi_logerror(126, error_msg, mi_sys);
+	free(error_msg);
 	mi_sys->nb_error++;
 }
 
@@ -89,7 +93,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 		mi_intlogerror (mi_sys, "fork out failed", 1);
 		return ;
 	}
-	if (mi_cmd->id == 0)
+	if (mi_cmd->id == 0 && mi_cmd->args[0] != NULL)
 	{
 		if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
 		{

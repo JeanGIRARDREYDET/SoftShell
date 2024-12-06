@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 18:38:45 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/06 07:33:10 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:02:08 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -40,7 +40,6 @@ void	mi_cmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd))
 	}
 }
 
-
 void	mi_cmdargsiter(char **r, t_sys *s, void (*f)(char *r, t_sys *s))
 {
 	int	i;
@@ -55,20 +54,20 @@ void	mi_cmdargsiter(char **r, t_sys *s, void (*f)(char *r, t_sys *s))
 
 void	mi_sysargsiter(t_sys *mi_sys, void (*f)(char *r, t_sys *mi_sys))
 {
-	
-	t_cmd	*mi_cmd;
-	int	i;
+	t_cmd			*mi_cmd;
+	int				i;
+
 	if (mi_sys->nb_error > 0)
 		return ;
 	mi_cmd = mi_sys->cmd;
 	while (mi_cmd != NULL)
 	{
-			i = 1;
-			while (*mi_cmd->args && mi_cmd->args[i])
-			{
-				(*f)(mi_cmd->args[i], mi_sys);
-				i++;
-			}
+		i = 1;
+		while (*mi_cmd->args && mi_cmd->args[i])
+		{
+			(*f)(mi_cmd->args[i], mi_sys);
+			i++;
+		}
 		mi_cmd = mi_cmd->next;
 	}
 }
@@ -92,7 +91,7 @@ void	mi_sysrediter(t_sys *mi_sys,int r_type, void (*f)(t_red *red, t_sys *mi_sys
 	mi_cmd = mi_sys->cmd;
 	while (mi_cmd != NULL)
 	{
-		mi_rediriter( mi_cmd->red, mi_sys ,r_type, f);
+		mi_rediriter(mi_cmd->red, mi_sys, r_type, f);
 		mi_cmd = mi_cmd->next;
 	}
 }

@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
@@ -8,7 +8,7 @@
 /*   Created: 2024/09/05 13:47:03 by doferet           #+#    #+#             */
 /*   Updated: 2024/12/06 08:04:16 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -152,7 +152,6 @@ void	mi_lexingline(char *ln, t_sys *mi_sys);
 void	mi_pospasscote(char *ln, size_t *i, t_sys *mi_sys);
 void	mi_logerror(int code_error, char *msg, t_sys *mi_sys);
 void	mi_logerror2(int id, char *msg, t_error *mi_error);
-void	mi_logerrorlong(int code, char *m1, char *m2, char *m3, t_sys *msys);
 int		mi_intlogerror(t_sys *mi_sys, char *s, int code);
 void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys);
 char	*ft_findcommand(char *line);

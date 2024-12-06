@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
@@ -8,11 +8,9 @@
 /*   Created: 2024/10/14 11:01:34 by jegirard          #+#    #+#             */
 /*   Updated: 2024/11/26 22:41:24 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../minishell.h"
-//utiliser la fonction getcwd qui copie le chemin d'acces absolu du repertoire 
-//de travail courant dans la chaine pointee par buf qui est de longueur size
 
 void	cd_home(char **new_pwd, t_sys *mi_sys)
 {
@@ -58,6 +56,7 @@ void	cd_parent(char **new_pwd, t_sys *mi_sys)
 	*new_pwd = ft_substr(back, 0, i);
 	free(back);
 }
+
 char	*cd_getpwd(char *key, int fd, t_sys *mi_sys)
 {
 	char	*new_pwd;
@@ -83,23 +82,21 @@ void	builtin_cd(char **key, int fd, t_sys *mi_sys)
 	if (*new_pwd != '\0' && access(new_pwd, F_OK) == 0 && chdir(new_pwd) == 0)
 	{
 		s_env_create_update_key_value("OLDPWD", start_pwd, mi_sys);
-		if(mi_sys->senv->oldpwd)
+		if (mi_sys->senv->oldpwd)
 			free(mi_sys->senv->oldpwd);
-		mi_sys->senv->oldpwd = ft_strdup(start_pwd);	
+		mi_sys->senv->oldpwd = ft_strdup(start_pwd);
 		free(new_pwd);
 		new_pwd = getcwd(NULL, 0);
 		mi_setenv("PWD", new_pwd, mi_sys);
 		s_env_create_update_key_value("PWD", new_pwd, mi_sys);
-		if(mi_sys->senv->pwd)
+		if (mi_sys->senv->pwd)
 			free(mi_sys->senv->pwd);
 		mi_sys->senv->pwd = ft_strdup(new_pwd);
-	//	free(tmp_pwd);
 		mi_sys->exit_status = EXIT_SUCCESS;
 	}
 	else if (*new_pwd != '\0')
 	{
-		// perror("access");
-		mi_logerror(1, "No such file or directory", mi_sys);
+		mi_logerror (1, "No such file or directory", mi_sys);
 		mi_sys->exit_status = EXIT_FAILURE;
 	}
 	free(start_pwd);
