@@ -98,6 +98,7 @@ SRCS = 			main.c \
 				common/mi_unsetenv.c \
 				common/mi_utils.c \
 				parsing/mi_cmdsplitcmd.c \
+				parsing/mi_unbordercote.c \
 				parsing/mi_expand.c \
 				parsing/mi_lexing.c \
 				parsing/mi_cmd_parsse.c \

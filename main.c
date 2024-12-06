@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:29:03 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/06 08:37:19 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/06 08:50:26 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,29 +26,6 @@ void	mi_checkmsargument(int argc, char **argv)
 			argv[0]);
 		exit(0);
 	}
-}
-
-void   mi_unbordercote(char *args, t_sys *mi_sys)
-{
-	int			i;
-	int			j;
-	char 		replace;
-
-	i = 0;
-	j = 0;
-	if (mi_sys->nb_error > 0)
-		return ;
-	if (args[i] == '\'' || args[i] == '\"')
-		replace = args[i];
-	while (args[i] != '\0')
-	{
-		while (args[i] == replace)
-			i++;
-		args[j] = args[i];
-		i++;
-		j++;
-	}
-	args[j] = '\0';
 }
 
 void	mi_analyse(char *line, t_sys *mi_sys)
