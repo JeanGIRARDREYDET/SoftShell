@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mi_execone.c                                       :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:50:42 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/06 15:52:49 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:12:54 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../minishell.h"
 
@@ -69,7 +69,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	if (mi_cmd->full)
 		free(mi_cmd->full);
 	mi_cmd->full = NULL;
-	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin)
+	if (mi_sys->nb_pipe == 1 && (mi_cmd->builtin || mi_cmd->args[0] == NULL))
 	{
 		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 			mi_execbuiltin(mi_cmd,
@@ -93,7 +93,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 		mi_intlogerror (mi_sys, "fork out failed", 1);
 		return ;
 	}
-	if (mi_cmd->id == 0 && mi_cmd->args[0] != NULL)
+	if (mi_cmd->id == 0)
 	{
 		if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
 		{
