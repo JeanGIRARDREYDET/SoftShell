@@ -20,7 +20,7 @@ void   mi_unbordercote(char *args, t_sys *mi_sys)
 
 	i = 0;
 	j = 0;
-	if (mi_sys->nb_error > 0)
+	if (mi_sys->nb_error > 0 || args== NULL)
 		return ;
 	if (args[i] == '\'' || args[i] == '\"')
 		replace = args[i];

@@ -25,8 +25,8 @@ void	mi_freered(t_cmd *mi_cmd)
 			close(mi_cmd->red->fd);
 		if (mi_cmd->red->redir_type == HEREDOC)
 			unlink(mi_cmd->red->file_name);
-		if (mi_cmd->red->file_name)
-			free(mi_cmd->red->file_name);
+//		if (mi_cmd->red->file_name)
+//			free(mi_cmd->red->file_name);
 		free(mi_cmd->red);
 		mi_cmd->red = tmp;
 	}

@@ -64,7 +64,7 @@ void	mi_sysargsiter(t_sys *mi_sys, void (*f)(char *r, t_sys *mi_sys))
 	while (mi_cmd != NULL)
 	{
 			i = 1;
-			while (mi_cmd->args[i] != NULL)
+			while (*mi_cmd->args && mi_cmd->args[i])
 			{
 				(*f)(mi_cmd->args[i], mi_sys);
 				i++;
