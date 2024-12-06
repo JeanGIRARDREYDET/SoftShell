@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   mi_execbuiltin.c                                   :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 13:50:25 by jegirard          #+#    #+#             */
-/*   Updated: 2024/11/29 08:56:25 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/06 07:15:30 by jegirard         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../minishell.h"
 
@@ -38,7 +38,7 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	else if (ft_findword(cmd, "pwd"))
 		builtin_pwd(fd);
 	else if (ft_findword(cmd, "unset"))
-		mi_sysargsiter(mi_cmd->args, mi_sys, &builtin_unset);
+		mi_cmdargsiter(mi_cmd->args, mi_sys, &builtin_unset);
 	if (mi_sys->nb_pipe > 1)
 		mi_execexitepipe(mi_sys->exit_status, mi_sys);
 }

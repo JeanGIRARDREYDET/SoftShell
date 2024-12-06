@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 10:33:58 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/05 23:45:17 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/06 07:06:59 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -38,7 +38,6 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 			if (i - s < 1)
 				continue ;
 			mi_cmd->split[n] = ft_substr(mi_cmd->full, s, i - s);
-			ft_subchar(mi_cmd->split[n], '\"');
 			n++;
 		}
 	}

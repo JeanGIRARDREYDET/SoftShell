@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 13:47:03 by doferet           #+#    #+#             */
-/*   Updated: 2024/12/05 20:54:54 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/06 08:04:16 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -178,8 +178,10 @@ void	s_env_create_update_value(char *key, t_sys *mi_sys);
 bool	mi_redis(t_cmd *mi_cmd, int type);
 void	mi_rediriter(t_red *r, t_sys *s, int t, void (*f)(t_red *r, t_sys *s));
 void	mi_sysrediter(t_sys *s, int t, void (*f)(t_red *red, t_sys *s));
-void	mi_sysargsiter(char **args, t_sys *s, void (*f)(char *args, t_sys *s));
+void	mi_cmdargsiter(char **args, t_sys *s, void (*f)(char *args, t_sys *s));
 void	mi_heredoc(t_red *red, t_sys *mi_sys);
 void	mi_cmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd));
+void	mi_sysargsiter(t_sys *mi_sys, void (*f)(char *r, t_sys *mi_sys));
+void	mi_unbordercote(char *args, t_sys *mi_sys);
 
 #endif

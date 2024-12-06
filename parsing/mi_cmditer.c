@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 18:38:45 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/05 20:56:41 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/06 07:33:10 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -41,7 +41,7 @@ void	mi_cmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd))
 }
 
 
-void	mi_sysargsiter(char **r, t_sys *s, void (*f)(char *r, t_sys *s))
+void	mi_cmdargsiter(char **r, t_sys *s, void (*f)(char *r, t_sys *s))
 {
 	int	i;
 
@@ -50,6 +50,26 @@ void	mi_sysargsiter(char **r, t_sys *s, void (*f)(char *r, t_sys *s))
 	{
 		(*f)(r[i], s);
 		i++;
+	}
+}
+
+void	mi_sysargsiter(t_sys *mi_sys, void (*f)(char *r, t_sys *mi_sys))
+{
+	
+	t_cmd	*mi_cmd;
+	int	i;
+	if (mi_sys->nb_error > 0)
+		return ;
+	mi_cmd = mi_sys->cmd;
+	while (mi_cmd != NULL)
+	{
+			i = 1;
+			while (mi_cmd->args[i] != NULL)
+			{
+				(*f)(mi_cmd->args[i], mi_sys);
+				i++;
+			}
+		mi_cmd = mi_cmd->next;
 	}
 }
 

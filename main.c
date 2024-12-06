@@ -6,7 +6,7 @@
 /*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:29:03 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/05 20:54:33 by jegirard         ###   ########.fr       */
+/*   Updated: 2024/12/06 08:05:38 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -28,6 +28,24 @@ void	mi_checkmsargument(int argc, char **argv)
 	}
 }
 
+void   mi_unbordercote(char *args, t_sys *mi_sys)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (args[i] != '\0')
+	{
+		if (args[i] == '\'' || args[i] == '\"')
+			i++;
+		mi_sys->cmd_args[j] = args[i];
+		i++;
+		j++;
+	}
+	mi_sys->cmd_args[j] = '\0';
+}
+
 void	mi_analyse(char *line, t_sys *mi_sys)
 {
 	mi_checkline(line, mi_sys);
@@ -35,6 +53,7 @@ void	mi_analyse(char *line, t_sys *mi_sys)
 	mi_syscmditer(mi_sys, &mi_expand_interface);
 	mi_cmditer(mi_sys, &mi_cmdsplitcmd);
 	mi_syscmditer(mi_sys, &mi_cmdparsse);
+	mi_sysyargsiter(mi_sys, &mi_unbordercote);
 	mi_sysrediter(mi_sys, HEREDOC, &mi_heredoc);
 	mi_cmditer(mi_sys, &mi_checkbuiltin);
 	mi_syscmditer(mi_sys, &mi_checkpathaccess);
