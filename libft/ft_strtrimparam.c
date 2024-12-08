@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim_param.c                                 :+:      :+:    :+:   */
+/*   ft_strtrimparam.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 15:57:54 by jegirard          #+#    #+#             */
-/*   Updated: 2024/09/27 15:57:59 by jegirard         ###   ########.fr       */
+/*   Created: 2024/11/26 19:31:05 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,12 @@ Retour :
 			NULL si l’allocation échoue
 */
 
-char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set)
+char	*ft_strtrimparamwhile(char const *s1, int debut, int fin)
 {
 	char	*p;
 	int		i;
 	int		len;
 
-	if (!s1 || !set || !fin || fin <= debut)
-		return (NULL);
-	while (ft_strchr (set, s1[debut]) && s1[debut] != '\0')
-		debut++;
-	if (s1[fin] == '|')
-		fin--;
-	while (ft_strchr(set, s1[fin]) && fin >= debut && s1[fin] != '\0')
-		fin--;
 	len = fin - debut +2;
 	if (len == 1)
 		return (NULL);
@@ -62,4 +54,17 @@ char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set)
 	}
 	p[i] = '\0';
 	return (p);
+}
+
+char	*ft_strtrimparam(char const *s1, int debut, int fin, char const *set)
+{
+	if (!s1 || !set || !fin || fin <= debut)
+		return (NULL);
+	while (ft_strchr (set, s1[debut]) && s1[debut] != '\0')
+		debut++;
+	if (s1[fin] == '|')
+		fin--;
+	while (ft_strchr(set, s1[fin]) && fin >= debut && s1[fin] != '\0')
+		fin--;
+	return (ft_strtrimparamwhile(s1, debut, fin));
 }

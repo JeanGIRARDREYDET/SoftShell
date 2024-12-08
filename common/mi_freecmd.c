@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_freecmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 11:40:01 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/06 16:14:10 by jegirard         ###   ########.fr       */
+/*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	mi_freered(t_cmd *mi_cmd)
 			close(mi_cmd->red->fd);
 		if (mi_cmd->red->redir_type == HEREDOC)
 			unlink(mi_cmd->red->file_name);
-//		if (mi_cmd->red->file_name)
-//			free(mi_cmd->red->file_name);
 		free(mi_cmd->red);
 		mi_cmd->red = tmp;
 	}
@@ -61,7 +59,7 @@ void	mi_freecmd(t_sys *mi_sys)
 	if (!mi_sys->cmd)
 		return ;
 	while (mi_sys->cmd && mi_sys->cmd != NULL)
-	{	
+	{
 		tmp = mi_sys->cmd->next;
 		mi_freeonecmd(mi_sys->cmd);
 		mi_sys->cmd = tmp;

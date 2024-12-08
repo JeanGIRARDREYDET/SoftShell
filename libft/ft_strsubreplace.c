@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsubreplace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 16:30:21 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/04 16:30:27 by jegirard         ###   ########.fr       */
+/*   Created: 2024/11/15 19:49:29 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-struct s_CompReplace
-{
-	int						i;
-	int						j;
-};
 
 char	*ft_strsubreplace(char *str, int start, int len, char *replace)
 {

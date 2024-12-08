@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_lastred.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 11:23:07 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/06 15:10:02 by jegirard         ###   ########.fr       */
+/*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	mi_lastred(t_red *mi_re, t_sys *mi_sys, int *find)
 			mi_set_io_files(mi_re, mi_sys);
 			close(mi_re->fd);
 			mi_return = mi_re;
-		}	
+		}
 		mi_re = mi_re->next;
 	}
 	if (ft_intisinarray(find, mi_re->redir_type))

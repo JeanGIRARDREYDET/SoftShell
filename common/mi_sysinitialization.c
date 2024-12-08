@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_sysinitialization.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 17:12:48 by doferet           #+#    #+#             */
-/*   Updated: 2024/10/20 18:34:59 by jegirard         ###   ########.fr       */
+/*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	read_env(char **env, t_sys *mi_sys)
 
 void	mi_setdefaul_initialization( t_sys *mi_sys)
 {
-	mi_sys->senv = (t_env*) ft_calloc (1, sizeof (t_env));
+	mi_sys->senv = (t_env *) ft_calloc (1, sizeof (t_env));
 	mi_sys->senv->path = "/usr/bin:/bin:/usr/sbin:/sbin";
 	mi_sys->senv->pwd = NULL;
 	mi_sys->nb_pipe = 0;
@@ -69,6 +69,15 @@ void	mi_setdefaul_initialization( t_sys *mi_sys)
 	mi_sys->fd_in = STDIN_FILENO;
 	mi_sys->error = NULL;
 	mi_sys->exit_status = 0;
+}
+
+void	mi_sysinitializationsave(int i, char ***ienv, t_sys *mi_sys)
+{
+	if (mi_sys->senv->pwd == NULL)
+		ft_sys_get_pwd(&mi_sys->senv->pwd);
+	mi_sys->env = *ienv;
+	mi_sys->len_env = i;
+	mi_sys->nb_error = 0;
 }
 
 void	mi_sysinitialization(char **env, t_sys *mi_sys)
@@ -92,14 +101,9 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 		if (ft_strnstr (env[i], "SHLVL=", 6) == 0)
 			ienv[i] = ft_strdup(env[i]);
 	}
-	if (mi_sys->senv->pwd == NULL)
-	{
-		ft_sys_get_pwd(&mi_sys->senv->pwd);
-		ienv[i++] = ft_strjoin("PWD=", mi_sys->senv->pwd);
-	}
 	if (!shlvl)
 		ienv[i++] = ft_strjoin("SHLVL=", mi_sys->senv->shlvl);
-	mi_sys->env = ienv;
-	mi_sys->len_env = i;
-	mi_sys->nb_error = 0;
+	mi_sysinitializationsave(i, &ienv, mi_sys);
+	if (mi_sys->senv->pwd == NULL)
+		ienv[i++] = ft_strjoin("PWD=", mi_sys->senv->pwd);
 }

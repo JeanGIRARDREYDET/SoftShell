@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_freesys.c                                       :+:      :+:    :+:   */
+/*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,47 +12,36 @@
 
 #include "../minishell.h"
 
-void	mi_freeerror(t_sys *mi_sys)
+void	cd_error(t_sys *mi_sys)
 {
-	t_error	*tmp;
-
-	mi_sys->code_error = 0;
-	if (mi_sys->error == NULL)
-		return ;
-	while (mi_sys->error && mi_sys->error != NULL)
-	{
-		mi_sys->code_error = mi_sys->error->code_error;
-		tmp = mi_sys->error->next;
-		free(mi_sys->error);
-		mi_sys->error = tmp;
-	}
-	mi_sys->error = NULL;
+	mi_logerror (1, "No such file or directory", mi_sys);
+	mi_sys->exit_status = EXIT_FAILURE;
 }
 
-void	mi_freesev(t_sys *mi_sys)
+void	builtin_cd(char **key, int fd, t_sys *mi_sys)
 {
-	if (mi_sys->senv)
+	char	*start_pwd;
+	char	*new_pwd;
+
+	start_pwd = getcwd(NULL, 0);
+	new_pwd = cd_getpwd(key[1], fd, mi_sys);
+	if (*new_pwd != '\0' && access(new_pwd, F_OK) == 0 && chdir(new_pwd) == 0)
 	{
+		s_env_create_update_key_value("OLDPWD", start_pwd, mi_sys);
 		if (mi_sys->senv->oldpwd)
 			free(mi_sys->senv->oldpwd);
+		mi_sys->senv->oldpwd = ft_strdup(start_pwd);
+		free(new_pwd);
+		new_pwd = getcwd(NULL, 0);
+		mi_setenv("PWD", new_pwd, mi_sys);
+		s_env_create_update_key_value("PWD", new_pwd, mi_sys);
 		if (mi_sys->senv->pwd)
 			free(mi_sys->senv->pwd);
-		if (mi_sys->senv->shlvl)
-			free(mi_sys->senv->shlvl);
-		free(mi_sys->senv);
+		mi_sys->senv->pwd = ft_strdup(new_pwd);
+		mi_sys->exit_status = EXIT_SUCCESS;
 	}
-}
-
-void	mi_freesys(t_sys *mi_sys)
-{
-	if (mi_sys == NULL)
-		return ;
-	if (mi_sys->env != NULL && mi_sys->env != NULL)
-		ft_arrclose(mi_sys->env);
-	if (mi_sys->cmd && mi_sys->cmd != NULL)
-		mi_freecmd(mi_sys);
-	if (mi_sys->error != NULL)
-		mi_freeerror(mi_sys);
-	mi_freesev(mi_sys);
-	rl_clear_history();
+	else if (*new_pwd != '\0')
+		cd_error(mi_sys);
+	free(start_pwd);
+	free(new_pwd);
 }

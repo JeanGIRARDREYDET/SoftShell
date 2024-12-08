@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_logerror.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 14:47:50 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/05 20:20:30 by jegirard         ###   ########.fr       */
+/*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ void	mi_logerror(int code_error, char *msg, t_sys *mi_sys)
 {
 	t_error	*error;
 
-	if(code_error != 0)
+	if (code_error != 0)
 		mi_sys->nb_error++;
-	if (msg!=NULL)
+	if (msg != NULL)
 	{
 		write(STDERR_FILENO, msg, ft_strlen(msg));
 		write(STDERR_FILENO, "\n", 1);
 	}
-	
 	if (mi_sys->error == NULL)
 		mi_sys->error = mi_errornew(code_error, msg);
 	else if (code_error == 0)

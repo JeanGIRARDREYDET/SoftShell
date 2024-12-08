@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_checkpathaccess.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 01:00:49 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/20 19:39:39 by jegirard         ###   ########.fr       */
+/*   Created: 2024/12/04 09:43:56 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

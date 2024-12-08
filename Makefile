@@ -13,6 +13,7 @@ C_FLAGS 		= -g3 -Wall -Wextra -Werror
 READLINE_LIB	= -lreadline 
 
 SRCS = 			main.c \
+				builtins/builtin_cd.c \
 				builtins/cd.c \
 				builtins/echo.c \
 				builtins/env.c \
@@ -89,13 +90,12 @@ SRCS = 			main.c \
 				libft/ft_strdup.c \
 				libft/ft_sys_get_pwd.c \
 				libft/ft_tolower.c \
-				libft/ft_strtrim_param.c \
+				libft/ft_strtrimparam.c \
 				common/mi_getenv.c \
 				common/mi_logerror.c \
 				common/mi_logerrorsys.c \
 				common/mi_setenv.c \
 				common/mi_sysinitialization.c \
-				common/mi_unsetenv.c \
 				common/mi_envcreateupdate.c \
 				parsing/mi_cmdsplitcmd.c \
 				parsing/mi_unbordercote.c \
@@ -106,6 +106,7 @@ SRCS = 			main.c \
 				parsing/mi_pospasscote.c \
 				parsing/mi_cmditer.c \
 				parsing/mi_redis.c \
+				parsing/mi_expand_interface.c \
 				pipe/mi_closepipe.c \
 				pipe/mi_createcmd.c \
 				pipe/mi_exec.c \

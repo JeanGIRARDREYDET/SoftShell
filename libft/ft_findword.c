@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_findword.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 11:35:05 by jegirard          #+#    #+#             */
-/*   Updated: 2024/11/29 11:40:32 by jegirard         ###   ########.fr       */
+/*   Created: 2024/12/05 19:44:12 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-typedef struct s_findworlf
-{
-	size_t		e;
-	size_t		i;
-	size_t		lenfind;
-	char		*dic;
-}	t_findworlf;
 
 bool	ft_findword(const char *dic, const char *find)
 {

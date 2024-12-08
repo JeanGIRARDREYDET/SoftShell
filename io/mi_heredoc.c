@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   mi_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 16:37:07 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/03 16:37:13 by jegirard         ###   ########.fr       */
+/*   Created: 2024/12/04 09:43:56 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
-{	
+{
 	char		*line;
 	char		*bash;
 

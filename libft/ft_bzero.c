@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 09:26:05 by jegirard          #+#    #+#             */
-/*   Updated: 2023/11/07 09:26:09 by jegirard         ###   ########.fr       */
+/*   Created: 2024/09/28 10:41:04 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/08 18:47:37 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  <unistd.h>
+#include <unistd.h>
 
 /*
 Description :

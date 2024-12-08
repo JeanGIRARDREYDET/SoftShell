@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_lexing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 17:27:50 by jegirard          #+#    #+#             */
-/*   Updated: 2024/11/02 17:27:55 by jegirard         ###   ########.fr       */
+/*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	mi_lexingline(char *ln, t_sys *mi_sys)
 			mi_pospasscote(ln, &i, mi_sys);
 		else if (ln[i] == '|')
 		{
-			mi_cmd->full = ft_strtrim_param(ln, start, i, WSPACE);
+			mi_cmd->full = ft_strtrimparam(ln, start, i, WSPACE);
 			if (mi_cmd->full == NULL)
 			{
 				msg_err = join_3("syntax error near ", ln, " unexpected token");
@@ -48,6 +48,6 @@ void	mi_lexingline(char *ln, t_sys *mi_sys)
 		}
 		i++;
 	}
-	mi_cmd->full = ft_strtrim_param(ln, start, i, WSPACE);
+	mi_cmd->full = ft_strtrimparam(ln, start, i, WSPACE);
 	mi_cmd->next = NULL;
 }

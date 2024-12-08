@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 15:47:44 by jegirard          #+#    #+#             */
-/*   Updated: 2024/10/15 02:51:15 by jegirard         ###   ########.fr       */
+/*   Created: 2024/11/26 19:31:05 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,4 @@ void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 			mi_expand_find(full_cmd, i, mi_sys);
 		i++;
 	}
-}
-
-void	mi_expand_interface(t_cmd *mi_cmd, t_sys *mi_sys)
-{
-	mi_expand(&mi_cmd->full, 0, mi_sys);
 }

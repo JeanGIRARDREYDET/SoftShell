@@ -3,12 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 11:35:31 by jegirard          #+#    #+#             */
-/*   Updated: 2023/11/16 11:35:41 by jegirard         ###   ########.fr       */
+/*   Created: 2024/11/26 19:31:05 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/******************************************************************************/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/16 11:35:31 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 12:55:45 by jegirard         ###   ########.fr       */
+/*                                                                            */
+/******************************************************************************/
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -25,6 +37,14 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_findworlf
+{
+	size_t		e;
+	size_t		i;
+	size_t		lenfind;
+	char		*dic;
+}	t_findworlf;
 
 /* libFc 1 */
 void	ft_arrclose(char **arr);
@@ -94,7 +114,7 @@ char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strrchr(const char *s, int c);
-char	*ft_strtrim_param(char const *s1, int debut, int fin, char const *set);
+char	*ft_strtrimparam(char const *s1, int debut, int fin, char const *set);
 char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	ft_sys_get_pwd(char **buf);

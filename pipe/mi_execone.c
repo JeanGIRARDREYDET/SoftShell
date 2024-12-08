@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_execone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 19:50:42 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/06 16:12:54 by jegirard         ###   ########.fr       */
+/*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	if (mi_cmd->next != NULL)
 	{
 		if (pipe(mi_cmd->fd) == -1)
-		{	
+		{
 			mi_intlogerror (mi_sys, "pipe out failed", 1);
 			return ;
 		}

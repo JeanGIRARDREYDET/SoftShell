@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 13:47:03 by doferet           #+#    #+#             */
-/*   Updated: 2024/12/06 08:04:16 by jegirard         ###   ########.fr       */
+/*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
+/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,12 @@ typedef struct s_sys
 	int				exit_status;
 }	t_sys;
 
+struct s_CompReplace
+{
+	int						i;
+	int						j;
+};
+
 void	mi_freesys(t_sys *mi_sys);
 void	signal_handle_sigint(int sign);
 bool	ft_findword(const char *source, const char *find);
@@ -142,6 +148,7 @@ void	mi_expand_interface(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_exec(t_cmd *me_cmd, t_sys *mi_sys);
 void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_oneexec(t_cmd *me_cmd, t_sys *mi_sys);
+char	*cd_getpwd(char *key, int fd, t_sys *mi_sys);
 
 void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_cmdargparsse(t_cmd *lst);
@@ -154,6 +161,7 @@ int		mi_intlogerror(t_sys *mi_sys, char *s, int code);
 void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys);
 char	*ft_findcommand(char *line);
 void	s_env_create_update_key_value(char *key, char *value, t_sys *mi_sys);
+void	mi_expand(char **full_cmd, int i, t_sys *mi_sys);
 
 void	mi_closecmd(t_cmd *mi_cmd, int nb);
 t_cmd	*mi_createcmd(t_sys *mi_sys);
