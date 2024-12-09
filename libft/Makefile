@@ -46,6 +46,7 @@ SOURCES = 	ft_isalnum.c\
 			ft_putchar_fd.c\
 			ft_split.c\
 			ft_strlen.c\
+			ft_setintarrayzero.c\
 			ft_strnstr.c
 
 BONUS_SOURCES = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c\

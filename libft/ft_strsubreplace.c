@@ -14,29 +14,28 @@
 
 char	*ft_strsubreplace(char *str, int start, int len, char *replace)
 {
-	char					*nw;
-	struct s_CompReplace	cr;
+	char		*nw;
+	int			i[2];
 
-	cr.i = 0;
-	cr.j = 0;
+	ft_bzero(i, 2 * sizeof(int));
 	nw = ft_calloc(ft_strlen(str) + ft_strlen(replace) - len + 1, sizeof(char));
-	while (cr.i < start)
+	while (i[0] < start)
 	{
-		nw[cr.i] = str[cr.i];
-		cr.i++;
+		nw[i[0]] = str[i[0]];
+		i[0]++;
 	}
-	while (replace[cr.j])
+	while (replace && replace[i[1]])
 	{
-		nw[cr.i] = replace[cr.j];
-		cr.i++;
-		cr.j++;
+		nw[i[0]] = replace[i[1]];
+		i[0]++;
+		i[1]++;
 	}
-	cr.j = start + len;
-	while (str[cr.j])
+	i[1] = start + len;
+	while (str[i[1]])
 	{
-		nw[cr.i] = str[cr.j];
-		cr.i++;
-		cr.j++;
+		nw[i[0]] = str[i[1]];
+		i[0]++;
+		i[1]++;
 	}
 	return (nw);
 }

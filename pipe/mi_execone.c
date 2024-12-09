@@ -12,6 +12,38 @@
 
 #include "../minishell.h"
 
+void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys)
+{
+	if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
+	{
+		mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
+		dup2(mi_cmd->red->fd, STDIN_FILENO);
+		close (mi_cmd->red->fd);
+	}
+	if (mi_cmd->no != 0)
+	{
+		if (dup2(mi_sys->fd_in, STDIN_FILENO) == -1)
+			return ;
+		close (mi_sys->fd_in);
+	}
+	if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
+	{
+		close (mi_cmd->fd[1]);
+		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys, out);
+		dup2(mi_cmd->red->fd, STDOUT_FILENO);
+	}
+	if (mi_cmd->next != NULL)
+	{
+		if (dup2(mi_cmd->fd[1], STDOUT_FILENO) == -1)
+			return ;
+		close (mi_cmd->fd[0]);
+		close (mi_cmd->fd[1]);
+	}
+	if (mi_cmd->args[0] != NULL)
+		mi_execcmd(mi_cmd, mi_sys);
+	}
+}
+
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int	*out;
@@ -48,33 +80,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	if (mi_cmd->id == 0)
 	{
-		if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
-		{
-			mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
-			dup2(mi_cmd->red->fd, STDIN_FILENO);
-			close (mi_cmd->red->fd);
-		}
-		if (mi_cmd->no != 0)
-		{
-			if (dup2(mi_sys->fd_in, STDIN_FILENO) == -1)
-				return ;
-			close (mi_sys->fd_in);
-		}
-		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
-		{
-			close (mi_cmd->fd[1]);
-			mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys, out);
-			dup2(mi_cmd->red->fd, STDOUT_FILENO);
-		}
-		if (mi_cmd->next != NULL)
-		{
-			if (dup2(mi_cmd->fd[1], STDOUT_FILENO) == -1)
-				return ;
-			close (mi_cmd->fd[0]);
-			close (mi_cmd->fd[1]);
-		}
-		if (mi_cmd->args[0] != NULL)
-			mi_execcmd(mi_cmd, mi_sys);
+		mi_execonechild(mi_cmd, mi_sys);
 	}
 	if (mi_cmd->no != 0)
 		close (mi_sys->fd_in);

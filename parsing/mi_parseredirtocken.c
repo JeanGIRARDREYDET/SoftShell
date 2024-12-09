@@ -15,17 +15,17 @@
 void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int		j;
-	char	capt_redir;
+	char	redir;
 	char	*msg_error;
 
 	j = 0;
-	capt_redir = mi_cmd->split[*i][0];
-	while (capt_redir == mi_cmd->split[*i][j])
+	redir = mi_cmd->split[*i][0];
+	while (redir == mi_cmd->split[*i][j])
 		j++ ;
 	if (j > 2)
 	{
 		msg_error = ft_strjoin("syntax error near unexpected token",
-			ft_chrrepeat (capt_redir, j));
+				ft_chrrepeat (redir, j));
 		mi_logerror(2, msg_error, mi_sys);
 		free(msg_error);
 	}
@@ -33,7 +33,7 @@ void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		*i += 1;
 		if (mi_cmd->split[*i])
-			mi_crered(mi_cmd, mi_sys, (j-1)|(capt_redir&2), mi_cmd->split[*i]);
+			mi_crered(mi_cmd, mi_sys, (j - 1) | (redir & 2), mi_cmd->split[*i]);
 	}
 	(*n)++;
 }

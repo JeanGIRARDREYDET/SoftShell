@@ -91,6 +91,7 @@ SRCS = 			main.c \
 				libft/ft_sys_get_pwd.c \
 				libft/ft_tolower.c \
 				libft/ft_strtrimparam.c \
+				libft/ft_setintarrayzero.c \
 				common/mi_getenv.c \
 				common/mi_logerror.c \
 				common/mi_logerrorsys.c \
@@ -107,6 +108,7 @@ SRCS = 			main.c \
 				parsing/mi_cmditer.c \
 				parsing/mi_redis.c \
 				parsing/mi_expand_interface.c \
+				parsing/mi_cmdherdoc.c \
 				pipe/mi_closepipe.c \
 				pipe/mi_createcmd.c \
 				pipe/mi_exec.c \

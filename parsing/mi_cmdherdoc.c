@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mi_cmd_parsse.c                                    :+:      :+:    :+:   */
+/*   mi_cmdherdoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,44 +12,15 @@
 
 #include "../minishell.h"
 
-void	mi_createcmdargs(t_cmd *mi_cmd, t_sys *mi_sys)
-
+void	mi_cmdherdoc(t_cmd *mp)
 {
-	int	i;
-	int	n;
-
-	n = 0;
-	i = 0;
-	while (mi_cmd->split[i])
+	while (*mp->args)
 	{
-		if (mi_cmd->split[i + 1] && (mi_cmd->split[i][0] == '<'
-			|| mi_cmd->split[i][0] == '>'))
-			mi_parseredirtocken(&i, &n, mi_cmd, mi_sys);
-		i++;
-	}
-	mi_cmd->args = ft_calloc(i - (2 * n) + 1, sizeof(char *));
-}
-
-void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
-{
-	int	i;
-	int	n;
-
-	if (mi_cmd->full == NULL)
-		return ;
-	mi_createcmdargs(mi_cmd, mi_sys);
-	i = 0;
-	n = 0;
-	while (mi_cmd->split[i])
-	{
-		if (mi_cmd->split[i + 1] && (mi_cmd->split[i][0] == '<'
-			|| mi_cmd->split[i][0] == '>'))
-			i++;
-		else
+		if (*mp->args && *mp->args[0] == '<' && *mp->args[1] == '<')
 		{
-			mi_cmd->args[n] = ft_strdup(mi_cmd->split[i]);
-			n++;
+			mp->args[0] = NULL;
+			mp->args[1] = NULL;
 		}
-		i++;
+		mp->args++;
 	}
 }

@@ -47,6 +47,7 @@ typedef struct s_findworlf
 }	t_findworlf;
 
 /* libFc 1 */
+void	ft_setintarrayzero(int **array);
 void	ft_arrclose(char **arr);
 
 int		ft_atoi(const char *str);
@@ -94,7 +95,6 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_pos_redir(char *ln, int *i);
-
 char	**ft_split(char const *s, char c);
 size_t	ft_strchr_pos(const char *source, int find);
 char	*ft_strchr(const char *s, int c);

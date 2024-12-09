@@ -115,12 +115,6 @@ typedef struct s_sys
 	int				exit_status;
 }	t_sys;
 
-struct s_CompReplace
-{
-	int						i;
-	int						j;
-};
-
 void	mi_freesys(t_sys *mi_sys);
 void	signal_handle_sigint(int sign);
 bool	ft_findword(const char *source, const char *find);
