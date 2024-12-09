@@ -48,11 +48,13 @@ void	s_env_create_update_value(char *key, t_sys *mi_sys)
 	}
 	pos = ft_get_confpos(key, '=', mi_sys->env);
 	if (pos == -1)
+		pos = ft_get_confpos(key, '\0', mi_sys->env);
+	if (pos == -1)
 		s_env_create_value (ft_strdup(key), mi_sys);
 	else
 	{
 		free(mi_sys->env[pos]);
-		mi_sys->env[pos] = key;
+		mi_sys->env[pos] = ft_strdup(key);
 	}
 	mi_sys->exit_status = EXIT_SUCCESS;
 }
