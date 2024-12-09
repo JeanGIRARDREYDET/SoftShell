@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys)
+void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 {
 	if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
 	{
@@ -41,7 +41,6 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	if (mi_cmd->args[0] != NULL)
 		mi_execcmd(mi_cmd, mi_sys);
-	}
 }
 
 void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
@@ -79,9 +78,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 		return ;
 	}
 	if (mi_cmd->id == 0)
-	{
-		mi_execonechild(mi_cmd, mi_sys);
-	}
+		mi_execonechild(mi_cmd, mi_sys, out, in);
 	if (mi_cmd->no != 0)
 		close (mi_sys->fd_in);
 	if (mi_cmd->next != NULL)
