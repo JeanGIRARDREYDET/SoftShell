@@ -12,18 +12,29 @@
 
 #include "../minishell.h"
 
+void	mi_lexinglineerr(char *ln, t_sys *mi_sys)
+
+{
+	char		*msg_err;
+
+	msg_err = join_3("syntax error near ", ln, " unexpected token");
+	mi_sys->nb_pipe = 0;
+	mi_logerror(2, msg_err, mi_sys);
+	free(msg_err);
+	mi_freecmd(mi_sys);
+}
 void	mi_lexingline(char *ln, t_sys *mi_sys)
 {
-	t_cmd		*new_cmd;
 	t_cmd		*mi_cmd;
-	char		*msg_err;
+	t_cmd		*new_cmd;
+
 	size_t		start;
 	size_t		i;
 
 	mi_sys->nb_pipe = 0;
 	mi_cmd = mi_createcmd(mi_sys);
 	i = 0;
-	start = i;
+	start = 0;
 	mi_sys->cmd = mi_cmd;
 	while (ft_strlen(ln) >= i && ln[i])
 	{
@@ -34,11 +45,7 @@ void	mi_lexingline(char *ln, t_sys *mi_sys)
 			mi_cmd->full = ft_strtrimparam(ln, start, i, WSPACE);
 			if (mi_cmd->full == NULL)
 			{
-				msg_err = join_3("syntax error near ", ln, " unexpected token");
-				mi_sys->nb_pipe = 0;
-				mi_logerror(2, msg_err, mi_sys);
-				free(msg_err);
-				mi_freecmd(mi_sys);
+				mi_lexinglineerr(ln, mi_sys);
 				return ;
 			}
 			new_cmd = mi_createcmd(mi_sys);
