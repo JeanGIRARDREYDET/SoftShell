@@ -35,8 +35,7 @@ void	mi_lexingline(char *ln, t_sys *mi_sys)
 
 	mi_sys->nb_pipe = 0;
 	mi_cmd = mi_createcmd(mi_sys);
-	i[1] = 0;
-	i[0] = 0;
+	ft_bzero(i, sizeof(size_t) * 2);
 	mi_sys->cmd = mi_cmd;
 	while (ft_strlen(ln) >= i[1] && ln[i[1]])
 	{
