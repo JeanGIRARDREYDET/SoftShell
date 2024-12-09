@@ -80,6 +80,21 @@ void	mi_expand_find(char **full_cmd, int i, t_sys *mi_sys)
 		mi_expand_find_env(full_cmd, i, len, mi_sys);
 }
 
+void mi_expandrepalceone(char **full_cmd, int i)
+{
+	int	j;
+
+	if (ft_strin(TECHAP, full_cmd[0][i]))
+	{
+		j = i;
+		while (full_cmd[0][j] != '\0')
+		{
+			full_cmd[0][j] = full_cmd[0][j + 1];
+			j++;
+		}
+	}
+}
+
 void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 {
 	char	echap;
@@ -95,6 +110,8 @@ void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 			echap = '\0';
 		if (echap != '\'' && full_cmd[0][i] == '$')
 			mi_expand_find(full_cmd, i, mi_sys);
+		if (ft_strin(TECHAP, full_cmd[0][i]))
+			mi_expandrepalceone(full_cmd, i);
 		i++;
-	}
+	}	
 }
