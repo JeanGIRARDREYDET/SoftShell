@@ -49,7 +49,7 @@ void	builtin_echo(t_cmd *mi_cmd, int fd)
 	start = j;
 	while (j < len)
 	{
-		if (j != start )
+		if (j != start)
 			write(fd, " ", 1);
 		write(fd, mi_cmd->args[j], ft_strlen(mi_cmd->args[j]));
 		j++;
