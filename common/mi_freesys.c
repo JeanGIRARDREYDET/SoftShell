@@ -47,7 +47,7 @@ void	mi_freesys(t_sys *mi_sys)
 {
 	if (mi_sys == NULL)
 		return ;
-	if (mi_sys->env != NULL && mi_sys->env != NULL)
+	if (mi_sys->env && mi_sys->env != NULL)
 		ft_arrclose(mi_sys->env);
 	if (mi_sys->cmd && mi_sys->cmd != NULL)
 		mi_freecmd(mi_sys);

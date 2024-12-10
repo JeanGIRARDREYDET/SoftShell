@@ -40,7 +40,7 @@ char	*ft_strdup(const char *s)
 	size_t	nmemb;
 
 	nmemb = 1;
-	while (s[nmemb - 1])
+	while (s && s[nmemb - 1])
 		nmemb ++;
 	if (sizeof(char) != 0)
 		if ((nmemb * sizeof (char)) / sizeof(char) != nmemb)
