@@ -21,19 +21,18 @@ void	echo_param(char **param, int *j, int len, int *nl)
 {
 	int	k;
 
-	while (*j < len && *nl == 1 && param[*j][0] == '-')
+	while (*j < len && param[*j][0] == '-')
 	{
 		k = 1;
 		while (param[*j][k] == 'n')
 			k++;
-		if (param[*j][k - 1] == 'n' && param[*j][k] == '\0')
+		if (param[*j][k - 1] == 'n' && !param[*j][k])
 		{
 			*nl = 0;
 			*j = *j + 1;
 		}
-		else
-			break ;
 	}
+	return ;
 }
 
 void	builtin_echo(t_cmd *mi_cmd, int fd)
@@ -41,16 +40,18 @@ void	builtin_echo(t_cmd *mi_cmd, int fd)
 	int		nl;
 	int		len;
 	int		j;
+	int		start;
 
 	nl = 1;
 	len = ft_tablen2(mi_cmd->args);
 	j = 1;
 	echo_param(mi_cmd->args, &j, len, &nl);
+	start = j;
 	while (j < len)
 	{
-		write(fd, mi_cmd->args[j], ft_strlen(mi_cmd->args[j]));
-		if (j < len)
+		if (j != start )
 			write(fd, " ", 1);
+		write(fd, mi_cmd->args[j], ft_strlen(mi_cmd->args[j]));
 		j++;
 	}
 	if (nl == 1)

@@ -110,8 +110,9 @@ void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 			echap = '\0';
 		if (echap != '\'' && full_cmd[0][i] == '$')
 			mi_expand_find(full_cmd, i, mi_sys);
-		if (ft_strin(TECHAP, full_cmd[0][i]))
+		if (ft_strin(TECHAP, full_cmd[0][i]) && (full_cmd[0][i]== echap || echap == '\0'))
 			mi_expandrepalceone(full_cmd, i);
-		i++;
+		else
+			i++;
 	}	
 }
