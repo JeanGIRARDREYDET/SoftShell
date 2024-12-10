@@ -49,6 +49,7 @@ void	mi_freesys(t_sys *mi_sys)
 		return ;
 	if (mi_sys->env && mi_sys->env != NULL)
 	{
+		dprintf(2, "mi_sys->env = %p\n", mi_sys);
 		ft_arrclose(mi_sys->env);
 	}
 		

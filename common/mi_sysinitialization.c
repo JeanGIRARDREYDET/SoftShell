@@ -81,7 +81,39 @@ void	mi_sysinitializationsave(int i, char ***ienv, t_sys *mi_sys)
 	mi_sys->nb_error = 0;
 }
 
+
 void	mi_sysinitialization(char **env, t_sys *mi_sys)
+{
+	int		i;
+	bool	shlvl;
+
+	shlvl = false;
+	mi_setdefaul_initialization(mi_sys);
+	mi_sys->len_env = read_env(env, mi_sys);
+	mi_sys->env = (char **)ft_calloc(mi_sys->len_env, sizeof(char *));
+	i = -1;
+
+	while (env[++i])
+	{
+		if (ft_strnstr (env[i], "SHLVL=", 6) != 0 && !shlvl)
+		{
+			mi_sys->env[i] = ft_strjoin("SHLVL=", mi_sys->senv->shlvl);
+			shlvl = true;
+		}
+		else
+			mi_sys->env[i] = ft_strdup(env[i]);
+	}
+
+	if (!shlvl)
+		mi_sys->env[i++] = ft_strjoin("SHLVL=", mi_sys->senv->shlvl);
+	mi_sys->len_env = i;
+	mi_sys->nb_error = 0;
+	if (mi_sys->senv->pwd == NULL)
+		mi_sys->env[i++] = ft_strjoin("PWD=", mi_sys->senv->pwd);
+
+}
+
+void	mi_sysinitialization2(char **env, t_sys *mi_sys)
 {
 	int		i;
 	char	**ienv;
@@ -107,4 +139,5 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 	mi_sysinitializationsave(i, &ienv, mi_sys);
 	if (mi_sys->senv->pwd == NULL)
 		ienv[i++] = ft_strjoin("PWD=", mi_sys->senv->pwd);
+
 }
