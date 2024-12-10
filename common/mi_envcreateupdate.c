@@ -17,16 +17,19 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 	char		**ienv;
 	int			i;
 
-	mi_sys->len_env += 2;
-	ienv = (char **)ft_calloc(mi_sys->len_env, sizeof(char *));
+	ienv = (char **)ft_calloc(mi_sys->len_env + 1, sizeof(char *));
 	if (ienv == NULL)
 	{
 		mi_logerror(126, "Cannot allocate memory", mi_sys);
 		mi_sys->exit_status = EXIT_FAILURE;
 	}
-	i = -1;
-	while (mi_sys->env[++i])
+	i = 0;
+	while (i < mi_sys->len_env)
+	{
 		ienv[i] = ft_strdup(mi_sys->env[i]);
+		i++;
+	}
+	mi_sys->len_env++;
 	if (ienv != NULL && ienv[i] == NULL)
 		ienv[i] = line;
 	free (mi_sys->env);
@@ -46,9 +49,9 @@ void	s_env_create_update_value(char *key, t_sys *mi_sys)
 		mi_sys->exit_status = EXIT_FAILURE;
 		return ;
 	}
-	pos = ft_get_confpos(key, '=', mi_sys->env);
+	pos = ft_get_confpos2(key, '=', mi_sys);
 	if (pos == -1)
-		pos = ft_get_confpos(key, '\0', mi_sys->env);
+		pos = ft_get_confpos2(key, '\0', mi_sys);
 	if (pos == -1)
 		s_env_create_value (ft_strdup(key), mi_sys);
 	else

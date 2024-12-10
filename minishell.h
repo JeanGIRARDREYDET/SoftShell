@@ -115,6 +115,7 @@ typedef struct s_sys
 	int				exit_status;
 }	t_sys;
 
+int		ft_get_confpos2(char *key, char k_sep, t_sys *mi_sys);
 void	mi_freesys(t_sys *mi_sys);
 void	signal_handle_sigint(int sign);
 bool	ft_findword(const char *source, const char *find);
