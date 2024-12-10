@@ -45,7 +45,7 @@ int	read_env(char **env, t_sys *mi_sys)
 		read_env_line(env[mi_sys->len_env], mi_sys);
 		mi_sys->len_env++;
 	}
-	mi_sys->len_env++;
+	//mi_sys->len_env++;
 	if (mi_sys->senv->pwd == 0)
 		mi_sys->len_env++;
 	if (mi_sys->senv->shlvl == NULL)
@@ -83,6 +83,27 @@ void	mi_sysinitializationsave(int i, char ***ienv, t_sys *mi_sys)
 
 
 void	mi_sysinitialization(char **env, t_sys *mi_sys)
+{
+	int		i;
+
+	i = 0;
+	mi_setdefaul_initialization(mi_sys);
+	mi_sys->len_env = read_env(env, mi_sys);
+	mi_sys->len_env = 0;
+	while (env[mi_sys->len_env])
+		mi_sys->len_env++;
+	mi_sys->env = (char **)ft_calloc(mi_sys->len_env, sizeof(char *));
+	while (env[i])
+	{
+		mi_sys->env[i] = ft_strdup(env[i]);
+		i++;
+	}
+	mi_sys->len_env = i - 1;
+	dprintf(2, "mi_sys->len_env = %d\n", mi_sys->len_env);
+	mi_sys->nb_error = 0;
+}
+
+void	mi_sysinitialization1(char **env, t_sys *mi_sys)
 {
 	int		i;
 	bool	shlvl;
