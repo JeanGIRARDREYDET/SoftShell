@@ -27,7 +27,7 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 	while (i <= mi_sys->len_env)
 	{
 		ienv[i] = ft_strdup(mi_sys->env[i]);
-		free(i_sys->env[i]);
+		free(mi_sys->env[i]);
 		i++;
 	}
 	dprintf (2, "i = %d\n", i);
@@ -52,7 +52,7 @@ void	s_env_create_update_value(char *key, t_sys *mi_sys)
 	}
 	pos = ft_get_confpos(key, mi_sys);
 	if (pos == -1)
-		s_env_create_value (ft_strdup(key), mi_sys);
+		s_env_create_value (key, mi_sys);
 	else
 	{
 		free(mi_sys->env[pos]);
