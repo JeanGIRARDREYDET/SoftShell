@@ -20,7 +20,7 @@ char	*mi_getenv(char *key, t_sys *mi_sys)
 
 	i = 0;
 	len = ft_strlen(key);
-	while (i <= mi_sys->len_env )
+	while (i <= mi_sys->len_env)
 	{
 		end = mi_sys->env[i][len];
 		if (ft_strncmp (mi_sys->env[i], key, len) == 0 && end == '=')
