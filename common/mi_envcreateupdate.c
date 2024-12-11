@@ -30,7 +30,6 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 		free(mi_sys->env[i]);
 		i++;
 	}
-	dprintf (2, "i = %d\n", i);
 	ienv[i] = ft_strdup(line);
 	mi_sys->len_env = i;
 	free (mi_sys->env);

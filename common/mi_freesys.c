@@ -49,10 +49,8 @@ void	mi_freesys(t_sys *mi_sys)
 		return ;
 	if (mi_sys->env && mi_sys->env != NULL)
 	{
-		dprintf(2, "\n\nmi_sys->len_env = %d\n", mi_sys->len_env);
 		while (mi_sys->len_env >= 0)
 		{
-			dprintf(2, "mi_sys->env[%d] = %s\n", mi_sys->len_env, mi_sys->env[mi_sys->len_env]);
 			free(mi_sys->env[mi_sys->len_env]);
 			mi_sys->len_env--;
 		}
