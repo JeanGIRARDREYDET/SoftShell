@@ -12,44 +12,24 @@
 
 #include "../minishell.h"
 
-int	ft_get_confpos(char *key, char k_sep, char **conf)
+int	ft_get_confpos(char *key, t_sys *mi_sys)
 {
 	int			i;
 	int			offset;
 	char		*line;
-	char		end;
+	char		endline;
+	char		endkey;
 
 	i = 0;
 	offset = 0;
-	while (key[offset] != k_sep && key[offset] != '\0' && key[offset] > 33)
+	while (key[offset] != '\0' && key[offset] > 33)
 		offset++;
-	while (conf[i] && key[0] != k_sep)
-	{
-		line = conf[i];
-		end = line[offset];
-		if (ft_strncmp (line, key, offset) == 0 && (end == '=' || end == 0))
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-int	ft_get_confpos2(char *key, char k_sep, t_sys *mi_sys)
-{
-	int			i;
-	int			offset;
-	char		*line;
-	char		end;
-
-	i = 0;
-	offset = 0;
-	while (key[offset] != k_sep && key[offset] != '\0' && key[offset] > 33)
-		offset++;
-	while (i < mi_sys->len_env && mi_sys->env[i] && key[0] != k_sep)
+	while (i < mi_sys->len_env && mi_sys->env[i])
 	{
 		line = mi_sys->env[i];
-		end = line[offset];
-		if (ft_strncmp (line, key, offset) == 0 && (end == '=' || end == '\0'))
+		endline = ft_strchr_pos(line, '=');
+		endkey = ft_strchr_pos(key, '=');
+		if (endline == endkey && ft_strncmp (line, key, endkey) == 0)
 			return (i);
 		i++;
 	}

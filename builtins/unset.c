@@ -19,9 +19,7 @@ void	builtin_unset(char *key, t_sys *mi_sys)
 {
 	int	pos;
 
-	pos = ft_get_confpos(key, '=', mi_sys->env);
-	if (pos != -1)
-		pos = ft_get_confpos(key, '\0', mi_sys->env);
+	pos = ft_get_confpos(key, mi_sys);
 	if (pos != -1)
 	{
 		free(mi_sys->env[pos]);
