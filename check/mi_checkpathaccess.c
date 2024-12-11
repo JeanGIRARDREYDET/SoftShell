@@ -53,6 +53,6 @@ void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		mi_cmd->found = true ;
 	}
-	mi_checkoneaccess(mi_getenv_env("PWD", mi_sys->env), mi_cmd);
+	mi_checkoneaccess(mi_getenv_env("PWD", mi_sys), mi_cmd);
 	mi_checkenvpathaccess (mi_cmd, mi_sys);
 }

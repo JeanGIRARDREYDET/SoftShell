@@ -20,7 +20,7 @@ char	*mi_getenv(char *key, t_sys *mi_sys)
 
 	i = 0;
 	len = ft_strlen(key);
-	while (mi_sys->env[i])
+	while (i <= mi_sys->len_env )
 	{
 		end = mi_sys->env[i][len];
 		if (ft_strncmp (mi_sys->env[i], key, len) == 0 && end == '=')
@@ -32,7 +32,7 @@ char	*mi_getenv(char *key, t_sys *mi_sys)
 	return (NULL);
 }
 
-char	*mi_getenv_env(char *key, char **env)
+char	*mi_getenv_env(char *key, t_sys *mi_sys)
 {
 	int			i;
 	int			len;
@@ -40,14 +40,14 @@ char	*mi_getenv_env(char *key, char **env)
 
 	i = 0;
 	len = ft_strlen(key);
-	while (env[i] && *env[i])
+	while (i<= mi_sys->len_env)
 	{
-		end = env[i][len];
-		if (ft_strncmp (env[i], key, len) == 0 && end == '=')
+		end = mi_sys->env[i][len];
+		if (ft_strncmp (mi_sys->env[i], key, len) == 0 && end == '=')
 			break ;
 		i++;
 	}
-	if (env[i])
-		return (env[i] + len + 1);
+	if (mi_sys->env[i])
+		return (mi_sys->env[i] + len + 1);
 	return (NULL);
 }

@@ -17,7 +17,7 @@ void	builtin_env(t_sys *mi_sys, int fd)
 	int	i;
 
 	i = 0;
-	while (mi_sys->env != NULL && mi_sys->env[i] != 0)
+	while (mi_sys->env != NULL && i<= mi_sys->len_env)
 	{
 		if (ft_strin(mi_sys->env[i], '='))
 		{
