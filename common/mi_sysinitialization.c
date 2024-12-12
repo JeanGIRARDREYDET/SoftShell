@@ -93,12 +93,12 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 	mi_sys->len_env = 0;
 	while (env[mi_sys->len_env])
 		mi_sys->len_env++;
-	mi_sys->env = (char **)ft_calloc(mi_sys->len_env+1, sizeof(char *));
+	mi_sys->env = (char **)ft_calloc(mi_sys->len_env + 1, sizeof(char *));
 	while (env[i])
 	{
 		if (ft_strnstr (env[i], "SHLVL=", 6) != 0 && !shlvl)
 		{
-			mi_sys->env[i]  = ft_strjoin("SHLVL=", mi_sys->senv->shlvl);
+			mi_sys->env[i] = ft_strjoin("SHLVL=", mi_sys->senv->shlvl);
 			shlvl = true;
 		}
 		else
