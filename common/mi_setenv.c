@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	mi_setenv(char *key, char *value, t_sys *sys)
+int	mi_setenv(char *key, char *value, t_sys *mi_sys)
 {
 	int			i;
 	int			len;
@@ -20,13 +20,13 @@ int	mi_setenv(char *key, char *value, t_sys *sys)
 
 	i = 0;
 	len = ft_strlen(key);
-	while (sys->env[i])
+	while (i < mi_sys->len_env)
 	{
-		if (ft_strncmp (sys->env[i], key, len) == 0)
+		if (ft_strncmp (mi_sys->env[i], key, len) == 0)
 		{
 			tmp = join_3(key, "=", value);
-			free(sys->env[i]);
-			sys->env[i] = tmp;
+			free(mi_sys->env[i]);
+			mi_sys->env[i] = tmp;
 			return (i);
 			break ;
 		}
