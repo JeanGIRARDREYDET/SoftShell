@@ -27,6 +27,8 @@ void	mi_execonechildexe(t_cmd *mi_cmd, t_sys *mi_sys)
 
 void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 {
+	if (!mi_cmd->args[0])
+		return ;
 	if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
 	{
 		mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
@@ -45,6 +47,7 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys, out);
 		dup2(mi_cmd->red->fd, STDOUT_FILENO);
 	}
+	dprintf(2, "mi_cmd->args[0] = %s\n", mi_cmd->args[0]);
 	mi_execonechildexe(mi_cmd, mi_sys);
 }
 
