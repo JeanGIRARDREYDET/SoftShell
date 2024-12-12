@@ -25,7 +25,6 @@ int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 		mi_execbuiltin(mi_cmd, STDOUT_FILENO, mi_sys);
 		mi_freesys(mi_sys);
 		return (127);
-
 	}
 	if (!mi_cmd->found)
 	{
