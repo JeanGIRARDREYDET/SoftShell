@@ -28,7 +28,11 @@ void	mi_execonechildexe(t_cmd *mi_cmd, t_sys *mi_sys)
 void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 {
 	if (!mi_cmd->args[0])
-		return ;
+	{
+		dup2(mi_cmd->red->fd, STDOUT_FILENO);
+		close (mi_cmd->red->fd);
+		mi_execexitepipe(mi_sys->exit_status, mi_sys);
+	}
 	if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
 	{
 		mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
@@ -90,6 +94,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 
 	out = (int []){OUTPUT, APPEND};
 	in = (int []){INPUT, HEREDOC};
+
 	if (mi_cmd->full)
 		free(mi_cmd->full);
 	mi_cmd->full = NULL;

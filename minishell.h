@@ -186,5 +186,5 @@ void	mi_heredoc(t_red *red, t_sys *mi_sys);
 void	mi_cmditer(t_sys *mi_sys, void (*f)(t_cmd *mi_cmd));
 void	mi_sysargsiter(t_sys *mi_sys, void (*f)(char *r, t_sys *mi_sys));
 void	mi_unbordercote(char *args, t_sys *mi_sys);
-
+void	mi_execexitepipe(int status, t_sys *mi_sys);
 #endif

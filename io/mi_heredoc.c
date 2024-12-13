@@ -24,6 +24,8 @@ void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
 		line = readline(bash);
 		if (ft_findword(mi_red->eof, line))
 			break ;
+		if (ft_strlen(line) > 0)
+			mi_expand(&line, 0, mi_sys);
 		write(mi_red->fd, line, ft_strlen(line));
 		write(mi_red->fd, "\n", 1);
 	}

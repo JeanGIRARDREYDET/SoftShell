@@ -24,11 +24,9 @@ char	*mi_getenv(char *key, t_sys *mi_sys)
 	{
 		end = mi_sys->env[i][len];
 		if (ft_strncmp (mi_sys->env[i], key, len) == 0 && end == '=')
-			break ;
+			return (mi_sys->env[i] + len + 1);
 		i++;
 	}
-	if (mi_sys->env[i])
-		return (mi_sys->env[i] + len + 1);
 	return (NULL);
 }
 
