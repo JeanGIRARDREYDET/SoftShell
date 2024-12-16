@@ -55,7 +55,7 @@ typedef struct s_env
 	char			*oldpwd;
 	char			*pwd;
 	char			*path;
-	char			*shlvl;
+	int				shlvl;
 	char			*_;
 	char			*home;
 }	t_env;
@@ -79,6 +79,7 @@ typedef struct s_red
 typedef struct s_cmd
 {
 	int				id;
+	int 			status;
 	int				no;
 	char			*line;
 	char			*full;
@@ -145,7 +146,7 @@ void	mi_exec(t_cmd *me_cmd, t_sys *mi_sys);
 void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_oneexec(t_cmd *me_cmd, t_sys *mi_sys);
 char	*cd_getpwd(char *key, int fd, t_sys *mi_sys);
-
+void	mi_waitingcmdipe(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_cmdargparsse(t_cmd *lst);
 void	mi_syscmditer(t_sys *sys, void (*f)(t_cmd *lst, t_sys *sys));;

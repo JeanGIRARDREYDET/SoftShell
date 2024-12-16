@@ -17,6 +17,15 @@
 // pour le dernier a rendre la main ou aurai utilise 
 // while (i < mi_sys->nb_pipe && wait (&status) != 32512)
 
+void	mi_waitingcmdipe(t_cmd *mi_cmd, t_sys *mi_sys)
+{
+	int			status;
+	if(mi_sys->nb_pipe < 2)
+		return ;
+	waitpid (mi_cmd->id, &(mi_cmd->status), 0);
+	mi_logerror (WEXITSTATUS(status), NULL, mi_sys);
+}
+
 void	mi_waitingpipe(t_sys *mi_sys)
 {
 	int			status;

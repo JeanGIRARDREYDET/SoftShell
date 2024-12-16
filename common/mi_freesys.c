@@ -37,8 +37,6 @@ void	mi_freesev(t_sys *mi_sys)
 			free(mi_sys->senv->oldpwd);
 		if (mi_sys->senv->pwd)
 			free(mi_sys->senv->pwd);
-		if (mi_sys->senv->shlvl)
-			free(mi_sys->senv->shlvl);
 		free(mi_sys->senv);
 	}
 }

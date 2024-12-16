@@ -50,6 +50,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		signal(SIGINT, &signal_handle_sigint);
+
 		line = readline("minishell> ");
 		if (line && *line == '\0')
 			continue ;
@@ -61,6 +62,7 @@ int	main(int argc, char **argv, char **env)
 			line++;
 		mi_analyse(line, &mi_sys);
 		mi_syscmditer(&mi_sys, &mi_execone);
+		mi_syscmditer(&mi_sys, &mi_waitingcmdipe);
 		mi_waitingpipe(&mi_sys);
 		mi_freecmd(&mi_sys);
 	}

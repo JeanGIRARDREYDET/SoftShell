@@ -36,26 +36,26 @@ void	s_env_create_value(char *line, t_sys *mi_sys)
 	mi_sys->env = ienv;
 }
 
-void	s_env_create_update_value(char *key, t_sys *mi_sys)
+void	s_env_create_update_value(char *keys_values, t_sys *mi_sys)
 {
 	int			pos;
 	char		*msg;
 
-	if (!key || key[0] == '=')
+	if (!keys_values || keys_values[0] == '=')
 	{
-		msg = join_3("export: `", key, "' not a valid identifier");
+		msg = join_3("export: `", keys_values, "' not a valid identifier");
 		mi_logerror(1, msg, mi_sys);
 		free(msg);
 		mi_sys->exit_status = EXIT_FAILURE;
 		return ;
 	}
-	pos = ft_get_confpos(key, mi_sys);
+	pos = ft_get_confpos(keys_values, mi_sys);
 	if (pos == -1)
-		s_env_create_value (key, mi_sys);
+		s_env_create_value (keys_values, mi_sys);
 	else
 	{
 		free(mi_sys->env[pos]);
-		mi_sys->env[pos] = ft_strdup(key);
+		mi_sys->env[pos] = ft_strdup(keys_values);
 	}
 	mi_sys->exit_status = EXIT_SUCCESS;
 }
@@ -68,12 +68,12 @@ void	s_env_create_update_key_value(char *key, char *value, t_sys *mi_sys)
 	s_env_create_update_value (str_pwd, mi_sys);
 }
 
-int	mi_export_values(char **key, t_sys *mi_sys)
+int	mi_export_values(char **keys_values, t_sys *mi_sys)
 {
 	int			i;
 
 	i = 1;
-	while (key[i] != NULL)
-		s_env_create_update_value(key[i++], mi_sys);
+	while (keys_values[i] != NULL)
+		s_env_create_update_value(keys_values[i++], mi_sys);
 	return (mi_sys->exit_status);
 }

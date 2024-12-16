@@ -35,12 +35,12 @@ void	print_export(t_sys *mi_sys, int fd)
 	}
 }
 
-void	builtin_export(char **key, int fd, t_sys *mi_sys)
+void	builtin_export(char **keys_values, int fd, t_sys *mi_sys)
 {
 	if (!mi_sys->env)
 		mi_logerror(1, "export: env NULL", mi_sys);
-	else if (key && key[1] != NULL)
-		mi_export_values(key, mi_sys);
+	else if (keys_values && keys_values[1] != NULL)
+		mi_export_values(keys_values, mi_sys);
 	else
 		print_export(mi_sys, fd);
 }
