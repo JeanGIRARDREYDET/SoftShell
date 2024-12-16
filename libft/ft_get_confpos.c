@@ -24,7 +24,7 @@ int	ft_get_confpos(char *key, t_sys *mi_sys)
 	offset = 0;
 	while (key[offset] != '\0' && key[offset] > 33)
 		offset++;
-	while (i < mi_sys->len_env && mi_sys->env[i])
+	while (i <= mi_sys->len_env && mi_sys->env[i])
 	{
 		line = mi_sys->env[i];
 		endline = ft_strchr_pos(line, '=');

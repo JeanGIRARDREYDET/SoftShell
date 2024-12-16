@@ -44,6 +44,7 @@
 # define WSPACE " \a\b\t\n\v\f\r"
 # define TECHAP "\"'"
 # define BUILTINS "echo cd pwd export unset env exit"
+# define DEEPENV "OLDPWD PWD PATH SHLVL _ HOME" 
 # define B64 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+_"
 # define HERDOCTEMPLATE "/tmp/minishell_heredoc_012345"
 

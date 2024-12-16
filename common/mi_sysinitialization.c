@@ -59,10 +59,10 @@ void	mi_setdefaul_initialization( t_sys *mi_sys)
 {
 	mi_sys->senv = (t_env *) ft_calloc (1, sizeof (t_env));
 	mi_sys->senv->path = "/usr/bin:/bin:/usr/sbin:/sbin";
-	mi_sys->senv->pwd = NULL;
+	mi_sys->senv->pwd = getcwd(NULL, 0);
 	mi_sys->nb_pipe = 0;
 	mi_sys->cmd = NULL;
-	mi_sys->senv->shlvl = 0;
+	mi_sys->senv->shlvl = ft_strdup("1");
 	mi_sys->senv->_ = NULL;
 	mi_sys->senv->home = NULL;
 	mi_sys->len_env = 0;
@@ -105,6 +105,8 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 			mi_sys->env[i] = ft_strdup(env[i]);
 		i++;
 	}
+	mi_setenv("SHLVL", mi_sys->senv->shlvl, mi_sys);
+	mi_setenv("PWD", mi_sys->senv->shlvl, mi_sys);
 	mi_sys->len_env = i - 1;
 	mi_sys->nb_error = 0;
 }

@@ -26,7 +26,7 @@ void	print_export(t_sys *mi_sys, int fd)
 	i = 0;
 	if (mi_sys->env == NULL)
 		return ;
-	while (i < mi_sys->len_env)
+	while (i <= mi_sys->len_env)
 	{
 		write(fd, "declare -x \"", 12);
 		write(fd, mi_sys->env[i], ft_strlen(mi_sys->env[i]));
