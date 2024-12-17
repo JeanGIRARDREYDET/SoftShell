@@ -63,7 +63,7 @@ int	main(int argc, char **argv, char **env)
 		mi_analyse(line, &mi_sys);
 		mi_syscmditer(&mi_sys, &mi_execone);
 		mi_syscmditer(&mi_sys, &mi_waitingcmdipe);
-		mi_waitingpipe(&mi_sys);
+		//mi_waitingpipe(&mi_sys);
 		mi_freecmd(&mi_sys);
 	}
 }
