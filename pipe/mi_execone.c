@@ -67,7 +67,7 @@ void	mi_execoneerr(t_cmd *mi_cmd, t_sys *mi_sys)
 	return ;
 }
 
-void	mi_execoneerrandfork(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
+void	mi_execonefork(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 {
 	mi_cmd->id = fork();
 	mi_sys->max_id = mi_cmd->id;
@@ -98,7 +98,8 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	if (mi_cmd->full)
 		free(mi_cmd->full);
 	mi_cmd->full = NULL;
-	if (mi_sys->nb_pipe == 1 && (mi_cmd->builtin || mi_cmd->args[0] == NULL))
+	// || (mi_cmd->args && mi_cmd->args[0] == NULL))
+	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin == true)
 	{
 		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 			mi_execbuiltin(mi_cmd,
@@ -109,6 +110,6 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	mi_execoneerr(mi_cmd, mi_sys);
 	if (mi_sys->error == NULL)
-		mi_execoneerrandfork(mi_cmd, mi_sys, out, in);
+		mi_execonefork(mi_cmd, mi_sys, out, in);
 	return ;
 }

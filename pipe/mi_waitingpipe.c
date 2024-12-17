@@ -19,11 +19,11 @@
 
 void	mi_waitingcmdipe(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	int			status;
+
 	if(mi_sys->nb_pipe < 2)
 		return ;
 	waitpid (mi_cmd->id, &(mi_cmd->status), 0);
-	mi_logerror (WEXITSTATUS(status), NULL, mi_sys);
+	mi_logerror (mi_cmd->status, NULL, mi_sys);
 }
 
 void	mi_waitingpipe(t_sys *mi_sys)
@@ -32,10 +32,10 @@ void	mi_waitingpipe(t_sys *mi_sys)
 
 	if (mi_sys->nb_error > 0)
 		return ;
-	if ((mi_sys->nb_pipe == 1 && (mi_sys->cmd->builtin || ! *mi_sys->cmd->args))
+	if ((mi_sys->nb_pipe == 1 && (mi_sys->cmd->builtin || !mi_sys->cmd->args))
 		|| mi_sys->nb_pipe == 0)
 		return ;
 	waitpid (mi_sys->max_id, &status, 0);
 	mi_freeerror (mi_sys);
-	mi_logerror (WEXITSTATUS(status), NULL, mi_sys);
+	mi_logerror (status, NULL, mi_sys);
 }

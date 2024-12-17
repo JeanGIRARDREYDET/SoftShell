@@ -18,7 +18,7 @@ void	mi_freered(t_cmd *mi_cmd)
 
 	if (!mi_cmd->red)
 		return ;
-	while (mi_cmd->red && mi_cmd->red != NULL)
+	while (mi_cmd->red && mi_cmd->red != NULL && mi_cmd->red->next != NULL)
 	{
 		tmp = mi_cmd->red->next;
 		if (mi_cmd->red->fd)
@@ -54,15 +54,15 @@ void	mi_freeonecmd(t_cmd *mi_cmd)
 
 void	mi_freecmd(t_sys *mi_sys)
 {
-	t_cmd	*tmp;
+	t_cmd	*mi_cmd;
 
 	if (!mi_sys->cmd)
 		return ;
-	while (mi_sys->cmd && mi_sys->cmd != NULL)
+	mi_cmd = mi_sys->cmd;
+	while (mi_cmd != NULL)
 	{
-		tmp = mi_sys->cmd->next;
 		mi_freeonecmd(mi_sys->cmd);
-		mi_sys->cmd = tmp;
+		mi_cmd = mi_cmd->next;
 	}
 	mi_sys->cmd = NULL;
 	mi_sys->nb_error = 0;

@@ -17,7 +17,7 @@ void	ft_arrclose(char **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i])
+	while (*arr && *arr[i] !='\0')
 	{
 		free(arr[i]);
 		arr[i] = NULL;

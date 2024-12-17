@@ -20,7 +20,7 @@ void	mi_createcmdargs(t_cmd *mi_cmd, t_sys *mi_sys)
 
 	n = 0;
 	i = 0;
-	while (mi_cmd->split[i])
+	while (mi_cmd->split && mi_cmd->split[i])
 	{
 		if (mi_cmd->split[i + 1] && (mi_cmd->split[i][0] == '<'
 			|| mi_cmd->split[i][0] == '>'))
@@ -40,7 +40,7 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 	mi_createcmdargs(mi_cmd, mi_sys);
 	i = 0;
 	n = 0;
-	while (mi_cmd->split[i])
+	while (mi_cmd->split && mi_cmd->split[i])
 	{
 		if (mi_cmd->split[i + 1] && (mi_cmd->split[i][0] == '<'
 			|| mi_cmd->split[i][0] == '>'))
