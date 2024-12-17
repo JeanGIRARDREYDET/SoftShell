@@ -47,8 +47,8 @@ void	mi_freeonecmd(t_cmd *mi_cmd)
 	if (mi_cmd->red != NULL)
 		mi_freered(mi_cmd);
 	mi_cmd->red = NULL;
-	if (mi_cmd != NULL)
-		free(mi_cmd);
+//	if (mi_cmd != NULL)
+//		free(mi_cmd);
 	mi_cmd = NULL;
 }
 
@@ -62,6 +62,8 @@ void	mi_freecmd(t_sys *mi_sys)
 	while (mi_cmd != NULL)
 	{
 		mi_freeonecmd(mi_sys->cmd);
+		if(!mi_cmd->next)
+			break ;
 		mi_cmd = mi_cmd->next;
 	}
 	mi_sys->cmd = NULL;

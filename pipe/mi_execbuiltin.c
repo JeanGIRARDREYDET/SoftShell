@@ -23,8 +23,6 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	char		*cmd;
 
 	cmd = mi_cmd->args[0];
-	if (mi_sys->env == NULL)
-		dprintf(2, "			mi_exebuiltin env  NULL\n");
 	if (ft_findword(cmd, "cd"))
 		builtin_cd(mi_cmd->args, fd, mi_sys);
 	else if (ft_findword(cmd, "echo"))

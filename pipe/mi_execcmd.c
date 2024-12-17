@@ -12,8 +12,6 @@
 
 #include "../minishell.h"
 
-//	dprintf(2, "	mi_execcmd ('%s') \n", mi_cmd->cmd);
-
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	char	*errormsg;

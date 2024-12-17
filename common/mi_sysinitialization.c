@@ -44,7 +44,6 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 	s_env_create_update_key_value("PWD", mi_sys->senv->pwd, mi_sys);
 	while (env[i])
 	{
-		dprintf(2,"env[i] = %s\n", env[i]);
 		s_env_create_update_value (env[i], mi_sys);
 		i++;
 	}
