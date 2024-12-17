@@ -15,21 +15,7 @@
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	char	*errormsg;
-	int 	i;
-	i = 0;
-	while (mi_sys->env[i])
-	{
-		dprintf(2, "mi_execcmd env %s \n",mi_sys->env[i]);
-		i++;
-	}
-	
-	i = 0;
-	while (mi_cmd->args[i])
-	{
-		dprintf(2, "mi_execcmd args %s \n",mi_cmd->args[i]);
-		i++;
-	}
-	
+		
 	if (mi_cmd->args[0] == NULL )
 		return (1);
 	if (mi_cmd->builtin == true)
