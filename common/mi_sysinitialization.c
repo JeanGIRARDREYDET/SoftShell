@@ -32,6 +32,8 @@ void	mi_setdefaul_initialization( t_sys *mi_sys)
 void	mi_sysinitialization(char **env, t_sys *mi_sys)
 {
 	int		i;
+	char 	*shlvl;
+
 	
 	i = 0;
 	mi_setdefaul_initialization(mi_sys);
@@ -48,6 +50,8 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 		i++;
 	}
 	mi_sys->senv->shlvl = 1 + ft_atoi(mi_getenv("SHLVL", mi_sys));
-	s_env_create_update_key_value("SHLVL",ft_itoa(mi_sys->senv->shlvl), mi_sys);
+	shlvl = ft_itoa(mi_sys->senv->shlvl);
+	s_env_create_update_key_value("SHLVL",shlvl, mi_sys);
+	free(shlvl);
 	mi_sys->nb_error = 0;
 }

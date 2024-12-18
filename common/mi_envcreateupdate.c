@@ -66,6 +66,7 @@ void	s_env_create_update_key_value(char *key, char *value, t_sys *mi_sys)
 
 	str_pwd = join_3(key, "=", value);
 	s_env_create_update_value (str_pwd, mi_sys);
+	free(str_pwd);
 }
 
 int	mi_export_values(char **keys_values, t_sys *mi_sys)
