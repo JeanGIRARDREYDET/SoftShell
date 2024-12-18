@@ -38,6 +38,8 @@ void	mi_analyse(char *line, t_sys *mi_sys)
 	mi_sysrediter(mi_sys, HEREDOC, &mi_heredoc);
 	mi_cmditer(mi_sys, &mi_checkbuiltin);
 	mi_syscmditer(mi_sys, &mi_checkpathaccess);
+	mi_syscmditer(mi_sys, &mi_execone);
+	mi_syscmditer(mi_sys, &mi_waitingcmdipe);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -61,8 +63,6 @@ int	main(int argc, char **argv, char **env)
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
 		mi_analyse(line, &mi_sys);
-		mi_syscmditer(&mi_sys, &mi_execone);
-		mi_syscmditer(&mi_sys, &mi_waitingcmdipe);
 		//mi_waitingpipe(&mi_sys);
 		mi_freecmd(&mi_sys);
 	}

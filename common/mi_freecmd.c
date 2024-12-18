@@ -66,6 +66,7 @@ void	mi_freecmd(t_sys *mi_sys)
 			break ;
 		mi_cmd = mi_cmd->next;
 	}
+	free(mi_sys->cmd);
 	mi_sys->cmd = NULL;
 	mi_sys->nb_error = 0;
 	mi_freeerror(mi_sys);
