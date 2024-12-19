@@ -23,7 +23,9 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	char		*cmd;
 
 	cmd = mi_cmd->args[0];
-	if (ft_findword(cmd, "cd"))
+	if (!mi_cmd->full)
+		;
+	else if (ft_findword(cmd, "cd"))
 		builtin_cd(mi_cmd->args, fd, mi_sys);
 	else if (ft_findword(cmd, "echo"))
 		builtin_echo(mi_cmd, fd);

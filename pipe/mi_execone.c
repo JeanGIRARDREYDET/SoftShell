@@ -94,12 +94,11 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 
 	out = (int []){OUTPUT, APPEND};
 	in = (int []){INPUT, HEREDOC};
-	if (mi_cmd->full)
+	if (!mi_cmd->full)
 	{
+		mi_cmd->builtin = true;
 		mi_logerror(2, "erreur de syntaxe : fin de fichier prématurée", mi_sys);
-		free(mi_cmd->full);
 	}
-	mi_cmd->full = NULL;
 	// || (mi_cmd->args && mi_cmd->args[0] == NULL))
 	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin == true)
 	{
