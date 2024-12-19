@@ -42,15 +42,7 @@ static void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 			mi_checkoneaccess(paths[i], mi_cmd);
 			i++;
 		}
-		i =0;
-		while (paths && paths[i])
-		{
-			free(paths[i]);
-			paths[i]=NULL;
-			i++;
-		}
-		free(paths);
-		paths = NULL;
+		ft_arrclose2(paths);
 	}
 	mi_checkoneaccess("/usr/bin", mi_cmd);
 }
