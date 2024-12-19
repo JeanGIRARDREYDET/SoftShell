@@ -47,6 +47,7 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 			i++;
 		else
 		{
+			dprintf(2, "mi_cmd->split[%d] = %s\n", i, mi_cmd->split[i]);
 			mi_cmd->args[n] = ft_strdup(mi_cmd->split[i]);
 			n++;
 		}

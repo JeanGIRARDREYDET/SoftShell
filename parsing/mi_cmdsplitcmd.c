@@ -35,7 +35,9 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 				ft_pos_passstring(mi_cmd->full, &x[0]);
 			if (x[0] - x[2] < 1)
 				continue ;
+			dprintf(2, "x[0] = %d, x[1] = %d, x[2] = %d\n", x[0], x[1], x[2]);
 			mi_cmd->split[x[1]] = ft_substr(mi_cmd->full, x[2], x[0] - x[2]);
+			dprintf(2, "mi_cmd->split[%d] = %s\n", x[1], mi_cmd->split[x[1]]);
 			x[1]++;
 		}
 	}

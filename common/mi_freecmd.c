@@ -36,13 +36,13 @@ void	mi_freeonecmd(t_cmd *mi_cmd)
 	if (!mi_cmd)
 		return ;
 	if (mi_cmd->args != NULL)
-		ft_arrclose(mi_cmd->args);
+		ft_arrclose2(mi_cmd->args);
 	mi_cmd->args = NULL;
 	if (mi_cmd->full != NULL)
 		free(mi_cmd->full);
 	mi_cmd->full = NULL;
 	if (mi_cmd->split != NULL)
-		ft_arrclose(mi_cmd->split);
+		ft_arrclose2(mi_cmd->split);
 	mi_cmd->split = NULL;
 	if (mi_cmd->red != NULL)
 		mi_freered(mi_cmd);
