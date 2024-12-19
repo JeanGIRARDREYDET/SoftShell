@@ -117,6 +117,7 @@ char	*ft_strtrimparam(char const *s1, int debut, int fin, char const *set);
 char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	ft_sys_get_pwd(char **buf);
+void	ft_arrclose2(char **arr);
 
 size_t	ft_tablen(char const **str);
 int		ft_tolower(int c);
