@@ -15,7 +15,6 @@
 void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 {
 	int	x[3];
-	char *tmp;
 
 	x[0] = 0;
 	x[1] = 0;
@@ -36,10 +35,7 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 				ft_pos_passstring(mi_cmd->full, &x[0]);
 			if (x[0] - x[2] < 1)
 				continue ;
-			tmp = ft_substr(mi_cmd->full, x[2], x[0] - x[2]);
-			dprintf(2, "mi_cmdsplitcmd tmp = %s\n", tmp);
-			mi_cmd->split[x[1]] = ft_strdup(tmp);
-			free(tmp);
+			mi_cmd->split[x[1]] = ft_substr(mi_cmd->full, x[2], x[0] - x[2]);
 			x[1]++;
 		}
 	}

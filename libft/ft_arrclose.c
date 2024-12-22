@@ -34,7 +34,6 @@ void	ft_arrclose2(char **arr)
 	i = 0;
 	while (arr && arr[i])
 	{
-		dprintf(2, "ft_arrclose2 arr[%d] = %s\n", i, arr[i]);
 		free(arr[i]);
 		arr[i] = NULL;
 		i++;

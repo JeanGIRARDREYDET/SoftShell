@@ -56,8 +56,6 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 
 void	mi_execoneerr(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	dprintf(2, "mi_execoneerr->args[0] = %s\n", mi_cmd->args[0]);
-	dprintf(2," num file  %ls \n",mi_cmd->fd); 
 	if (mi_cmd->next != NULL)
 	{
 		if (pipe(mi_cmd->fd) == -1)

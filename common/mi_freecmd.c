@@ -64,14 +64,15 @@ void	mi_freecmd(t_sys *mi_sys)
 	{
 		mi_cmd = mi_sys->cmd;
 		mi_freeonecmd(mi_sys->cmd);
+		
 		if(!mi_cmd->next)
 			break ;
 		mi_nxcmd = mi_cmd->next;
+		if(mi_cmd->full)
+			free(mi_cmd->full);
 		free (mi_cmd);
 		mi_sys->cmd = mi_nxcmd;
 	}
-	if(mi_cmd->full)
-		free(mi_cmd->full);
 	free(mi_sys->cmd);
 	mi_sys->cmd = NULL;
 	mi_sys->nb_error = 0;
