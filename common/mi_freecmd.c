@@ -61,10 +61,14 @@ void	mi_freecmd(t_sys *mi_sys)
 	mi_cmd = mi_sys->cmd;
 	while (mi_cmd != NULL)
 	{
+		mi_cmd = mi_sys->cmd;
+		dprintf(2, "64  mi_freecmd  %s %s\n", mi_cmd->args[0], mi_cmd->args[1]);
 		mi_freeonecmd(mi_sys->cmd);
+		dprintf(2, "66  mi_freecmd \n");
 		if(!mi_cmd->next)
 			break ;
-		mi_cmd = mi_cmd->next;
+		//mi_cmd = mi_cmd->next;
+		mi_sys->cmd = mi_cmd->next;
 	}
 	if(mi_cmd->full)
 		free(mi_cmd->full);
