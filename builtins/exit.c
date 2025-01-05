@@ -16,17 +16,14 @@ void	builtin_exit(t_sys *mi_sys)
 {
 	int		code_exit;
 	char	*arg;
-	int		i;
-	int		n;
+	int		n[3];
 
-	i = 0;
-	n = 0;
 	code_exit = 255;
 	if (mi_sys->cmd && mi_sys->cmd->arg)
 	{
 		arg = mi_sys->cmd->arg;
-		ft_cnt_arg(arg, &i, &n);
-		if (n > 1)
+		ft_cnt_arg(arg,  n);
+		if (n[0] > 1)
 			return (mi_logerror(2, "too many arguments", mi_sys));
 		ft_subchars(arg, "\"\'");
 		if (arg != NULL)

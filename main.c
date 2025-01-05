@@ -52,7 +52,6 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		signal(SIGINT, &signal_handle_sigint);
-
 		line = readline("minishell> ");
 		if (line && *line == '\0')
 			continue ;

@@ -55,7 +55,7 @@ void	ft_bzero(void *s, size_t n);
 
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_chrrepeat(char c, int n);
-void	ft_cnt_arg(char *ln, int *i, int *n);
+void	ft_cnt_arg(char *ln, int *n);
 
 
 
@@ -87,13 +87,13 @@ char	*ft_strsubreplace(char *str, int start, int len, char *replace);
 int		ft_pos_left_char(char *s, char c);
 int		ft_pos_left_chars(char *s, char *c);
 char	*ft_post_left_sep(char *s, const char *c);
-void	ft_pos_passspace(char *ln, int *i);
-void	ft_pos_passstring(char *ln, int *i);
+void	ft_posnospace(char *ln, int *i);
+void	ft_posnostring(char *ln, int *i);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-void	ft_pos_redir(char *ln, int *i);
+void	ft_posredir(char *ln, int *i);
 char	**ft_split(char const *s, char c);
 size_t	ft_strchr_pos(const char *source, int find);
 char	*ft_strchr(const char *s, int c);

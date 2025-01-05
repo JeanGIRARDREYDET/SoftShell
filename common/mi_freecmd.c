@@ -28,6 +28,9 @@ void	mi_freered(t_cmd *mi_cmd)
 		free(mi_cmd->red);
 		mi_cmd->red = tmp;
 	}
+	if(mi_cmd->red == NULL)
+		return ;
+	free(mi_cmd->red);
 	mi_cmd->red = NULL;
 }
 

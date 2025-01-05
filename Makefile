@@ -43,8 +43,8 @@ SRCS = 			main.c \
 				libft/ft_itoa.c \
 				libft/ft_lstadd_front.c \
 				libft/ft_post_left_sep.c \
-				libft/ft_pos_passspace.c \
-				libft/ft_pos_passstring.c \
+				libft/ft_posnospace.c \
+				libft/ft_posnostring.c \
 				libft/ft_strlcat.c \
 				libft/ft_lstclear.c \
 				libft/ft_putchar_fd.c \

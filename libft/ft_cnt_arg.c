@@ -12,24 +12,34 @@
 
 #include "../minishell.h"
 
-void	ft_pos_redir(char *ln, int *i)
+void	ft_posredir(char *ln, int *i)
 {
-	while (ln && ln[*i] && (ln[*i] == '<' || ln[*i] == '>'))
-		(*i)++;
+	int 	s;
+	
+	s = *i;
+	if (ln && ln[*i] && (ln[*i] != '<' && ln[*i] != '>'))
+	{
+		while (ln && ln[*i] && (ln[*i] != '<' && ln[*i] != '>'))
+			(*i)++;
+	}
+	else if (ln && ln[*i] && (ln[*i] == '<' || ln[*i] == '>'))
+		{
+			while (ln && ln[*i] && ln[*i] == ln[s])
+				(*i)++;
+		}
 }
 
-void	ft_cnt_arg(char *ln, int *i, int *n)
+void	ft_cnt_arg(char *ln ,int *n)
 {
-	int			s;
-
 	if (ln == NULL)
 		return ;
-	ft_pos_passspace(ln, i);
-	s = *i;
-	ft_pos_redir(ln, i);
-	if (s == *i)
-		ft_pos_passstring(ln, i);
-	(*n)++;
-	if (ln && ln[*i])
-		ft_cnt_arg(ln, i, n);
+	ft_posnospace(ln, &(n[1]));
+	ft_posredir(ln, &(n[2]));
+	if (n[1]<n[2])
+		ft_posnostring(ln, &(n[1]));
+	else
+		ft_posnostring(ln, &(n[2]));
+	(n[0])++;
+	if (ln && ln[n[0]])
+		ft_cnt_arg(ln, n);
 }

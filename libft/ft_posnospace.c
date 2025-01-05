@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pos_passstring.c                                :+:      :+:    :+:   */
+/*   ft_posnospace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
+/*   Created: 2024/10/13 12:41:16 by jegirard          #+#    #+#             */
 /*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// && ln[*i] != '<' && ln[*i] != '>'
-
-void	ft_pos_passstring(char *ln, int *i)
+void	ft_posnospace(char *ln, int *i)
 {
-	char	echap;
-
-	echap = '\0';
-	while (ln && ln[*i] != '\0'
-		&& (!ft_strchr(WSPACE, ln[*i]) || echap != '\0'))
-	{
-		if ((echap == '\0') && ft_strchr(TECHAP, ln[*i]))
-			echap = ft_strchr(TECHAP, ln[*i])[0];
-		else if (ln[*i] == echap)
-			echap = '\0';
+	while (ln && ln[*i] && !ft_strchr(WSPACE, ln[*i]))
 		(*i)++;
-	}
 }
