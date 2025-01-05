@@ -99,11 +99,13 @@ SRCS = 			main.c \
 				common/mi_sysinitialization.c \
 				common/mi_envcreateupdate.c \
 				parsing/mi_cmdsplitcmd.c \
+				parsing/mi_cntarg.c \
 				parsing/mi_unbordercote.c \
 				parsing/mi_expand.c \
 				parsing/mi_lexing.c \
 				parsing/mi_cmd_parsse.c \
 				parsing/mi_parseredirtocken.c \
+				parsing/mi_posdif.c \
 				parsing/mi_pospasscote.c \
 				parsing/mi_cmditer.c \
 				parsing/mi_redis.c \
