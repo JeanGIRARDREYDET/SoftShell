@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <sys/types.h>
+#include <dirent.h>
 
 static void	mi_checkoneaccess(char *path, t_cmd *mi_cmd)
 {
@@ -47,6 +49,21 @@ static void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 	mi_checkoneaccess("/usr/bin", mi_cmd);
 }
 
+static void	mi_checkdireaccess(t_cmd *mi_cmd)
+{
+	DIR		*pathcmd;
+
+	if(mi_cmd->found == false)
+		return ;
+	mi_cmd->isdir = false;
+	pathcmd = opendir( mi_cmd->args[0]);
+	if (pathcmd == NULL)
+		return ;
+	mi_cmd->isdir = true;
+	mi_cmd->builtin = true;
+	closedir(pathcmd);
+}
+
 void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	mi_cmd->found = false;
@@ -58,4 +75,5 @@ void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	mi_checkoneaccess(mi_getenv_env("PWD", mi_sys), mi_cmd);
 	mi_checkenvpathaccess (mi_cmd, mi_sys);
+	mi_checkdireaccess(mi_cmd);
 }
