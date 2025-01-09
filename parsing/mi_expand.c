@@ -65,8 +65,7 @@ void	mi_expand_find_env(char **full_cmd, int i, int len, t_sys *mi_sys)
 	if (!find)
 		replace = ft_strsubreplace(full_cmd[0], i, 1, "");
 	else
-		replace = ft_strsubreplace(full_cmd[0], i, len, find);		
-	replace = ft_strsubreplace(full_cmd[0], i, len, find);
+		replace = ft_strsubreplace(full_cmd[0], i, len, find);
 	free(*full_cmd);
 	*full_cmd = replace;
 }
