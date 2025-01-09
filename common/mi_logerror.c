@@ -55,7 +55,7 @@ int	mi_intlogerror(t_sys *mi_sys, char *s, int code)
 	mi_logerror(code, s, mi_sys);
 	return (code);
 }
-void	mi_logerrormsg2(int code_error, char *msg1, char *msg2, t_sys *mi_sys)
+void	mi_logerror2(int code_error, char *msg1, char *msg2, t_sys *mi_sys)
 {
 	char	*msg;
 
