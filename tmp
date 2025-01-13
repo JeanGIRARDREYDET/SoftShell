@@ -1,1 +1,24 @@
-/home/jegirard/projet/minishell /home/jegirard/projet/minishell $PWD
+builtins
+check
+common
+io
+libft
+main.c
+main.o
+Makefile
+minishell
+minishell.h
+minishell.h.gch
+Minishell.pdf
+nb_error
+outfile
+outfile_
+parsing
+pipe
+pq
+PWD
+readline.supp
+README.md
+test.txt
+tmp
+toto
