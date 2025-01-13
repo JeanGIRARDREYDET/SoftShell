@@ -32,7 +32,7 @@ void	mi_analyse(char *line, t_sys *mi_sys)
 {
 	mi_checkline(line, mi_sys);
 	mi_lexingline(line, mi_sys);
-	mi_syscmditer(mi_sys, &mi_expand_interface);
+//	mi_syscmditer(mi_sys, &mi_expand_interface);
 	mi_cmditer(mi_sys, &mi_cmdsplitcmd);
 	mi_syscmditer(mi_sys, &mi_cmdparsse);
 	mi_sysrediter(mi_sys, HEREDOC, &mi_heredoc);

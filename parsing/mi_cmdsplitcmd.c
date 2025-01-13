@@ -29,12 +29,13 @@ void	mi_cmdsplitcmd(t_cmd *mi_cmd)
 		x[1] = 0;
 		x[2] = 0;
 		while (mi_cmd->full[x[0]])
-		{	x[1] = x[0];
-			mi_posdif(mi_cmd->full , &x[0], &x[1]);			
-			if ( x[1]<1)
+		{
+			x[1] = x[0];
+			mi_posdif(mi_cmd->full, &x[0], &x[1]);
+			if (x[1] < 1)
 			{
 				x[0]++;
-				continue;
+				continue ;
 			}
 			if (x[1] > x[0])
 			{

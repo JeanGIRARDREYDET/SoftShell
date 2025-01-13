@@ -12,24 +12,21 @@
 
 #include "../minishell.h"
 
-
 void	mi_posdif(char *ln, int *s, int *i)
 {
-
-	while (ln && ln[*i] && ln[*i] != '\0' && ft_strchr(WSPACE, ln[*i]))
+	while (ln && ln[*i] && ln[*i] != '\0' && ft_strchr(WSPACE, ln[*i]) && !ft_strin(TECHAP, ln[*i]))
 		(*i)++;
-	
 	*s = *i;
 	if (ln && ln[*i] && ln[*i] != '\0' && (ln[*i] != '<' && ln[*i] != '>'))
 	{
-		while (ln && ln[*i] && ln[*i] != '\0'  && !ft_strchr(WSPACE, ln[*i]) 
+		while (ln && ln[*i] && ln[*i] != '\0' && !ft_strchr(WSPACE, ln[*i])
 		&& (ln[*i] != '<' && ln[*i] != '>'))
 			(*i)++;
 	}
-	else if (ln && ln[*i] && ln[*i] != '\0'  && !ft_strchr(WSPACE, ln[*i]) 
+	else if (ln && ln[*i] && ln[*i] != '\0' && !ft_strchr(WSPACE, ln[*i])
 	&& (ln[*i] == '<' || ln[*i] == '>'))
-		{
-			while (ln && ln[*i] && ln[*i] == ln[*s])
-				(*i)++;
-		}
+	{
+		while (ln && ln[*i] && ln[*i] == ln[*s])
+			(*i)++;
+	}
 }

@@ -12,14 +12,13 @@
 
 #include "../minishell.h"
 
-
 void	mi_cntarg(char *ln ,int *x)
 {
-	mi_posdif(ln , &x[0], &x[1]);
+	mi_posdif(ln, &x[0], &x[1]);
 	if (ln && ln[x[0]] && x[1] > x[0])
 	{
 		x[0] = x[1];
-		mi_cntarg( ln , x);
-		x[2]++;;
+		mi_cntarg(ln, x);
+		x[2]++;
 	}
 }

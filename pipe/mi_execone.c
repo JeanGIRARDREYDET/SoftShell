@@ -56,11 +56,8 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 
 void	mi_execonepipe(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-
 	if (mi_cmd->next != NULL)
 	{
-
-
 		if (pipe(mi_cmd->fd) == -1)
 		{
 			dprintf(2,"pipe out failed\n");
