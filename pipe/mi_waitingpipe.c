@@ -32,10 +32,12 @@ void	mi_waitingpipe(t_sys *mi_sys)
 
 	if (mi_sys->nb_error > 0)
 		return ;
-	if ((mi_sys->nb_pipe == 1 && (mi_sys->cmd->builtin || !mi_sys->cmd->args))
+	if ((mi_sys->nb_pipe == 1 || (mi_sys->cmd->builtin || !mi_sys->cmd->args))
 		|| mi_sys->nb_pipe == 0)
 		return ;
 	waitpid (mi_sys->max_id, &status, 0);
 	mi_freeerror (mi_sys);
+	dprintf(2, "nb_pipe %d \n", mi_sys->nb_pipe);
+	dprintf(2, "status = %d\n", WEXITSTATUS(status));
 	mi_logerror (WEXITSTATUS(status), NULL, mi_sys);
 }
