@@ -38,6 +38,9 @@ void	mi_waitingpipe(t_sys *mi_sys)
 	waitpid (mi_sys->max_id, &status, 0);
 	mi_freeerror (mi_sys);
 	dprintf(2, "nb_pipe %d \n", mi_sys->nb_pipe);
-	dprintf(2, "status = %d\n", WEXITSTATUS(status));
+	if (!status)
+		return ;
+	dprintf(2, "status = %d\n", status);
+	dprintf(2, "WEXITSTATUS status = %d\n", WEXITSTATUS(status));
 	mi_logerror (WEXITSTATUS(status), NULL, mi_sys);
 }
