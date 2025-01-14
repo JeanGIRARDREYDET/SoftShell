@@ -19,8 +19,7 @@
 
 void	mi_waitingcmdipe(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-
-	if(mi_sys->nb_pipe == 1 && mi_cmd->builtin)
+	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin)
 		return ;
 	waitpid (mi_cmd->id, &(mi_cmd->status), 0);
 	mi_logerror (WEXITSTATUS(mi_cmd->status), NULL, mi_sys);

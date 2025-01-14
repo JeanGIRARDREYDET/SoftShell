@@ -15,12 +15,11 @@
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	char	*errormsg;
-		
+
 	if (mi_cmd->args[0] == NULL )
 		return (1);
 	if (mi_cmd->builtin == true)
 	{
-		// les argirmnt doivent se terminer par un null
 		mi_execbuiltin(mi_cmd, STDOUT_FILENO, mi_sys);
 		mi_freesys(mi_sys);
 		return (127);

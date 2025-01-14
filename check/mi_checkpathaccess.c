@@ -39,12 +39,12 @@ static void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		paths = ft_split (pathstring, ':');
 		i = 0;
-		while (!mi_cmd->found &&paths && paths[i])
+		while (!mi_cmd->found && paths && paths[i])
 		{
 			mi_checkoneaccess(paths[i], mi_cmd);
 			i++;
 		}
-		ft_arrclose2(paths);
+		ft_arrclose(paths);
 	}
 	mi_checkoneaccess("/usr/bin", mi_cmd);
 }
@@ -53,10 +53,10 @@ static void	mi_checkdireaccess(t_cmd *mi_cmd)
 {
 	DIR		*pathcmd;
 
-	if(mi_cmd->found == false)
+	if (mi_cmd->found == false)
 		return ;
 	mi_cmd->isdir = false;
-	pathcmd = opendir( mi_cmd->args[0]);
+	pathcmd = opendir(mi_cmd->args[0]);
 	if (pathcmd == NULL)
 		return ;
 	mi_cmd->isdir = true;

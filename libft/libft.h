@@ -57,8 +57,6 @@ void	*ft_calloc(size_t count, size_t size);
 char	*ft_chrrepeat(char c, int n);
 void	ft_cnt_arg(char *ln, int *n);
 
-
-
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
@@ -117,7 +115,6 @@ char	*ft_strtrimparam(char const *s1, int debut, int fin, char const *set);
 char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	ft_sys_get_pwd(char **buf);
-void	ft_arrclose2(char **arr);
 
 size_t	ft_tablen(char const **str);
 int		ft_tolower(int c);

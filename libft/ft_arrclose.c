@@ -17,21 +17,6 @@ void	ft_arrclose(char **arr)
 	int	i;
 
 	i = 0;
-	while (*arr && *arr[i] !='\0')
-	{
-		free(arr[i]);
-		arr[i] = NULL;
-		i++;
-	}
-	if (arr)
-		free(arr);
-	arr = NULL;
-}
-void	ft_arrclose2(char **arr)
-{
-	int	i;
-
-	i = 0;
 	while (arr && arr[i])
 	{
 		free(arr[i]);
@@ -41,6 +26,4 @@ void	ft_arrclose2(char **arr)
 	if (arr)
 		free(arr);
 	arr = NULL;
-
-
 }

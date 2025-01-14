@@ -55,11 +55,12 @@ int	mi_intlogerror(t_sys *mi_sys, char *s, int code)
 	mi_logerror(code, s, mi_sys);
 	return (code);
 }
+
 void	mi_logerror2(int code_error, char *msg1, char *msg2, t_sys *mi_sys)
 {
 	char	*msg;
 
-	msg	= ft_strjoin(msg1, msg2);
+	msg = ft_strjoin(msg1, msg2);
 	mi_logerror(code_error, msg, mi_sys);
 	free(msg);
 }

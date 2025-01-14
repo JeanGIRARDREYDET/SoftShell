@@ -22,7 +22,7 @@ void	builtin_exit(t_sys *mi_sys)
 	if (mi_sys->cmd && mi_sys->cmd->arg)
 	{
 		arg = mi_sys->cmd->arg;
-		ft_cnt_arg(arg,  n);
+		ft_cnt_arg(arg, n);
 		if (n[0] > 1)
 			return (mi_logerror(2, "too many arguments", mi_sys));
 		ft_subchars(arg, "\"\'");
