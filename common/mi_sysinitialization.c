@@ -15,7 +15,7 @@
 void	mi_setdefaul_initialization( t_sys *mi_sys)
 {
 	mi_sys->senv = (t_env *) ft_calloc (1, sizeof (t_env));
-	mi_sys->senv->path = "/usr/bin:/bin:/usr/sbin:/sbin";
+	mi_sys->senv->path = "/usr/bin";
 	mi_sys->senv->pwd = getcwd(NULL, 0);
 	mi_sys->nb_pipe = 0;
 	mi_sys->cmd = NULL;
