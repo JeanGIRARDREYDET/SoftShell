@@ -45,7 +45,7 @@ static int	fname(char *file, long n, int len, long lb)
 	return (++len);
 }
 
-void	mi_creredfilename(t_red *mi_re, int type, char *file_name)
+void	mi_crered_herdoc_filename(t_red *mi_re, int type, char *file_name)
 {
 	uintptr_t			addresse;
 
@@ -76,7 +76,7 @@ void	mi_crered(t_cmd *cmd, t_sys *sys, int type, char *file_name)
 		return ;
 	mi_red->redir_type = type;
 	mi_red->fd = 0;
-	mi_creredfilename(mi_red, type, file_name);
+	mi_crered_herdoc_filename(mi_red, type, file_name);
 	mi_red->next = NULL;
 	if (cmd->red == NULL)
 		cmd->red = mi_red;

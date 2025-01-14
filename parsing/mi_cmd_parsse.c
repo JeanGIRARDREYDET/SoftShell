@@ -44,9 +44,14 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		if (mi_cmd->split[i + 1] && (mi_cmd->split[i][0] == '<'
 			|| mi_cmd->split[i][0] == '>'))
-			i++;
+		{
+				i++;
+				if (&mi_cmd->split[i])
+					mi_expand(&mi_cmd->split[i], 0, mi_sys);
+		}
 		else
 		{
+			mi_expand(&mi_cmd->split[i], 0, mi_sys);
 			mi_cmd->args[n] = ft_strdup(mi_cmd->split[i]);
 			n++;
 		}
