@@ -138,7 +138,6 @@ void	mi_sysinitialization(char **env, t_sys *s_sys);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
 void	mi_freeerror(t_sys *mi_sys);
 void	mi_freeonecmd(t_cmd *mi_cmd);
-size_t	ft_tablen2(char **str);
 int		mi_export_values(char **key, t_sys *mi_sys);
 t_error	*mi_errornew(int code_error, char *msg);
 void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys);
@@ -160,7 +159,6 @@ void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys);
 char	*ft_findcommand(char *line);
 void	s_env_create_update_key_value(char *key, char *value, t_sys *mi_sys);
 void	mi_expand(char **full_cmd, int i, t_sys *mi_sys);
-
 void	mi_closecmd(t_cmd *mi_cmd, int nb);
 t_cmd	*mi_createcmd(t_sys *mi_sys);
 void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys);

@@ -14,6 +14,6 @@
 
 void	ft_posnospace(char *ln, int *i)
 {
-	while (ln && ln[*i] && !ft_strchr(WSPACE, ln[*i]))
+	while (ln && ln[*i] && ln[*i] != '\0' && !ft_strchr(WSPACE, ln[*i]))
 		(*i)++;
 }

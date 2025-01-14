@@ -10,18 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/******************************************************************************/
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jegirard <jegirard@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 11:35:31 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/07 12:55:45 by jegirard         ###   ########.fr       */
-/*                                                                            */
-/******************************************************************************/
-
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -116,7 +104,7 @@ char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	ft_sys_get_pwd(char **buf);
 
-size_t	ft_tablen(char const **str);
+size_t	ft_tablen(char **str);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 

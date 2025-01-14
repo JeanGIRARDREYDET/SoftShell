@@ -43,7 +43,7 @@ void	builtin_echo(t_cmd *mi_cmd, int fd)
 	int		start;
 
 	nl = 1;
-	len = ft_tablen2(mi_cmd->args);
+	len = ft_tablen(mi_cmd->args);
 	j = 1;
 	echo_param(mi_cmd->args, &j, len, &nl);
 	start = j;

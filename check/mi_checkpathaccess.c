@@ -46,7 +46,7 @@ static void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		ft_arrclose(paths);
 	}
-	mi_checkoneaccess("/usr/bin", mi_cmd);
+	//mi_checkoneaccess("/usr/bin", mi_cmd);
 }
 
 static void	mi_checkdireaccess(t_cmd *mi_cmd)

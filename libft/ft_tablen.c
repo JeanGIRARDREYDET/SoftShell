@@ -24,7 +24,7 @@ Retour :		The strlen() function returns the number of bytes in the string
 
 #include "../minishell.h"
 
-size_t	ft_tablen(char const **str)
+size_t	ft_tablen(char **str)
 {
 	size_t	i;
 
