@@ -26,11 +26,14 @@ void	echo_param(char **param, int *j, int len, int *nl)
 		k = 1;
 		while (param[*j][k] == 'n')
 			k++;
-		if (param[*j][k - 1] == 'n' && !param[*j][k])
+		if (param[*j][k - 1] == 'n' && !param[*j][k] &&
+			ft_strchr(WSPACE, param[*j][k]))
 		{
 			*nl = 0;
 			*j = *j + 1;
 		}
+		else
+			break ;
 	}
 	return ;
 }
