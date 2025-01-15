@@ -46,7 +46,7 @@ static void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		ft_arrclose(paths);
 	}
-	if (mi_sys->senv->path)
+	if (mi_sys->senv->path != NULL)
 		mi_checkoneaccess(mi_sys->senv->path, mi_cmd);
 }
 
