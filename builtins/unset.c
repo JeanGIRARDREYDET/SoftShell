@@ -24,7 +24,6 @@ void	builtin_unset(char *key, t_sys *mi_sys)
 	{
 		if (key && ft_findword(key, "PATH"))
 			mi_sys->senv->path = NULL;
-			
 		free(mi_sys->env[pos]);
 		while (mi_sys->env[pos + 1] != NULL)
 		{
