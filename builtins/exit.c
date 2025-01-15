@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	builtin_exit(char **args,t_sys *mi_sys)
+void	builtin_exit(char **args, t_sys *mi_sys)
 {
 	int		code_exit;
 	size_t	arglen;

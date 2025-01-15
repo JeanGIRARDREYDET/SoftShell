@@ -33,7 +33,6 @@ void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 	char		*cmd;
 	char		**paths;
 	int			i;
-	char		*error_msg;
 
 	i = 0;
 	if (mi_execheckfind(mi_cmd, mi_sys))
@@ -50,8 +49,7 @@ void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		free(cmd);
 	}
-	error_msg = join_3 ("minishell: ", mi_cmd->args[0], ": command not found\n");
-	mi_logerror(126, error_msg, mi_sys);
+	mi_logerror2(126, mi_cmd->args[0], ": command not found", mi_sys);
 	free(paths);
 	return ;
 }

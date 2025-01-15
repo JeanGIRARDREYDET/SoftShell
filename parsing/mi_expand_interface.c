@@ -32,7 +32,7 @@ void	mi_expand(char **full_cmd, int i, t_sys *mi_sys)
 			mi_expandrepalceone(full_cmd, i);
 		else
 			i++;
-	}	
+	}
 }
 
 void	mi_expand_interface(t_cmd *mi_cmd, t_sys *mi_sys)
