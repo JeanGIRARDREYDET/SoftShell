@@ -12,12 +12,6 @@
 
 #include "minishell.h"
 
-void	mi_checkline(char *line, t_sys *mi_sys)
-{
-	if (ft_findword("exit", line))
-		builtin_exit(mi_sys->cmd->args, mi_sys);
-}
-
 void	mi_checkmsargument(int argc, char **argv)
 {
 	if (argc > 1)
@@ -30,7 +24,6 @@ void	mi_checkmsargument(int argc, char **argv)
 
 void	mi_analyse(char *line, t_sys *mi_sys)
 {
-	mi_checkline(line, mi_sys);
 	mi_lexingline(line, mi_sys);
 	mi_cmditer(mi_sys, &mi_cmdsplitcmd);
 	mi_syscmditer(mi_sys, &mi_cmdparsse);
@@ -52,12 +45,10 @@ int	main(int argc, char **argv, char **env)
 	{
 		signal(SIGINT, &signal_handle_sigint);
 		line = readline("minishell> ");
-		if (line && *line == '\0')
+		if (!line || (line && *line == '\0'))
 			continue ;
 		else if (line)
 			add_history(line);
-		else if (!line)
-			continue;
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
 		mi_analyse(line, &mi_sys);
