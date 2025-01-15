@@ -60,7 +60,6 @@ void	mi_execonepipe(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		if (pipe(mi_cmd->fd) == -1)
 		{
-			dprintf(2, "pipe out failed\n");
 			mi_intlogerror (mi_sys, "pipe out failed", 1);
 			return ;
 		}
