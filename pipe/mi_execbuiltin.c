@@ -32,7 +32,7 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	else if (ft_findword(cmd, "env"))
 		builtin_env(mi_sys, fd);
 	else if (ft_findword(cmd, "exit"))
-		builtin_exit(mi_sys);
+		builtin_exit(mi_cmd->args, mi_sys);
 	else if (ft_findword(cmd, "export"))
 		builtin_export(mi_cmd->args, fd, mi_sys);
 	else if (ft_findword(cmd, "pwd"))

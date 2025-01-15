@@ -12,23 +12,22 @@
 
 #include "../minishell.h"
 
-void	builtin_exit(t_sys *mi_sys)
+void	builtin_exit(char **args,t_sys *mi_sys)
 {
 	int		code_exit;
 	size_t	arglen;
 
 	code_exit = 255;
-	if (mi_sys->cmd && mi_sys->cmd->arg)
+	if (args)
 	{
-		arglen = ft_tablen(mi_sys->cmd->args);
+		arglen = ft_tablen(args);
 		if (arglen > 2)
-			return (mi_logerror(2, "too many arguments", mi_sys));
-		//t_subchars(args[1], "\"\'");
-		if (mi_sys->cmd->args[1] != NULL)
+			mi_logerror2(2, args[1], "too many arguments", mi_sys);
+		if (args[1] != NULL)
 		{
-			code_exit = 0xFF & ft_atoi(mi_sys->cmd->args[1]);
+			code_exit = 0xFF & ft_atoi(args[1]);
 			if (code_exit == 0)
-				return (mi_logerror(130, "numeric argument required", mi_sys));
+				mi_logerror2(130, args[1], "numeric argument required", mi_sys);
 		}
 	}
 	write(STDOUT_FILENO, "exit", 5);

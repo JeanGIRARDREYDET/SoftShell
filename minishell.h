@@ -125,7 +125,7 @@ bool	ft_findword(const char *source, const char *find);
 void	builtin_cd(char **key, int fd, t_sys *s_sys);
 void	builtin_echo(t_cmd *me_cmd, int fd);
 void	builtin_env(t_sys *s_sys, int fd);
-void	builtin_exit(t_sys *s_sys);
+void	builtin_exit(char **args,t_sys *mi_sys);
 void	builtin_export(char **key, int fd, t_sys *s_sys);
 void	print_export(t_sys *s_sys, int fd);
 void	builtin_pwd(int fd);

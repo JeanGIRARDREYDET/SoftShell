@@ -15,7 +15,7 @@
 void	mi_checkline(char *line, t_sys *mi_sys)
 {
 	if (ft_findword("exit", line))
-		builtin_exit(mi_sys);
+		builtin_exit(mi_sys->cmd->args, mi_sys);
 }
 
 void	mi_checkmsargument(int argc, char **argv)
@@ -57,7 +57,7 @@ int	main(int argc, char **argv, char **env)
 		else if (line)
 			add_history(line);
 		else if (!line)
-			builtin_exit(&mi_sys);
+			continue;
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
 		mi_analyse(line, &mi_sys);
