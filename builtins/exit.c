@@ -15,14 +15,12 @@
 void	builtin_exit(t_sys *mi_sys)
 {
 	int		code_exit;
-	char	*arg;
 	size_t	arglen;
 
 	code_exit = 255;
 	if (mi_sys->cmd && mi_sys->cmd->arg)
 	{
 		arglen = ft_tablen(mi_sys->cmd->args);
-		arg = mi_sys->cmd->arg;
 		if (arglen > 2)
 			return (mi_logerror(2, "too many arguments", mi_sys));
 		//t_subchars(args[1], "\"\'");

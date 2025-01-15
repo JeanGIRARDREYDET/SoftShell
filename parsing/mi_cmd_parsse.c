@@ -46,7 +46,7 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 			|| mi_cmd->split[i][0] == '>'))
 		{
 			i++;
-			if (&mi_cmd->split[i])
+			if (mi_cmd->split[i])
 				mi_expand(&mi_cmd->split[i], 0, mi_sys);
 		}
 		else
