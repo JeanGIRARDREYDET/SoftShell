@@ -21,7 +21,7 @@ void	mi_freered(t_cmd *mi_cmd)
 	tmp = mi_cmd->red;
 	while (tmp)
 	{
-		if (tmp->fd)
+		if (tmp->fd && tmp->fd != -1)
 			close(tmp->fd);
 		if (tmp->redir_type == HEREDOC)
 		{
@@ -31,7 +31,7 @@ void	mi_freered(t_cmd *mi_cmd)
 		}
 		tmp = tmp->next;
 	}
-	if (mi_cmd->red->fd)
+	if(mi_cmd->red->fd && mi_cmd->red->fd != -1)
 		close(mi_cmd->red->fd);
 	if (mi_cmd->red == NULL)
 		return ;

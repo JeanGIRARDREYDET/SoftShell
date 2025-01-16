@@ -40,7 +40,7 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	else if (ft_findword(cmd, "unset"))
 		mi_cmdargsiter(mi_cmd->args, mi_sys, &builtin_unset);
 	else if (mi_cmd->isdir == true)
-		mi_logerror2(126, cmd, " : is a directory", mi_sys);
+		mi_logerror2(126, cmd, "is a directory", mi_sys);
 	if (mi_sys->nb_pipe > 1)
 		mi_execexitepipe(mi_sys->exit_status, mi_sys);
 }
