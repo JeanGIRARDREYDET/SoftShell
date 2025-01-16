@@ -8,3 +8,4 @@ libft/*.o
 *.o
 *.html
 libft/*.o
+tmp*

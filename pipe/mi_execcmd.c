@@ -14,9 +14,9 @@
 
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	char	*errormsg;
+	int error;
 
-	if (mi_cmd->args[0] == NULL )
+	if (mi_cmd->args[0] == NULL)
 		return (1);
 	if (mi_cmd->builtin == true)
 	{
@@ -25,13 +25,12 @@ int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 		return (127);
 	}
 	if (!mi_cmd->found)
+		mi_logerror2(127, mi_cmd->args[0], ": command not found", mi_sys);
+	if (!mi_cmd->found || mi_cmd->fd[1] == -1)
 	{
-		errormsg = ft_strjoin(mi_cmd->args[0], ": command not found");
-		mi_logerror(127, errormsg, mi_sys);
-		free(errormsg);
+		error = mi_sys->error->code_error;
 		mi_freesys(mi_sys);
-		exit(127);
-		return (127);
+		exit(error);
 	}
 	else if (execve(mi_cmd->args[0], mi_cmd->args, mi_sys->env) == -1)
 	{

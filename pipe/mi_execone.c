@@ -13,12 +13,15 @@
 #include "../minishell.h"
 
 void	mi_execonechildexe(t_cmd *mi_cmd, t_sys *mi_sys)
-{
+{	
 	if (mi_cmd->next != NULL)
 	{
 		if (dup2(mi_cmd->fd[1], STDOUT_FILENO) == -1)
 			return ;
 		close (mi_cmd->fd[0]);
+		
+		if (mi_cmd->fd[1] != -1)
+			return ;
 		close (mi_cmd->fd[1]);
 	}
 	if (mi_cmd->args[0] != NULL)
@@ -29,12 +32,14 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 {
 	if (!mi_cmd->args[0])
 	{
+		//signal(SIGINT, SIG_IGN);
 		dup2(mi_cmd->red->fd, STDOUT_FILENO);
 		close (mi_cmd->red->fd);
 		mi_execexitepipe(mi_sys->exit_status, mi_sys);
 	}
 	if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
 	{
+		dprintf(2, "-----\n\n\n");
 		mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
 		dup2(mi_cmd->red->fd, STDIN_FILENO);
 		close (mi_cmd->red->fd);
@@ -100,6 +105,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 		close (mi_sys->fd_in);
 		return ;
 	}
+
 	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin == true)
 	{
 		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))

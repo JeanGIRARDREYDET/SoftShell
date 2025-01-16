@@ -18,15 +18,18 @@ void	mi_freered(t_cmd *mi_cmd)
 
 	if (!mi_cmd->red)
 		return ;
-	while (mi_cmd->red && mi_cmd->red != NULL && mi_cmd->red->next != NULL)
+	tmp = mi_cmd->red;
+	while (tmp)
 	{
-		tmp = mi_cmd->red->next;
-		if (mi_cmd->red->fd)
-			close(mi_cmd->red->fd);
-		if (mi_cmd->red->redir_type == HEREDOC)
-			unlink(mi_cmd->red->file_name);
-		free(mi_cmd->red);
-		mi_cmd->red = tmp;
+		if (tmp->fd)
+			close(tmp->fd);
+		if (tmp->redir_type == HEREDOC)
+		{
+			unlink(tmp->file_name);
+			free(tmp->file_name);
+			tmp->file_name = NULL;
+		}
+		tmp = tmp->next;
 	}
 	if (mi_cmd->red->fd)
 		close(mi_cmd->red->fd);
