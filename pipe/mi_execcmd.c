@@ -14,7 +14,7 @@
 
 int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	int error;
+	int	error;
 
 	if (mi_cmd->args[0] == NULL)
 		return (1);
