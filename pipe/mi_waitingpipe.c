@@ -32,8 +32,8 @@ void	mi_waitingpipe(t_sys *mi_sys)
 	status = 0;
 	if (mi_sys->nb_error > 0)
 		return ;
-	if ((mi_sys->nb_pipe == 1 || (mi_sys->cmd->builtin || !mi_sys->cmd->args))
-		|| mi_sys->nb_pipe == 0)
+	if ((mi_sys->nb_pipe == 0 || (mi_sys->cmd->builtin || !mi_sys->cmd->args) )
+		|| mi_sys->nb_pipe == 1)
 		return ;
 	waitpid (mi_sys->max_id, &status, 0);
 	mi_freeerror (mi_sys);

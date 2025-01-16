@@ -19,7 +19,6 @@ void	mi_execonechildexe(t_cmd *mi_cmd, t_sys *mi_sys)
 		if (dup2(mi_cmd->fd[1], STDOUT_FILENO) == -1)
 			return ;
 		close (mi_cmd->fd[0]);
-		
 		if (mi_cmd->fd[1] != -1)
 			return ;
 		close (mi_cmd->fd[1]);
@@ -32,7 +31,6 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 {
 	if (!mi_cmd->args[0])
 	{
-		//signal(SIGINT, SIG_IGN);
 		dup2(mi_cmd->red->fd, STDOUT_FILENO);
 		close (mi_cmd->red->fd);
 		mi_execexitepipe(mi_sys->exit_status, mi_sys);
