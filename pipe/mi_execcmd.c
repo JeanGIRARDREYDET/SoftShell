@@ -16,7 +16,6 @@ int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int	error;
 
-	signal(SIGINT, SIG_DFL);
 	if (mi_cmd->args[0] == NULL)
 		return (1);
 	if (mi_cmd->builtin == true)

@@ -79,7 +79,10 @@ void	mi_execonefork(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 		return ;
 	}
 	if (mi_cmd->id == 0)
+	{
 		mi_execonechild(mi_cmd, mi_sys, out, in);
+	//	signal(SIGINT, SIG_DFL);
+	}
 	if (mi_cmd->no != 0)
 		close (mi_sys->fd_in);
 	if (mi_cmd->next != NULL)

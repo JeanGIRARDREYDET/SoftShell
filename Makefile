@@ -153,7 +153,7 @@ fclean : clean
 	@echo -e "$(RED)all deleted!$(DEFAULT)"
 
 tart : 
-	valgrind --leak-check=full --track-fds=yes --trace-children=yes --track-origins=yes --suppressions=readline.supp ./minishell
+	valgrind --leak-check=full -s --track-fds=yes --trace-children=yes --track-origins=yes --suppressions=readline.supp ./minishell
 
 re : fclean all
 

@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **env)
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
 		mi_analyse(line, &mi_sys);
-		mi_waitingpipe(&mi_sys);
+	//	mi_waitingpipe(&mi_sys);
 		mi_freecmd(&mi_sys);
 	}
 }
