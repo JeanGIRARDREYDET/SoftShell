@@ -151,6 +151,8 @@ clean:
 fclean : clean
 	$(CMD_RM) $(NAME)
 	@echo -e "$(RED)all deleted!$(DEFAULT)"
+rm :
+	find . -name "*.o" -type f -delete
 
 tart : 
 	valgrind --leak-check=full -s --track-fds=yes --trace-children=yes --track-origins=yes --suppressions=readline.supp ./minishell
