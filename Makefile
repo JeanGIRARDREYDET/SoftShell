@@ -150,7 +150,6 @@ clean:
 fclean : clean
 	$(CMD_RM) $(NAME)
 	@echo -e "$(RED)all deleted!$(DEFAULT)"
-rm :
 	find . -name "*.o" -type f -delete
 
 tart : 
