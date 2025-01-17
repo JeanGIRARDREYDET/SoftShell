@@ -15,11 +15,11 @@
 void	mi_execonechildexe(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	if (mi_cmd->fd[0] == -1)
-			return ;
+		return ;
 	if (mi_cmd->next != NULL)
 	{
 		if (dup2(mi_cmd->fd[1], STDOUT_FILENO) == -1)
-			return ;		
+			return ;
 		close (mi_cmd->fd[0]);
 		if (mi_cmd->fd[1] == -1)
 			return ;
