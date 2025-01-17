@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:09:47 by doferet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,15 @@ int	main(int argc, char **argv, char **env)
 	mi_sysinitialization(env, &mi_sys);
 	while (1)
 	{
-		signal(SIGINT, &signal_handle_sigint);
+		init_signal();
 		line = readline("minishell> ");
-		if (!line || (line && *line == '\0'))
-			continue ;
+		if (!line)
+		{
+			mi_freesys(&mi_sys);
+			mi_freecmd(&mi_sys);
+			ft_putstr_fd("exit\n", 1);
+			exit(0);
+		}
 		else if (line)
 			add_history(line);
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)

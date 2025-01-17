@@ -13,7 +13,6 @@
 #include "../minishell.h"
 
 void	mi_createcmdargs(t_cmd *mi_cmd, t_sys *mi_sys)
-
 {
 	int	i;
 	int	n;

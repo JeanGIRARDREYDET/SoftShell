@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_freecmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:07:20 by doferet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	mi_freered(t_cmd *mi_cmd)
 			close(tmp->fd);
 		if (tmp->redir_type == HEREDOC)
 			unlink(tmp->file_name);
+		if (tmp->redir_type == HEREDOC)
 		free(mi_cmd->red->file_name);
 		mi_cmd->red->file_name = NULL;
 		mi_cmd->red = tmp->next;

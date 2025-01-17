@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:09:07 by doferet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,9 @@ typedef struct s_sys
 	int				exit_status;
 }	t_sys;
 
+int		sigint_heredoc(void);
+void	init_signal(void);
+void	signal_in_heredoc(int signal);
 int		ft_get_confpos(char *key, t_sys *mi_sys);
 void	mi_freesys(t_sys *mi_sys);
 void	signal_handle_sigint(int sign);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_set_io_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:44:12 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:21:12 by doferet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys)
 		mi_logerror2(1, mi_re->file_name, strerror(errno), mi_sys);
 		close(mi_re->fd);
 	}
+	//dup2(mi_re->fd, STDOUT_FILENO);
 	return ;
 }

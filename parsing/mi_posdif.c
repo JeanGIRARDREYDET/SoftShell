@@ -25,6 +25,11 @@ void	mi_posdif(char *ln, int *s, int *i)
 		(*i)++;
 		while (ln[*i] && ln[*i] != '\0' && ln[*i] != end)
 			(*i)++;
+		if( ln[*i] == end && ln[1+*i] != '\0' && (ft_strchr(WSPACE, ln[1+*i]) || ft_strin(TECHAP, ln[1+*i])))
+		{
+			(*i)++;
+			return ;
+		}
 	}
 	if (ln && ln[*i] && ln[*i] != '\0' && (ln[*i] != '<' && ln[*i] != '>'))
 	{

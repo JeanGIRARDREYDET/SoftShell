@@ -152,7 +152,7 @@ fclean : clean
 	@echo -e "$(RED)all deleted!$(DEFAULT)"
 	find . -name "*.o" -type f -delete
 
-tart : 
+valgrind : 
 	valgrind --leak-check=full -s --track-fds=yes --trace-children=yes --track-origins=yes --suppressions=readline.supp ./minishell
 
 re : fclean all

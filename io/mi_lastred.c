@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mi_lastred.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:40:10 by doferet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ bool	ft_intisinarray(int *array, int find)
 	int			i;
 
 	i = 0;
-	while (array[i] != -1)
+	if(!array)
+		return (false);
+	while (array && array[i] != -1)
 	{
 		if (array[i] == find)
 			return (true);

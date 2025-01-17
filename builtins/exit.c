@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: doferet <doferet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
-/*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:33:19 by doferet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	builtin_exit(char **args, t_sys *mi_sys)
 				mi_logerror2(130, args[1], "numeric argument required", mi_sys);
 		}
 	}
-	write(STDOUT_FILENO, "exit", 5);
+	write(STDOUT_FILENO, "exit\n", 5);
 	mi_freecmd(mi_sys);
 	mi_freesys(mi_sys);
 	exit(code_exit);
