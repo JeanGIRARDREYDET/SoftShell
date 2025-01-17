@@ -13,13 +13,13 @@
 #include "../minishell.h"
 
 void	mi_execonechildexe(t_cmd *mi_cmd, t_sys *mi_sys)
-{	
+{
 	if (mi_cmd->next != NULL)
 	{
 		if (dup2(mi_cmd->fd[1], STDOUT_FILENO) == -1)
 			return ;
 		close (mi_cmd->fd[0]);
-		if (mi_cmd->fd[1] != -1)
+		if (mi_cmd->fd[1] == -1)
 			return ;
 		close (mi_cmd->fd[1]);
 	}
@@ -79,10 +79,7 @@ void	mi_execonefork(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 		return ;
 	}
 	if (mi_cmd->id == 0)
-	{
 		mi_execonechild(mi_cmd, mi_sys, out, in);
-	//	signal(SIGINT, SIG_DFL);
-	}
 	if (mi_cmd->no != 0)
 		close (mi_sys->fd_in);
 	if (mi_cmd->next != NULL)
