@@ -35,7 +35,7 @@ void	mi_addarg(int *n, int i, t_cmd *mi_cmd, t_sys *mi_sys)
 	if (mi_cmd->split[i][0])
 	{
 		mi_cmd->args[*n] = ft_strdup(mi_cmd->split[i]);
-		n++;
+		(*n)++;
 	}
 }
 
