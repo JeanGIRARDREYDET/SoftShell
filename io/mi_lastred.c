@@ -48,7 +48,7 @@ int	mi_lastred(t_red *mi_re, t_sys *mi_sys, int *find)
 		mi_re = mi_re->next;
 	}
 	dprintf(2, "mi_lastred 40  redir_type : %d\n", mi_re->redir_type);
-	if (ft_intisinarray(find, mi_re->redir_type))
+	if (ft_intisinarray(find, mi_return->redir_type))
 		mi_return = mi_re;
 	dprintf(2, "mi_lastred 52 : %s\n", mi_return->file_name);
 	dprintf(2, "mi_lastred 43 : %d\n", mi_return->redir_type);
