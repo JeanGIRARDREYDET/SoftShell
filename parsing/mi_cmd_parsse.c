@@ -29,6 +29,16 @@ void	mi_createcmdargs(t_cmd *mi_cmd, t_sys *mi_sys)
 	mi_cmd->args = ft_calloc(i - (2 * n) + 4, sizeof(char *));
 }
 
+void	mi_addarg(int *n, int i, t_cmd *mi_cmd, t_sys *mi_sys)
+{
+	mi_expand(&mi_cmd->split[i], 0, mi_sys);
+	if (mi_cmd->split[i][0])
+	{
+		mi_cmd->args[*n] = ft_strdup(mi_cmd->split[i]);
+		n++;
+	}
+}
+
 void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int	i;
@@ -49,11 +59,7 @@ void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys)
 				mi_expand(&mi_cmd->split[i], 0, mi_sys);
 		}
 		else
-		{
-			mi_expand(&mi_cmd->split[i], 0, mi_sys);
-			mi_cmd->args[n] = ft_strdup(mi_cmd->split[i]);
-			n++;
-		}
+			mi_addarg(&n, i, mi_cmd, mi_sys);
 		i++;
 	}
 }
