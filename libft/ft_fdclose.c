@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec_child_in.c                                 :+:      :+:    :+:   */
+/*   ft_fdclose.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegirard  <jegirard@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 12:41:16 by jegirard          #+#    #+#             */
+/*   Created: 2024/12/07 11:38:34 by jegirard          #+#    #+#             */
 /*   Updated: 2024/12/07 13:24:53 by jegirard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../struct.h"
+#include "../minishell.h"
 
-int	ft_exec_child_in(t_app *app, char **argv, int ind, char **env)
+void	ft_fdclose(int fd)
 {
-	if (app->pid == 0)
-		return (0);
-	app->pid = fork();
-	if (app->pid == -1)
-		return (ft_perror(app, "fork failed in :", 3, 0));
-	if (app->pid != 0)
-		return (0);
-	if (dup2(app->fdd[1][1], STDOUT_FILENO) == -1)
-		return (1);
-	ft_fdclose (app->fdd[1][0]);
-	if (dup2(app->fdd[0][0], STDIN_FILENO) == -1)
-		return (1);
-	close_pipe (app, 1);
-	if (app->exe[ind] != NULL)
-		ft_exec_cmd(app, argv, ind, env);
-	free_pipe (app);
-	exit (EXIT_FAILURE);
-	return (errno);
+	if (fd != -1)
+		close (fd);
 }

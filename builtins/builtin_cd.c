@@ -18,16 +18,11 @@ void	cd_error(t_sys *mi_sys)
 	mi_sys->exit_status = EXIT_FAILURE;
 }
 
-void	builtin_cd(char **key, int fd, t_sys *mi_sys)
+void	builtin_cdrun(char **key, int fd, t_sys *mi_sys)
 {
 	char	*start_pwd;
 	char	*new_pwd;
 
-	if (ft_tablen(key) > 2)
-	{
-		mi_logerror(1, "too many arguments", mi_sys);
-		return ;
-	}
 	start_pwd = getcwd(NULL, 0);
 	new_pwd = cd_getpwd(key[1], fd, mi_sys);
 	if (*new_pwd != '\0' && access(new_pwd, F_OK) == 0 && chdir(new_pwd) == 0)
@@ -49,4 +44,14 @@ void	builtin_cd(char **key, int fd, t_sys *mi_sys)
 		cd_error(mi_sys);
 	free(start_pwd);
 	free(new_pwd);
+}
+
+void	builtin_cd(char **key, int fd, t_sys *mi_sys)
+{
+	if (ft_tablen(key) > 2)
+	{
+		mi_logerror(1, "too many arguments", mi_sys);
+		return ;
+	}
+	builtin_cdrun(key, fd, mi_sys);
 }

@@ -77,6 +77,7 @@ SRCS = 			main.c \
 				libft/ft_memcpy.c \
 				libft/ft_strin.c \
 				libft/ft_subchar.c \
+				libft/ft_fdclose.c \
 				libft/ft_left_sub_char.c \
 				libft/ft_pos_left_chars.c \
 				libft/ft_pos_left_char.c \
@@ -117,6 +118,7 @@ SRCS = 			main.c \
 				pipe/mi_execcmd.c \
 				pipe/mi_execone.c \
 				pipe/mi_exefind.c \
+				pipe/mi_execonefork.c \
 				pipe/mi_exepermis.c \
 				common/mi_freecmd.c \
 				common/mi_freesys.c \

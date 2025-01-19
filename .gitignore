@@ -9,3 +9,5 @@ libft/*.o
 *.html
 libft/*.o
 tmp*
+libft/libft.a
+*.a

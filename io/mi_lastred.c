@@ -19,7 +19,7 @@ bool	ft_intisinarray(int *array, int find)
 	i = 0;
 	if (!array)
 		return (false);
-	while (array && i<2)
+	while (array && i < 2)
 	{
 		if (array[i] == find)
 			return (true);
@@ -27,7 +27,7 @@ bool	ft_intisinarray(int *array, int find)
 	}
 	return (false);
 }
-//		<<a ls o >a
+
 int	mi_lastred(t_red *mi_re, t_sys *mi_sys, int *finds)
 {
 	t_red	*mi_return;
@@ -40,7 +40,8 @@ int	mi_lastred(t_red *mi_re, t_sys *mi_sys, int *finds)
 		if (ft_intisinarray(finds, mi_re->redir_type))
 		{
 			mi_set_io_files(mi_re, mi_sys);
-			close(mi_re->fd);
+			if (mi_re->fd != -1)
+				ft_fdclose(mi_re->fd);
 			mi_return = mi_re;
 		}
 		mi_re = mi_re->next;

@@ -22,7 +22,7 @@ void	mi_freered(t_cmd *mi_cmd)
 	{
 		tmp = mi_cmd->red;
 		if (tmp->fd && tmp->fd != -1)
-			close(tmp->fd);
+			ft_fdclose(tmp->fd);
 		if (tmp->redir_type == HEREDOC)
 			unlink(tmp->file_name);
 		if (tmp->redir_type == HEREDOC)

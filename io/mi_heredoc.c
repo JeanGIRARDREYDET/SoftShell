@@ -45,5 +45,5 @@ void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
 		write(mi_red->fd, "\n", 1);
 	}
 	free(bash);
-	return (free(line), close (mi_red->fd), mi_sys->nb_herdoc++, (void) NULL);
+	return (free(line), ft_fdclose (mi_red->fd), mi_sys->nb_herdoc++, (void) NULL);
 }

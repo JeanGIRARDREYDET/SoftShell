@@ -18,6 +18,7 @@ SOURCES = 	ft_isalnum.c\
 			ft_putendl_fd.c\
 			ft_strchr.c\
 			ft_strjoin.c\
+			ft_fdclose.c\
 			ft_strmapi.c\
 			ft_strrchr.c\
 			ft_substr.c\

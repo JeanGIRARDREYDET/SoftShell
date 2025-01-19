@@ -177,7 +177,7 @@ char	*mi_getenv_env(char *key, t_sys *mi_sys);
 char	*find_expand(char *line);
 void	mi_expandrepalceone(char **full_cmd, int i);
 void	mi_expand_find(char **full_cmd, int i, t_sys *mi_sys);
-
+void	mi_execonefork(t_cmd *mi_cmd, t_sys *mi_sys, int *out);
 void	mi_posdif(char *ln, int *s, int *i);
 void	mi_cntarg(char *ln, int *x);
 void	mi_crered(t_cmd *cmd, t_sys *sys, int type, char *f_name);
