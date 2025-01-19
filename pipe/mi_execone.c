@@ -115,7 +115,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 		return ;
 	}
 	mi_execonepipe(mi_cmd, mi_sys);
-	if (mi_sys->error == NULL)
+	if (mi_sys->error == NULL && mi_cmd->args)
 		mi_execonefork(mi_cmd, mi_sys, out, in);
 	return ;
 }
