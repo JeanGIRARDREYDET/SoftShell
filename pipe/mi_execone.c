@@ -39,7 +39,6 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 	}
 	if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
 	{
-		dprintf(2, "mi_execonechild mi_cmd->red->file_name = %s\n", mi_cmd->red->file_name);
 		mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
 		dup2(mi_cmd->red->fd, STDIN_FILENO);
 		close (mi_cmd->red->fd);
@@ -54,7 +53,7 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out, int *in)
 	{
 		close (mi_cmd->fd[1]);
 		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys, out);
-		dup2(mi_cmd->red->fd, STDOUT_FILENO);
+		dup2(mi_cmd->fd[1], STDOUT_FILENO);
 	}
 	mi_execonechildexe(mi_cmd, mi_sys);
 }
