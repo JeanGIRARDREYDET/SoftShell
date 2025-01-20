@@ -17,7 +17,16 @@ void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys)
 	if (mi_re == NULL)
 		return ;
 	if (mi_re->redir_type == INPUT)
+	{
 		mi_re->fd = open(mi_re->file_name, O_RDONLY);
+		if (mi_re->fd == -1 && mi_sys->error == NULL)
+		{
+				mi_logerror (1, "No such file or directory", mi_sys);
+				mi_sys->exit_status = EXIT_FAILURE;
+			return ;
+		}
+		dup2(mi_re->fd, STDIN_FILENO);
+	}
 	else if (mi_re->redir_type == OUTPUT)
 		mi_re->fd = open(mi_re->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (mi_re->redir_type == APPEND)
