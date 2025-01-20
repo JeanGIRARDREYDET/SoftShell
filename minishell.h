@@ -157,6 +157,7 @@ void	mi_lexingline(char *ln, t_sys *mi_sys);
 void	mi_pospasscote(char *ln, size_t *i, t_sys *mi_sys);
 void	mi_logerror(int code_error, char *msg, t_sys *mi_sys);
 void	mi_logerror2(int code_error, char *msg1, char *msg2, t_sys *mi_sys);
+void	mi_error_nfdr(t_sys *mi_sys);
 int		mi_intlogerror(t_sys *mi_sys, char *s, int code);
 void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys);
 char	*ft_findcommand(char *line);

@@ -67,3 +67,9 @@ void	mi_logerror2(int code_error, char *msg1, char *msg2, t_sys *mi_sys)
 	free(msg);
 	free(msga);
 }
+
+void	mi_error_nfdr(t_sys *mi_sys)
+{
+	mi_logerror (1, "No such file or directory", mi_sys);
+	mi_sys->exit_status = EXIT_FAILURE;
+}
