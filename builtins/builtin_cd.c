@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	cd_error(t_sys *mi_sys)
+void	mi_error_nfdr(t_sys *mi_sys)
 {
 	mi_logerror (1, "No such file or directory", mi_sys);
 	mi_sys->exit_status = EXIT_FAILURE;
@@ -41,7 +41,7 @@ void	builtin_cdrun(char **key, int fd, t_sys *mi_sys)
 		mi_sys->exit_status = EXIT_SUCCESS;
 	}
 	else if (*new_pwd != '\0')
-		cd_error(mi_sys);
+		mi_error_nfdr(mi_sys);
 	free(start_pwd);
 	free(new_pwd);
 }
