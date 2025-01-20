@@ -21,11 +21,10 @@ static void	verif_signal(void)
 
 void	mi_heredocsignalbarke(t_sys *mi_sys)
 {
-	write(2, "warning: here-document delimited by end-of-file (wanted `",57);
+	write(2, "warning: here-document delimited by end-of-file (wanted `", 57);
 	write(2, mi_sys->cmd->red->eof, ft_strlen(mi_sys->cmd->red->eof));
 	write(2, "')\n", 3);
 }
-
 
 void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
 {
