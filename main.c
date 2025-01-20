@@ -58,7 +58,6 @@ int	main(int argc, char **argv, char **env)
 			line++;
 		mi_analyse(line, &mi_sys);
 		mi_waitingpipe(&mi_sys);
-		dprintf(2, "exit_status: %d\n", mi_sys.exit_status);
 		mi_freecmd(&mi_sys);
 	}
 }

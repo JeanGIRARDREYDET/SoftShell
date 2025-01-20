@@ -19,6 +19,14 @@ static void	verif_signal(void)
 	rl_event_hook = sigint_heredoc;
 }
 
+void	mi_heredocsignalbarke(t_sys *mi_sys)
+{
+	write(2, "warning: here-document delimited by end-of-file (wanted `",57);
+	write(2, mi_sys->cmd->red->eof, ft_strlen(mi_sys->cmd->red->eof));
+	write(2, "')\n", 3);
+}
+
+
 void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
 {
 	char		*line;
@@ -32,7 +40,7 @@ void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
 		line = readline(bash);
 		if (!line)
 		{
-			printf("warning: here-document delimited by end-of-file (wanted `%s')\n", mi_red->eof);
+			mi_heredocsignalbarke(mi_sys);
 			break ;
 		}
 		if (ft_findword(mi_red->eof, line))
@@ -44,6 +52,6 @@ void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
 		write(mi_red->fd, line, ft_strlen(line));
 		write(mi_red->fd, "\n", 1);
 	}
-	free(bash);
-	return (free(line), ft_fdclose (mi_red->fd), mi_sys->nb_herdoc++, (void) NULL);
+	ft_fdclose (mi_red->fd);
+	return (free(line), free(bash), mi_sys->nb_herdoc++, (void) NULL);
 }

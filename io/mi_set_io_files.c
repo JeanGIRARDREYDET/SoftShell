@@ -26,7 +26,8 @@ void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys)
 		mi_re->fd = open(mi_re->file_name, O_RDONLY);
 	if (mi_re->fd == -1)
 	{
-		mi_logerror2(1, mi_re->file_name, strerror(errno), mi_sys);
+		if (mi_sys->error == NULL)
+			mi_logerror2(1, mi_re->file_name, strerror(errno), mi_sys);
 		ft_fdclose(mi_re->fd);
 	}
 	return ;
