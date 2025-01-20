@@ -64,9 +64,9 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 	}
 	if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 	{
-		ft_fdclose (mi_cmd->fd[1]);
 		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys, out);
 		dup2(mi_cmd->fd[1], STDOUT_FILENO);
+		ft_fdclose (mi_cmd->fd[1]);
 	}
 	mi_execonechildexe(mi_cmd, mi_sys);
 }
