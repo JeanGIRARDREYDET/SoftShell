@@ -23,10 +23,10 @@ SRCS = 			main.c \
 				builtins/unset.c \
 				check/mi_checkbuiltin.c \
 				check/mi_checkpathaccess.c \
-				io/mi_set_io_files.c \
 				io/mi_heredoc.c \
-				io/signal.c \
 				io/mi_lastred.c \
+				io/mi_set_io_files.c \
+				io/signal.c \
 				libft/ft_arrclose.c \
 				libft/ft_atoi.c \
 				libft/ft_bzero.c \
@@ -113,7 +113,6 @@ SRCS = 			main.c \
 				parsing/mi_expand_interface.c \
 				parsing/mi_cmdherdoc.c \
 				pipe/mi_createcmd.c \
-				pipe/mi_exec.c \
 				pipe/mi_execbuiltin.c \
 				pipe/mi_execcmd.c \
 				pipe/mi_execone.c \
