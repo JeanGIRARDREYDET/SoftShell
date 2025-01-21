@@ -52,6 +52,7 @@ void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys)
 
 void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 {
+	g_signal = 1;
 	if (!mi_cmd->args[0])
 		mi_execonechildnoarg(mi_cmd, mi_sys);
 	if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))

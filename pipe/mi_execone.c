@@ -14,6 +14,7 @@
 
 void	mi_execonepipe(t_cmd *mi_cmd, t_sys *mi_sys)
 {
+	g_signal = 1;
 	if (mi_cmd->next != NULL)
 	{
 		if (pipe(mi_cmd->fd) == -1)

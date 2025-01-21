@@ -30,7 +30,6 @@ void	mi_analyse(char *line, t_sys *mi_sys)
 	mi_sysrediter(mi_sys, HEREDOC, &mi_heredoc);
 	mi_cmditer(mi_sys, &mi_checkbuiltin);
 	mi_syscmditer(mi_sys, &mi_checkpathaccess);
-	signal(SIGINT, SIG_IGN);
 	mi_syscmditer(mi_sys, &mi_execone);
 	mi_syscmditer(mi_sys, &mi_waitingcmdipe);
 }
@@ -42,24 +41,23 @@ int	main(int argc, char **argv, char **env)
 
 	mi_checkmsargument(argc, argv);
 	mi_sysinitialization(env, &mi_sys);
+	init_signal();
 	while (1)
 	{
-		init_signal();
-		line = readline("minishell> ");
+		line = readline("SoftShell >");
 		if (!line)
 		{
-			mi_freesys(&mi_sys);
 			mi_freecmd(&mi_sys);
+			mi_freesys(&mi_sys);
 			ft_putstr_fd("exit\n", 1);
 			exit(0);
 		}
-		else if (line)
+		else if (*line != '\0')
 			add_history(line);
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
 		mi_analyse(line, &mi_sys);
 		mi_waitingpipe(&mi_sys);
-		signal(SIGINT, SIG_DFL);
 		mi_freecmd(&mi_sys);
 	}
 }

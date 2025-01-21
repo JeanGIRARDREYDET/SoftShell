@@ -76,4 +76,5 @@ void	mi_freecmd(t_sys *mi_sys)
 	mi_sys->cmd = NULL;
 	mi_sys->nb_error = 0;
 	mi_freeerror(mi_sys);
+	g_signal = 0;
 }
