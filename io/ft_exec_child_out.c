@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../struct.h"
+#include "../minishell.h"
 
 int	ft_exec_child_out(t_app *app, char **argv, int ind, char **env)
 {
