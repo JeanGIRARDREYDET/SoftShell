@@ -47,7 +47,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		line = readline("SoftShell>");
 		if (!line)
-			mi_freecmdsysexit(2, 26, &mi_sys);
+			mi_freecmdsysexit(1, 26, &mi_sys);
 		else if (*line == '\0')
 			continue ;
 		add_history(line);

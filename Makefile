@@ -116,7 +116,6 @@ SRCS = 			main.c \
 				pipe/mi_execbuiltin.c \
 				pipe/mi_execcmd.c \
 				pipe/mi_execone.c \
-				pipe/mi_exefind.c \
 				pipe/mi_execonefork.c \
 				pipe/mi_exepermis.c \
 				common/mi_freecmd.c \

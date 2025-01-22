@@ -146,7 +146,6 @@ t_error	*mi_errornew(int code_error, char *msg);
 void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_expand_interface(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_exec(t_cmd *me_cmd, t_sys *mi_sys);
-void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_oneexec(t_cmd *me_cmd, t_sys *mi_sys);
 char	*cd_getpwd(char *key, int fd, t_sys *mi_sys);
 void	mi_waitingcmdipe(t_cmd *mi_cmd, t_sys *mi_sys);
