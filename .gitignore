@@ -11,3 +11,4 @@ libft/*.o
 tmp*
 libft/libft.a
 *.a
+minishell_tester
