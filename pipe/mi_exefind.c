@@ -49,7 +49,7 @@ void	mi_exefind(t_cmd *mi_cmd, t_sys *mi_sys)
 		}
 		free(cmd);
 	}
-	mi_logerror2(126, mi_cmd->args[0], ": command not found", mi_sys);
+	mi_logerror2(126, mi_cmd->args[0], " command not found", mi_sys);
 	free(paths);
 	return ;
 }

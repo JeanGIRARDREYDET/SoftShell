@@ -47,13 +47,10 @@ int	main(int argc, char **argv, char **env)
 	{
 		line = readline("SoftShell>");
 		if (!line)
-		{
-			write(2, "exit\n", 5);
-			mi_freecmd(&mi_sys);
-			mi_freesys(&mi_sys);
-		}
-		else if (*line != '\0')
-			add_history(line);
+			mi_freecmdsysexit(2, 26, &mi_sys);
+		else if (*line == '\0')
+			continue ;
+		add_history(line);
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
 		mi_analyse(line, &mi_sys);

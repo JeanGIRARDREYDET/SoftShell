@@ -33,9 +33,9 @@ int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 		exit(error);
 	}
 	else if (execve(mi_cmd->args[0], mi_cmd->args, mi_sys->env) == -1)
-	{	
+	{
 		mi_logerror(126, "Command found but in error ", mi_sys);
-		return (126);
+		mi_freecmdsysexit(0, 126, mi_sys);
 	}
 	return (127);
 }

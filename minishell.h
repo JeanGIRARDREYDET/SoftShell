@@ -175,6 +175,7 @@ void	mi_waitingpipe(t_sys *mi_sys);
 void	mi_cmdherdoc(t_cmd *mi_cmd);
 void	mi_cmdsplitcmd(t_cmd *mi_cmd);
 char	*mi_getenv_env(char *key, t_sys *mi_sys);
+void	mi_freecmdsysexit(int fd, int status, t_sys *mi_sys);
 char	*find_expand(char *line);
 void	mi_expandrepalceone(char **full_cmd, int i);
 void	mi_expand_find(char **full_cmd, int i, t_sys *mi_sys);

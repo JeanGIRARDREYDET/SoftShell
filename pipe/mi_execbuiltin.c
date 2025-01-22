@@ -15,7 +15,7 @@
 void	mi_freesysexit(int status, t_sys *mi_sys)
 {
 	mi_freesys(mi_sys);
-	exit((int)status);
+	exit (status);
 }
 
 void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)

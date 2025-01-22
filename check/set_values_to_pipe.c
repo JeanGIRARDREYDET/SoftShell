@@ -81,7 +81,7 @@ int	set_cmt_to_pipe(t_app *app, char **argv, int cnt, int ind)
 	cmd = ft_strtrim(argv[cnt + 2], " ");
 	if (ft_strlen(cmd) == 0)
 	{
-		ft_perror(app, " command not found ", 127, ind);
+		ft_perror(app, "command not found ", 127, ind);
 		free (cmd);
 		return (127);
 	}

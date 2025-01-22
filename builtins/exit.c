@@ -12,8 +12,10 @@
 
 #include "../minishell.h"
 
-void	mi_freecmdsysexit(int status, t_sys *mi_sys)
+void	mi_freecmdsysexit(int fd, int status, t_sys *mi_sys)
 {
+	if (fd > 0)
+		write(fd, "exit\n", 5);
 	mi_freecmd(mi_sys);
 	mi_freesysexit(status, mi_sys);
 }
@@ -27,21 +29,19 @@ void	builtin_exit(char **args, t_sys *mi_sys)
 	if (args)
 	{
 		arglen = ft_tablen(args);
+		arglen = ft_tablen(args);
 		if (arglen > 2)
-		{
-			mi_logerror2(1, args[1], "too many arguments", mi_sys);
-			mi_freecmdsysexit(1, mi_sys);
-		}
+			code_exit = 1;
 		if (args[1] != NULL)
 		{
 			code_exit = 0xFF & ft_atoi(args[1]);
 			if (code_exit == 0)
-			{
-				mi_logerror2(2, args[1], "numeric argument required", mi_sys);
 				code_exit = 2;
-			}
 		}
+		if (code_exit == 1)
+			mi_logerror2(1, args[1], "too many arguments", mi_sys);
+		if (code_exit == 2)
+			mi_logerror2(2, args[1], "numeric argument required", mi_sys);
 	}
-	write(STDOUT_FILENO, "exit\n", 5);
-	mi_freecmdsysexit(code_exit, mi_sys);
+	mi_freecmdsysexit(STDOUT_FILENO, code_exit, mi_sys);
 }
