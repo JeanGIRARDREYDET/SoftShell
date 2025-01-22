@@ -16,8 +16,9 @@ void	mi_checkmsargument(int argc, char **argv)
 {
 	if (argc > 1)
 	{
-		printf("Error: minishell does not take arguments. Try: ./%s\n",
-			argv[0]);
+		write (2, "Error: minishell does not take arguments. Try: ./", 49);
+		write (2, argv[0], ft_strlen(argv[0]));
+		write (2, "\n", 1);
 		exit(0);
 	}
 }
