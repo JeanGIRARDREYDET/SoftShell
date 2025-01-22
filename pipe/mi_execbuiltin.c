@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	mi_execexitepipe(int status, t_sys *mi_sys)
+void	mi_freesysexit(int status, t_sys *mi_sys)
 {
 	mi_freesys(mi_sys);
 	exit((int)status);
@@ -42,5 +42,5 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	else if (mi_cmd->isdir == true)
 		mi_logerror2(126, cmd, "is a directory", mi_sys);
 	if (mi_sys->nb_pipe > 1)
-		mi_execexitepipe(mi_sys->exit_status, mi_sys);
+		mi_freesysexit(mi_sys->exit_status, mi_sys);
 }

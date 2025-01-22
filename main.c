@@ -45,13 +45,12 @@ int	main(int argc, char **argv, char **env)
 	init_signal();
 	while (1)
 	{
-		line = readline("SoftShell >");
+		line = readline("SoftShell>");
 		if (!line)
 		{
+			write(2, "exit\n", 5);
 			mi_freecmd(&mi_sys);
 			mi_freesys(&mi_sys);
-			ft_putstr_fd("exit\n", 1);
-			exit(0);
 		}
 		else if (*line != '\0')
 			add_history(line);

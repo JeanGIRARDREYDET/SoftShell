@@ -35,7 +35,7 @@ void	mi_execonechildnoarg(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	dup2(mi_cmd->red->fd, STDOUT_FILENO);
 	ft_fdclose (mi_cmd->red->fd);
-	mi_execexitepipe(mi_sys->exit_status, mi_sys);
+	mi_freesysexit(mi_sys->exit_status, mi_sys);
 }
 
 void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys)
@@ -46,7 +46,7 @@ void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys)
 	mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
 	dup2(mi_cmd->fd[0], STDIN_FILENO);
 	if (mi_cmd->fd[0] == -1)
-		mi_execexitepipe(mi_sys->exit_status, mi_sys);
+		mi_freesysexit(mi_sys->exit_status, mi_sys);
 	ft_fdclose (mi_cmd->fd[0]);
 }
 
