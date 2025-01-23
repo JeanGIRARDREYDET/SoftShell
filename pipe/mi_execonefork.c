@@ -73,11 +73,11 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 	}
 	if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 	{
-		if (mi_sys->nb_pipe > 1)
+		//if (mi_sys->nb_pipe > 1)
 			ft_fdclose (mi_cmd->fd[1]);
 		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys, out);
 		if (mi_cmd->fd[1] == -1)
-            mi_freecmdsysexit(mi_cmd->fd[1], 1, mi_sys);
+			mi_freecmdsysexit(mi_cmd->fd[1], 1, mi_sys);
 		dup2(mi_cmd->fd[1], STDOUT_FILENO);
 		if (mi_sys->nb_pipe <= 1)
 			ft_fdclose (mi_cmd->fd[1]);
