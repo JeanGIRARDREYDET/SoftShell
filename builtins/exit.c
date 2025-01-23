@@ -32,7 +32,7 @@ void	builtin_exit(char **args, t_sys *mi_sys)
 		arglen = ft_tablen(args);
 		if (arglen > 2)
 			code_exit = 1;
-		if (args[1] != NULL)
+		else if (args[1] != NULL)
 		{
 			code_exit = 0xFF & ft_atoi(args[1]);
 			if (code_exit == 0)

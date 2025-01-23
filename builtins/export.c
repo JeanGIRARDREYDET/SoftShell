@@ -19,24 +19,24 @@ echo, le parent renvoie bien dollyne, si on ouvre un autre bash, il n'aura pas
 cette variable donc si on utilise exporte l'enfant a bien la variable myname
 */
 
-bool ft_anti_negative(char **keys_values)
+bool	ft_anti_negative(char **keys_values)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
 	j = 0;
 	while (keys_values[i])
 	{
 		j = 0;
+		if (ft_isdigit(keys_values[i][0]) == true)
+			return (true);
 		while (keys_values[i][j])
 		{
-			if (ft_isdigit(keys_values[i][0]) == true)
-				return (true);
-			if (keys_values[i][j] == '=')
+			if (j > 0 && keys_values[i][j] == '=')
 				return (false);
-			if (keys_values[i][j] == '-')
-			return (true);
+			if (!ft_isalnum(keys_values[i][j]))
+				return (true);
 			j++;
 		}
 	i++;
@@ -46,11 +46,11 @@ bool ft_anti_negative(char **keys_values)
 
 void	print_export(t_sys *mi_sys, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (mi_sys->env == NULL)
- 		return ;
+		return ;
 	while (i <= mi_sys->len_env)
 	{
 		write(fd, "declare -x \"", 12);
@@ -60,15 +60,15 @@ void	print_export(t_sys *mi_sys, int fd)
 	}
 }
 
-void    builtin_export(char **keys_values, int fd, t_sys *mi_sys)
+void	builtin_export(char **keys_values, int fd, t_sys *mi_sys)
 {
- 	(void)fd;
-    if (!mi_sys->env)
-        mi_logerror(1, "export: env NULL", mi_sys);
-    else if (ft_anti_negative(keys_values) == true)
-        mi_logerror(1, "export: not a valid identifier", mi_sys);
-    else if (keys_values && keys_values[1] != NULL)
-        mi_export_values(keys_values, mi_sys);
-    else
-        print_export(mi_sys, fd);
+	(void)fd;
+	if (!mi_sys->env)
+		mi_logerror(1, "export: env NULL", mi_sys);
+	else if (ft_anti_negative(keys_values) == true)
+		mi_logerror(1, "export: not a valid identifier", mi_sys);
+	else if (keys_values && keys_values[1] != NULL)
+		mi_export_values(keys_values, mi_sys);
+	else
+		print_export(mi_sys, fd);
 }

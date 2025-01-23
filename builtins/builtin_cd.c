@@ -44,7 +44,7 @@ void	builtin_cd(char **key, int fd, t_sys *mi_sys)
 {
 	if (ft_tablen(key) > 2)
 	{
-		mi_logerror(1, "too many arguments", mi_sys);
+		mi_logerror2(1, "cd", "too many arguments", mi_sys);
 		return ;
 	}
 	builtin_cdrun(key, fd, mi_sys);

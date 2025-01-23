@@ -33,6 +33,7 @@ void	mi_logerror(int code_error, char *msg, t_sys *mi_sys)
 		mi_sys->nb_error++;
 	if (msg != NULL)
 	{
+		write(STDERR_FILENO, " ", 1);
 		write(STDERR_FILENO, msg, ft_strlen(msg));
 		write(STDERR_FILENO, "\n", 1);
 	}
