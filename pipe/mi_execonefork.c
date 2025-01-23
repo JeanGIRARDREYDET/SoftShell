@@ -37,16 +37,24 @@ void	mi_execonechildnoarg(t_cmd *mi_cmd, t_sys *mi_sys)
 	ft_fdclose (mi_cmd->red->fd);
 	mi_freesysexit(mi_sys->exit_status, mi_sys);
 }
+/*
+	if (type == INPUT && sys->error == NULL && !(access(file_name, R_OK) == 0))
+	{
+		dprintf(2, "minishell: %s: No such file or directory\n", file_name);
+		mi_logerror2(1, file_name, "No such file or directory", sys);
+		return ;
+	}
 
+*/
 void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int	*in;
 
 	in = (int []){INPUT, HEREDOC};
 	mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
-	dup2(mi_cmd->fd[0], STDIN_FILENO);
 	if (mi_cmd->fd[0] == -1)
 		mi_freesysexit(mi_sys->exit_status, mi_sys);
+	dup2(mi_cmd->fd[0], STDIN_FILENO);
 	ft_fdclose (mi_cmd->fd[0]);
 }
 
@@ -65,17 +73,42 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 	}
 	if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 	{
+		if (mi_sys->nb_pipe > 1)
+			ft_fdclose (mi_cmd->fd[1]);
 		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys, out);
+		if (mi_cmd->fd[1] == -1)
+            mi_freecmdsysexit(mi_cmd->fd[1], 1, mi_sys);
 		dup2(mi_cmd->fd[1], STDOUT_FILENO);
-		ft_fdclose (mi_cmd->fd[1]);
+		if (mi_sys->nb_pipe <= 1)
+			ft_fdclose (mi_cmd->fd[1]);
 	}
 	mi_execonechildexe(mi_cmd, mi_sys);
+}
+
+bool	mi_redistypexist(int type, t_cmd *mi_cmd)
+{
+	t_red			*mi_red;
+
+	mi_red = mi_cmd->red;
+	while (mi_red)
+	{
+		if (mi_red->redir_type == type && mi_red->file_name)
+		{
+			if (access(mi_red->file_name, F_OK) != 0)
+				return true ;
+		}
+		else if (!mi_red->next)
+			return (false);
+		mi_red = mi_red->next;
+	}
+	return (false);
 }
 
 void	mi_execonefork(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 {
 	mi_cmd->id = fork();
 	mi_sys->max_id = mi_cmd->id;
+
 	if (mi_cmd->id == -1)
 	{
 		mi_intlogerror (mi_sys, "fork out failed", 1);
