@@ -26,7 +26,7 @@ void	mi_pospasscote(char *ln, size_t *pos, t_sys *mi_sys)
 		i++;
 		i += ft_pos_left_char ((ln + i), echap);
 		if (ln[i] != echap)
-			mi_logerror(130, "erreur de quot", mi_sys);
+			mi_logerror(2, "erreur de quot", mi_sys);
 	}
 	*pos = i;
 }

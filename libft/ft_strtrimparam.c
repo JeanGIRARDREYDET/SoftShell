@@ -58,13 +58,14 @@ char	*ft_strtrimparamwhile(char const *s1, int debut, int fin)
 
 char	*ft_strtrimparam(char const *s1, int debut, int fin, char const *set)
 {
-	if (!s1 || !set || !fin || fin <= debut)
+	if (!s1 || !set || !fin || fin <= debut || fin > (int)ft_strlen(s1))
 		return (NULL);
 	while (ft_strchr (set, s1[debut]) && s1[debut] != '\0')
 		debut++;
 	if (s1[fin] == '|')
 		fin--;
-	while (ft_strchr(set, s1[fin]) && fin >= debut && s1[fin] != '\0')
+	while (fin >= debut && s1[fin] != '\0' && ft_strchr(set, s1[fin]))
 		fin--;
 	return (ft_strtrimparamwhile(s1, debut, fin));
 }
+//echo "'""'"'"'"
