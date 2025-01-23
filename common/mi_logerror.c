@@ -39,8 +39,6 @@ void	mi_logerror(int code_error, char *msg, t_sys *mi_sys)
 	}
 	if (mi_sys->error == NULL)
 		mi_sys->error = mi_errornew(code_error, msg);
-//	else if (code_error == 0)
-//		return ;
 	else
 	{
 		error = mi_sys->error;
