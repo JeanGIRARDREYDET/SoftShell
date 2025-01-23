@@ -29,10 +29,22 @@ void	mi_setdefaul_initialization( t_sys *mi_sys)
 	mi_sys->code_error = 0;
 }
 
+void	mi_init_shlvl(t_sys *mi_sys)
+{
+	int		new_shlvl;
+	char	*shlvl;
+
+	new_shlvl = 1;
+	if (mi_getenv("SHLVL", mi_sys))
+		new_shlvl = 1 + ft_atoi(mi_getenv("SHLVL", mi_sys));
+	shlvl = ft_itoa(new_shlvl);
+	s_env_create_update_key_value("SHLVL", shlvl, mi_sys);
+	free(shlvl);
+}
+
 void	mi_sysinitialization(char **env, t_sys *mi_sys)
 {
 	int		i;
-	char	*shlvl;
 
 	i = 0;
 	mi_setdefaul_initialization(mi_sys);
@@ -48,9 +60,6 @@ void	mi_sysinitialization(char **env, t_sys *mi_sys)
 		s_env_create_update_value (env[i], mi_sys);
 		i++;
 	}
-	mi_sys->senv->shlvl = 1 + ft_atoi(mi_getenv("SHLVL", mi_sys));
-	shlvl = ft_itoa(mi_sys->senv->shlvl);
-	s_env_create_update_key_value("SHLVL", shlvl, mi_sys);
-	free(shlvl);
+	mi_init_shlvl(mi_sys);
 	mi_sys->nb_error = 0;
 }

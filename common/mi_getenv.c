@@ -17,14 +17,19 @@ char	*mi_getenv(char *key, t_sys *mi_sys)
 	int			i;
 	int			len;
 	char		end;
+	int			lenline;
 
 	i = 0;
 	len = ft_strlen(key);
 	while (i <= mi_sys->len_env)
 	{
-		end = mi_sys->env[i][len];
-		if (ft_strncmp (mi_sys->env[i], key, len) == 0 && end == '=')
+		lenline = ft_strlen(mi_sys->env[i]);
+		if (lenline > len)
+		{
+			end = mi_sys->env[i][len];
+			if (ft_strncmp (mi_sys->env[i], key, len) == 0 && end == '=')
 			return (mi_sys->env[i] + len + 1);
+		}
 		i++;
 	}
 	return (NULL);
