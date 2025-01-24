@@ -46,10 +46,12 @@ void	mi_execonechildnoarg(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 
 */
+
 void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int	*in;
 
+	//dprintf(2, "   mi_execonechildin %s\n", mi_cmd->args[0]);
 	in = (int []){INPUT, HEREDOC};
 	mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
 	if (mi_cmd->fd[0] == -1)
@@ -60,22 +62,26 @@ void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys)
 
 void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 {
+	//dprintf(2, "  mi_execonechild %s\n", mi_cmd->args[0]);
 	g_signal = 1;
 	if (!mi_cmd->args[0])
 		mi_execonechildnoarg(mi_cmd, mi_sys);
-	if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
-		mi_execonechildin(mi_cmd, mi_sys);
+
 	if (mi_cmd->no != 0)
 	{
 		if (dup2(mi_sys->fd_in, STDIN_FILENO) == -1)
 			return ;
 		ft_fdclose (mi_sys->fd_in);
 	}
+	if (mi_redis(mi_cmd, INPUT) || mi_redis(mi_cmd, HEREDOC))
+		mi_execonechildin(mi_cmd, mi_sys);
+	
 	if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 	{
 		if (mi_sys->nb_pipe > 1)
 			ft_fdclose (mi_cmd->fd[1]);
 		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys, out);
+		//dprintf(2, "mi_execonechild mi_cmd->fd[1] = %s\n", mi_cmd->type);
 		if (mi_cmd->fd[1] == -1)
 			mi_freecmdsysexit(mi_cmd->fd[1], 1, mi_sys);
 		dup2(mi_cmd->fd[1], STDOUT_FILENO);
@@ -106,9 +112,9 @@ bool	mi_redistypexist(int type, t_cmd *mi_cmd)
 
 void	mi_execonefork(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 {
+	//dprintf(2, "mi_execonefork %s\n", mi_cmd->args[0]);
 	mi_cmd->id = fork();
 	mi_sys->max_id = mi_cmd->id;
-
 	if (mi_cmd->id == -1)
 	{
 		mi_intlogerror (mi_sys, "fork out failed", 1);
@@ -120,7 +126,9 @@ void	mi_execonefork(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 		ft_fdclose (mi_sys->fd_in);
 	if (mi_cmd->next != NULL)
 	{
+		//dprintf(2, " mi_execonefork mi_cmd->next != NULL\n");
 		ft_fdclose (mi_cmd->fd[1]);
 		mi_sys->fd_in = mi_cmd->fd[0];
 	}
+	//dprintf(2, "end fork %s\n", mi_cmd->args[0]);
 }
