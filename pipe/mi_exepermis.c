@@ -14,12 +14,8 @@
 
 void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 {
-	char	*error_msg;
-
 	if (access(mi->args[0], X_OK) == 0)
 		return ;
-	error_msg = join_3("minishell: ", mi->args[0], ": Permission denied\n");
-	mi_logerror(126, error_msg, mi_sys);
-	free(error_msg);
+	mi_logerror2(126, mi->args[0], "Permission denied", mi_sys);
 	mi_sys->nb_error++;
 }

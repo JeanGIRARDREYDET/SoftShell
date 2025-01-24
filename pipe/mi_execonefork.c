@@ -51,7 +51,6 @@ void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int	*in;
 
-	//dprintf(2, "   mi_execonechildin %s\n", mi_cmd->args[0]);
 	in = (int []){INPUT, HEREDOC};
 	mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
 	if (mi_cmd->fd[0] == -1)
