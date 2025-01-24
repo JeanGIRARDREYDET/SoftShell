@@ -20,7 +20,6 @@ void	mi_freered(t_cmd *mi_cmd)
 		return ;
 	while (mi_cmd->red)
 	{
-
 		tmp = mi_cmd->red;
 		if (tmp->fd && tmp->fd != -1)
 			ft_fdclose(tmp->fd);

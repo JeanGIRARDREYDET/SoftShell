@@ -113,6 +113,7 @@ SRCS = 			main.c \
 				parsing/mi_expand_interface.c \
 				parsing/mi_cmdherdoc.c \
 				pipe/mi_createcmd.c \
+				pipe/mi_redistypexist.c \
 				pipe/mi_execbuiltin.c \
 				pipe/mi_execcmd.c \
 				pipe/mi_execone.c \

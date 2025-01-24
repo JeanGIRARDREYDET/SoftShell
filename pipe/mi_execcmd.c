@@ -26,13 +26,9 @@ int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	if (!mi_cmd->found)
 		mi_logerror2(127, mi_cmd->args[0], "command not found", mi_sys);
-	// dprintf(2, "mi_execcmd i_sys->code_error = %d\n", mi_sys->code_error);
-	if (!mi_cmd->found || mi_cmd->fd[1] == -1 || (mi_sys->code_error > 0))
+	if (!mi_cmd->found || mi_cmd->fd[1] == -1)
 	{
-		if (mi_sys->error)
 		error = mi_sys->error->code_error;
-		if (mi_sys->code_error > 0)
-		error = mi_sys->code_error;
 		mi_freesys(mi_sys);
 		exit(error);
 	}

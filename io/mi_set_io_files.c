@@ -36,9 +36,7 @@ void	mi_set_io_files(t_red *mi_re, t_sys *mi_sys)
 		if (mi_sys->error == NULL)
 			mi_logerror2(1, mi_re->file_name, strerror(errno), mi_sys);
 		ft_fdclose(mi_re->fd);
-		mi_sys->code_error = 1;
-		mi_freesys(mi_sys);
-		exit(mi_sys->code_error);
+		mi_freesysexit(1, mi_sys);
 	}
 	return ;
 }
