@@ -23,11 +23,32 @@ void	mi_checkmsargument(int argc, char **argv)
 	}
 }
 
+void	mi_checksyntax(char *line, t_sys *mi_sys)
+{
+	//mi_sys->code_error = 0;
+	if (ft_strrchr(line, '|') != NULL && (ft_strrchr(line, '|') == line 
+		|| *(ft_strrchr(line, '|') + 1) == '\0' 
+		|| *(ft_strrchr(line, '|') + 1) == '|'))
+        mi_logerror(2, "syntax error near unexpected token `|'", mi_sys);
+    else if (ft_strrchr(line, '>') != NULL && (ft_strrchr(line, '>') == line 
+		|| *(ft_strrchr(line, '>') + 1) == '\0' 
+		|| *(ft_strrchr(line, '>') + 1) == '>'))
+        mi_logerror(2, "syntax error near unexpected token `>'", mi_sys);
+    else if (ft_strrchr(line, '<') != NULL && (ft_strrchr(line, '<') == line 
+		|| *(ft_strrchr(line, '<') + 1) == '\0' 
+		|| *(ft_strrchr(line, '<') + 1) == '<'))
+        mi_logerror(2, "syntax error near unexpected token `<'", mi_sys);
+}
+
 void	mi_analyse(char *line, t_sys *mi_sys)
 {
 	mi_lexingline(line, mi_sys);
+	mi_checksyntax(line, mi_sys);
+	if (mi_sys->error)
+		return ;
 	mi_cmditer(mi_sys, &mi_cmdsplitcmd);
 	mi_syscmditer(mi_sys, &mi_cmdparsse);
+//	mi_sysrediter(mi_sys, INPUT, &mi_checkexist);
 	mi_sysrediter(mi_sys, HEREDOC, &mi_heredoc);
 	mi_cmditer(mi_sys, &mi_checkbuiltin);
 	mi_syscmditer(mi_sys, &mi_checkpathaccess);

@@ -18,6 +18,14 @@ void	mi_freesysexit(int status, t_sys *mi_sys)
 	exit (status);
 }
 
+void	mi_iddir(char **cmd, t_sys *mi_sys)
+{
+	if (chdir(*cmd) == 0)
+		mi_logerror2(127, *cmd, "est un dossier", mi_sys);
+	else
+	
+		mi_logerror2(126, *cmd, "Is a directory 26", mi_sys);
+}
 void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 {
 	char		*cmd;
@@ -42,7 +50,7 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	else if (ft_findword(cmd, "unset"))
 		mi_cmdargsiter(mi_cmd->args, mi_sys, &builtin_unset);
 	else if (mi_cmd->isdir == true)
-		mi_logerror2(127, cmd, "Is a directory", mi_sys);
+		mi_iddir(mi_cmd->args, mi_sys);	
 	if (mi_sys->nb_pipe > 1)
 		mi_freesysexit(mi_sys->exit_status, mi_sys);
 }

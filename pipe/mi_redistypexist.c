@@ -30,3 +30,13 @@ bool	mi_redistypexist(int type, t_cmd *mi_cmd)
 	}
 	return (false);
 }
+
+void	mi_checkexist(t_red *mi_red, t_sys *mi_sys)
+{
+	if (access(mi_red->file_name, F_OK) != 0)
+	{
+		mi_logerror2(1, mi_red->file_name, 
+			"Aucun fichier ou dossier de ce nom", mi_sys);
+		mi_sys->code_error = 1;
+	}
+}

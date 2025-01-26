@@ -30,6 +30,7 @@ char	*ft_strsubreplace(char *str, int start, int len, char *replace)
 		i[0]++;
 		i[1]++;
 	}
+//	 return (nw);
 	i[1] = start + len;
 	while (str[i[1]])
 	{
