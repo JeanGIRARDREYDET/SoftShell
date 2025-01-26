@@ -70,12 +70,16 @@ int	main(int argc, char **argv, char **env)
 		if (!line)
 			mi_freecmdsysexit(1, 26, &mi_sys);
 		else if (*line == '\0')
+		{
+			free(line);
 			continue ;
+		}
 		add_history(line);
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
 		mi_analyse(line, &mi_sys);
 		mi_waitingpipe(&mi_sys);
 		mi_freecmd(&mi_sys);
+		free(line);
 	}
 }

@@ -57,6 +57,7 @@ void	mi_freecmd(t_sys *mi_sys)
 	t_cmd	*mi_cmd;
 	t_cmd	*mi_nxcmd;
 
+	
 	if (!mi_sys->cmd)
 		return ;
 	mi_cmd = mi_sys->cmd;
