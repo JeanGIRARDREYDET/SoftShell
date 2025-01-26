@@ -16,7 +16,7 @@ void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 {
 	if (access(mi->args[0], X_OK) == 0)
 		return ;
-	mi_logerror2(126, mi->args[0], "Permission denied", mi_sys);
+	mi_logerror2(127, mi->args[0], "Permission denied", mi_sys);
 	mi_sys->nb_error++;
 }
 
