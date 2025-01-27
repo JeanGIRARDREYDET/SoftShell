@@ -52,7 +52,8 @@ void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys)
 
 void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 {
-	g_signal = 1;
+	signal(SIGINT, signal_handle_sigint_cat);
+	signal(SIGQUIT, signal_handle_sigquit);
 	if (!mi_cmd->args[0])
 		mi_execonechildnoarg(mi_cmd, mi_sys);
 	if (mi_cmd->no != 0)

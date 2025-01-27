@@ -16,7 +16,7 @@ void	mi_checkmsargument(int argc, char **argv)
 {
 	if (argc > 1)
 	{
-		write (2, "Error: minishell does not take arguments. Try: ./", 49);
+		write (2, "Error: minishell does not take arguments. Try: ", 47);
 		write (2, argv[0], ft_strlen(argv[0]));
 		write (2, "\n", 1);
 		exit(0);
@@ -42,6 +42,10 @@ void	mi_checksyntax(char *line, t_sys *mi_sys)
 
 void	mi_analyse(char *line, t_sys *mi_sys)
 {
+	if (g_signal == SIGINT)
+		mi_sys->code_error = 130;
+	// if (g_signal == SIGQUIT)
+	// 	mi_sys->code_error = 131;
 	mi_lexingline(line, mi_sys);
 	mi_checksyntax(line, mi_sys);
 	if (mi_sys->error)
@@ -79,9 +83,12 @@ int	main(int argc, char **argv, char **env)
 		add_history(line);
 		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
 			line++;
+		if (g_signal == SIGINT)
+			mi_sys.code_error = 130;
 		mi_analyse(line, &mi_sys);
 		mi_waitingpipe(&mi_sys);
 		mi_freecmd(&mi_sys);
 		free(line);
+		g_signal = 0;
 	}
 }

@@ -29,6 +29,10 @@ void	mi_logerror(int code_error, char *msg, t_sys *mi_sys)
 {
 	t_error	*error;
 
+	if (g_signal == SIGINT)
+		code_error = 130;
+	if (g_signal == SIGQUIT)
+		code_error = 131;
 	if (code_error != 0)
 		mi_sys->nb_error++;
 	if (msg != NULL)

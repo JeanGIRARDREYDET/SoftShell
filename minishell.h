@@ -118,6 +118,8 @@ typedef struct s_sys
 	int				exit_status;
 }	t_sys;
 
+void	signal_handle_sigint_cat(int sign);
+void	signal_handle_sigquit(int sign);
 int		sigint_heredoc(void);
 void	init_signal(void);
 void	signal_in_heredoc(int signal);

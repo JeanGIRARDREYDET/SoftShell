@@ -20,8 +20,24 @@ void	signal_handle_sigint(int sign)
 	write(2, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	if (g_signal == 0)
-		rl_redisplay();
+	rl_redisplay();
+	g_signal = SIGINT;
+}
+
+void	signal_handle_sigint_cat(int sign)
+{
+	(void)sign;
+	write(2, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	g_signal = SIGINT;
+}
+
+void	signal_handle_sigquit(int sign)
+{
+	(void)sign;
+	write(2, "Quit (core dumped)\n", 19);
+	g_signal = SIGQUIT;
 }
 
 void	init_signal(void)

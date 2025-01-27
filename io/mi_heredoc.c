@@ -48,8 +48,7 @@ void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
 			mi_expand(&line, 0, mi_sys);
 		if (g_signal == SIGINT)
 			return (free(bash), free(line), mi_logerror(130, NULL, mi_sys));
-		write(mi_red->fd, line, ft_strlen(line));
-		write(mi_red->fd, "\n", 1);
+		free(line);
 	}
 	ft_fdclose (mi_red->fd);
 	return (free(line), free(bash), mi_sys->nb_herdoc++, (void) NULL);

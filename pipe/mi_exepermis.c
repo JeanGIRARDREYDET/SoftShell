@@ -19,4 +19,3 @@ void	mi_exepermis(t_cmd *mi, t_sys *mi_sys)
 	mi_logerror2(127, mi->args[0], "Permission denied", mi_sys);
 	mi_sys->nb_error++;
 }
-
