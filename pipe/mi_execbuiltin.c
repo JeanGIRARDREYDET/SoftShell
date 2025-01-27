@@ -23,7 +23,7 @@ void	mi_iddir(char **cmd, t_sys *mi_sys)
 	if (chdir(*cmd) == 0)
 		mi_logerror2(126, *cmd, "est un dossier", mi_sys);
 	else
-		mi_logerror2(126, *cmd, "Is a directory 26", mi_sys);
+		mi_logerror2(126, *cmd, "Is a directory", mi_sys);
 }
 
 void	mi_execbuiltinbody(t_cmd *mi_cmd, int fd, t_sys *mi_sys)

@@ -31,17 +31,19 @@ void	builtin_exit(char **args, t_sys *mi_sys)
 		arglen = ft_tablen(args);
 		arglen = ft_tablen(args);
 		if (arglen > 2)
+		{
 			code_exit = 1;
+			mi_logerror2(1, args[1], "too many arguments", mi_sys);
+		}
 		else if (args[1] != NULL)
 		{
 			code_exit = 0xFF & ft_atoi(args[1]);
 			if (code_exit == 0)
+			{
 				code_exit = 2;
+				mi_logerror2(2, args[1], "numeric argument required", mi_sys);
+			}
 		}
-		if (code_exit == 1)
-			mi_logerror2(1, args[1], "too many arguments", mi_sys);
-		if (code_exit == 2)
-			mi_logerror2(2, args[1], "numeric argument required", mi_sys);
 	}
 	mi_freecmdsysexit(STDOUT_FILENO, code_exit, mi_sys);
 }
