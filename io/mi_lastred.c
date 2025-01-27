@@ -37,6 +37,12 @@ int	mi_lastred(t_red *mi_re, t_sys *mi_sys, int *finds)
 		return (-1);
 	while (mi_re)
 	{
+		if (mi_re->redir_type == OUTPUT )
+		{
+			mi_createdoc(mi_re, mi_sys);
+			if(access(mi_re->file_name, W_OK) != 0)
+				mi_logerror2(1, mi_re->file_name, "Permission denied", mi_sys);
+		}
 		if (ft_intisinarray(finds, mi_re->redir_type))
 		{
 			mi_set_io_files(mi_re, mi_sys);

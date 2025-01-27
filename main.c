@@ -48,9 +48,9 @@ void	mi_analyse(char *line, t_sys *mi_sys)
 		return ;
 	mi_cmditer(mi_sys, &mi_cmdsplitcmd);
 	mi_syscmditer(mi_sys, &mi_cmdparsse);
-//	mi_sysrediter(mi_sys, OUTPUT, &mi_createdoc);
-//	if (mi_sys->error)
-//		return ;
+	//mi_sysrediter(mi_sys, OUTPUT, &mi_createdoc);
+	//if (mi_sys->error)
+	//	return ;
 	mi_sysrediter(mi_sys, HEREDOC, &mi_heredoc);
 	mi_cmditer(mi_sys, &mi_checkbuiltin);
 	mi_syscmditer(mi_sys, &mi_checkpathaccess);
