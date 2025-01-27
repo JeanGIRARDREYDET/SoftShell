@@ -34,6 +34,7 @@ void	mi_parseredirtocken(int *i, int *n, t_cmd *mi_cmd, t_sys *mi_sys)
 	else
 	{
 		*i += 1;
+		mi_expand(&mi_cmd->split[*i], 0, mi_sys);
 		if (mi_cmd->split[*i])
 			mi_crered(mi_cmd, mi_sys, (j - 1) | (redir & 2), mi_cmd->split[*i]);
 	}

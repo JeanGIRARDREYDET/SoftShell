@@ -33,7 +33,10 @@ void	mi_execonechildexe(t_cmd *mi_cmd, t_sys *mi_sys)
 
 void	mi_execonechildnoarg(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	dup2(mi_cmd->red->fd, STDOUT_FILENO);
+	if (!mi_cmd->red)
+		mi_freesysexit(mi_sys->exit_status, mi_sys);
+	if (mi_cmd->red->fd)
+		dup2(mi_cmd->red->fd, STDOUT_FILENO);
 	ft_fdclose (mi_cmd->red->fd);
 	mi_freesysexit(mi_sys->exit_status, mi_sys);
 }
