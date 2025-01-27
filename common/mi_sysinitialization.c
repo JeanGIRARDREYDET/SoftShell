@@ -12,6 +12,17 @@
 
 #include "../minishell.h"
 
+void	mi_checkmsargument(int argc, char **argv)
+{
+	if (argc > 1)
+	{
+		write (2, "Error: minishell does not take arguments. Try: ", 47);
+		write (2, argv[0], ft_strlen(argv[0]));
+		write (2, "\n", 1);
+		exit(0);
+	}
+}
+
 void	mi_setdefaul_initialization( t_sys *mi_sys)
 {
 	mi_sys->senv = (t_env *) ft_calloc (1, sizeof (t_env));
@@ -42,11 +53,12 @@ void	mi_init_shlvl(t_sys *mi_sys)
 	free(shlvl);
 }
 
-void	mi_sysinitialization(char **env, t_sys *mi_sys)
+void	mi_sysinitialization(char **env, t_sys *mi_sys, int argc, char **argv)
 {
 	int		i;
 
 	i = 0;
+	mi_checkmsargument(argc, argv);
 	mi_setdefaul_initialization(mi_sys);
 	mi_sys->len_env = 0;
 	while (env[mi_sys->len_env])

@@ -45,7 +45,7 @@ int	mi_lastred(t_red *mi_re, t_cmd *mi_cmd, t_sys *mi_sys, int *finds)
 		}
 		if (ft_intisinarray(finds, mi_re->redir_type))
 		{
-			mi_set_io_files(mi_re,mi_cmd, mi_sys);
+			mi_set_io_files(mi_re, mi_cmd, mi_sys);
 			if (mi_re->fd != -1)
 				ft_fdclose(mi_re->fd);
 			mi_return = mi_re;

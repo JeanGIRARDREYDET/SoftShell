@@ -12,33 +12,6 @@
 
 #include "minishell.h"
 
-void	mi_checkmsargument(int argc, char **argv)
-{
-	if (argc > 1)
-	{
-		write (2, "Error: minishell does not take arguments. Try: ", 47);
-		write (2, argv[0], ft_strlen(argv[0]));
-		write (2, "\n", 1);
-		exit(0);
-	}
-}
-
-void	mi_checksyntax(char *line, t_sys *mi_sys)
-{
-	if (ft_strrchr(line, '|') != NULL && (ft_strrchr(line, '|') == line 
-		|| *(ft_strrchr(line, '|') + 1) == '\0'
-		|| *(ft_strrchr(line, '|') + 1) == '|'))
-		mi_logerror(2, "syntax error near unexpected token `|'", mi_sys);
-	else if (ft_strrchr(line, '>') != NULL && (ft_strrchr(line, '>') == line 
-		|| *(ft_strrchr(line, '>') + 1) == '\0'
-		|| *(ft_strrchr(line, '>') + 1) == '>'))
-		mi_logerror(2, "syntax error near unexpected token `>'", mi_sys);
-	else if (ft_strrchr(line, '<') != NULL && (ft_strrchr(line, '<') == line 
-		|| *(ft_strrchr(line, '<') + 1) == '\0'
-		|| *(ft_strrchr(line, '<') + 1) == '<'))
-		mi_logerror(2, "syntax error near unexpected token `<'", mi_sys);
-}
-
 void	mi_analyse(char *line, t_sys *mi_sys)
 {
 	mi_lexingline(line, mi_sys);
@@ -52,6 +25,7 @@ void	mi_analyse(char *line, t_sys *mi_sys)
 	mi_syscmditer(mi_sys, &mi_checkpathaccess);
 	mi_syscmditer(mi_sys, &mi_execone);
 	mi_syscmditer(mi_sys, &mi_waitingcmdipe);
+	mi_waitingpipe(mi_sys);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -59,8 +33,7 @@ int	main(int argc, char **argv, char **env)
 	char			*line;
 	t_sys			mi_sys;
 
-	mi_checkmsargument(argc, argv);
-	mi_sysinitialization(env, &mi_sys);
+	mi_sysinitialization(env, &mi_sys, argc, argv);
 	while (1)
 	{
 		init_signal();
@@ -78,7 +51,6 @@ int	main(int argc, char **argv, char **env)
 		if (g_signal == SIGINT)
 			mi_sys.code_error = 130;
 		mi_analyse(line, &mi_sys);
-		mi_waitingpipe(&mi_sys);
 		mi_freecmd(&mi_sys);
 		free(line);
 		g_signal = 0;

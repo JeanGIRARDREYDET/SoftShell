@@ -139,7 +139,7 @@ void	mi_checkbuiltin(t_cmd *mi_cmd);
 void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys);
 char	*mi_getenv(char *key, t_sys *s_sys);
 void	mi_unset(char *key, t_sys *s_sys);
-void	mi_sysinitialization(char **env, t_sys *s_sys);
+void	mi_sysinitialization(char **env, t_sys *mi_sys, int argc, char **argv);
 int		mi_setenv(char *key, char *value, t_sys *s_sys);
 void	mi_freeerror(t_sys *mi_sys);
 int		mi_export_values(char **key, t_sys *mi_sys);
@@ -200,4 +200,6 @@ void	mi_freesysexit(int status, t_sys *mi_sys);
 bool	mi_redistypexist(int type, t_cmd *mi_cmd);
 void	mi_checkexist(t_red *mi_red, t_sys *mi_sys);
 void	mi_createdoc(t_red *mi_red, t_sys *mi_sys);
+void	mi_checksyntax(char *line, t_sys *mi_sys);
+
 #endif
