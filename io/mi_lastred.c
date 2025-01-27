@@ -28,7 +28,7 @@ bool	ft_intisinarray(int *array, int find)
 	return (false);
 }
 
-int	mi_lastred(t_red *mi_re, t_sys *mi_sys, int *finds)
+int	mi_lastred(t_red *mi_re, t_cmd *mi_cmd, t_sys *mi_sys, int *finds)
 {
 	t_red	*mi_return;
 
@@ -37,21 +37,21 @@ int	mi_lastred(t_red *mi_re, t_sys *mi_sys, int *finds)
 		return (-1);
 	while (mi_re)
 	{
-		if (mi_re->redir_type == OUTPUT )
+		if (mi_re->redir_type == OUTPUT)
 		{
 			mi_createdoc(mi_re, mi_sys);
-			if(access(mi_re->file_name, W_OK) != 0)
+			if (access(mi_re->file_name, W_OK) != 0)
 				mi_logerror2(1, mi_re->file_name, "Permission denied", mi_sys);
 		}
 		if (ft_intisinarray(finds, mi_re->redir_type))
 		{
-			mi_set_io_files(mi_re, mi_sys);
+			mi_set_io_files(mi_re,mi_cmd, mi_sys);
 			if (mi_re->fd != -1)
 				ft_fdclose(mi_re->fd);
 			mi_return = mi_re;
 		}
 		mi_re = mi_re->next;
 	}
-	mi_set_io_files(mi_return, mi_sys);
+	mi_set_io_files(mi_return, mi_cmd, mi_sys);
 	return (mi_return->fd);
 }

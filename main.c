@@ -25,36 +25,28 @@ void	mi_checkmsargument(int argc, char **argv)
 
 void	mi_checksyntax(char *line, t_sys *mi_sys)
 {
-	//mi_sys->code_error = 0;
 	if (ft_strrchr(line, '|') != NULL && (ft_strrchr(line, '|') == line 
-		|| *(ft_strrchr(line, '|') + 1) == '\0' 
+		|| *(ft_strrchr(line, '|') + 1) == '\0'
 		|| *(ft_strrchr(line, '|') + 1) == '|'))
-        mi_logerror(2, "syntax error near unexpected token `|'", mi_sys);
-    else if (ft_strrchr(line, '>') != NULL && (ft_strrchr(line, '>') == line 
-		|| *(ft_strrchr(line, '>') + 1) == '\0' 
+		mi_logerror(2, "syntax error near unexpected token `|'", mi_sys);
+	else if (ft_strrchr(line, '>') != NULL && (ft_strrchr(line, '>') == line 
+		|| *(ft_strrchr(line, '>') + 1) == '\0'
 		|| *(ft_strrchr(line, '>') + 1) == '>'))
-        mi_logerror(2, "syntax error near unexpected token `>'", mi_sys);
-    else if (ft_strrchr(line, '<') != NULL && (ft_strrchr(line, '<') == line 
-		|| *(ft_strrchr(line, '<') + 1) == '\0' 
+		mi_logerror(2, "syntax error near unexpected token `>'", mi_sys);
+	else if (ft_strrchr(line, '<') != NULL && (ft_strrchr(line, '<') == line 
+		|| *(ft_strrchr(line, '<') + 1) == '\0'
 		|| *(ft_strrchr(line, '<') + 1) == '<'))
-        mi_logerror(2, "syntax error near unexpected token `<'", mi_sys);
+		mi_logerror(2, "syntax error near unexpected token `<'", mi_sys);
 }
 
 void	mi_analyse(char *line, t_sys *mi_sys)
 {
-	if (g_signal == SIGINT)
-		mi_sys->code_error = 130;
-	// if (g_signal == SIGQUIT)
-	// 	mi_sys->code_error = 131;
 	mi_lexingline(line, mi_sys);
 	mi_checksyntax(line, mi_sys);
 	if (mi_sys->error)
 		return ;
 	mi_cmditer(mi_sys, &mi_cmdsplitcmd);
 	mi_syscmditer(mi_sys, &mi_cmdparsse);
-	//mi_sysrediter(mi_sys, OUTPUT, &mi_createdoc);
-	//if (mi_sys->error)
-	//	return ;
 	mi_sysrediter(mi_sys, HEREDOC, &mi_heredoc);
 	mi_cmditer(mi_sys, &mi_checkbuiltin);
 	mi_syscmditer(mi_sys, &mi_checkpathaccess);
@@ -69,12 +61,12 @@ int	main(int argc, char **argv, char **env)
 
 	mi_checkmsargument(argc, argv);
 	mi_sysinitialization(env, &mi_sys);
-	init_signal();
 	while (1)
 	{
+		init_signal();
 		line = readline("SoftShell>");
 		if (!line)
-			mi_freecmdsysexit(1, 26, &mi_sys);
+			mi_freecmdsysexit(1, 0, &mi_sys);
 		else if (*line == '\0')
 		{
 			free(line);

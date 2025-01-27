@@ -43,7 +43,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 			mi_execbuiltin(mi_cmd,
-				mi_lastred(mi_cmd->red, mi_sys, out), mi_sys);
+				mi_lastred(mi_cmd->red, mi_cmd, mi_sys, out), mi_sys);
 		else
 			mi_execbuiltin(mi_cmd, STDOUT_FILENO, mi_sys);
 		return ;

@@ -44,8 +44,6 @@ void	mi_lexingline(char *ln, t_sys *mi_sys)
 		else if (ln[i[1]] == '|')
 		{
 			mi_cmd->full = ft_strtrimparam(ln, i[0], i[1], WSPACE);
-			// if (mi_lexinglincheckerr(ln, mi_cmd, mi_sys))
-			// 	return ;
 			mi_cmd->next = mi_createcmd(mi_sys);
 			mi_cmd = mi_cmd->next;
 			i[0] = i[1] + 1;

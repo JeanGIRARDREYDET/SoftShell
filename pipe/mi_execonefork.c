@@ -43,7 +43,7 @@ void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys)
 	int	*in;
 
 	in = (int []){INPUT, HEREDOC};
-	mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_sys, in);
+	mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_cmd, mi_sys, in);
 	if (mi_cmd->fd[0] == -1)
 		mi_freesysexit(mi_sys->exit_status, mi_sys);
 	dup2(mi_cmd->fd[0], STDIN_FILENO);
@@ -68,7 +68,7 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 	{
 		if (mi_sys->nb_pipe > 1)
 			ft_fdclose (mi_cmd->fd[1]);
-		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_sys, out);
+		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_cmd, mi_sys, out);
 		if (mi_cmd->fd[1] == -1)
 			mi_freecmdsysexit(mi_cmd->fd[1], 1, mi_sys);
 		dup2(mi_cmd->fd[1], STDOUT_FILENO);

@@ -25,13 +25,12 @@ void	mi_iddir(char **cmd, t_sys *mi_sys)
 	else
 		mi_logerror2(126, *cmd, "Is a directory 26", mi_sys);
 }
-void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
+
+void	mi_execbuiltinbody(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 {
 	char		*cmd;
 
 	cmd = mi_cmd->args[0];
-	if (mi_redistypexist(INPUT, mi_cmd))
-		mi_logerror2(1, "file_name", "No such file or directory", mi_sys);
 	if (!mi_cmd->full)
 		;
 	else if (ft_findword(cmd, "cd"))
@@ -49,7 +48,16 @@ void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	else if (ft_findword(cmd, "unset"))
 		mi_cmdargsiter(mi_cmd->args, mi_sys, &builtin_unset);
 	else if (mi_cmd->isdir == true)
-		mi_iddir(mi_cmd->args, mi_sys);	
+		mi_iddir(mi_cmd->args, mi_sys);
+}
+
+void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
+{
+	if (mi_sys->error)
+		return ;
+	if (mi_redistypexist(INPUT, mi_cmd))
+		mi_logerror2(1, "file_name", "No such file or directory", mi_sys);
+	mi_execbuiltinbody(mi_cmd, fd, mi_sys);
 	if (mi_sys->nb_pipe > 1)
 		mi_freesysexit(mi_sys->exit_status, mi_sys);
 }
