@@ -197,4 +197,5 @@ void	mi_unbordercote(char *args, t_sys *mi_sys);
 void	mi_freesysexit(int status, t_sys *mi_sys);
 bool	mi_redistypexist(int type, t_cmd *mi_cmd);
 void	mi_checkexist(t_red *mi_red, t_sys *mi_sys);
+void	mi_createdoc(t_red *mi_red, t_sys *mi_sys);
 #endif

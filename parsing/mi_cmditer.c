@@ -64,6 +64,8 @@ void	mi_rediriter(t_red *r, t_sys *s, int t, void (*f)(t_red *r, t_sys *s ))
 	{
 		if (r->redir_type == t)
 			(*f)(r, s);
+		if (t == OUTPUT && access(r->file_name, W_OK) != 0)
+		return (mi_logerror2(1, r->file_name, "Permission denied", s));
 		r = r->next ;
 	}
 }
@@ -77,7 +79,8 @@ void	mi_sysrediter(t_sys *sys, int type, void (*f)(t_red *red, t_sys *sys))
 	mi_cmd = sys->cmd;
 	while (mi_cmd != NULL)
 	{
-		mi_rediriter(mi_cmd->red, sys, type, f);
+		if(mi_cmd->red)
+			mi_rediriter(mi_cmd->red, sys, type, f);
 		mi_cmd = mi_cmd->next;
 	}
 }

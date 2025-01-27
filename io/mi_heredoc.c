@@ -54,3 +54,15 @@ void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
 	ft_fdclose (mi_red->fd);
 	return (free(line), free(bash), mi_sys->nb_herdoc++, (void) NULL);
 }
+
+void	mi_createdoc(t_red *mi_red, t_sys *mi_sys)
+{
+	int i;
+	if(mi_sys->error==NULL && mi_red)
+	{
+		i = open(mi_red->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		ft_fdclose (i);
+	}
+
+	return ;
+}

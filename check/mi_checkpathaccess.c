@@ -52,6 +52,8 @@ static void	mi_checkenvpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 
 static void	mi_checkdireaccess(t_cmd *mi_cmd)
 {
+	if (!mi_cmd || !mi_cmd->args || !mi_cmd->args[0])
+        return ;
 	mi_cmd->isdir = false;
 	if (chdir(mi_cmd->args[0]) == 0)
 	{
