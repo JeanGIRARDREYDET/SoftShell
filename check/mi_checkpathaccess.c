@@ -66,7 +66,6 @@ static void	mi_checkdireaccess(t_cmd *mi_cmd)
 void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	mi_cmd->found = false;
-	mi_checkdireaccess(mi_cmd);
 	if (mi_cmd->isdir == true)
 		return ;
 	if (!mi_cmd || mi_cmd->builtin == true || !mi_cmd->args || !mi_cmd->args[0])
@@ -75,6 +74,7 @@ void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		mi_cmd->found = true ;
 	}
-	mi_checkoneaccess(mi_getenv_env("PWD", mi_sys), mi_cmd);
 	mi_checkenvpathaccess (mi_cmd, mi_sys);
+	mi_checkdireaccess(mi_cmd);
+	mi_checkoneaccess(mi_getenv_env("PWD", mi_sys), mi_cmd);
 }
