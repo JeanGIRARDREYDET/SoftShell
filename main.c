@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **env)
 			mi_sys.code_error = 130;
 		mi_analyse(line, &mi_sys);
 		mi_freecmd(&mi_sys);
-		free(line);
+//		free(line);
 		g_signal = 0;
 	}
 }
