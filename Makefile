@@ -62,6 +62,8 @@ SRCS = 			main.c \
 				libft/ft_strnstr.c \
 				libft/ft_lstnew.c \
 				libft/ft_strchr.c \
+				libft/ft_strremovespacebefor.c \
+				libft/ft_strrollleft.c \
 				libft/ft_strsubreplace.c \
 				libft/ft_strrchr.c \
 				libft/ft_lstsize.c \
