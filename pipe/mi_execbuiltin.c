@@ -46,7 +46,7 @@ void	mi_execbuiltinbody(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	else if (ft_findword(cmd, "export"))
 		builtin_export(mi_cmd->args, fd, mi_sys);
 	else if (ft_findword(cmd, "pwd"))
-		builtin_pwd(fd);
+		builtin_pwd(fd, mi_sys);
 	else if (ft_findword(cmd, "unset"))
 		mi_cmdargsiter(mi_cmd->args, mi_sys, &builtin_unset);
 	else if (mi_cmd->isdir == true)

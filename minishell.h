@@ -133,7 +133,7 @@ void	builtin_env(t_sys *s_sys, int fd);
 void	builtin_exit(char **args, t_sys *mi_sys);
 void	builtin_export(char **key, int fd, t_sys *s_sys);
 void	print_export(t_sys *s_sys, int fd);
-void	builtin_pwd(int fd);
+void	builtin_pwd(int fd, t_sys *mi_sys);
 void	builtin_unset(char *key, t_sys *s_sys);
 void	mi_checkbuiltin(t_cmd *mi_cmd);
 void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys);
