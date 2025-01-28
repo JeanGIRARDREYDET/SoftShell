@@ -15,7 +15,10 @@
 void	mi_freesysexit(int status, t_sys *mi_sys)
 {
 	mi_freesys(mi_sys);
-	exit (status);
+	if (status == 0)
+		exit (mi_sys->code_error);
+	else
+		exit (status);
 }
 
 void	mi_iddir(t_cmd *mi_cmd, t_sys *mi_sys)
