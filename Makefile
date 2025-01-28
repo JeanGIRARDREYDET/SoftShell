@@ -1,6 +1,4 @@
 #------------MAKEFILE------------#
-##	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(READLINE_LIB)
-
 
 NAME = minishell
 
