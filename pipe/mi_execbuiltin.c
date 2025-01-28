@@ -18,12 +18,14 @@ void	mi_freesysexit(int status, t_sys *mi_sys)
 	exit (status);
 }
 
-void	mi_iddir(char **cmd, t_sys *mi_sys)
+void	mi_iddir(t_cmd *mi_cmd, t_sys *mi_sys)
 {
-	if (chdir(*cmd) == 0)
-		mi_logerror2(126, *cmd, "est un dossier", mi_sys);
+	if (mi_cmd->full && mi_cmd->full[0] == '.')
+		mi_logerror2(126, mi_cmd->args[0], "Is a directory", mi_sys);
+	else if (mi_cmd->args && mi_cmd->args[0] && mi_cmd->args[0][0] == '/')
+		mi_logerror2(126, mi_cmd->args[0], "No such file or directory", mi_sys);
 	else
-		mi_logerror2(126, *cmd, "Is a directory", mi_sys);
+		mi_logerror2(127, mi_cmd->args[0], "command not found", mi_sys);
 }
 
 void	mi_execbuiltinbody(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
@@ -48,7 +50,7 @@ void	mi_execbuiltinbody(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 	else if (ft_findword(cmd, "unset"))
 		mi_cmdargsiter(mi_cmd->args, mi_sys, &builtin_unset);
 	else if (mi_cmd->isdir == true)
-		mi_iddir(mi_cmd->args, mi_sys);
+		mi_iddir(mi_cmd, mi_sys);
 }
 
 void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)

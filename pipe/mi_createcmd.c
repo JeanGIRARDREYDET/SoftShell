@@ -59,7 +59,7 @@ void	mi_crered_herdoc_filename(t_red *mi_re, int type, char *file_name)
 		mi_re->file_name = file_name;
 }
 
-bool is_filename_valid(char *file_name)
+bool	is_filename_valid(char *file_name)
 {
 	if (!file_name)
 		return (false);
@@ -72,13 +72,7 @@ void	mi_crered(t_cmd *cmd, t_sys *sys, int type, char *file_name)
 {
 	t_red	*mi_red;
 	t_red	*li_red;
-	//(void)sys;
 
-//	if (is_filename_valid(file_name) == false)
-//	{
-//		file_name = NULL;
-//		return ;
-//	}
 	if (!file_name)
 	{
 		mi_logerror(2, "syntax error near unexpected token", sys);

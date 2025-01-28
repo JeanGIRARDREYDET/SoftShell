@@ -74,7 +74,8 @@ void	mi_checkpathaccess(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		mi_cmd->found = true ;
 	}
-	mi_checkenvpathaccess (mi_cmd, mi_sys);
+	if (mi_cmd->full && mi_cmd->full[0] != '.')
+		mi_checkenvpathaccess (mi_cmd, mi_sys);
 	mi_checkdireaccess(mi_cmd);
 	mi_checkoneaccess(mi_getenv_env("PWD", mi_sys), mi_cmd);
 }

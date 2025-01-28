@@ -39,7 +39,9 @@ int	mi_execcmd(t_cmd *mi_cmd, t_sys *mi_sys)
 	{
 		mi_logerror2(123, mi_cmd->args[0], "command not found", mi_sys);
 		if (access(mi_cmd->args[0], X_OK) != 0)
-			mi_freecmdsysexit(0, 126, mi_sys);
+			if (mi_cmd->full && (mi_cmd->full[0] == '.'
+					|| mi_cmd->full[0] == '/'))
+				mi_freecmdsysexit(0, 126, mi_sys);
 		mi_freecmdsysexit(0, 127, mi_sys);
 	}
 	return (122);
