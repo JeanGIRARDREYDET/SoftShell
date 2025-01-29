@@ -33,6 +33,8 @@ void mi_prompt(t_sys *mi_sys)
 	{
 		init_signal();
 		line = readline(prompt_text);
+		if (*line == '\0')
+			continue ;
 		mi_sys->input = ft_strtrim(line, WSPACE); 
         free(line);
         if (!mi_sys->input)
