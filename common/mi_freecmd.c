@@ -76,5 +76,7 @@ void	mi_freecmd(t_sys *mi_sys)
 	mi_sys->cmd = NULL;
 	mi_sys->nb_error = 0;
 	mi_freeerror(mi_sys);
+	if (mi_sys.input != NULL)
+		free(mi_sys.input);
 	g_signal = 0;
 }
