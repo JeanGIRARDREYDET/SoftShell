@@ -51,7 +51,6 @@ void mi_prompt(t_sys *mi_sys)
 			continue ;
 		}
 		free(prompt_text);
-		add_history(mi_sys->input);
 	break;
 	}
 }
