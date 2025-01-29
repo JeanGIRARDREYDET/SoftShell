@@ -37,7 +37,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		init_signal();
-		line = readline("SoftShell>");
+		line = ft_strtrim(readline("SoftShell>"), WSPACE);
 		if (!line)
 			mi_freecmdsysexit(1, 0, &mi_sys);
 		else if (*line == '\0')
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **env)
 			mi_sys.code_error = 130;
 		mi_analyse(line, &mi_sys);
 		mi_freecmd(&mi_sys);
-//		free(line);
+		free(line);
 		g_signal = 0;
 	}
 }
