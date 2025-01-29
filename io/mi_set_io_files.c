@@ -30,7 +30,10 @@ void	mi_set_io_files(t_red *mi_re, t_cmd *mi_cmd, t_sys *mi_sys)
 	else if (mi_re->redir_type == APPEND)
 		mi_re->fd = open(mi_re->file_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if (mi_re->redir_type == HEREDOC)
+	{
 		mi_re->fd = open(mi_re->file_name, O_RDONLY);
+		dup2(mi_re->fd, STDIN_FILENO);
+	}
 	if (mi_re->fd == -1)
 	{
 		if (mi_sys->error == NULL)

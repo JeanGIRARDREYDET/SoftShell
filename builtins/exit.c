@@ -20,10 +20,28 @@ void	mi_freecmdsysexit(int fd, int status, t_sys *mi_sys)
 	mi_freesysexit(status, mi_sys);
 }
 
+bool	ft_is_number(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (false);
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 void	builtin_exit(char **args, t_sys *mi_sys)
 {
-	int			code_exit;
-	size_t		arglen;
+	int		code_exit;
+	size_t	arglen;
 
 	code_exit = mi_sys->code_error;
 	if (args)
@@ -34,11 +52,12 @@ void	builtin_exit(char **args, t_sys *mi_sys)
 		{
 			code_exit = 1;
 			mi_logerror2(1, args[1], "too many arguments", mi_sys);
+			return ;
 		}
 		else if (args[1] != NULL)
 		{
 			code_exit = 0xFF & ft_atoi(args[1]);
-			if (code_exit == 0)
+			if (!ft_is_number(args[1]))
 			{
 				code_exit = 2;
 				mi_logerror2(2, args[1], "numeric argument required", mi_sys);

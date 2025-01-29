@@ -26,6 +26,20 @@ void	mi_heredocsignalbarke(t_sys *mi_sys)
 	write(2, "')\n", 3);
 }
 
+void	mi_heredocwrite(t_red *mi_red, char *line, t_sys *mi_sys)
+{
+	int len;
+
+	len = ft_strlen(line);
+	if (len > 0)
+	{
+		mi_expand(&line, 0, mi_sys);
+		if(write(mi_red->fd, line, ft_strlen(line)))
+	}		return ;
+	if (write(mi_red->fd, "\n", 1));
+		return ;
+}
+
 void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
 {
 	char		*line;
@@ -44,8 +58,7 @@ void	mi_heredoc(t_red *mi_red, t_sys *mi_sys)
 		}
 		if (ft_findword(mi_red->eof, line))
 			break ;
-		if (ft_strlen(line) > 0)
-			mi_expand(&line, 0, mi_sys);
+		mi_heredocwrite(mi_red, line, mi_sys);
 		if (g_signal == SIGINT)
 			return (free(bash), free(line), mi_logerror(130, NULL, mi_sys));
 		free(line);

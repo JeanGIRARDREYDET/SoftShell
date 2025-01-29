@@ -14,16 +14,18 @@
 
 void	mi_checksyntax(char *line, t_sys *mi_sys)
 {
-	if (ft_strrchr(line, '|') != NULL && (ft_strrchr(line, '|') == line
-			|| *(ft_strrchr(line, '|') + 1) == '\0'
-			|| *(ft_strrchr(line, '|') + 1) == '|'))
+	if (!line)
+		return ;
+	if (ft_strlen(line) == 1 && (*line == '|' || *line == '<' || *line == '>'))
+		mi_logerror(2, "syntax error near unexpected token", mi_sys);
+	else if (ft_strrchr(line, '|') != NULL && (ft_strrchr(line, '|') == line
+			|| *(ft_strrchr(line, '|') + 1) == '\0' || *(ft_strrchr(line, '|')
+				+ 1) == '|'))
 		mi_logerror(2, "syntax error near unexpected token `|'", mi_sys);
-	else if (ft_strrchr(line, '>') != NULL && (ft_strrchr(line, '>') == line
-			|| *(ft_strrchr(line, '>') + 1) == '\0'
-			|| *(ft_strrchr(line, '>') + 1) == '>'))
+	else if (ft_strrchr(line, '>') != NULL && (*(ft_strrchr(line, '>')
+				+ 1) == '\0' || *(ft_strrchr(line, '>') + 1) == '>'))
 		mi_logerror(2, "syntax error near unexpected token `>'", mi_sys);
-	else if (ft_strrchr(line, '<') != NULL && (ft_strrchr(line, '<') == line
-			|| *(ft_strrchr(line, '<') + 1) == '\0'
-			|| *(ft_strrchr(line, '<') + 1) == '<'))
+	else if (ft_strrchr(line, '<') != NULL && (*(ft_strrchr(line, '<')
+				+ 1) == '\0' || *(ft_strrchr(line, '<') + 1) == '<'))
 		mi_logerror(2, "syntax error near unexpected token `<'", mi_sys);
 }
