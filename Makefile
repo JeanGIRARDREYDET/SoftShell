@@ -26,6 +26,7 @@ SRCS = 			main.c \
 				io/mi_set_io_files.c \
 				io/signal.c \
 				io/sigint_heredoc.c \
+				io/mi_prompt.c \
 				libft/ft_arrclose.c \
 				libft/ft_atoi.c \
 				libft/ft_bzero.c \

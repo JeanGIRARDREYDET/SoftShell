@@ -31,23 +31,13 @@ void	mi_analyse(char *line, t_sys *mi_sys)
 
 int	main(int argc, char **argv, char **env)
 {
-	char			*read;
 	t_sys			mi_sys;
 
 	mi_sysinitialization(env, &mi_sys, argc, argv);
 	while (1)
 	{
 		init_signal();
-		read = readline("SoftShell>");
-		mi_sys.input = ft_strtrim(read, WSPACE); 
-        free(read);
-		if (!mi_sys.input)
-			mi_freecmdsysexit(1, 0, &mi_sys);
-		else if (*mi_sys.input == '\0')
-		{
-			free(mi_sys.input);
-			continue ;
-		}
+		mi_prompt(&mi_sys);
 		add_history(mi_sys.input);		
 		while (*mi_sys.input != '\0' && ft_strrchr(WSPACE, *mi_sys.input) != NULL)
 			mi_sys.input++;
