@@ -14,7 +14,7 @@
 
 void	mi_analyse(char *line, t_sys *mi_sys)
 {
-	mi_lexingline(line, mi_sys);
+	mi_lexingline( mi_sys);
 	mi_checksyntax(line, mi_sys);
 	if (mi_sys->error)
 		return ;
@@ -28,31 +28,34 @@ void	mi_analyse(char *line, t_sys *mi_sys)
 	mi_waitingpipe(mi_sys);
 }
 
+
 int	main(int argc, char **argv, char **env)
 {
-	char			*line;
+	char			*read;
 	t_sys			mi_sys;
 
 	mi_sysinitialization(env, &mi_sys, argc, argv);
 	while (1)
 	{
 		init_signal();
-		line = ft_strtrim(readline("SoftShell>"), WSPACE);
-		if (!line)
+		read = readline("SoftShell>");
+		mi_sys.input = ft_strtrim(read, WSPACE); 
+        free(read);
+		if (!mi_sys.input)
 			mi_freecmdsysexit(1, 0, &mi_sys);
-		else if (*line == '\0')
+		else if (*mi_sys.input == '\0')
 		{
-			free(line);
+			free(mi_sys.input);
 			continue ;
 		}
-		add_history(line);
-		while (*line != '\0' && ft_strrchr(WSPACE, *line) != NULL)
-			line++;
+		add_history(mi_sys.input);		
+		while (*mi_sys.input != '\0' && ft_strrchr(WSPACE, *mi_sys.input) != NULL)
+			mi_sys.input++;
 		if (g_signal == SIGINT)
 			mi_sys.code_error = 130;
-		mi_analyse(line, &mi_sys);
+		mi_analyse(mi_sys.input, &mi_sys);
 		mi_freecmd(&mi_sys);
-		free(line);
+		free(mi_sys.input);
 		g_signal = 0;
 	}
 }

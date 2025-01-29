@@ -81,6 +81,6 @@ void	mi_sysrediter(t_sys *sys, int type, void (*f)(t_red *red, t_sys *sys))
 	{
 		if (mi_cmd->red)
 			mi_rediriter(mi_cmd->red, sys, type, f);
-		mi_cmd = mi_cmd->next;
+ 		mi_cmd = mi_cmd->next;
 	}
 }

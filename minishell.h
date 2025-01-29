@@ -100,6 +100,7 @@ typedef struct s_cmd
 typedef struct s_sys
 {
 	int				status;
+	char			*input;
 	int				here_doc;
 	int				max_id;
 	int				nb_pipe;
@@ -155,7 +156,7 @@ void	mi_waitingcmdipe(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_cmdparsse(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_cmdargparsse(t_cmd *lst);
 void	mi_syscmditer(t_sys *sys, void (*f)(t_cmd *lst, t_sys *sys));;
-void	mi_lexingline(char *ln, t_sys *mi_sys);
+void	mi_lexingline(t_sys *mi_sys);
 void	mi_pospasscote(char *ln, size_t *i, t_sys *mi_sys);
 void	mi_logerror(int code_error, char *msg, t_sys *mi_sys);
 void	mi_logerror2(int code_error, char *msg1, char *msg2, t_sys *mi_sys);
