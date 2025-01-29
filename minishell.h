@@ -145,7 +145,7 @@ int		mi_setenv(char *key, char *value, t_sys *s_sys);
 void	mi_freeerror(t_sys *mi_sys);
 int		mi_export_values(char **key, t_sys *mi_sys);
 bool	mi_redistypexist(int type, t_cmd *mi_cmd);
-void 	mi_prompt(t_sys *mi_sys);
+void	mi_prompt(t_sys *mi_sys);
 t_error	*mi_errornew(int code_error, char *msg);
 void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys);
 void	mi_exebuiltin(t_cmd *mi_cmd, t_sys *mi_sys);

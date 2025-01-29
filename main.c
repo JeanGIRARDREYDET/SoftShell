@@ -38,7 +38,8 @@ int	main(int argc, char **argv, char **env)
 		init_signal();
 		mi_prompt(&mi_sys);
 		add_history(mi_sys.input);
-		while (*mi_sys.input != '\0' && ft_strrchr(WSPACE, *mi_sys.input) != NULL)
+		while (*mi_sys.input != '\0'
+			&& ft_strrchr(WSPACE, *mi_sys.input) != NULL)
 			mi_sys.input++;
 		if (g_signal == SIGINT)
 			mi_sys.code_error = 130;

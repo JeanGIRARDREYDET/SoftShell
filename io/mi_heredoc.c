@@ -28,15 +28,16 @@ void	mi_heredocsignalbarke(t_sys *mi_sys)
 
 void	mi_heredocwrite(t_red *mi_red, char *line, t_sys *mi_sys)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(line);
 	if (len > 0)
 	{
 		mi_expand(&line, 0, mi_sys);
-		if(write(mi_red->fd, line, ft_strlen(line)))
-	}		return ;
-	if (write(mi_red->fd, "\n", 1));
+		if (write(mi_red->fd, line, ft_strlen(line)))
+			return ;
+	}
+	if (write(mi_red->fd, "\n", 1))
 		return ;
 }
 

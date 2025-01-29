@@ -18,7 +18,8 @@ bool	mi_lexinglincheckerr( t_cmd *mi_cmd, t_sys *mi_sys)
 
 	if (mi_cmd->full == NULL)
 	{
-		msg_err = join_3("syntax error near ", mi_sys->input, " unexpected token");
+		msg_err = join_3("syntax error near ", mi_sys->input,
+				" unexpected token");
 		mi_sys->nb_pipe = 0;
 		mi_logerror(2, msg_err, mi_sys);
 		free(msg_err);

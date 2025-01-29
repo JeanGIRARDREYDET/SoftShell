@@ -12,6 +12,18 @@
 
 #include "../minishell.h"
 
+void	mi_set_io_files_error(t_red *mi_re, t_cmd *mi_cmd, t_sys *mi_sys)
+{
+	if (mi_re->fd == -1)
+	{
+		if (mi_sys->error == NULL)
+			mi_logerror2(1, mi_re->file_name, strerror(errno), mi_sys);
+		ft_fdclose(mi_re->fd);
+		if (mi_sys->nb_pipe > 1 || mi_cmd->builtin == false)
+			mi_freesysexit(1, mi_sys);
+	}
+}
+
 void	mi_set_io_files(t_red *mi_re, t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	if (mi_re == NULL)
@@ -34,12 +46,5 @@ void	mi_set_io_files(t_red *mi_re, t_cmd *mi_cmd, t_sys *mi_sys)
 		mi_re->fd = open(mi_re->file_name, O_RDONLY);
 		dup2(mi_re->fd, STDIN_FILENO);
 	}
-	if (mi_re->fd == -1)
-	{
-		if (mi_sys->error == NULL)
-			mi_logerror2(1, mi_re->file_name, strerror(errno), mi_sys);
-		ft_fdclose(mi_re->fd);
-		if (mi_sys->nb_pipe > 1 || mi_cmd->builtin == false)
-			mi_freesysexit(1, mi_sys);
-	}
+	mi_set_io_files_error(mi_re, mi_cmd, mi_sys);
 }
