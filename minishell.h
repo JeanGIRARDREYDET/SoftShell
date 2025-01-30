@@ -100,6 +100,7 @@ typedef struct s_cmd
 typedef struct s_sys
 {
 	int				status;
+	char			*prompt;
 	char			*input;
 	int				here_doc;
 	int				max_id;
@@ -119,6 +120,7 @@ typedef struct s_sys
 	int				exit_status;
 }	t_sys;
 
+void	ft_fdarrclose(int *fd_arr, int size);
 void	signal_handle_sigint_cat(int sign);
 void	signal_handle_sigquit(int sign);
 int		sigint_heredoc(void);

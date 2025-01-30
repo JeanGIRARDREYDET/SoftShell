@@ -28,6 +28,12 @@ bool	ft_intisinarray(int *array, int find)
 	return (false);
 }
 
+void	mi_logerrorpermdenied(char *file_name, t_sys *mi_sys)
+{
+	mi_logerror2(1, file_name, "Permission denied", mi_sys);
+	mi_sys->exit_status = EXIT_FAILURE;
+}
+
 int	mi_lastred(t_red *mi_re, t_cmd *mi_cmd, t_sys *mi_sys, int *finds)
 {
 	t_red	*mi_return;
@@ -41,7 +47,7 @@ int	mi_lastred(t_red *mi_re, t_cmd *mi_cmd, t_sys *mi_sys, int *finds)
 		{
 			mi_createdoc(mi_re, mi_sys);
 			if (access(mi_re->file_name, F_OK & W_OK) != 0)
-				mi_logerror2(1, mi_re->file_name, "Permission denied", mi_sys);
+				mi_logerrorpermdenied(mi_re->file_name, mi_sys);
 		}
 		if (ft_intisinarray(finds, mi_re->redir_type))
 		{

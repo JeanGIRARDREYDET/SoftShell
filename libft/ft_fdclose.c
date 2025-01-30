@@ -17,3 +17,16 @@ void	ft_fdclose(int fd)
 	if (fd != -1)
 		close (fd);
 }
+
+void	ft_fdarrclose(int *fd_arr, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (fd_arr[i] != -1)
+			close(fd_arr[i]);
+		i++;
+	}
+}
