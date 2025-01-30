@@ -69,9 +69,9 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 		mi_execonechildin(mi_cmd, mi_sys);
 	if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 	{
-		if (mi_sys->nb_pipe > 1 && mi_cmd->fd[1]!=-1)
+		if (mi_sys->nb_pipe > 1 && mi_cmd->fd[1] != -1)
 			ft_fdclose (mi_cmd->fd[1]);
-		if (mi_sys->nb_pipe >= 1 && mi_cmd->next!=NULL)
+		if (mi_sys->nb_pipe >= 1 && mi_cmd->next != NULL)
 			ft_fdclose (mi_cmd->fd[0]);
 		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_cmd, mi_sys, out);
 		if (mi_cmd->fd[1] == -1)
