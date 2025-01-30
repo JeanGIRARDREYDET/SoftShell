@@ -13,3 +13,4 @@ libft/libft.a
 *.a
 minishell_tester
 *.pdf
+test_files/*

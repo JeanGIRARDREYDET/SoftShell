@@ -121,6 +121,7 @@ SRCS = 			main.c \
 				pipe/mi_execone.c \
 				pipe/mi_execonefork.c \
 				pipe/mi_exepermis.c \
+				pipe/mi_execonechildout.c \
 				common/mi_freecmd.c \
 				common/mi_freesys.c \
 				pipe/mi_waitingpipe.c \

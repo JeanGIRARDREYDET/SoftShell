@@ -29,6 +29,7 @@ void	mi_execonechildexe(t_cmd *mi_cmd, t_sys *mi_sys)
 	}
 	if (mi_cmd->args[0] != NULL)
 		mi_execcmd(mi_cmd, mi_sys);
+		
 }
 
 void	mi_execonechildnoarg(t_cmd *mi_cmd, t_sys *mi_sys)
@@ -44,9 +45,21 @@ void	mi_execonechildnoarg(t_cmd *mi_cmd, t_sys *mi_sys)
 void	mi_execonechildin(t_cmd *mi_cmd, t_sys *mi_sys)
 {
 	int	*in;
+	int fdout;
 
 	in = (int []){INPUT, HEREDOC};
-	mi_cmd->fd[0] = mi_lastred(mi_cmd->red, mi_cmd, mi_sys, in);
+	fdout = mi_lastred(mi_cmd->red, mi_cmd, mi_sys, in);
+	if( fdout != -1)
+	{
+		ft_fdclose (mi_cmd->fd[0]);
+		mi_cmd->fd[0] = fdout;
+	}
+	if(mi_cmd->args[0] == NULL || mi_sys->exit_status == EXIT_FAILURE)
+	{
+		ft_fdclose (mi_cmd->fd[0]);
+		ft_fdclose (mi_cmd->fd[1]);
+		mi_freesysexit(mi_sys->exit_status, mi_sys);
+	}
 	if (mi_cmd->fd[0] == -1)
 		mi_freesysexit(mi_sys->exit_status, mi_sys);
 	dup2(mi_cmd->fd[0], STDIN_FILENO);
@@ -57,8 +70,8 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 {
 	signal(SIGINT, signal_handle_sigint_cat);
 	signal(SIGQUIT, signal_handle_sigquit);
-	if (!mi_cmd->args[0])
-		mi_execonechildnoarg(mi_cmd, mi_sys);
+//	if (!mi_cmd->args[0])
+//		mi_execonechildnoarg(mi_cmd, mi_sys, out);
 	if (mi_cmd->no != 0)
 	{
 		if (dup2(mi_sys->fd_in, STDIN_FILENO) == -1)
@@ -69,8 +82,8 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 		mi_execonechildin(mi_cmd, mi_sys);
 	if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 	{
-		if (mi_sys->nb_pipe > 1)
-			ft_fdclose (mi_cmd->fd[1]);
+//		if (mi_sys->nb_pipe > 1)
+//			ft_fdclose (mi_cmd->fd[1]);
 		if (mi_sys->nb_pipe >= 1 && mi_cmd->next != NULL)
 			ft_fdclose (mi_cmd->fd[0]);
 		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_cmd, mi_sys, out);

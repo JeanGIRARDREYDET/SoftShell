@@ -12,13 +12,31 @@
 
 #include "../minishell.h"
 
-void	mi_freesysexit(int status, t_sys *mi_sys)
+void	mi_freesysexit (int status, t_sys *mi_sys)
 {
+	if (mi_sys->cmd)
+	{
+		if (mi_sys->cmd->fd[0] != -1)
+		{
+			close(mi_sys->cmd->fd[0]);
+			mi_sys->cmd->fd[0] = -1;
+		}
+		if (mi_sys->cmd->fd[1] != -1)
+		{
+			close(mi_sys->cmd->fd[1]);
+			mi_sys->cmd->fd[1] = -1;
+		}
+		if (mi_sys->fd_in != -1)
+		{
+			close(mi_sys->fd_in);
+			mi_sys->fd_in = -1;
+		}
+	}
 	mi_freesys(mi_sys);
 	if (status == 0)
-		exit (mi_sys->code_error);
+		exit(mi_sys->code_error);
 	else
-		exit (status);
+		exit(status);
 }
 
 void	mi_iddir(t_cmd *mi_cmd, t_sys *mi_sys)
@@ -33,7 +51,7 @@ void	mi_iddir(t_cmd *mi_cmd, t_sys *mi_sys)
 
 void	mi_execbuiltinbody(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 {
-	char		*cmd;
+	char	*cmd;
 
 	cmd = mi_cmd->args[0];
 	if (!mi_cmd->full)
@@ -54,6 +72,8 @@ void	mi_execbuiltinbody(t_cmd *mi_cmd, int fd, t_sys *mi_sys)
 		mi_cmdargsiter(mi_cmd->args, mi_sys, &builtin_unset);
 	else if (mi_cmd->isdir == true)
 		mi_iddir(mi_cmd, mi_sys);
+	else if (mi_sys->nb_pipe > 1)
+		mi_freecmdsysexit(STDOUT_FILENO, 0, mi_sys);
 }
 
 void	mi_execbuiltin(t_cmd *mi_cmd, int fd, t_sys *mi_sys)

@@ -43,11 +43,22 @@ int	mi_lastred(t_red *mi_re, t_cmd *mi_cmd, t_sys *mi_sys, int *finds)
 		return (-1);
 	while (mi_re)
 	{
-		if (mi_re->redir_type == OUTPUT)
+		if (mi_re->redir_type == INPUT || mi_re->redir_type == HEREDOC)
+		{
+			if (access(mi_re->file_name, F_OK & R_OK) != 0)
+			{
+				mi_logerrorpermdenied(mi_re->file_name, mi_sys);
+				return (-1);
+			}
+		}
+		else if (mi_re->redir_type == OUTPUT || mi_re->redir_type == APPEND)
 		{
 			mi_createdoc(mi_re, mi_sys);
 			if (access(mi_re->file_name, F_OK & W_OK) != 0)
+			{
 				mi_logerrorpermdenied(mi_re->file_name, mi_sys);
+				return (-1);
+			}
 		}
 		if (ft_intisinarray(finds, mi_re->redir_type))
 		{

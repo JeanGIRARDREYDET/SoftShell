@@ -33,13 +33,15 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	int	*out;
 
 	out = (int []){OUTPUT, APPEND};
+	if(*mi_cmd->args == 0)
+		mi_cmd->builtin = true;
 	if (mi_cmd->full && mi_cmd->full[0] == '\0')
 	{
 		mi_logerror(2, "erreur de syntaxe : fin de fichier prématurée", mi_sys);
 		ft_fdclose (mi_sys->fd_in);
 		return ;
 	}
-	if (mi_sys->nb_pipe == 1 && mi_cmd->builtin == true)
+	if (mi_sys->nb_pipe == 1 && (mi_cmd->builtin == true))
 	{
 		if (mi_redis(mi_cmd, OUTPUT) || mi_redis(mi_cmd, APPEND))
 			mi_execbuiltin(mi_cmd,
@@ -49,7 +51,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 		return ;
 	}
 	mi_execonepipe(mi_cmd, mi_sys);
-	if (mi_sys->error == NULL && mi_cmd->args)
+	if (mi_sys->error == NULL)
 		mi_execonefork(mi_cmd, mi_sys, out);
 	return ;
 }

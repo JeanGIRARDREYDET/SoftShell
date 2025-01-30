@@ -35,7 +35,7 @@ bool	ft_anti_negative(char **keys_values)
 		{
 			if (j > 0 && keys_values[i][j] == '=')
 				return (false);
-			if (!ft_isalnum(keys_values[i][j]))
+			if (!(ft_isalnum(keys_values[i][j]) || keys_values[i][j] == '_'))
 				return (true);
 			j++;
 		}

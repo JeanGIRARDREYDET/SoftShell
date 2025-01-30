@@ -20,7 +20,7 @@ void	mi_prompt(t_sys *mi_sys)
 	{
 		line = readline("Softshell:>");
 		if (line == NULL)
-			mi_freecmdsysexit(1, 0, mi_sys);;
+			mi_freecmdsysexit(1, 0, mi_sys);
 		if (*line == '\0')
 			continue ;
 		mi_sys->input = ft_strtrim(line, WSPACE);
