@@ -89,8 +89,8 @@ void	mi_execonechild(t_cmd *mi_cmd, t_sys *mi_sys, int *out)
 		if (mi_cmd->fd[1] > 0)
 			close(mi_cmd->fd[1]);
 		mi_cmd->fd[1] = mi_lastred(mi_cmd->red, mi_cmd, mi_sys, out);
-		if (mi_cmd->fd[1] == -1)
-			mi_freecmdsysexit(STDOUT_FILENO, 1, mi_sys);
+		if (mi_cmd->fd[1] == -1 || ft_strlen(*mi_cmd->args) == 0)
+			mi_freecmdsysexit(0, 1, mi_sys);
 		if (mi_cmd->args)
 			dup2(mi_cmd->fd[1], STDOUT_FILENO);
 		if (mi_sys->nb_pipe <= 1)
