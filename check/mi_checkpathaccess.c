@@ -18,6 +18,8 @@ static void	mi_checkoneaccess(char *path, t_cmd *mi_cmd)
 {
 	char		*pathcmd;
 
+	if (!path || !mi_cmd || !mi_cmd->args)
+		return ;
 	pathcmd = join_3(path, "/", mi_cmd->args[0]);
 	if (access(pathcmd, F_OK) == 0)
 	{

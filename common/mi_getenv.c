@@ -43,9 +43,9 @@ char	*mi_getenv_env(char *key, t_sys *mi_sys)
 
 	i = 0;
 	len = ft_strlen(key);
-	while (i <= mi_sys->len_env)
+	while (i <= mi_sys->len_env && mi_sys->env[i])
 	{
-		end = mi_sys->env[i][len];
+		end = mi_sys->env[i][ft_strlen(mi_sys->env[i])];
 		if (ft_strncmp (mi_sys->env[i], key, len) == 0 && end == '=')
 			break ;
 		i++;
