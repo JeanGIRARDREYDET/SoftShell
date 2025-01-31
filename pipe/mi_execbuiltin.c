@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	mi_freesysexit (int status, t_sys *mi_sys)
+void	mi_freesysexit(int status, t_sys *mi_sys)
 {
 	if (mi_sys->cmd)
 	{

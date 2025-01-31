@@ -14,7 +14,7 @@
 
 bool	ft_intisinarray(int *array, int find)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	if (!array)
@@ -34,41 +34,48 @@ void	mi_logerrorpermdenied(char *file_name, t_sys *mi_sys)
 	mi_sys->exit_status = EXIT_FAILURE;
 }
 
+bool	mi_lastredcheck(t_red *mi_re, t_sys *mi_sys)
+{
+	if (mi_re->redir_type == INPUT || mi_re->redir_type == HEREDOC)
+	{
+		if (access(mi_re->file_name, R_OK) != 0)
+		{
+			mi_logerrorpermdenied(mi_re->file_name, mi_sys);
+			return (false);
+		}
+	}
+	else if (mi_re->redir_type == OUTPUT || mi_re->redir_type == APPEND)
+	{
+		mi_createdoc(mi_re, mi_sys);
+		if (access(mi_re->file_name, W_OK) != 0)
+		{
+			mi_logerrorpermdenied(mi_re->file_name, mi_sys);
+			return (false);
+		}
+	}
+	return (true);
+}
+
 int	mi_lastred(t_red *mi_re, t_cmd *mi_cmd, t_sys *mi_sys, int *finds)
 {
-	t_red	*mi_return;
+	t_red		*mi_lastred ;
 
-	mi_return = NULL;
+	mi_lastred = NULL;
 	if (mi_re == NULL)
 		return (-1);
 	while (mi_re)
 	{
-		if (mi_re->redir_type == INPUT || mi_re->redir_type == HEREDOC)
-		{
-			if (access(mi_re->file_name, F_OK & R_OK) != 0)
-			{
-				mi_logerrorpermdenied(mi_re->file_name, mi_sys);
-				return (-1);
-			}
-		}
-		else if (mi_re->redir_type == OUTPUT || mi_re->redir_type == APPEND)
-		{
-			mi_createdoc(mi_re, mi_sys);
-			if (access(mi_re->file_name, F_OK & W_OK) != 0)
-			{
-				mi_logerrorpermdenied(mi_re->file_name, mi_sys);
-				return (-1);
-			}
-		}
+		if (!mi_lastredcheck(mi_re, mi_sys))
+			return (-1);
 		if (ft_intisinarray(finds, mi_re->redir_type))
 		{
 			mi_set_io_files(mi_re, mi_cmd, mi_sys);
 			if (mi_re->fd != -1)
 				ft_fdclose(mi_re->fd);
-			mi_return = mi_re;
+			mi_lastred = mi_re;
 		}
 		mi_re = mi_re->next;
 	}
-	mi_set_io_files(mi_return, mi_cmd, mi_sys);
-	return (mi_return->fd);
+	mi_set_io_files(mi_lastred, mi_cmd, mi_sys);
+	return (mi_lastred->fd);
 }

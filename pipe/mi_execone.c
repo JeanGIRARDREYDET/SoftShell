@@ -33,7 +33,7 @@ void	mi_execone(t_cmd *mi_cmd, t_sys *mi_sys)
 	int	*out;
 
 	out = (int []){OUTPUT, APPEND};
-	if(*mi_cmd->args == 0)
+	if (mi_cmd->args && *mi_cmd->args == 0)
 		mi_cmd->builtin = true;
 	if (mi_cmd->full && mi_cmd->full[0] == '\0')
 	{
