@@ -47,7 +47,7 @@ void	builtin_cd(char **key, int fd, t_sys *mi_sys)
 		mi_logerror2(1, "cd", "too many arguments", mi_sys);
 		return ;
 	}
-	if (ft_tablen(key) == 2 && ft_strlen(key[1]) && *key[1] == '.')
+	if (ft_tablen(key) == 2 && ft_strlen(key[1])==1 && key[1][0] == '.')
 		return ;
 	builtin_cdrun(key, fd, mi_sys);
 }
