@@ -4,7 +4,7 @@ NAME = minishell
 
 CC = cc
 
-C_FLAGS 		= -Wall -Wextra -Werror
+C_FLAGS 		= -g3 -Wall -Wextra -Werror #-fsanitize=address,leak,undefined
 
 #-Wundef
 READLINE_LIB	= -lreadline 
@@ -155,6 +155,9 @@ fclean : clean
 	$(CMD_RM) $(NAME)
 	@echo -e "$(RED)all deleted!$(DEFAULT)"
 	find . -name "*.o" -type f -delete
+
+valgrind : 
+	valgrind --leak-check=full -s --track-fds=yes --trace-children=yes --track-origins=yes --suppressions=readline.supp ./minishell
 
 re : fclean all
 

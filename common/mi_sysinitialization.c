@@ -32,7 +32,7 @@ void	mi_setdefaul_initialization( t_sys *mi_sys)
 	mi_sys->cmd = NULL;
 	mi_sys->senv->shlvl = 0;
 	mi_sys->senv->_ = NULL;
-	mi_sys->senv->home = NULL;
+	mi_sys->senv->home = "/home/jegirard/";
 	mi_sys->len_env = 0;
 	mi_sys->fd_in = STDIN_FILENO;
 	mi_sys->error = NULL;
